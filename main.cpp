@@ -7,7 +7,7 @@
 #include <fstream>
 
 // 文字のサイズ
-#define MOJI_SIZE 24
+const std::int32_t moji_size = 24;
 
 int DrawPointX, DrawPointY;	// 文字列描画の位置
 int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
@@ -39,7 +39,7 @@ int Kaigyou(void)
 	DrawPointX = 0;
 
 	// もし画面からはみ出るなら画面をスクロールさせる
-	if (DrawPointY * MOJI_SIZE + MOJI_SIZE > 480)
+	if (DrawPointY * moji_size + moji_size > 480)
 	{
 		// テンポラリグラフィックの作成
 		TempGraph = MakeGraph(640, 480);
@@ -48,10 +48,10 @@ int Kaigyou(void)
 		GetDrawScreenGraph(0, 0, 640, 480, TempGraph);
 
 		// 一行分上に貼り付ける
-		DrawGraph(0, -MOJI_SIZE, TempGraph, FALSE);
+		DrawGraph(0, -moji_size, TempGraph, FALSE);
 
 		// 一番下の行の部分を黒で埋める
-		DrawBox(0, 480 - MOJI_SIZE, 640, 480, 0, TRUE);
+		DrawBox(0, 480 - moji_size, 640, 480, 0, TRUE);
 
 		// 描画行位置を一つあげる
 		DrawPointY--;
@@ -85,7 +85,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	CP = 0;	// ０文字
 
 			// フォントのサイズセット
-	SetFontSize(MOJI_SIZE);
+	SetFontSize(moji_size);
 
 	// 終了フラグを倒す
 	EndFlag = 0;
@@ -141,7 +141,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			OneMojiBuf[2] = '\0';
 
 			// １文字描画
-			DrawString(DrawPointX * MOJI_SIZE, DrawPointY * MOJI_SIZE,
+			DrawString(DrawPointX * moji_size, DrawPointY * moji_size,
 				OneMojiBuf, GetColor(255, 255, 255));
 
 			// 参照文字位置を２バイト勧める
@@ -154,7 +154,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			WaitTimer(10);
 
 			// 画面からはみ出たら改行する
-			if (DrawPointX * MOJI_SIZE + MOJI_SIZE > 640) Kaigyou();
+			if (DrawPointX * moji_size + moji_size > 640) Kaigyou();
 
 			break;
 		}
