@@ -12,20 +12,8 @@ const std::int32_t moji_size = 24;
 int DrawPointX, DrawPointY;	// 文字列描画の位置
 int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
 
-char String[][256] =
-{
-	"　ゲームプログラムとは、いやプログラムとは" ,
-	"ある事柄を実現するプログラムの方法を説明されても理解できないことがある。B" ,
-	"@　なぜならそのプログラム技法も何かの基本的な技法の組み合わせで出来ているからだ。B",
-	"@　これはその他の学問も基本がわからないと応用が利かないということと同じ現象で、",
-	"別に特に珍しいことでもない。B" ,
-	"C　しかしゲームプログラムとなると覚えなくてはならない基礎が沢山あり、" ,
-	"さらにある程度クオリティの高いソフトを作ろうとすると色々なプログラム技法を",
-	"習得しなくてはならない。B" ,
-	"@　しかもある程度レベルが高くなると自分で技法を編み出すか、技術レベルの高い",
-	"プログラマーに聞くなどするしか方法がなく大変厄介である。B"
-	"というかそのせいでゲームプログラムの敷居は高くなっているといえる。BE"
-};
+//スクリプト格納変数
+static std::vector<std::string> Script;
 
 // 改行関数
 int Kaigyou(void)
@@ -96,7 +84,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		char  Moji;
 
 		// 文字の描画
-		Moji = String[SP][CP];
+		Moji = Script[SP][CP];
 		switch (Moji)
 		{
 		case '@':	// 改行文字
@@ -136,8 +124,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		default:	// その他の文字
 
 					// １文字分抜き出す
-			OneMojiBuf[0] = String[SP][CP];
-			OneMojiBuf[1] = String[SP][CP + 1];
+			OneMojiBuf[0] = Script[SP][CP];
+			OneMojiBuf[1] = Script[SP][CP + 1];
 			OneMojiBuf[2] = '\0';
 
 			// １文字描画
@@ -163,7 +151,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		if (EndFlag == 1) break;
 
 		// 参照文字列の終端まで行っていたら参照文字列を進める
-		if (String[SP][CP] == '\0')
+		if (Script[SP][CP] == '\0')
 		{
 			SP++;
 			CP = 0;
