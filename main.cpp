@@ -2,6 +2,9 @@
 // Coding by S.H.(GAMELINKS)
 
 #include "DxLib.h"
+#include <vector>
+#include <string>
+#include <fstream>
 
 // •¶Žš‚ÌƒTƒCƒY
 #define MOJI_SIZE 24
