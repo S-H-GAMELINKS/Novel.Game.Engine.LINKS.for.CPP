@@ -28,6 +28,9 @@ static std::vector<int> BackGroundMusic;
 
 static std::vector<int> SoundEffect;
 
+//動画格納変数
+static std::vector<std::string> Movie;
+
 //スクリプト読込関数
 void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) {
 
@@ -151,6 +154,25 @@ void MaterialLoadSoundEffect() {
 	}
 }
 
+//動画読込関数
+void MaterialLoadMovie() {
+
+	std::string FilePath = "DATA/MOVIE/MOVIE";
+	std::string FileFormat = ".wmv";
+	std::string FileName = "";
+
+	for (std::int32_t i = 0; i < 99; i++) {
+
+		std::ostringstream Num;
+
+		Num << std::setfill('0') << std::setw(2) << i + 1;
+
+		FileName = (FilePath + Num.str() + FileFormat);
+
+		Movie.emplace_back(std::move(FileName));
+	}
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
@@ -224,6 +246,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		case 'S':
 			CP++;
 			DxLib::PlaySoundMem(SoundEffect[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_BACK);
+			CP++;
+			break;
+
+		case 'V':
+			CP++;
+			DxLib::PlayMovie(Movie[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 			CP++;
 			break;
 
