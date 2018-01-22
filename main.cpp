@@ -159,7 +159,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 			break;
 
-		case 'C':	// クリア文字
+		case 'R':	// クリア文字
 
 					// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
 			ClearDrawScreen();
