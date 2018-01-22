@@ -5,6 +5,9 @@
 #include <vector>
 #include <string>
 
+//ゲームタイトル
+extern const char* GameTitle = "ノベルゲームエンジン「LINKS」 for C++";
+
 // 文字のサイズ
 extern const std::int32_t moji_size = 24;
 

@@ -12,10 +12,14 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
+	//ウインドウサイズ指定
 	DxLib::SetGraphMode(640, 480, 16);
 
 	//ウインドウで描画
 	DxLib::ChangeWindowMode(TRUE);
+
+	//ゲームタイトルの指定
+	DxLib::SetMainWindowText(GameTitle);
 
 	if (DxLib_Init() == -1)	// ＤＸライブラリ初期化処理
 	{
