@@ -14,6 +14,8 @@ extern int EndFlag;
 
 namespace {
 
+	char OneMojiBuf[3];	// １文字分一時記憶配列
+
 	// 改行関数
 	void Kaigyou()
 	{
@@ -47,12 +49,30 @@ namespace {
 			DeleteGraph(TempGraph);
 		}
 	}
+
+	//文字列描画関数
+	void DrawScript(const std::vector<std::string>& Script) {
+		// １文字分抜き出す
+		OneMojiBuf[0] = Script[SP][CP];
+		OneMojiBuf[1] = Script[SP][CP + 1];
+		OneMojiBuf[2] = '\0';
+
+		// １文字描画
+		DrawString(DrawPointX * moji_size, DrawPointY * moji_size, OneMojiBuf, GetColor(255, 255, 255));
+
+		// 参照文字位置を２バイト勧める
+		CP += 2;
+
+		// カーソルを一文字文進める
+		DrawPointX++;
+
+		// 少し待つ
+		WaitTimer(10);
+	}
 }
 
 //スクリプトタグ処理関数
 void ScriptTagTaskManager(const std::vector<std::string>& Script, std::vector<int>& BackGround, std::vector<int>& Character, std::vector<int>& BackGroundMusic, std::vector<int>& SoundEffect, std::vector<std::string>& Movie) {
-
-	char OneMojiBuf[3];	// １文字分一時記憶配列
 
 	// 文字の描画
 	switch (Script[SP][CP])
@@ -151,22 +171,8 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, std::vector<in
 
 	default:	// その他の文字
 
-				// １文字分抜き出す
-		OneMojiBuf[0] = Script[SP][CP];
-		OneMojiBuf[1] = Script[SP][CP + 1];
-		OneMojiBuf[2] = '\0';
-
-		// １文字描画
-		DrawString(DrawPointX * moji_size, DrawPointY * moji_size, OneMojiBuf, GetColor(255, 255, 255));
-
-		// 参照文字位置を２バイト勧める
-		CP += 2;
-
-		// カーソルを一文字文進める
-		DrawPointX++;
-
-		// 少し待つ
-		WaitTimer(10);
+		//文字列描画
+		DrawScript(Script);
 
 		// 画面からはみ出たら改行する
 		if (DrawPointX * moji_size + moji_size > 640) Kaigyou();
