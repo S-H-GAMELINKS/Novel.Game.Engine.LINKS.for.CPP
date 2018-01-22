@@ -182,6 +182,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			CP++;
 			break;
 
+		case '/':
+			CP++;
+
+			if (Script[SP][CP] == '/') {
+				SP++;
+				CP = 0;
+			}
+			break;
+
 		case ' ':
 			CP++;
 			break;
