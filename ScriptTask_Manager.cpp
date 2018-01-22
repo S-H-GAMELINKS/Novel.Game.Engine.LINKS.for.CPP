@@ -12,7 +12,7 @@ extern const std::int32_t moji_size;
 //終了フラグ
 extern int EndFlag;
 
-namespace {
+namespace ScriptTask {
 
 	char OneMojiBuf[3];	// １文字分一時記憶配列
 
@@ -69,43 +69,68 @@ namespace {
 		// 少し待つ
 		WaitTimer(10);
 	}
+
+	//背景画像描画関数
+	void DrawBackGround(const std::vector<std::string>& Script, const std::vector<int>& BackGround) {
+		CP++;
+		DxLib::DrawGraph(0, 0, BackGround[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], TRUE);
+	}
+
+	//立ち絵描画関数
+	void DrawCharacter(const std::vector<std::string>& Script, const std::vector<int>& Character) {
+		CP++;
+		DxLib::DrawGraph(150, 130, Character[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], TRUE);
+	}
+
+	//BGM再生関数
+	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::vector<int> BackGroundMusic) {
+		CP++;
+		DxLib::PlaySoundMem(BackGroundMusic[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_LOOP);
+	}
+
+	//効果音再生関数
+	void PlaySoundEffect(const std::vector<std::string>& Script, const std::vector<int>& SoundEffect) {
+		CP++;
+		DxLib::PlaySoundMem(SoundEffect[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_BACK);
+	}
+
+	//動画再生関数
+	template <typename T>
+	void PlayMovie(const std::vector<T>& Script, std::vector<T> Movie) {
+		CP++;
+		DxLib::PlayMovie(Movie[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
+	}
 }
 
 //スクリプトタグ処理関数
 void ScriptTagTaskManager(const std::vector<std::string>& Script, std::vector<int>& BackGround, std::vector<int>& Character, std::vector<int>& BackGroundMusic, std::vector<int>& SoundEffect, std::vector<std::string>& Movie) {
 
-	// 文字の描画
 	switch (Script[SP][CP])
 	{
 	case 'B':
-		CP++;
-		DxLib::DrawGraph(0, 0, BackGround[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], TRUE);
+		ScriptTask::DrawBackGround(Script, BackGround);
 		break;
 
 	case 'C':
-		CP++;
-		DxLib::DrawGraph(150, 130, Character[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], TRUE);
+		ScriptTask::DrawCharacter(Script, Character);
 		break;
 
 	case 'M':
-		CP++;
-		DxLib::PlaySoundMem(BackGroundMusic[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_LOOP);
+		ScriptTask::PlayBackGroundMusic(Script, BackGroundMusic);
 		break;
 
 	case 'S':
-		CP++;
-		DxLib::PlaySoundMem(SoundEffect[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_BACK);
+		ScriptTask::PlaySoundEffect(Script, SoundEffect);
 		break;
 
 	case 'V':
-		CP++;
-		DxLib::PlayMovie(Movie[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
+		ScriptTask::PlayMovie(Script, Movie);
 		break;
 
 	case 'L':	// 改行文字
 
 				// 改行処理および参照文字位置を一つ進める
-		Kaigyou();
+		ScriptTask::Kaigyou();
 		CP++;
 
 		break;
@@ -172,10 +197,10 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, std::vector<in
 	default:	// その他の文字
 
 		//文字列描画
-		DrawScript(Script);
+		ScriptTask::DrawScript(Script);
 
 		// 画面からはみ出たら改行する
-		if (DrawPointX * moji_size + moji_size > 640) Kaigyou();
+		if (DrawPointX * moji_size + moji_size > 640) ScriptTask::Kaigyou();
 
 		break;
 	}
