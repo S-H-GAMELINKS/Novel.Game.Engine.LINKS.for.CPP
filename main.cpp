@@ -20,6 +20,9 @@ static std::vector<std::string> Script;
 //背景画像格納変数
 static std::vector<int> BackGround;
 
+//立ち絵格納変数
+static std::vector<int> Character;
+
 //スクリプト読込関数
 void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) {
 
@@ -86,6 +89,25 @@ void MaterialLoadBackGround() {
 	}
 }
 
+//立ち絵素材読込関数
+void MaterialLoadCharacter() {
+
+	std::string FilePath = "DATA/CHARACTER/CHAR";
+	std::string FileFormat = ".png";
+	std::string FileName = "";
+
+	for (std::int32_t i = 0; i < 99; i++) {
+
+		std::ostringstream Num;
+
+		Num << std::setfill('0') << std::setw(2) << i + 1;
+
+		FileName = (FilePath + Num.str() + FileFormat);
+
+		Character.emplace_back(std::move(DxLib::LoadGraph(FileName.c_str())));
+	}
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
@@ -123,6 +145,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//背景画像読込関数
 	MaterialLoadBackGround();
 
+	MaterialLoadCharacter();
+
 	// ループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
@@ -132,6 +156,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		case 'B':
 			CP++;
 			DxLib::DrawGraph(0, 0, BackGround[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) -48) - 1], TRUE);
+			CP++;
+			break;
+
+		case 'C':
+			CP++;
+			DxLib::DrawGraph(150, 130, Character[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], TRUE);
 			CP++;
 			break;
 
