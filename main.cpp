@@ -78,6 +78,12 @@ int Kaigyou(void)
 	return 0;
 }
 
+//各種素材ファイル確認関数
+bool CheckMaterialExistence(const std::string& FilePath) {
+	std::ifstream Material(FilePath, std::ios_base::in);
+	return Material.is_open();
+}
+
 //背景画像読込関数
 void MaterialLoadBackGround() {
 
@@ -93,7 +99,8 @@ void MaterialLoadBackGround() {
 
 		FileName = (FilePath + Num.str() + FileFormat);
 
-		BackGround.emplace_back(std::move(DxLib::LoadGraph(FileName.c_str())));
+		if (CheckMaterialExistence(FileName))
+			BackGround.emplace_back(std::move(DxLib::LoadGraph(FileName.c_str())));
 	}
 }
 
@@ -112,7 +119,8 @@ void MaterialLoadCharacter() {
 
 		FileName = (FilePath + Num.str() + FileFormat);
 
-		Character.emplace_back(std::move(DxLib::LoadGraph(FileName.c_str())));
+		if (CheckMaterialExistence(FileName))
+			Character.emplace_back(std::move(DxLib::LoadGraph(FileName.c_str())));
 	}
 }
 
@@ -131,7 +139,8 @@ void MaterialLoadBackGroundMusic() {
 
 		FileName = (FilePath + Num.str() + FileFormat);
 
-		BackGroundMusic.emplace_back(std::move(DxLib::LoadSoundMem(FileName.c_str())));
+		if (CheckMaterialExistence(FileName))
+			BackGroundMusic.emplace_back(std::move(DxLib::LoadSoundMem(FileName.c_str())));
 	}
 }
 
@@ -150,7 +159,8 @@ void MaterialLoadSoundEffect() {
 
 		FileName = (FilePath + Num.str() + FileFormat);
 
-		SoundEffect.emplace_back(std::move(DxLib::LoadSoundMem(FileName.c_str())));
+		if (CheckMaterialExistence(FileName))
+			SoundEffect.emplace_back(std::move(DxLib::LoadSoundMem(FileName.c_str())));
 	}
 }
 
@@ -169,7 +179,8 @@ void MaterialLoadMovie() {
 
 		FileName = (FilePath + Num.str() + FileFormat);
 
-		Movie.emplace_back(std::move(FileName));
+		if (CheckMaterialExistence(FileName))
+			Movie.emplace_back(std::move(FileName));
 	}
 }
 
