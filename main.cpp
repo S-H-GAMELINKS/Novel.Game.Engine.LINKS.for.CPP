@@ -167,7 +167,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//背景画像読込関数
 	MaterialLoadBackGround();
 
+	//立ち絵画像読込関数
 	MaterialLoadCharacter();
+
+	//BGM読込関数
+	MaterialLoadBackGroundMusic();
 
 	// ループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
