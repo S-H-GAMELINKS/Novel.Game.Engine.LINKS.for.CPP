@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include <vector>
 #include <string>
+#include <array>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
@@ -15,7 +16,7 @@ namespace {
 	}
 
 	//îwåiâÊëúì«çûä÷êî
-	void MaterialLoadBackGround(std::vector<int>& BackGround) {
+	void MaterialLoadBackGround(std::array<int, 99>& BackGround) {
 
 		std::string FilePath = "DATA/BACKGROUND/BG";
 		std::string FileFormat = ".png";
@@ -30,12 +31,12 @@ namespace {
 			FileName = (FilePath + Num.str() + FileFormat);
 
 			if (CheckMaterialExistence(FileName))
-				BackGround.emplace_back(std::move(DxLib::LoadGraph(FileName.c_str())));
+				BackGround[i] = DxLib::LoadGraph(FileName.c_str());
 		}
 	}
 
 	//óßÇøäGëfçﬁì«çûä÷êî
-	void MaterialLoadCharacter(std::vector<int>& Character) {
+	void MaterialLoadCharacter(std::array<int, 99>& Character) {
 
 		std::string FilePath = "DATA/CHARACTER/CHAR";
 		std::string FileFormat = ".png";
@@ -50,12 +51,12 @@ namespace {
 			FileName = (FilePath + Num.str() + FileFormat);
 
 			if (CheckMaterialExistence(FileName))
-				Character.emplace_back(std::move(DxLib::LoadGraph(FileName.c_str())));
+				Character[i] = DxLib::LoadGraph(FileName.c_str());
 		}
 	}
 
 	//BGMì«çûä÷êî
-	void MaterialLoadBackGroundMusic(std::vector<int>& BackGroundMusic) {
+	void MaterialLoadBackGroundMusic(std::array<int, 99>& BackGroundMusic) {
 
 		std::string FilePath = "DATA/BACKGROUNDMUSIC/BGM";
 		std::string FileFormat = ".ogg";
@@ -70,12 +71,12 @@ namespace {
 			FileName = (FilePath + Num.str() + FileFormat);
 
 			if (CheckMaterialExistence(FileName))
-				BackGroundMusic.emplace_back(std::move(DxLib::LoadSoundMem(FileName.c_str())));
+				BackGroundMusic[i] = DxLib::LoadSoundMem(FileName.c_str());
 		}
 	}
 
 	//SEì«çûä÷êî
-	void MaterialLoadSoundEffect(std::vector<int>& SoundEffect) {
+	void MaterialLoadSoundEffect(std::array<int, 99>& SoundEffect) {
 
 		std::string FilePath = "DATA/SOUNDEFFECT/SE";
 		std::string FileFormat = ".ogg";
@@ -90,12 +91,13 @@ namespace {
 			FileName = (FilePath + Num.str() + FileFormat);
 
 			if (CheckMaterialExistence(FileName))
-				SoundEffect.emplace_back(std::move(DxLib::LoadSoundMem(FileName.c_str())));
+				SoundEffect[i] = DxLib::LoadSoundMem(FileName.c_str());
 		}
 	}
 
 	//ìÆâÊì«çûä÷êî
-	void MaterialLoadMovie(std::vector<std::string>& Movie) {
+	template <typename T>
+	void MaterialLoadMovie(std::array<T, 99>& Movie) {
 
 		std::string FilePath = "DATA/MOVIE/MOVIE";
 		std::string FileFormat = ".wmv";
@@ -110,13 +112,13 @@ namespace {
 			FileName = (FilePath + Num.str() + FileFormat);
 
 			if (CheckMaterialExistence(FileName))
-				Movie.emplace_back(std::move(FileName));
+				Movie[i] = FileName;
 		}
 	}
 }
 
 //äeéÌëfçﬁì«çûä÷êî
-void MaterialLoad(std::vector<int>& BackGround, std::vector<int>& Character, std::vector<int>& BackGroundMusic, std::vector<int>& SoundEffect, std::vector<std::string>& Movie) {
+void MaterialLoad(std::array<int, 99>& BackGround, std::array<int, 99>& Character, std::array<int, 99>& BackGroundMusic, std::array<int, 99>& SoundEffect, std::array<std::string, 99>& Movie) {
 
 	//îwåiâÊëúì«çûä÷êî
 	MaterialLoadBackGround(BackGround);

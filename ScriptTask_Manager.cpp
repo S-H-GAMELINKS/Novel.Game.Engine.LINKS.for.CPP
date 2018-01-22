@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include <vector>
 #include <string>
+#include <array>
 
 extern int DrawPointX, DrawPointY;	// 文字列描画の位置
 extern int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
@@ -71,39 +72,39 @@ namespace ScriptTask {
 	}
 
 	//背景画像描画関数
-	void DrawBackGround(const std::vector<std::string>& Script, const std::vector<int>& BackGround) {
+	void DrawBackGround(const std::vector<std::string>& Script, const std::array<int, 99>& BackGround) {
 		CP++;
 		DxLib::DrawGraph(0, 0, BackGround[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], TRUE);
 	}
 
 	//立ち絵描画関数
-	void DrawCharacter(const std::vector<std::string>& Script, const std::vector<int>& Character) {
+	void DrawCharacter(const std::vector<std::string>& Script, const std::array<int, 99>& Character) {
 		CP++;
 		DxLib::DrawGraph(150, 130, Character[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], TRUE);
 	}
 
 	//BGM再生関数
-	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::vector<int> BackGroundMusic) {
+	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, 99>& BackGroundMusic) {
 		CP++;
 		DxLib::PlaySoundMem(BackGroundMusic[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_LOOP);
 	}
 
 	//効果音再生関数
-	void PlaySoundEffect(const std::vector<std::string>& Script, const std::vector<int>& SoundEffect) {
+	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, 99>& SoundEffect) {
 		CP++;
 		DxLib::PlaySoundMem(SoundEffect[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_BACK);
 	}
 
 	//動画再生関数
 	template <typename T>
-	void PlayMovie(const std::vector<T>& Script, std::vector<T> Movie) {
+	void PlayMovie(const std::vector<T>& Script, std::array<T, 99> Movie) {
 		CP++;
 		DxLib::PlayMovie(Movie[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
 }
 
 //スクリプトタグ処理関数
-void ScriptTagTaskManager(const std::vector<std::string>& Script, std::vector<int>& BackGround, std::vector<int>& Character, std::vector<int>& BackGroundMusic, std::vector<int>& SoundEffect, std::vector<std::string>& Movie) {
+void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::array<int, 99>& BackGround, const std::array<int, 99>& Character, const std::array<int, 99>& BackGroundMusic, const std::array<int, 99>& SoundEffect, const std::array<std::string, 99>& Movie) {
 
 	switch (Script[SP][CP])
 	{

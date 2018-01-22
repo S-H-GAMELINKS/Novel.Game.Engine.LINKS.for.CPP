@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <string>
+#include <array>
 
 //ゲームタイトル
 extern const char* GameTitle = "ノベルゲームエンジン「LINKS」 for C++";
@@ -16,21 +17,21 @@ int SP = 0, CP = 0;	// 参照する文字列番号と文字列中の文字ポインタ
 
 int EndFlag = 0;	// 終了フラグ
 
-					//スクリプト格納変数
+//スクリプト格納変数
 static std::vector<std::string> Script;
 
 //背景画像格納変数
-static std::vector<int> BackGround;
+std::array<int, 99> BackGround;
 
 //立ち絵格納変数
-static std::vector<int> Character;
+static std::array<int, 99> Character;
 
 //BGM格納変数
-static std::vector<int> BackGroundMusic;
+static std::array<int, 99> BackGroundMusic;
 
-static std::vector<int> SoundEffect;
+static std::array<int, 99> SoundEffect;
 
 //動画格納変数
-static std::vector<std::string> Movie;
+static std::array<std::string, 99> Movie;
 
 #endif //VALIABLE_H_
