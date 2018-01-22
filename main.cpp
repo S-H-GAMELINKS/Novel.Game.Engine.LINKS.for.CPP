@@ -198,6 +198,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			CP++;
 			break;
 
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+			CP++;
+			break;
+
 		default:	// その他の文字
 
 					// １文字分抜き出す
@@ -206,8 +219,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			OneMojiBuf[2] = '\0';
 
 			// １文字描画
-			DrawString(DrawPointX * moji_size, DrawPointY * moji_size,
-				OneMojiBuf, GetColor(255, 255, 255));
+			DrawString(DrawPointX * moji_size, DrawPointY * moji_size, OneMojiBuf, GetColor(255, 255, 255));
 
 			// 参照文字位置を２バイト勧める
 			CP += 2;
