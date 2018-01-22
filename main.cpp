@@ -1,4 +1,4 @@
-// Novel Game Engine LINKS for C++
+ï»¿// Novel Game Engine LINKS for C++
 // Coding by S.H.(GAMELINKS)
 
 #include "DxLib.h"
@@ -6,114 +6,124 @@
 #include <string>
 #include <fstream>
 
-// •¶š‚ÌƒTƒCƒY
+// æ–‡å­—ã®ã‚µã‚¤ã‚º
 const std::int32_t moji_size = 24;
 
-int DrawPointX, DrawPointY;	// •¶š—ñ•`‰æ‚ÌˆÊ’u
-int SP, CP;	// QÆ‚·‚é•¶š—ñ”Ô†‚Æ•¶š—ñ’†‚Ì•¶šƒ|ƒCƒ“ƒ^
+int DrawPointX, DrawPointY;	// æ–‡å­—åˆ—æç”»ã®ä½ç½®
+int SP, CP;	// å‚ç…§ã™ã‚‹æ–‡å­—åˆ—ç•ªå·ã¨æ–‡å­—åˆ—ä¸­ã®æ–‡å­—ãƒã‚¤ãƒ³ã‚¿
 
-//ƒXƒNƒŠƒvƒgŠi”[•Ï”
+//ã‚¹ã‚¯ãƒªãƒ—ãƒˆæ ¼ç´å¤‰æ•°
 static std::vector<std::string> Script;
 
-// ‰üsŠÖ”
+//ã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼é–¢æ•°
+void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) {
+
+	const char* ScriptFilePath[] = { "DATA/STR/LINKS.txt" };
+
+	std::fstream file(ScriptFilePath[EndFlag], std::ios_base::in);
+
+	for (std::string line; std::getline(file, line); ) if (!line.empty()) Script.emplace_back(std::move(line));
+}
+
+// æ”¹è¡Œé–¢æ•°
 int Kaigyou(void)
 {
 	int TempGraph;
 
-	// •`‰æsˆÊ’u‚ğˆê‚Â‰º‚°‚é
+	// æç”»è¡Œä½ç½®ã‚’ä¸€ã¤ä¸‹ã’ã‚‹
 	DrawPointY++;
 
-	// •`‰æ—ñ‚ğÅ‰‚É–ß‚·
+	// æç”»åˆ—ã‚’æœ€åˆã«æˆ»ã™
 	DrawPointX = 0;
 
-	// ‚à‚µ‰æ–Ê‚©‚ç‚Í‚İo‚é‚È‚ç‰æ–Ê‚ğƒXƒNƒ[ƒ‹‚³‚¹‚é
+	// ã‚‚ã—ç”»é¢ã‹ã‚‰ã¯ã¿å‡ºã‚‹ãªã‚‰ç”»é¢ã‚’ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã•ã›ã‚‹
 	if (DrawPointY * moji_size + moji_size > 480)
 	{
-		// ƒeƒ“ƒ|ƒ‰ƒŠƒOƒ‰ƒtƒBƒbƒN‚Ìì¬
+		// ãƒ†ãƒ³ãƒãƒ©ãƒªã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã®ä½œæˆ
 		TempGraph = MakeGraph(640, 480);
 
-		// ‰æ–Ê‚Ì“à—e‚ğŠÛXƒRƒs[‚·‚é
+		// ç”»é¢ã®å†…å®¹ã‚’ä¸¸ã€…ã‚³ãƒ”ãƒ¼ã™ã‚‹
 		GetDrawScreenGraph(0, 0, 640, 480, TempGraph);
 
-		// ˆês•ªã‚É“\‚è•t‚¯‚é
+		// ä¸€è¡Œåˆ†ä¸Šã«è²¼ã‚Šä»˜ã‘ã‚‹
 		DrawGraph(0, -moji_size, TempGraph, FALSE);
 
-		// ˆê”Ô‰º‚Ìs‚Ì•”•ª‚ğ•‚Å–„‚ß‚é
+		// ä¸€ç•ªä¸‹ã®è¡Œã®éƒ¨åˆ†ã‚’é»’ã§åŸ‹ã‚ã‚‹
 		DrawBox(0, 480 - moji_size, 640, 480, 0, TRUE);
 
-		// •`‰æsˆÊ’u‚ğˆê‚Â‚ ‚°‚é
+		// æç”»è¡Œä½ç½®ã‚’ä¸€ã¤ã‚ã’ã‚‹
 		DrawPointY--;
 
-		// ƒOƒ‰ƒtƒBƒbƒN‚ğíœ‚·‚é
+		// ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚’å‰Šé™¤ã™ã‚‹
 		DeleteGraph(TempGraph);
 	}
 
-	// I—¹
+	// çµ‚äº†
 	return 0;
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
-	int EndFlag;	// I—¹ƒtƒ‰ƒO
-	char OneMojiBuf[3];	// ‚P•¶š•ªˆê‹L‰¯”z—ñ
+	int EndFlag;	// çµ‚äº†ãƒ•ãƒ©ã‚°
+	char OneMojiBuf[3];	// ï¼‘æ–‡å­—åˆ†ä¸€æ™‚è¨˜æ†¶é…åˆ—
 
 	SetGraphMode(640, 480, 16);
-	if (DxLib_Init() == -1)	// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
+	if (DxLib_Init() == -1)	// ï¼¤ï¼¸ãƒ©ã‚¤ãƒ–ãƒ©ãƒªåˆæœŸåŒ–å‡¦ç†
 	{
-		return -1;				// ƒGƒ‰[‚ª‹N‚«‚½‚ç’¼‚¿‚ÉI—¹
+		return -1;				// ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸã‚‰ç›´ã¡ã«çµ‚äº†
 	}
 
-	// •`‰æˆÊ’u‚Ì‰ŠúˆÊ’uƒZƒbƒg
+	// æç”»ä½ç½®ã®åˆæœŸä½ç½®ã‚»ãƒƒãƒˆ
 	DrawPointX = 0;
 	DrawPointY = 0;
 
-	// QÆ•¶šˆÊ’u‚ğƒZƒbƒg
-	SP = 0;	// ‚Ps–Ú‚Ì
-	CP = 0;	// ‚O•¶š
+	// å‚ç…§æ–‡å­—ä½ç½®ã‚’ã‚»ãƒƒãƒˆ
+	SP = 0;	// ï¼‘è¡Œç›®ã®
+	CP = 0;	// ï¼æ–‡å­—
 
-			// ƒtƒHƒ“ƒg‚ÌƒTƒCƒYƒZƒbƒg
+			// ãƒ•ã‚©ãƒ³ãƒˆã®ã‚µã‚¤ã‚ºã‚»ãƒƒãƒˆ
 	SetFontSize(moji_size);
 
-	// I—¹ƒtƒ‰ƒO‚ğ“|‚·
+	// çµ‚äº†ãƒ•ãƒ©ã‚°ã‚’å€’ã™
 	EndFlag = 0;
 
-	// ƒ‹[ƒv
+	//ã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼é–¢æ•°
+	ScriptRead(Script, EndFlag);
+
+	// ãƒ«ãƒ¼ãƒ—
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
-		char  Moji;
-
-		// •¶š‚Ì•`‰æ
-		Moji = Script[SP][CP];
-		switch (Moji)
+		// æ–‡å­—ã®æç”»
+		switch (Script[SP][CP])
 		{
-		case '@':	// ‰üs•¶š
+		case 'L':	// æ”¹è¡Œæ–‡å­—
 
-					// ‰üsˆ—‚¨‚æ‚ÑQÆ•¶šˆÊ’u‚ğˆê‚Âi‚ß‚é
+					// æ”¹è¡Œå‡¦ç†ãŠã‚ˆã³å‚ç…§æ–‡å­—ä½ç½®ã‚’ä¸€ã¤é€²ã‚ã‚‹
 			Kaigyou();
 			CP++;
 
 			break;
 
-		case 'B':	// ƒ{ƒ^ƒ“‰Ÿ‚µ‘Ò‚¿•¶š
+		case 'P':	// ãƒœã‚¿ãƒ³æŠ¼ã—å¾…ã¡æ–‡å­—
 
-					// ƒ{ƒ^ƒ“‰Ÿ‚µ‘Ò‚¿‚¨‚æ‚ÑQÆ•¶šˆÊ’u‚ğˆê‚Âi‚ß‚é
+					// ãƒœã‚¿ãƒ³æŠ¼ã—å¾…ã¡ãŠã‚ˆã³å‚ç…§æ–‡å­—ä½ç½®ã‚’ä¸€ã¤é€²ã‚ã‚‹
 			WaitKey();
 			CP++;
 
 			break;
 
-		case 'E':	// I—¹•¶š
+		case 'E':	// çµ‚äº†æ–‡å­—
 
-					// I—¹ƒtƒ‰ƒO‚ğ—§‚Ä‚é‚¨‚æ‚ÑQÆ•¶šˆÊ’u‚ğˆê‚Âi‚ß‚é
+					// çµ‚äº†ãƒ•ãƒ©ã‚°ã‚’ç«‹ã¦ã‚‹ãŠã‚ˆã³å‚ç…§æ–‡å­—ä½ç½®ã‚’ä¸€ã¤é€²ã‚ã‚‹
 			EndFlag = 1;
 			CP++;
 
 			break;
 
-		case 'C':	// ƒNƒŠƒA•¶š
+		case 'C':	// ã‚¯ãƒªã‚¢æ–‡å­—
 
-					// ‰æ–Ê‚ğ‰Šú‰»‚µ‚Ä•`‰æ•¶šˆÊ’u‚ğ‰ŠúˆÊ’u‚É–ß‚·‚¨‚æ‚ÑQÆ•¶šˆÊ’u‚ğˆê‚Âi‚ß‚é
+					// ç”»é¢ã‚’åˆæœŸåŒ–ã—ã¦æç”»æ–‡å­—ä½ç½®ã‚’åˆæœŸä½ç½®ã«æˆ»ã™ãŠã‚ˆã³å‚ç…§æ–‡å­—ä½ç½®ã‚’ä¸€ã¤é€²ã‚ã‚‹
 			ClearDrawScreen();
 			DrawPointY = 0;
 			DrawPointX = 0;
@@ -121,36 +131,36 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 			break;
 
-		default:	// ‚»‚Ì‘¼‚Ì•¶š
+		default:	// ãã®ä»–ã®æ–‡å­—
 
-					// ‚P•¶š•ª”²‚«o‚·
+					// ï¼‘æ–‡å­—åˆ†æŠœãå‡ºã™
 			OneMojiBuf[0] = Script[SP][CP];
 			OneMojiBuf[1] = Script[SP][CP + 1];
 			OneMojiBuf[2] = '\0';
 
-			// ‚P•¶š•`‰æ
+			// ï¼‘æ–‡å­—æç”»
 			DrawString(DrawPointX * moji_size, DrawPointY * moji_size,
 				OneMojiBuf, GetColor(255, 255, 255));
 
-			// QÆ•¶šˆÊ’u‚ğ‚QƒoƒCƒgŠ©‚ß‚é
+			// å‚ç…§æ–‡å­—ä½ç½®ã‚’ï¼’ãƒã‚¤ãƒˆå‹§ã‚ã‚‹
 			CP += 2;
 
-			// ƒJ[ƒ\ƒ‹‚ğˆê•¶š•¶i‚ß‚é
+			// ã‚«ãƒ¼ã‚½ãƒ«ã‚’ä¸€æ–‡å­—æ–‡é€²ã‚ã‚‹
 			DrawPointX++;
 
-			// ­‚µ‘Ò‚Â
+			// å°‘ã—å¾…ã¤
 			WaitTimer(10);
 
-			// ‰æ–Ê‚©‚ç‚Í‚İo‚½‚ç‰üs‚·‚é
+			// ç”»é¢ã‹ã‚‰ã¯ã¿å‡ºãŸã‚‰æ”¹è¡Œã™ã‚‹
 			if (DrawPointX * moji_size + moji_size > 640) Kaigyou();
 
 			break;
 		}
 
-		// I—¹ƒtƒ‰ƒO‚ª‚P‚¾‚Á‚½‚çI—¹‚·‚é
+		// çµ‚äº†ãƒ•ãƒ©ã‚°ãŒï¼‘ã ã£ãŸã‚‰çµ‚äº†ã™ã‚‹
 		if (EndFlag == 1) break;
 
-		// QÆ•¶š—ñ‚ÌI’[‚Ü‚Ås‚Á‚Ä‚¢‚½‚çQÆ•¶š—ñ‚ği‚ß‚é
+		//å‚ç…§æ–‡å­—åˆ—ã®çµ‚ç«¯ã¾ã§è¡Œã£ã¦ã„ãŸã‚‰å‚ç…§æ–‡å­—åˆ—ã‚’é€²ã‚ã‚‹
 		if (Script[SP][CP] == '\0')
 		{
 			SP++;
@@ -158,7 +168,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		}
 	}
 
-	DxLib_End();				// ‚c‚wƒ‰ƒCƒuƒ‰ƒŠg—p‚ÌI—¹ˆ—
+	DxLib_End();				// ï¼¤ï¼¸ãƒ©ã‚¤ãƒ–ãƒ©ãƒªä½¿ç”¨ã®çµ‚äº†å‡¦ç†
 
-	return 0;					// ƒ\ƒtƒg‚ÌI—¹
+	return 0;					// ã‚½ãƒ•ãƒˆã®çµ‚äº†
 }
