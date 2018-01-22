@@ -2,11 +2,10 @@
 // Coding by S.H.(GAMELINKS)
 
 #include "DxLib.h"
+#include "Material_Manager.h"
 #include <vector>
 #include <string>
 #include <fstream>
-#include <sstream>
-#include <iomanip>
 
 // 文字のサイズ
 const std::int32_t moji_size = 24;
@@ -78,112 +77,6 @@ int Kaigyou(void)
 	return 0;
 }
 
-//各種素材ファイル確認関数
-bool CheckMaterialExistence(const std::string& FilePath) {
-	std::ifstream Material(FilePath, std::ios_base::in);
-	return Material.is_open();
-}
-
-//背景画像読込関数
-void MaterialLoadBackGround() {
-
-	std::string FilePath = "DATA/BACKGROUND/BG";
-	std::string FileFormat = ".png";
-	std::string FileName = "";
-
-	for (std::int32_t i = 0; i < 99; i++) {
-
-		std::ostringstream Num;
-
-		Num << std::setfill('0') << std::setw(2) << i + 1;
-
-		FileName = (FilePath + Num.str() + FileFormat);
-
-		if (CheckMaterialExistence(FileName))
-			BackGround.emplace_back(std::move(DxLib::LoadGraph(FileName.c_str())));
-	}
-}
-
-//立ち絵素材読込関数
-void MaterialLoadCharacter() {
-
-	std::string FilePath = "DATA/CHARACTER/CHAR";
-	std::string FileFormat = ".png";
-	std::string FileName = "";
-
-	for (std::int32_t i = 0; i < 99; i++) {
-
-		std::ostringstream Num;
-
-		Num << std::setfill('0') << std::setw(2) << i + 1;
-
-		FileName = (FilePath + Num.str() + FileFormat);
-
-		if (CheckMaterialExistence(FileName))
-			Character.emplace_back(std::move(DxLib::LoadGraph(FileName.c_str())));
-	}
-}
-
-//BGM読込関数
-void MaterialLoadBackGroundMusic() {
-
-	std::string FilePath = "DATA/BACKGROUNDMUSIC/BGM";
-	std::string FileFormat = ".ogg";
-	std::string FileName = "";
-
-	for (std::int32_t i = 0; i < 99; i++) {
-
-		std::ostringstream Num;
-
-		Num << std::setfill('0') << std::setw(2) << i + 1;
-
-		FileName = (FilePath + Num.str() + FileFormat);
-
-		if (CheckMaterialExistence(FileName))
-			BackGroundMusic.emplace_back(std::move(DxLib::LoadSoundMem(FileName.c_str())));
-	}
-}
-
-//SE読込関数
-void MaterialLoadSoundEffect() {
-
-	std::string FilePath = "DATA/SOUNDEFFECT/SE";
-	std::string FileFormat = ".ogg";
-	std::string FileName = "";
-
-	for (std::int32_t i = 0; i < 99; i++) {
-
-		std::ostringstream Num;
-
-		Num << std::setfill('0') << std::setw(2) << i + 1;
-
-		FileName = (FilePath + Num.str() + FileFormat);
-
-		if (CheckMaterialExistence(FileName))
-			SoundEffect.emplace_back(std::move(DxLib::LoadSoundMem(FileName.c_str())));
-	}
-}
-
-//動画読込関数
-void MaterialLoadMovie() {
-
-	std::string FilePath = "DATA/MOVIE/MOVIE";
-	std::string FileFormat = ".wmv";
-	std::string FileName = "";
-
-	for (std::int32_t i = 0; i < 99; i++) {
-
-		std::ostringstream Num;
-
-		Num << std::setfill('0') << std::setw(2) << i + 1;
-
-		FileName = (FilePath + Num.str() + FileFormat);
-
-		if (CheckMaterialExistence(FileName))
-			Movie.emplace_back(std::move(FileName));
-	}
-}
-
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
@@ -218,17 +111,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//スクリプト読込関数
 	ScriptRead(Script, EndFlag);
 
-	//背景画像読込関数
-	MaterialLoadBackGround();
-
-	//立ち絵画像読込関数
-	MaterialLoadCharacter();
-
-	//BGM読込関数
-	MaterialLoadBackGroundMusic();
-
-	//SE読込関数
-	MaterialLoadSoundEffect();
+	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie);
 
 	// ループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
