@@ -68,7 +68,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	int EndFlag;	// 終了フラグ
 	char OneMojiBuf[3];	// １文字分一時記憶配列
 
-	SetGraphMode(640, 480, 16);
+	
+	DxLib::SetGraphMode(640, 480, 16);
+
+	//ウインドウで描画
+	DxLib::ChangeWindowMode(TRUE);
+
 	if (DxLib_Init() == -1)	// ＤＸライブラリ初期化処理
 	{
 		return -1;				// エラーが起きたら直ちに終了
