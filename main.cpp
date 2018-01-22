@@ -166,7 +166,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			DrawPointY = 0;
 			DrawPointX = 0;
 			CP++;
+			break;
 
+		case ' ':
+			CP++;
 			break;
 
 		default:	// その他の文字
