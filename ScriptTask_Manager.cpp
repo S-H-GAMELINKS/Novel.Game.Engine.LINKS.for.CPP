@@ -1,8 +1,16 @@
 //Script Tag Task Maneger Source
 #include "DxLib.h"
-#include "Variable.h"
 #include <vector>
 #include <string>
+
+extern int DrawPointX, DrawPointY;	// 文字列描画の位置
+extern int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
+
+//文字サイズ
+extern const std::int32_t moji_size;
+
+//終了フラグ
+extern int EndFlag;
 
 namespace {
 

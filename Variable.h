@@ -6,7 +6,7 @@
 #include <string>
 
 // 文字のサイズ
-std::int32_t moji_size = 24;
+extern const std::int32_t moji_size = 24;
 
 int DrawPointX = 0, DrawPointY = 0;	// 文字列描画の位置
 int SP = 0, CP = 0;	// 参照する文字列番号と文字列中の文字ポインタ
