@@ -26,6 +26,8 @@ static std::vector<int> Character;
 //BGM格納変数
 static std::vector<int> BackGroundMusic;
 
+static std::vector<int> SoundEffect;
+
 //スクリプト読込関数
 void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) {
 
@@ -130,6 +132,25 @@ void MaterialLoadBackGroundMusic() {
 	}
 }
 
+//SE読込関数
+void MaterialLoadSoundEffect() {
+
+	std::string FilePath = "DATA/SOUNDEFFECT/SE";
+	std::string FileFormat = ".ogg";
+	std::string FileName = "";
+
+	for (std::int32_t i = 0; i < 99; i++) {
+
+		std::ostringstream Num;
+
+		Num << std::setfill('0') << std::setw(2) << i + 1;
+
+		FileName = (FilePath + Num.str() + FileFormat);
+
+		SoundEffect.emplace_back(std::move(DxLib::LoadSoundMem(FileName.c_str())));
+	}
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	LPSTR lpCmdLine, int nCmdShow)
 {
@@ -173,6 +194,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//BGM読込関数
 	MaterialLoadBackGroundMusic();
 
+	//SE読込関数
+	MaterialLoadSoundEffect();
+
 	// ループ
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
@@ -194,6 +218,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		case 'M':
 			CP++;
 			DxLib::PlaySoundMem(BackGroundMusic[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_LOOP);
+			CP++;
+			break;
+
+		case 'S':
+			CP++;
+			DxLib::PlaySoundMem(SoundEffect[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_BACK);
 			CP++;
 			break;
 
