@@ -122,31 +122,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		case 'B':
 			CP++;
 			DxLib::DrawGraph(0, 0, BackGround[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) -48) - 1], TRUE);
-			CP++;
 			break;
 
 		case 'C':
 			CP++;
 			DxLib::DrawGraph(150, 130, Character[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], TRUE);
-			CP++;
 			break;
 
 		case 'M':
 			CP++;
 			DxLib::PlaySoundMem(BackGroundMusic[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_LOOP);
-			CP++;
 			break;
 
 		case 'S':
 			CP++;
 			DxLib::PlaySoundMem(SoundEffect[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_BACK);
-			CP++;
 			break;
 
 		case 'V':
 			CP++;
 			DxLib::PlayMovie(Movie[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
-			CP++;
 			break;
 
 		case 'L':	// 改行文字
@@ -186,9 +181,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			CP++;
 
 			if (Script[SP][CP] == '/') {
-				SP++;
 				CP = 0;
+				SP++;
 			}
+			break;
+
+		case '@':
+			CP++;
 			break;
 
 		case ' ':
@@ -225,7 +224,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		if (EndFlag == 1) break;
 
 		//参照文字列の終端まで行っていたら参照文字列を進める
-		if (Script[SP][CP] == '\0')
+		if (0 < CP && (Script[SP].size() == std::size_t(CP)))
 		{
 			SP++;
 			CP = 0;
