@@ -133,3 +133,29 @@ void MaterialLoad(std::vector<int>& BackGround, std::vector<int>& Character, std
 	//動画読込関数
 	MaterialLoadMovie(Movie);
 }
+
+//スクリプト読込関数
+void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) {
+
+	const char* ScriptFilePath[] = {
+		"DATA/STR/LINKS.txt",
+		"DATA/STR/A.txt",
+		"DATA/STR/B.txt",
+		"DATA/STR/C.txt",
+		"DATA/STR/D.txt",
+		"DATA/STR/E.txt",
+		"DATA/STR/F.txt",
+		"DATA/STR/G.txt",
+		"DATA/STR/H.txt",
+		"DATA/STR/I.txt",
+		"DATA/STR/J.txt",
+		"DATA/STR/K.txt",
+		"DATA/STR/L.txt",
+		"DATA/STR/M.txt",
+		"DATA/STR/N.txt"
+	};
+
+	std::fstream file(ScriptFilePath[EndFlag], std::ios_base::in);
+
+	for (std::string line; std::getline(file, line); ) if (!line.empty()) Script.emplace_back(std::move(line));
+}
