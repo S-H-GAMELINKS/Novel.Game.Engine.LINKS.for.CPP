@@ -155,7 +155,9 @@ void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) {
 		"DATA/STR/N.txt"
 	};
 
-	std::fstream file(ScriptFilePath[EndFlag], std::ios_base::in);
+	if (0 <= EndFlag && EndFlag < 15) {
+		std::fstream file(ScriptFilePath[EndFlag], std::ios_base::in);
 
-	for (std::string line; std::getline(file, line); ) if (!line.empty()) Script.emplace_back(std::move(line));
+		for (std::string line; std::getline(file, line); ) if (!line.empty()) Script.emplace_back(std::move(line));
+	}
 }
