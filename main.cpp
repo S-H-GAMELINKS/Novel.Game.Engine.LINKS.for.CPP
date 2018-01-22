@@ -190,6 +190,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 			CP++;
 			break;
 
+		case '#':
+			CP++;
+			break;
+
 		case ' ':
 			CP++;
 			break;
