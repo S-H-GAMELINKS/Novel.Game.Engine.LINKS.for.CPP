@@ -169,6 +169,26 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		CP++;
 		break;
 
+	case 'G':	//ゲームオーバー画面
+		CP++;
+		break;
+
+	case 'F':	//エンディング画面
+		CP++;
+		break;
+
+	case 'O':	//BGM停止
+		CP++;
+		break;
+
+	case 'Q':	//SE停止
+		CP++;
+		break;
+
+	case 'D':	//選択肢
+		CP++;
+		break;
+
 	case 'E':	//ゲーム終了
 		EndFlag = 99;
 		CP++;
