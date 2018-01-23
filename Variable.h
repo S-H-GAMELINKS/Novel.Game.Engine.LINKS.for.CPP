@@ -34,6 +34,8 @@ static std::array<int, 99> SoundEffect;
 //動画格納変数
 static std::array<std::string, 99> Movie;
 
+std::int32_t GameTitleGraph;
+
 //タイトルメニュー位置
 extern const std::int32_t title_menu_y = 300;
 extern const std::int32_t title_menu_x = 430;

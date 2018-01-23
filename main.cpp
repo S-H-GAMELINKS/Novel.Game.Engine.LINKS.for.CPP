@@ -43,7 +43,7 @@ void DxLibInitPostProccessing() {
 	ScriptRead(Script, EndFlag);
 
 	//各種素材の読込関数
-	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie);
+	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie, GameTitleGraph);
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)

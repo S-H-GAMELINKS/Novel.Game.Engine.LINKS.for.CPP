@@ -25,12 +25,17 @@ extern const std::int32_t wait_task_time;
 //終了フラグ
 extern int EndFlag;
 
+//タイトル画面
+extern std::int32_t GameTitleGraph;
+
 namespace {
 
 	//タイトルメニューの描画関数
 	void GameTitleMenuDraw(unsigned int color, std::int32_t cursor_y) {
 
 		const char* TitleMenuItem[] = { "Start", "Load", "Config", "QuickLoad", "Continue", "Exit" };
+
+		DxLib::DrawGraph(0, 0, GameTitleGraph, TRUE);
 
 		//カーソルの描画
 		DxLib::DrawString(title_menu_cursor_x, cursor_y, "■", color);
