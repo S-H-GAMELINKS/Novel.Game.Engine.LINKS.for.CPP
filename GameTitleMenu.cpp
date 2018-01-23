@@ -90,5 +90,6 @@ void GameTitleMenuLoop(unsigned int color, std::int32_t& cursor_y) {
 		GameTitleMenuKeyMove(cursor_y);
 		GameTitleMenuChoice(cursor_y);
 		ScreenClear();
+		GameEndMessageBox();
 	}
 }

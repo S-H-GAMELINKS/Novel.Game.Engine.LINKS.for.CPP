@@ -5,6 +5,7 @@
 #include "Material_Manager.h"
 #include "ScriptTask_Manager.h"
 #include "GameTitleMenu.h"
+#include "Utility.h"
 #include "Variable.h"
 #include <vector>
 #include <string>
@@ -54,6 +55,9 @@ void GamePlayLoop(const int RouteNumber) {
 		
 		//スクリプトタグ処理管理関数
 		ScriptTagTaskManager(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie);
+
+		//ゲーム終了確認ウインドウ
+		GameEndMessageBox();
 
 		// 終了フラグが１だったら終了する
 		if (EndFlag != RouteNumber) break;

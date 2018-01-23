@@ -10,4 +10,7 @@ int MessageBoxOk(LPCTSTR lpText) noexcept;
 //画面クリア処理関数
 void ScreenClear() noexcept;
 
+//ゲーム終了確認ウインドウ
+void GameEndMessageBox();
+
 #endif // !UTILITY_H_
