@@ -113,6 +113,15 @@ namespace ScriptTask {
 		DrawPointY = 0;
 		DrawPointX = 0;
 	}
+
+	//コメント処理関数
+	template <typename T>
+	void Comment(const std::vector<T>& Script) {
+		if (Script[SP][CP] == '/') {
+			CP = 0;
+			SP++;
+		}
+	}
 }
 
 //スクリプトタグ処理関数
@@ -167,11 +176,7 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 
 	case '/':	//コメント
 		CP++;
-
-		if (Script[SP][CP] == '/') {
-			CP = 0;
-			SP++;
-		}
+		ScriptTask::Comment(Script);
 		break;
 
 	case '@':	//立ち絵を画面から削除
