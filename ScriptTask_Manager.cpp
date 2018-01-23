@@ -108,60 +108,49 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 
 	switch (Script[SP][CP])
 	{
-	case 'B':
+	case 'B':	//背景画像描画
 		ScriptTask::DrawBackGround(Script, BackGround);
 		break;
 
-	case 'C':
+	case 'C':	//立ち絵画像描画
 		ScriptTask::DrawCharacter(Script, Character);
 		break;
 
-	case 'M':
+	case 'M':	//BGM再生
 		ScriptTask::PlayBackGroundMusic(Script, BackGroundMusic);
 		break;
 
-	case 'S':
+	case 'S':	//SE再生
 		ScriptTask::PlaySoundEffect(Script, SoundEffect);
 		break;
 
-	case 'V':
+	case 'V':	//動画再生
 		ScriptTask::PlayMovie(Script, Movie);
 		break;
 
-	case 'L':	// 改行文字
-
-				// 改行処理および参照文字位置を一つ進める
+	case 'L':	//改行文字
 		ScriptTask::Kaigyou();
 		CP++;
-
 		break;
 
-	case 'P':	// ボタン押し待ち文字
-
-				// ボタン押し待ちおよび参照文字位置を一つ進める
+	case 'P':	//クリック待ち
 		WaitKey();
 		CP++;
-
 		break;
 
-	case 'E':	// 終了文字
-
-				// 終了フラグを立てるおよび参照文字位置を一つ進める
-		EndFlag = 1;
+	case 'E':	//ゲーム終了
+		EndFlag = 99;
 		CP++;
-
 		break;
 
-	case 'R':	// クリア文字
-
-				// 画面を初期化して描画文字位置を初期位置に戻すおよび参照文字位置を一つ進める
+	case 'R':	//画面クリア
 		ClearDrawScreen();
 		DrawPointY = 0;
 		DrawPointX = 0;
 		CP++;
 		break;
 
-	case '/':
+	case '/':	//コメント
 		CP++;
 
 		if (Script[SP][CP] == '/') {
@@ -170,18 +159,15 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		}
 		break;
 
-	case '@':
+	case '@':	//立ち絵を画面から削除
 		CP++;
 		break;
 
-	case '#':
+	case '#':	//キャラクター名描画
 		CP++;
 		break;
 
 	case ' ':
-		CP++;
-		break;
-
 	case '0':
 	case '1':
 	case '2':
