@@ -125,11 +125,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameTitleMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material_Manager.cpp" />
     <ClCompile Include="ScriptTask_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameTitleMenu.h" />
     <ClInclude Include="Material_Manager.h" />
     <ClInclude Include="ScriptTask_Manager.h" />
     <ClInclude Include="Variable.h" />

@@ -34,4 +34,22 @@ static std::array<int, 99> SoundEffect;
 //動画格納変数
 static std::array<std::string, 99> Movie;
 
+//タイトルメニュー位置
+extern const std::int32_t title_menu_y = 300;
+extern const std::int32_t title_menu_x = 430;
+extern const std::int32_t title_menu_load_y = 330;
+extern const std::int32_t title_menu_config_y = 360;
+extern const std::int32_t title_menu_quick_load_y = 390;
+extern const std::int32_t title_menu_continue_y = 420;
+extern const std::int32_t title_menu_exit_y = 450;
+
+//タイトルメニューのカーソル位置
+extern const std::int32_t title_menu_cursor_x = 400;
+
+//キーカーソルの移動量
+extern const std::int32_t cursor_move = 30;
+
+//処理停止時間
+extern const std::int32_t wait_task_time = 70;
+
 #endif //VALIABLE_H_
