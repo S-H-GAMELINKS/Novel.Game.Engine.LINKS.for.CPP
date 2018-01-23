@@ -106,6 +106,13 @@ namespace ScriptTask {
 		CP++;
 		DxLib::PlayMovie(Movie[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
+
+	//画面クリア処理関数
+	void ClearScreen() {
+		ClearDrawScreen();
+		DrawPointY = 0;
+		DrawPointX = 0;
+	}
 }
 
 //スクリプトタグ処理関数
@@ -144,9 +151,7 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		break;
 
 	case 'R':	//画面クリア
-		ClearDrawScreen();
-		DrawPointY = 0;
-		DrawPointX = 0;
+		ScriptTask::ClearScreen();
 		CP++;
 		break;
 

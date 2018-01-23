@@ -52,7 +52,7 @@ extern const std::int32_t title_menu_cursor_x = 400;
 extern const std::int32_t cursor_move = 30;
 
 //ƒL[ˆ—’â~ŠÔ
-extern const std::int32_t wait_task_time = 70;
+extern const std::int32_t wait_key_task_time = 70;
 
 //ƒQ[ƒ€ƒvƒŒƒC‚Ì’x‰„ŠÔ
 extern const std::int32_t wait_game_time = 3;

@@ -20,7 +20,7 @@ extern const std::int32_t title_menu_cursor_x;
 extern const std::int32_t cursor_move;
 
 //処理停止時間
-extern const std::int32_t wait_task_time;
+extern const std::int32_t wait_key_task_time;
 
 //終了フラグ
 extern int EndFlag;
@@ -54,7 +54,7 @@ namespace {
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
 			cursor_y = (title_menu_y == cursor_y) ? title_menu_exit_y : cursor_y - cursor_move;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
 	//ゲーム終了(タイトルメニュー)
