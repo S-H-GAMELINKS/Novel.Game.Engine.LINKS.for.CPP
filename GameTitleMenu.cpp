@@ -52,6 +52,12 @@ namespace {
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_task_time));
 	}
 
+	//ゲーム終了(タイトルメニュー)
+	void GameTitleMenuExit() {
+		if (IDYES == MessageBoxYesNo("終了しますか？"))
+			EndFlag = 99;
+	}
+
 	//タイトルメニューの項目選択関数
 	void GameTitleMenuChoice(const std::int32_t& cursor_y) {
 
@@ -66,14 +72,15 @@ namespace {
 
 		//if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && cursor_y == title_menu_continue_y)
 
-		//if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && cursor_y == title_menu_exit_y)
+		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && cursor_y == title_menu_exit_y)
+			GameTitleMenuExit();
 	}
 }
 
 //タイトルメニューのループ関数
 void GameTitleMenuLoop(unsigned int color, std::int32_t& cursor_y) {
 
-	while (CheckHitKey(KEY_INPUT_ESCAPE) == 0 && EndFlag == -1) {
+	while (EndFlag == -1) {
 		GameTitleMenuDraw(color, cursor_y);
 		GameTitleMenuKeyMove(cursor_y);
 		GameTitleMenuChoice(cursor_y);
