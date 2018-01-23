@@ -1,5 +1,6 @@
 // Game Title Menu Source 
 #include "DxLib.h"
+#include "Utility.h"
 #include <thread>
 #include <chrono>
 

@@ -129,11 +129,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material_Manager.cpp" />
     <ClCompile Include="ScriptTask_Manager.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameTitleMenu.h" />
     <ClInclude Include="Material_Manager.h" />
     <ClInclude Include="ScriptTask_Manager.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="Variable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
