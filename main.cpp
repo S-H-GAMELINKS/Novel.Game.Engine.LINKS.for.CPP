@@ -63,6 +63,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	std::int32_t color = DxLib::GetColor(255, 255, 255);
 	std::int32_t cursor_y = 300;
 
+	//タイトル画面
 	GameTitleMenuLoop(color, cursor_y);
 
 	ScriptRead(Script, EndFlag);
