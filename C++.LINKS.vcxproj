@@ -132,6 +132,7 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConstantExpressionVariable.h" />
     <ClInclude Include="GameTitleMenu.h" />
     <ClInclude Include="Material_Manager.h" />
     <ClInclude Include="ScriptTask_Manager.h" />

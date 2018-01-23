@@ -1,26 +1,9 @@
 // Game Title Menu Source 
 #include "DxLib.h"
+#include "ConstantExpressionVariable.h"
 #include "Utility.h"
 #include <thread>
 #include <chrono>
-
-//タイトルメニュー位置
-extern const std::int32_t title_menu_y;
-extern const std::int32_t title_menu_x;
-extern const std::int32_t title_menu_load_y;
-extern const std::int32_t title_menu_config_y;
-extern const std::int32_t title_menu_quick_load_y;
-extern const std::int32_t title_menu_continue_y;
-extern const std::int32_t title_menu_exit_y;
-
-//タイトルメニューのカーソル位置
-extern const std::int32_t title_menu_cursor_x;
-
-//キーカーソルの移動量
-extern const std::int32_t cursor_move;
-
-//処理停止時間
-extern const std::int32_t wait_key_task_time;
 
 //終了フラグ
 extern int EndFlag;

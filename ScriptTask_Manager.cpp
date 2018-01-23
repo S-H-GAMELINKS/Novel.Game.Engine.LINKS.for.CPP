@@ -1,5 +1,6 @@
 //Script Tag Task Maneger Source
 #include "DxLib.h"
+#include "ConstantExpressionVariable.h"
 #include <vector>
 #include <string>
 #include <array>
@@ -9,14 +10,8 @@
 extern int DrawPointX, DrawPointY;	// 文字列描画の位置
 extern int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
 
-//文字サイズ
-extern const std::int32_t moji_size;
-
 //終了フラグ
 extern int EndFlag;
-
-//ゲームプレイ時の遅延時間
-extern const std::int32_t wait_game_time;
 
 namespace ScriptTask {
 
@@ -83,28 +78,28 @@ namespace ScriptTask {
 	}
 
 	//背景画像描画関数
-	void DrawBackGround(const std::vector<std::string>& Script, const std::array<int, 99>& BackGround) {
+	void DrawBackGround(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround) {
 		CP++;
 		BackGroundHandle = BackGround[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 	}
 
 	//立ち絵描画関数
-	void DrawCharacter(const std::vector<std::string>& Script, const std::array<int, 99>& Character) {
+	void DrawCharacter(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& Character) {
 		CP++;
 		CharacterHandle = Character[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
 	}
 
 	//BGM再生関数
-	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, 99>& BackGroundMusic) {
+	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGroundMusic) {
 		CP++;
 		BackGroundMusicHandle = BackGroundMusic[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
 		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
 	}
 
 	//効果音再生関数
-	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, 99>& SoundEffect) {
+	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& SoundEffect) {
 		CP++;
 		SoundEffectHandle = SoundEffect[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
 		DxLib::PlaySoundMem(SoundEffectHandle, DX_PLAYTYPE_BACK);
@@ -112,7 +107,7 @@ namespace ScriptTask {
 
 	//動画再生関数
 	template <typename T>
-	void PlayMovie(const std::vector<T>& Script, std::array<T, 99> Movie) {
+	void PlayMovie(const std::vector<T>& Script, std::array<T, MaterialMax> Movie) {
 		CP++;
 		DxLib::PlayMovie(Movie[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
@@ -135,7 +130,7 @@ namespace ScriptTask {
 }
 
 //スクリプトタグ処理関数
-void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::array<int, 99>& BackGround, const std::array<int, 99>& Character, const std::array<int, 99>& BackGroundMusic, const std::array<int, 99>& SoundEffect, const std::array<std::string, 99>& Movie) {
+void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround, const std::array<int, MaterialMax>& Character, const std::array<int, MaterialMax>& BackGroundMusic, const std::array<int, MaterialMax>& SoundEffect, const std::array<std::string, MaterialMax>& Movie) {
 
 	switch (Script[SP][CP])
 	{

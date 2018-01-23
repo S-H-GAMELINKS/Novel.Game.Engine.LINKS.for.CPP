@@ -1,6 +1,7 @@
 // Utility Source
 
 #include "DxLib.h"
+#include "ConstantExpressionVariable.h"
 #include <thread>
 #include <chrono>
 
@@ -9,12 +10,6 @@ extern const char* GameTitle;
 
 //終了フラグ
 extern int EndFlag;
-
-//キー処理停止時間
-extern const std::int32_t wait_key_task_time;
-
-//ゲームプレイ時の遅延時間
-extern const std::int32_t wait_game_time;
 
 namespace {
 

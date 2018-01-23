@@ -1,5 +1,6 @@
 //Material Manage Source
 #include "DxLib.h"
+#include "ConstantExpressionVariable.h"
 #include <vector>
 #include <string>
 #include <array>
@@ -16,7 +17,7 @@ namespace {
 	}
 
 	//”wŒi‰æ‘œ“ÇŠÖ”
-	void MaterialLoadBackGround(std::array<int, 99>& BackGround) {
+	void MaterialLoadBackGround(std::array<int, MaterialMax>& BackGround) {
 
 		std::string FilePath = "DATA/BACKGROUND/BG";
 		std::string FileFormat = ".png";
@@ -36,7 +37,7 @@ namespace {
 	}
 
 	//—§‚¿ŠG‘fŞ“ÇŠÖ”
-	void MaterialLoadCharacter(std::array<int, 99>& Character) {
+	void MaterialLoadCharacter(std::array<int, MaterialMax>& Character) {
 
 		std::string FilePath = "DATA/CHARACTER/CHAR";
 		std::string FileFormat = ".png";
@@ -56,7 +57,7 @@ namespace {
 	}
 
 	//BGM“ÇŠÖ”
-	void MaterialLoadBackGroundMusic(std::array<int, 99>& BackGroundMusic) {
+	void MaterialLoadBackGroundMusic(std::array<int, MaterialMax>& BackGroundMusic) {
 
 		std::string FilePath = "DATA/BACKGROUNDMUSIC/BGM";
 		std::string FileFormat = ".ogg";
@@ -76,7 +77,7 @@ namespace {
 	}
 
 	//SE“ÇŠÖ”
-	void MaterialLoadSoundEffect(std::array<int, 99>& SoundEffect) {
+	void MaterialLoadSoundEffect(std::array<int, MaterialMax>& SoundEffect) {
 
 		std::string FilePath = "DATA/SOUNDEFFECT/SE";
 		std::string FileFormat = ".ogg";
@@ -97,7 +98,7 @@ namespace {
 
 	//“®‰æ“ÇŠÖ”
 	template <typename T>
-	void MaterialLoadMovie(std::array<T, 99>& Movie) {
+	void MaterialLoadMovie(std::array<T, MaterialMax>& Movie) {
 
 		std::string FilePath = "DATA/MOVIE/MOVIE";
 		std::string FileFormat = ".wmv";
@@ -118,7 +119,7 @@ namespace {
 }
 
 //Šeí‘fŞ“ÇŠÖ”
-void MaterialLoad(std::array<int, 99>& BackGround, std::array<int, 99>& Character, std::array<int, 99>& BackGroundMusic, std::array<int, 99>& SoundEffect, std::array<std::string, 99>& Movie, std::int32_t& GameTitleGraph) {
+void MaterialLoad(std::array<int, MaterialMax>& BackGround, std::array<int, MaterialMax>& Character, std::array<int, MaterialMax>& BackGroundMusic, std::array<int, MaterialMax>& SoundEffect, std::array<std::string, MaterialMax>& Movie, std::int32_t& GameTitleGraph) {
 
 	//ƒTƒEƒ“ƒhƒf[ƒ^‚Ì“Ç‚İ‚İŒ`®
 	DxLib::SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
