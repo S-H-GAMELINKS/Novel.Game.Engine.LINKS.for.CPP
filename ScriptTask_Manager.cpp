@@ -164,7 +164,7 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		CP++;
 		break;
 
-	case 'W':
+	case 'W': //’x‰„ˆ—
 		std::this_thread::sleep_for(std::chrono::seconds(wait_game_time));
 		CP++;
 		break;
