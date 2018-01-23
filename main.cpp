@@ -47,6 +47,7 @@ void DxLibInitPostProccessing() {
 	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie, GameTitleGraph);
 }
 
+//ゲーム中のループ
 void GamePlayLoop(const int RouteNumber) {
 
 	ScriptRead(Script, EndFlag);
@@ -85,7 +86,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//初期化後処理
 	DxLibInitPostProccessing();
 
+	//文字などの色
 	std::int32_t color = DxLib::GetColor(255, 255, 255);
+
+	//カーソルの位置
 	std::int32_t cursor_y = 300;
 
 	while (EndFlag != 99) {
