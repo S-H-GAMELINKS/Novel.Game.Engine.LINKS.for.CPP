@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <array>
+#include <thread>
+#include <chrono>
 
 extern int DrawPointX, DrawPointY;	// 文字列描画の位置
 extern int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
@@ -12,6 +14,9 @@ extern const std::int32_t moji_size;
 
 //終了フラグ
 extern int EndFlag;
+
+//ゲームプレイ時の遅延時間
+extern const std::int32_t wait_game_time;
 
 namespace ScriptTask {
 
@@ -138,15 +143,20 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		CP++;
 		break;
 
-	case 'E':	//ゲーム終了
-		EndFlag = 99;
-		CP++;
-		break;
-
 	case 'R':	//画面クリア
 		ClearDrawScreen();
 		DrawPointY = 0;
 		DrawPointX = 0;
+		CP++;
+		break;
+
+	case 'W':
+		std::this_thread::sleep_for(std::chrono::seconds(wait_game_time));
+		CP++;
+		break;
+
+	case 'E':	//ゲーム終了
+		EndFlag = 99;
 		CP++;
 		break;
 

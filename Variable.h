@@ -51,7 +51,10 @@ extern const std::int32_t title_menu_cursor_x = 400;
 //キーカーソルの移動量
 extern const std::int32_t cursor_move = 30;
 
-//処理停止時間
+//キー処理停止時間
 extern const std::int32_t wait_task_time = 70;
+
+//ゲームプレイ時の遅延時間
+extern const std::int32_t wait_game_time = 3;
 
 #endif //VALIABLE_H_
