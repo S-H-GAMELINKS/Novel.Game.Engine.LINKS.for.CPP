@@ -22,6 +22,12 @@ namespace ScriptTask {
 
 	char OneMojiBuf[3];	// ‚P•¶š•ªˆê‹L‰¯”z—ñ
 
+	//Šeí‘fŞƒnƒ“ƒhƒ‹
+	std::int32_t BackGroundHandle;
+	std::int32_t CharacterHandle;
+	std::int32_t BackGroundMusicHandle;
+	std::int32_t SoundEffectHandle;
+
 	// ‰üsŠÖ”
 	void Kaigyou()
 	{
@@ -79,25 +85,29 @@ namespace ScriptTask {
 	//”wŒi‰æ‘œ•`‰æŠÖ”
 	void DrawBackGround(const std::vector<std::string>& Script, const std::array<int, 99>& BackGround) {
 		CP++;
-		DxLib::DrawGraph(0, 0, BackGround[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], TRUE);
+		BackGroundHandle = BackGround[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
+		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 	}
 
 	//—§‚¿ŠG•`‰æŠÖ”
 	void DrawCharacter(const std::vector<std::string>& Script, const std::array<int, 99>& Character) {
 		CP++;
-		DxLib::DrawGraph(150, 130, Character[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], TRUE);
+		CharacterHandle = Character[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
+		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
 	}
 
 	//BGMÄ¶ŠÖ”
 	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, 99>& BackGroundMusic) {
 		CP++;
-		DxLib::PlaySoundMem(BackGroundMusic[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_LOOP);
+		BackGroundMusicHandle = BackGroundMusic[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
+		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
 	}
 
 	//Œø‰Ê‰¹Ä¶ŠÖ”
 	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, 99>& SoundEffect) {
 		CP++;
-		DxLib::PlaySoundMem(SoundEffect[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1], DX_PLAYTYPE_BACK);
+		SoundEffectHandle = SoundEffect[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
+		DxLib::PlaySoundMem(SoundEffectHandle, DX_PLAYTYPE_BACK);
 	}
 
 	//“®‰æÄ¶ŠÖ”
@@ -178,11 +188,13 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		break;
 
 	case 'O':	//BGM’â~
+		DxLib::StopSoundMem(ScriptTask::BackGroundMusicHandle);
 		CP++;
 		break;
 
 	case 'Q':	//SE’â~
 		CP++;
+		DxLib::StopSoundMem(ScriptTask::SoundEffectHandle);
 		break;
 
 	case 'D':	//‘I‘ğˆ
