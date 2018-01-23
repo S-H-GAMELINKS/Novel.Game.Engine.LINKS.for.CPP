@@ -46,6 +46,27 @@ void DxLibInitPostProccessing() {
 	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie, GameTitleGraph);
 }
 
+void GamePlayLoop(const int RouteNumber) {
+
+	ScriptRead(Script, EndFlag);
+
+	while (DxLib::ProcessMessage() == 0) {
+		
+		//スクリプトタグ処理管理関数
+		ScriptTagTaskManager(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie);
+
+		// 終了フラグが１だったら終了する
+		if (EndFlag != RouteNumber) break;
+
+		//参照文字列の終端まで行っていたら参照文字列を進める
+		if (0 < CP && (Script[SP].size() == std::size_t(CP)))
+		{
+			SP++;
+			CP = 0;
+		}
+	}
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 
@@ -63,29 +84,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	std::int32_t color = DxLib::GetColor(255, 255, 255);
 	std::int32_t cursor_y = 300;
 
-	//タイトル画面
-	GameTitleMenuLoop(color, cursor_y);
+	while (EndFlag != 99) {
 
-	ScriptRead(Script, EndFlag);
+		//タイトル画面
+		GameTitleMenuLoop(color, cursor_y);
 
-	if (0 <= EndFlag && EndFlag <= 15) {
-		// ループ
-		while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
-		{
-
-			//スクリプトタグ処理管理関数
-			ScriptTagTaskManager(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie);
-
-			// 終了フラグが１だったら終了する
-			if (EndFlag == 1) break;
-
-			//参照文字列の終端まで行っていたら参照文字列を進める
-			if (0 < CP && (Script[SP].size() == std::size_t(CP)))
-			{
-				SP++;
-				CP = 0;
-			}
-		}
+		//ゲームループ
+		if (0 <= EndFlag && EndFlag <= 15)
+			GamePlayLoop(EndFlag);
 	}
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
