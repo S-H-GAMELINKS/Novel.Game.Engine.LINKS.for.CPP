@@ -19,6 +19,10 @@ constexpr int title_menu_exit_y = 450;
 //タイトルメニューのカーソル位置
 constexpr int title_menu_cursor_x = 400;
 
+//選択肢
+constexpr int choice_pos_x = 100;
+constexpr int choice_pos_y[] = { 200, 230 };
+
 //キーカーソルの移動量
 constexpr int cursor_move = 30;
 
