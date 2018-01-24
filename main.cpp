@@ -60,7 +60,7 @@ void GamePlayLoop(const int RouteNumber) {
 		//ゲーム終了確認ウインドウ
 		GameEndMessageBox();
 
-		// 終了フラグが１だったら終了する
+		// 終了フラグが異なっていたら終了する
 		if (EndFlag != RouteNumber) {
 			SP = 0;
 			CP = 0;
