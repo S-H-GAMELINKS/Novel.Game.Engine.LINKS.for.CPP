@@ -32,6 +32,12 @@ static std::array<int, MaterialMax> SoundEffect;
 //“®‰æŠi”[•Ï”
 static std::array<std::string, MaterialMax> Movie;
 
+//Šeí‘fŞƒnƒ“ƒhƒ‹
+std::int32_t BackGroundHandle;
+std::int32_t CharacterHandle;
+std::int32_t BackGroundMusicHandle;
+std::int32_t SoundEffectHandle;
+
 std::int32_t GameTitleGraph;
 
 #endif //VALIABLE_H_

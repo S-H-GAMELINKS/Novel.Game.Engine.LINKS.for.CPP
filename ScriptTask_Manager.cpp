@@ -15,15 +15,15 @@ extern int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
 //終了フラグ
 extern int EndFlag;
 
+//各種素材ハンドル
+extern std::int32_t BackGroundHandle;
+extern std::int32_t CharacterHandle;
+extern std::int32_t BackGroundMusicHandle;
+extern std::int32_t SoundEffectHandle;
+
 namespace ScriptTask {
 
 	char OneMojiBuf[3];	// １文字分一時記憶配列
-
-	//各種素材ハンドル
-	std::int32_t BackGroundHandle;
-	std::int32_t CharacterHandle;
-	std::int32_t BackGroundMusicHandle;
-	std::int32_t SoundEffectHandle;
 
 	// 改行関数
 	void Kaigyou()
@@ -95,6 +95,11 @@ namespace ScriptTask {
 
 	//BGM再生関数
 	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGroundMusic) {
+		
+		//BGM再生中の場合は、BGMを停止する
+		if (DxLib::CheckSoundMem(BackGroundMusicHandle))
+			DxLib::StopSoundMem(BackGroundMusicHandle);
+
 		CP++;
 		BackGroundMusicHandle = BackGroundMusic[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
 		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
@@ -102,6 +107,11 @@ namespace ScriptTask {
 
 	//効果音再生関数
 	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& SoundEffect) {
+
+		//SE再生中の場合は、SEを停止する
+		if (DxLib::CheckSoundMem(SoundEffectHandle))
+			DxLib::StopSoundMem(SoundEffectHandle);
+
 		CP++;
 		SoundEffectHandle = SoundEffect[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
 		DxLib::PlaySoundMem(SoundEffectHandle, DX_PLAYTYPE_BACK);
@@ -245,13 +255,13 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		break;
 
 	case 'O':	//BGM停止
-		DxLib::StopSoundMem(ScriptTask::BackGroundMusicHandle);
+		DxLib::StopSoundMem(BackGroundMusicHandle);
 		CP++;
 		break;
 
 	case 'Q':	//SE停止
 		CP++;
-		DxLib::StopSoundMem(ScriptTask::SoundEffectHandle);
+		DxLib::StopSoundMem(SoundEffectHandle);
 		break;
 
 	case 'D':	//選択肢
