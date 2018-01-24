@@ -184,6 +184,34 @@ void ChoiceKeyMove(std::int32_t& cursor_y) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
 
+//選択肢(↑)選択時処理
+void ChoiceSelectUp() {
+	if (0 <= EndFlag && EndFlag <= 6) {
+		EndFlag *= 2;
+	}
+}
+
+//選択肢(↑)選択時処理
+void ChoiceSelectDown() {
+	if (0 <= EndFlag && EndFlag <= 6) {
+		EndFlag = EndFlag * 2 + 1;
+	}
+}
+
+//選択肢の選択されたかをチェック
+void ChoiceSelectCheck(std::int32_t cursor_y) {
+
+	if (cursor_y == choice_pos_y[0] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		ChoiceSelectUp();
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+	}
+
+	if (cursor_y == choice_pos_y[1] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		ChoiceSelectDown();
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+	}
+}
+
 //選択肢処理関数
 void ChoiceSelect(int RoutteNumber) {
 
@@ -195,6 +223,7 @@ void ChoiceSelect(int RoutteNumber) {
 	while (EndFlag == RoutteNumber) {
 		DrawChoice(color, cursor_y);
 		ChoiceKeyMove(cursor_y);
+		ChoiceSelectCheck(cursor_y);
 		ScreenClear();
 		GameEndMessageBox();
 	}
