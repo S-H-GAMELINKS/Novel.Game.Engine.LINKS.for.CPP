@@ -61,7 +61,11 @@ void GamePlayLoop(const int RouteNumber) {
 		GameEndMessageBox();
 
 		// 終了フラグが１だったら終了する
-		if (EndFlag != RouteNumber) break;
+		if (EndFlag != RouteNumber) {
+			SP = 0;
+			CP = 0;
+			break;
+		}
 
 		//参照文字列の終端まで行っていたら参照文字列を進める
 		if (0 < CP && (Script[SP].size() == std::size_t(CP)))
@@ -98,7 +102,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		GameTitleMenuLoop(color, cursor_y);
 
 		//ゲームループ
-		if (0 <= EndFlag && EndFlag <= 15)
+		if (1 <= EndFlag && EndFlag <= 16)
 			GamePlayLoop(EndFlag);
 	}
 

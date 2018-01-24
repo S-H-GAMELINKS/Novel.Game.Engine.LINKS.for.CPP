@@ -146,6 +146,8 @@ void MaterialLoad(std::array<int, MaterialMax>& BackGround, std::array<int, Mate
 //スクリプト読込関数
 void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) {
 
+	Script.clear();
+
 	const char* ScriptFilePath[] = {
 		"DATA/STR/LINKS.txt",
 		"DATA/STR/A.txt",
@@ -164,8 +166,8 @@ void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) {
 		"DATA/STR/N.txt"
 	};
 
-	if (0 <= EndFlag && EndFlag < 15) {
-		std::fstream file(ScriptFilePath[EndFlag], std::ios_base::in);
+	if (1 <= EndFlag && EndFlag < 16) {
+		std::fstream file(ScriptFilePath[EndFlag - 1], std::ios_base::in);
 
 		for (std::string line; std::getline(file, line); ) if (!line.empty()) Script.emplace_back(std::move(line));
 	}

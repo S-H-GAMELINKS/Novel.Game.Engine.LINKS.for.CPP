@@ -164,9 +164,9 @@ void DrawChoice(unsigned int color, std::int32_t& choice_y) {
 
 //選択肢読込関数
 void ChoiceRead() {
-	if (0 <= EndFlag && EndFlag <= 6) {
+	if (1 <= EndFlag && EndFlag <= 7) {
 		for (std::size_t i : {0, 1}) {
-			std::ifstream file(ChoiceScript[EndFlag][i], std::ios_base::in);
+			std::ifstream file(ChoiceScript[EndFlag - 1][i], std::ios_base::in);
 			std::getline(file, Choice[i]);
 		}
 	}
@@ -186,14 +186,14 @@ void ChoiceKeyMove(std::int32_t& cursor_y) {
 
 //選択肢(↑)選択時処理
 void ChoiceSelectUp() {
-	if (0 <= EndFlag && EndFlag <= 6) {
+	if (1 <= EndFlag && EndFlag <= 7) {
 		EndFlag *= 2;
 	}
 }
 
 //選択肢(↑)選択時処理
 void ChoiceSelectDown() {
-	if (0 <= EndFlag && EndFlag <= 6) {
+	if (1 <= EndFlag && EndFlag <= 7) {
 		EndFlag = EndFlag * 2 + 1;
 	}
 }
@@ -295,7 +295,6 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 
 	case 'D':	//選択肢
 		ChoiceSelect(EndFlag);
-		CP++;
 		break;
 
 	case 'E':	//ゲーム終了

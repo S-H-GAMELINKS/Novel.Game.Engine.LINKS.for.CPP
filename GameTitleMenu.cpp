@@ -50,7 +50,7 @@ namespace {
 	void GameTitleMenuChoice(const std::int32_t& cursor_y) {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && cursor_y == title_menu_y)
-			EndFlag = 0;
+			EndFlag = 1;
 
 		//if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && cursor_y == title_menu_load_y)
 
@@ -68,7 +68,7 @@ namespace {
 //タイトルメニューのループ関数
 void GameTitleMenuLoop(unsigned int color, std::int32_t& cursor_y) {
 
-	while (EndFlag == -1) {
+	while (EndFlag == 0) {
 		GameTitleMenuDraw(color, cursor_y);
 		GameTitleMenuKeyMove(cursor_y);
 		GameTitleMenuChoice(cursor_y);

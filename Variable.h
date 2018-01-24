@@ -13,7 +13,7 @@ extern const char* GameTitle = "ノベルゲームエンジン「LINKS」 for C++";
 int DrawPointX = 0, DrawPointY = 0;	// 文字列描画の位置
 int SP = 0, CP = 0;	// 参照する文字列番号と文字列中の文字ポインタ
 
-int EndFlag = -1;	// 終了フラグ
+int EndFlag = 0;	// 終了フラグ
 
 //スクリプト格納変数
 static std::vector<std::string> Script;
