@@ -13,4 +13,7 @@ void ScreenClear() noexcept;
 //ゲーム終了確認ウインドウ
 void GameEndMessageBox();
 
+//各種ショートカットキー
+void ShortCutKey();
+
 #endif // !UTILITY_H_

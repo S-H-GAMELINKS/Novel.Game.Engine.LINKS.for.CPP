@@ -62,6 +62,9 @@ void GamePlayLoop(const int RouteNumber) {
 		//ゲーム終了確認ウインドウ
 		GameEndMessageBox();
 
+		//ショートカットキー
+		ShortCutKey();
+
 		// 終了フラグが異なっていたら終了する
 		if (EndFlag != RouteNumber) {
 			SP = 0;
