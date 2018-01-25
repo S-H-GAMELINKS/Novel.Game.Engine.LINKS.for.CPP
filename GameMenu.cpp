@@ -77,5 +77,8 @@ void GameMenuLoop() {
 		GameMenuKeyMove(gamemenu_y);
 		GameMenuSelect(gamemenu_y);
 		ScreenClear();
+
+		//ゲーム終了確認ウインドウ
+		GameEndMessageBox();
 	}
 }
