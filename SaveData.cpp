@@ -161,11 +161,13 @@ void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y) {
 
 
 	if (cursor_y == save_base_pos_y * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		SaveDataTask(1, "DATA/SAVE/SAVEDATA2.bat");
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
 
 	if (cursor_y == save_base_pos_y * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		SaveDataTask(1, "DATA/SAVE/SAVEDATA3.bat");
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
