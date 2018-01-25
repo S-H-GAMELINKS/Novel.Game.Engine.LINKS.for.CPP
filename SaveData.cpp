@@ -2,6 +2,7 @@
 
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
+#include "Utility.h"
 #include <string>
 #include <thread>
 #include <chrono>
@@ -45,8 +46,8 @@ namespace {
 		}
 	}
 
-	//セーブ/ロードメニュー描画
-	void SaveLoadMenuDraw(std::int32_t& cursor_y) {
+	//セーブ/ロード/デリート メニュー描画
+	void SaveLoadDeleteMenuDraw(std::int32_t& cursor_y) {
 
 		//スクリーンショット描画
 		for (std::int32_t i = 0; i < save_max_num; i++)
@@ -150,8 +151,8 @@ namespace {
 	}
 }
 
-//セーブ/ロードメニュー選択処理
-void SaveLoadMenuSelect(std::int32_t& cursor_y) {
+//セーブ/ロード/デリート メニュー選択処理
+void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y) {
 
 	if (cursor_y == save_base_pos_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 		SaveDataTask(1, "DATA/SAVE/SAVEDATA1.bat");
@@ -171,5 +172,20 @@ void SaveLoadMenuSelect(std::int32_t& cursor_y) {
 
 	if (cursor_y == save_base_pos_y * 4 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+	}
+}
+
+//セーブデータ(セーブ/ロード/デリート)ループ
+void SaveDataLoop() {
+
+	//スクリーンショットの読込
+	SaveDataSnapLoad();
+
+	std::int32_t save_y = save_base_pos_y;
+
+	while (EndFlag == 17) {
+		SaveLoadDeleteMenuDraw(save_y);
+		SaveLoadDeleteMenuSelect(save_y);
+		ScreenClear();
 	}
 }
