@@ -2,8 +2,12 @@
 
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
+#include "Utility.h"
 #include <thread>
 #include <chrono>
+
+//終了フラグ
+extern int EndFlag;
 
 //ゲームメニュー描画関数
 void GameMenuDraw(std::int32_t cursor_y) {
@@ -59,4 +63,17 @@ void GameMenuSelect(std::int32_t& cursor_y) {
 	
 	//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
 
+}
+
+//ゲームメニューループ
+void GameMenuLoop() {
+
+	std::int32_t gamemenu_y = game_menu_base_pos_y;
+
+	while (EndFlag == 17) {
+		GameMenuDraw(gamemenu_y);
+		GameMenuKeyMove(gamemenu_y);
+		GameMenuSelect(gamemenu_y);
+		ScreenClear();
+	}
 }
