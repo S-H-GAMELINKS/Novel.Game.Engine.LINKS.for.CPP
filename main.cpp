@@ -5,6 +5,7 @@
 #include "Material_Manager.h"
 #include "ScriptTask_Manager.h"
 #include "GameTitleMenu.h"
+#include "GameMenu.h"
 #include "Utility.h"
 #include "Variable.h"
 #include <vector>
@@ -108,6 +109,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//ゲームループ
 		if (1 <= EndFlag && EndFlag <= 16)
 			GamePlayLoop(EndFlag);
+
+		//ゲームメニューループ
+		if (EndFlag == 17)
+			GameMenuLoop();
 	}
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
