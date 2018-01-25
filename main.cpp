@@ -159,6 +159,7 @@ int SaveDataSave(const char* SaveDataPath) {
 
 }
 
+//セーブデータをデリート
 int SaveDataLoad(const char* SaveDataPath) {
 
 	SaveData_t SaveData;
