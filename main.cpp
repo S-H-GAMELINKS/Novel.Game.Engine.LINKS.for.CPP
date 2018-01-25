@@ -190,7 +190,9 @@ int SaveDataLoad(const char* SaveDataPath) {
 }
 
 //セーブデータをデリート
-
+void SaveDataDelete(const char* SaveDataPath) {
+	std::remove(SaveDataPath);
+}
 
 //セーブ/ロード/デリート切り替え関数
 void SaveDataTask(std::int32_t Num, const char* SaveDataPath) {
@@ -204,8 +206,8 @@ void SaveDataTask(std::int32_t Num, const char* SaveDataPath) {
 		SaveDataLoad(SaveDataPath);
 
 	//デリート
-	//if (Num == 3)
-
+	if (Num == 3)
+		SaveDataDelete(SaveDataPath);
 }
 
 //セーブ/ロードメニュー選択処理
