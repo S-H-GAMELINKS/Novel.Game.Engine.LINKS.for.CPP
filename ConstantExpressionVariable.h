@@ -32,6 +32,9 @@ constexpr int wait_key_task_time = 70;
 //ゲームプレイ時の遅延時間
 constexpr int wait_game_time = 3;
 
+//ゲームメニュー位置関係
+constexpr int game_menu_base_pos_y = 30;
+
 //セーブ・ロード画面関係
 constexpr int save_max_num = 3;
 constexpr int save_base_pos_x = 400;

@@ -48,6 +48,23 @@ void DxLibInitPostProccessing() {
 	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie, GameTitleGraph);
 }
 
+//ゲームメニュー描画関数
+void GameMenuDraw(std::int32_t cursor_y) {
+
+	static constexpr const char* GameMenuItem[] = {
+		"セーブ", "ロード", "セーブデータ削除", "既読スキップ", "スキップ", "オート",
+		"オート/スキップ停止", "バックログ参照", "設定", "タイトルに戻る", "ゲームに戻る", "ゲーム終了"
+	};
+
+	//各メニュー項目の描画
+	for (std::int32_t i = 0; i < 12; i++)
+		DxLib::DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), GameMenuItem[i], 255);
+
+	//カーソルの描画
+	DxLib::DrawString(save_base_pos_x - (cursor_move * 6), cursor_y, "■", 255);
+}
+
+
 //ゲーム中のループ
 void GamePlayLoop(const int RouteNumber) {
 
