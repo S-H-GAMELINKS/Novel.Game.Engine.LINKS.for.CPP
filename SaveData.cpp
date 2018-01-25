@@ -76,78 +76,87 @@ namespace {
 	}
 
 	//セーブデータをセーブ
-	int SaveDataSave(const char* SaveDataPath) {
+	int SaveDataSave(const char* SaveDataPath, const char* Message) {
 
-		SaveData_t SaveData = { EndFlag, SP, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
+		if (IDYES == MessageBoxYesNo(Message)) {
 
-		FILE *fp;
+			SaveData_t SaveData = { EndFlag, SP, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
+
+			FILE *fp;
 
 #ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, SaveDataPath, "wb");
-		if (0 != er || nullptr == fp) {
-			return 0;
-		}
+			const errno_t er = fopen_s(&fp, SaveDataPath, "wb");
+			if (0 != er || nullptr == fp) {
+				return 0;
+			}
 #else
-		fopen_s(&fp, SaveDataPath, "wb");//バイナリファイルを開く
-		if (nullptr == fp) {//エラーが起きたらnullptrを返す
-			return 0;
-		}
+			fopen_s(&fp, SaveDataPath, "wb");//バイナリファイルを開く
+			if (nullptr == fp) {//エラーが起きたらnullptrを返す
+				return 0;
+			}
 #endif
 
-		fwrite(&SaveData, sizeof(SaveData), 1, fp); // SaveData_t構造体の中身を出力
-		fclose(fp);
-
+			fwrite(&SaveData, sizeof(SaveData), 1, fp); // SaveData_t構造体の中身を出力
+			fclose(fp);
+		}
 	}
 
 	//セーブデータをロード
-	int SaveDataLoad(const char* SaveDataPath) {
+	int SaveDataLoad(const char* SaveDataPath, const char* Message) {
 
-		SaveData_t SaveData;
+		if (IDYES == MessageBoxYesNo(Message)) {
 
-		FILE *fp;
+			SaveData_t SaveData;
+
+			FILE *fp;
 
 #ifdef LINKS_HAS_FOPEN_S
-		const errno_t er = fopen_s(&fp, SaveDataPath, "rb");
-		if (0 != er || nullptr == fp) {
-			MessageBoxOk(ErrorMessage);
-			return 0;
-		}
+			const errno_t er = fopen_s(&fp, SaveDataPath, "rb");
+			if (0 != er || nullptr == fp) {
+				MessageBoxOk(ErrorMessage);
+				return 0;
+			}
 #else
-		fopen_s(&fp, SaveDataPath, "rb");
-		if (fp == nullptr) {
-			//MessageBoxOk(ErrorMessage);
-			return 0;
-		}
+			fopen_s(&fp, SaveDataPath, "rb");
+			if (fp == nullptr) {
+				//MessageBoxOk(ErrorMessage);
+				return 0;
+			}
 #endif
-		fread(&SaveData, sizeof(SaveData), 1, fp);
-		fclose(fp);
-		EndFlag = SaveData.ENDFLAG;
-		SP = SaveData.SP;
-		CP = SaveData.CP;
-		CharacterHandle = SaveData.CHAR;
-		BackGroundHandle = SaveData.BG;
-		BackGroundMusicHandle = SaveData.BGM;
+			fread(&SaveData, sizeof(SaveData), 1, fp);
+			fclose(fp);
+			EndFlag = SaveData.ENDFLAG;
+			SP = SaveData.SP;
+			CP = SaveData.CP;
+			CharacterHandle = SaveData.CHAR;
+			BackGroundHandle = SaveData.BG;
+			BackGroundMusicHandle = SaveData.BGM;
+		}
 	}
 
 	//セーブデータをデリート
-	void SaveDataDelete(const char* SaveDataPath) {
-		std::remove(SaveDataPath);
+	void SaveDataDelete(const char* SaveDataPath, const char* Message) {
+		if (IDYES == MessageBoxYesNo(Message)) {
+			std::remove(SaveDataPath);
+		}
 	}
 
 	//セーブ/ロード/デリート切り替え関数
 	void SaveDataTask(std::int32_t Num, const char* SaveDataPath) {
 
+		static constexpr const char* SaveTaskItem[] = { "セーブしますか？", "ロードしますか？", "削除しますか？" };
+
 		//セーブ
 		if (Num == 1)
-			SaveDataSave(SaveDataPath);
+			SaveDataSave(SaveDataPath, SaveTaskItem[Num - 1]);
 
 		//ロード
 		if (Num == 2)
-			SaveDataLoad(SaveDataPath);
+			SaveDataLoad(SaveDataPath, SaveTaskItem[Num - 1]);
 
 		//デリート
 		if (Num == 3)
-			SaveDataDelete(SaveDataPath);
+			SaveDataDelete(SaveDataPath, SaveTaskItem[Num - 1]);
 	}
 }
 

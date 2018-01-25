@@ -3,6 +3,7 @@
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
+#include "SaveData.h"
 #include <thread>
 #include <chrono>
 
@@ -40,7 +41,8 @@ namespace {
 	//ゲームメニュー項目選択処理
 	void GameMenuSelect(std::int32_t& cursor_y) {
 
-		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+			SaveDataLoop();
 
 		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
 
