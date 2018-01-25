@@ -82,6 +82,16 @@ void GamePlayLoop(const int RouteNumber) {
 
 std::int32_t SaveSnap[save_max_num];
 
+//通常セーブデータ
+struct alignas(4) SaveData_t {
+	std::int32_t ENDFLAG;    //ENDFLAG
+	std::int32_t SP;			//行数
+	std::int32_t CP;			//文字位置
+	std::int32_t CHAR;		//立ち絵情報
+	std::int32_t BG;			//背景画像情報
+	std::int32_t BGM;		//BGM情報
+};
+
 //セーブデータ用スクリーンショット読込関数
 void SaveDataSnapLoad() {
 	std::string FilePath = "DATA/SAVE/SAVESNAP";
@@ -125,10 +135,50 @@ void SaveLoadMenuKeyMove(std::int32_t& cursor_y) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
 
+//セーブデータをセーブ
+int SaveDataSave(const char* SaveDataPath) {
+
+	SaveData_t SaveData = { EndFlag, SP, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
+
+	FILE *fp;
+
+#ifdef LINKS_HAS_FOPEN_S
+	const errno_t er = fopen_s(&fp, SaveDataPath, "wb");
+	if (0 != er || nullptr == fp) {
+		return 0;
+	}
+#else
+	fopen_s(&fp, SaveDataPath, "wb");//バイナリファイルを開く
+	if (nullptr == fp) {//エラーが起きたらnullptrを返す
+		return 0;
+	}
+#endif
+
+	fwrite(&SaveData, sizeof(SaveData), 1, fp); // SaveData_t構造体の中身を出力
+	fclose(fp);
+
+}
+
+//セーブ/ロード/デリート切り替え関数
+void SaveDataTask(std::int32_t Num, const char* SaveDataPath) {
+
+	//セーブ
+	if (Num == 1)
+		SaveDataSave(SaveDataPath);
+
+	//ロード
+	//if (Num == 2)
+
+	//デリート
+	//if (Num == 3)
+
+}
+
 //セーブ/ロードメニュー選択処理
 void SaveLoadMenuSelect(std::int32_t& cursor_y){
 
 	if (cursor_y == save_base_pos_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		SaveDataTask(1, "DATA/SAVE/SAVEDATA1.bat");
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
@@ -167,6 +217,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//カーソルの位置
 	std::int32_t cursor_y = 300;
+
+	//セーブデータテスト 後でRmove
+	SaveDataSnapLoad();
+	std::int32_t save_y = save_base_pos_y;
+	while (EndFlag == 0) {
+		SaveLoadMenuDraw(save_y);
+		SaveLoadMenuKeyMove(save_y);
+		SaveLoadMenuSelect(save_y);
+		ScreenClear();
+	}
 
 	while (EndFlag != 99) {
 
