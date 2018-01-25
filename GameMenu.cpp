@@ -11,7 +11,7 @@ extern int EndFlag;
 
 namespace {
 	//ゲームメニュー描画関数
-	void GameMenuDraw(std::int32_t cursor_y) {
+	void GameMenuDraw(std::int32_t& cursor_y) {
 
 		static constexpr const char* GameMenuItem[] = {
 			"セーブ", "ロード", "セーブデータ削除", "既読スキップ", "スキップ", "オート",
