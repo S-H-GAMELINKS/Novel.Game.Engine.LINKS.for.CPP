@@ -61,3 +61,34 @@ void GameEndMessageBox() {
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 }
+
+//各種ショートカットキー
+void ShortCutKey() {
+
+	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1)
+
+	if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1)
+
+	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1)
+	
+	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1)
+	
+	if (DxLib::CheckHitKey(KEY_INPUT_F5) == 1)
+	
+	if (DxLib::CheckHitKey(KEY_INPUT_F6) == 1)
+	
+	if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1)
+	
+	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
+	
+	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1)
+	
+	if (DxLib::CheckHitKey(KEY_INPUT_F10) == 1)
+	
+	if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1)
+	
+	if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1)
+
+	//ゲーム終了確認ウインドウ
+	GameEndMessageBox();
+}
