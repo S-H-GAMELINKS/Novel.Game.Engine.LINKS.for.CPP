@@ -59,9 +59,6 @@ void GamePlayLoop(const int RouteNumber) {
 		//スクリプトタグ処理管理関数
 		ScriptTagTaskManager(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie);
 
-		//ゲーム終了確認ウインドウ
-		GameEndMessageBox();
-
 		//ショートカットキー
 		ShortCutKey();
 

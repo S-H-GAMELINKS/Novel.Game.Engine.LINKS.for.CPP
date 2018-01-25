@@ -98,7 +98,10 @@ void ChoiceSelect(int RoutteNumber) {
 		ChoiceKeyMove(cursor_y);
 		ChoiceSelectCheck(cursor_y);
 		ScreenClear();
-		GameEndMessageBox();
+
+		//ゲーム終了確認ウインドウ
+		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
+			GameEndMessageBox();
 	}
 
 }

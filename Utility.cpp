@@ -52,7 +52,7 @@ void ScreenClear() noexcept {
 
 //ゲーム終了確認ウインドウ
 void GameEndMessageBox() {
-	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) {
+
 		if (IDYES == MessageBoxYesNo("終了しますか？"))
 			EndFlag = 99;
 
@@ -60,7 +60,6 @@ void GameEndMessageBox() {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitTimeCalc(wait_key_task_time) / wait_game_time));
 		else
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
-	}
 }
 
 //各種ショートカットキー
@@ -94,5 +93,6 @@ void ShortCutKey() {
 		EndFlag = 17;
 
 	//ゲーム終了確認ウインドウ
-	GameEndMessageBox();
+	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
+		GameEndMessageBox();
 }

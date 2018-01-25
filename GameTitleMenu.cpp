@@ -73,6 +73,9 @@ void GameTitleMenuLoop(unsigned int color, std::int32_t& cursor_y) {
 		GameTitleMenuKeyMove(cursor_y);
 		GameTitleMenuChoice(cursor_y);
 		ScreenClear();
-		GameEndMessageBox();
+
+		//ゲーム終了確認ウインドウ
+		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
+			GameEndMessageBox();
 	}
 }

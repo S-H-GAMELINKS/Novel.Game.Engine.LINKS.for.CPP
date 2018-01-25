@@ -79,6 +79,7 @@ void GameMenuLoop() {
 		ScreenClear();
 
 		//ゲーム終了確認ウインドウ
-		GameEndMessageBox();
+		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
+			GameEndMessageBox();
 	}
 }
