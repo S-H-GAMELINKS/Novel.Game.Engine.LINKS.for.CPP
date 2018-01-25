@@ -76,6 +76,23 @@ void GamePlayLoop(const int RouteNumber) {
 	}
 }
 
+std::int32_t SaveSnap[save_max_num];
+
+//セーブ/ロードメニュー描画
+void SaveLoadMenuDraw() {
+
+	//スクリーンショット描画
+	for (std::int32_t i = 0; i < save_max_num; i++)
+	DxLib::DrawRotaGraph(save_snap_draw_pos_x, save_base_pos_y * (i + 1), 0.2f, 0, SaveSnap[i - 1], TRUE);
+
+	//セーブデータ名描画
+	DxLib::DrawString(save_name_pos_x, save_base_pos_y, "セーブデータ1", 255);
+	DxLib::DrawString(save_name_pos_x, save_base_pos_y * 2, "セーブデータ2", 255);
+	DxLib::DrawString(save_name_pos_x, save_base_pos_y * 3, "セーブデータ3", 255);
+
+	DxLib::DrawString(save_name_pos_x - cursor_move, save_base_pos_y * 4, "戻る", 255);
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 

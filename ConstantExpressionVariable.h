@@ -32,4 +32,10 @@ constexpr int wait_key_task_time = 70;
 //ゲームプレイ時の遅延時間
 constexpr int wait_game_time = 3;
 
+//セーブ・ロード画面関係
+constexpr int save_max_num = 3;
+constexpr int save_base_pos_y = 100;
+constexpr int save_snap_draw_pos_x = 150;
+constexpr int save_name_pos_x = 250;
+
 #endif // CONSTANT_EXPRESSION_VARIABLE_H_
