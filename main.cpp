@@ -125,6 +125,29 @@ void SaveLoadMenuKeyMove(std::int32_t& cursor_y) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
 
+//セーブ/ロードメニュー選択処理
+void SaveLoadMenuSelect(std::int32_t& cursor_y){
+
+	if (cursor_y == save_base_pos_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+	}
+
+
+	if (cursor_y == save_base_pos_y * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+	}
+
+
+	if (cursor_y == save_base_pos_y * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+	}
+
+
+	if (cursor_y == save_base_pos_y * 4 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+	}
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 
