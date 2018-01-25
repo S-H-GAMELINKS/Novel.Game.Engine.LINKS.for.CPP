@@ -196,6 +196,7 @@ void SaveDataLoop() {
 
 	while (EndFlag == 17) {
 		SaveLoadDeleteMenuDraw(save_y);
+		SaveLoadMenuKeyMove(save_y);
 		SaveLoadDeleteMenuSelect(save_y);
 		ScreenClear();
 	}
