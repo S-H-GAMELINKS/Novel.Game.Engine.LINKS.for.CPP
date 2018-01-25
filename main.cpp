@@ -11,6 +11,10 @@
 #include <string>
 #include <fstream>
 
+#include <sstream>
+#include <iomanip>
+
+
 //DxLib初期化前処理
 void DxLibInitPreProccessing() {
 	//ログの抽出
@@ -77,6 +81,20 @@ void GamePlayLoop(const int RouteNumber) {
 }
 
 std::int32_t SaveSnap[save_max_num];
+
+//セーブデータ用スクリーンショット読込関数
+void SaveDataSnapLoad() {
+	std::string FilePath = "DATA/SAVE/SAVESNAP";
+	std::string FileFormat = ".png";
+	std::string FileName = "";
+
+	for (std::int32_t i = 0; i < save_max_num; i++) {
+
+		FileName = (FilePath + std::to_string(i) + FileFormat);
+
+		SaveSnap[i] = DxLib::LoadGraph(FileName.c_str());
+	}
+}
 
 //セーブ/ロードメニュー描画
 void SaveLoadMenuDraw() {
