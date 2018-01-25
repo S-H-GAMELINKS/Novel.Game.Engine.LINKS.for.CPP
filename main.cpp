@@ -173,7 +173,7 @@ int SaveDataLoad(const char* SaveDataPath) {
 		return 0;
 	}
 #else
-	fp = fopen(SaveDataPath, "rb");
+	fopen_s(&fp, SaveDataPath, "rb");
 	if (fp == nullptr) {
 		//MessageBoxOk(ErrorMessage);
 		return 0;
@@ -188,6 +188,9 @@ int SaveDataLoad(const char* SaveDataPath) {
 	BackGroundHandle = SaveData.BG;
 	BackGroundMusicHandle = SaveData.BGM;
 }
+
+//セーブデータをデリート
+
 
 //セーブ/ロード/デリート切り替え関数
 void SaveDataTask(std::int32_t Num, const char* SaveDataPath) {
