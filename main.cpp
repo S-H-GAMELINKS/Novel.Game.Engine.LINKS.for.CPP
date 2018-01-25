@@ -11,8 +11,8 @@
 #include <string>
 #include <fstream>
 
-#include <sstream>
-#include <iomanip>
+#include <thread>
+#include <chrono>
 
 
 //DxLib初期化前処理
@@ -97,11 +97,14 @@ void SaveDataSnapLoad() {
 }
 
 //セーブ/ロードメニュー描画
-void SaveLoadMenuDraw() {
+void SaveLoadMenuDraw(std::int32_t& cursor_y) {
 
 	//スクリーンショット描画
 	for (std::int32_t i = 0; i < save_max_num; i++)
 	DxLib::DrawRotaGraph(save_snap_draw_pos_x, save_base_pos_y * (i + 1), 0.2f, 0, SaveSnap[i - 1], TRUE);
+
+	//カーソルの描画
+	DxLib::DrawString(save_base_pos_x, cursor_y, "■", 255);
 
 	//セーブデータ名描画
 	DxLib::DrawString(save_name_pos_x, save_base_pos_y, "セーブデータ1", 255);
@@ -109,6 +112,17 @@ void SaveLoadMenuDraw() {
 	DxLib::DrawString(save_name_pos_x, save_base_pos_y * 3, "セーブデータ3", 255);
 
 	DxLib::DrawString(save_name_pos_x - cursor_move, save_base_pos_y * 4, "戻る", 255);
+}
+
+//セーブ/ロードメニューキー操作
+void SaveLoadMenuKeyMove(std::int32_t& cursor_y) {
+	if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
+		cursor_y = (save_buttom_y == cursor_y) ? save_base_pos_y : cursor_y + save_move_unit;
+
+	if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
+		cursor_y = (save_base_pos_y == cursor_y) ? save_buttom_y : cursor_y - save_move_unit;
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
