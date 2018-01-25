@@ -12,9 +12,6 @@
 #include <string>
 #include <fstream>
 
-#include <thread>
-#include <chrono>
-
 
 //DxLib初期化前処理
 void DxLibInitPreProccessing() {
