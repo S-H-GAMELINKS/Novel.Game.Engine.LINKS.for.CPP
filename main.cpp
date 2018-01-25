@@ -159,6 +159,35 @@ int SaveDataSave(const char* SaveDataPath) {
 
 }
 
+int SaveDataLoad(const char* SaveDataPath) {
+
+	SaveData_t SaveData;
+
+	FILE *fp;
+
+#ifdef LINKS_HAS_FOPEN_S
+	const errno_t er = fopen_s(&fp, SaveDataPath, "rb");
+	if (0 != er || nullptr == fp) {
+		MessageBoxOk(ErrorMessage);
+		return 0;
+	}
+#else
+	fp = fopen(SaveDataPath, "rb");
+	if (fp == nullptr) {
+		//MessageBoxOk(ErrorMessage);
+		return 0;
+	}
+#endif
+	fread(&SaveData, sizeof(SaveData), 1, fp);
+	fclose(fp);
+	EndFlag = SaveData.ENDFLAG;
+	SP = SaveData.SP;
+	CP = SaveData.CP;
+	CharacterHandle = SaveData.CHAR;
+	BackGroundHandle = SaveData.BG;
+	BackGroundMusicHandle = SaveData.BGM;
+}
+
 //セーブ/ロード/デリート切り替え関数
 void SaveDataTask(std::int32_t Num, const char* SaveDataPath) {
 
@@ -167,7 +196,8 @@ void SaveDataTask(std::int32_t Num, const char* SaveDataPath) {
 		SaveDataSave(SaveDataPath);
 
 	//ロード
-	//if (Num == 2)
+	if (Num == 2)
+		SaveDataLoad(SaveDataPath);
 
 	//デリート
 	//if (Num == 3)
