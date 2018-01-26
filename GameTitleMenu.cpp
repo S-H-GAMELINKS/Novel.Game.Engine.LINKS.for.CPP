@@ -37,6 +37,16 @@ void ConfigMenuKeyMove(std::int32_t& cursor_y) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
 
+//コンフィグ画面選択処理
+void ConfigMenuSelect(std::int32_t& cursor_y, std::int32_t& ConfigFlag) {
+
+	if (game_menu_base_pos_y * 8 == cursor_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (IDYES == MessageBoxYesNo("戻りますか？")) {
+			ConfigFlag = 0;
+		}
+	}
+}
+
 //コンフィグ画面ループ
 void ConfigMenuLoop() {
 
@@ -48,8 +58,8 @@ void ConfigMenuLoop() {
 		ScreenClear();
 		ConfigMenuDraw(config_y);
 		ConfigMenuKeyMove(config_y);
+		ConfigMenuSelect(config_y, ConfigFlag);
 	}
-
 }
 
 namespace {
