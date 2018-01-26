@@ -50,7 +50,7 @@ namespace {
 			cursor_y = (game_menu_base_pos_y * 7 == cursor_y) ? game_menu_base_pos_y : cursor_y + cursor_move;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			cursor_y = (game_menu_base_pos_y == cursor_y) ? game_menu_base_pos_y * 8 : cursor_y - cursor_move;
+			cursor_y = (game_menu_base_pos_y == cursor_y) ? game_menu_base_pos_y * 7 : cursor_y - cursor_move;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
