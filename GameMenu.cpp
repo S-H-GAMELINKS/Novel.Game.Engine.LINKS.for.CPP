@@ -80,6 +80,8 @@ void GameMenuLoop() {
 	std::int32_t gamemenu_y = game_menu_base_pos_y;
 	unsigned int color = DxLib::GetColor(255, 255, 255);
 
+	DxLib::ClearDrawScreen();
+
 	while (EndFlag == 17) {
 		GameMenuDraw(gamemenu_y, color);
 		GameMenuKeyMove(gamemenu_y);
