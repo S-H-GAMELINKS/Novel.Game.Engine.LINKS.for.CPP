@@ -233,6 +233,23 @@ namespace {
 	}
 }
 
+//コンフィグ読込関数
+auto ConfigLoad() {
+
+	FILE* fp;
+
+	fopen_s(&fp, "DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
+
+	if (nullptr == fp) {//エラーが起きたらnullptrを返す
+		return 0;
+	}
+
+	fwrite(&ConfigData, sizeof(ConfigData_t), 1, fp); // ConfigData_t構造体の中身を出力
+	fclose(fp);
+
+	return 0;
+}
+
 //コンフィグ画面ループ
 void ConfigMenuLoop() {
 
