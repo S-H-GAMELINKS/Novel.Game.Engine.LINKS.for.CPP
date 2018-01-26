@@ -98,7 +98,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//カーソルの位置
 	std::int32_t cursor_y = 300;
 
-	while (EndFlag != 99) {
+	while (EndFlag != 99 && DxLib::ProcessMessage() == 0) {
 
 		//タイトル画面
 		GameTitleMenuLoop(color, cursor_y);
