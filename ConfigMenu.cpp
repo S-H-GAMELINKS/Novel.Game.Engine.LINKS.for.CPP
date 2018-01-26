@@ -236,14 +236,17 @@ namespace {
 //コンフィグ画面ループ
 void ConfigMenuLoop() {
 
-	std::int32_t ConfigFlag = 1;
+	if (IDYES == MessageBoxYesNo("コンフィグ画面に移行しますか？")) {
 
-	std::int32_t config_y = game_menu_base_pos_y;
+		std::int32_t ConfigFlag = 1;
 
-	while (ConfigFlag == 1) {
-		ScreenClear();
-		ConfigMenuDraw(config_y);
-		ConfigMenuKeyMove(config_y);
-		ConfigMenuSelect(config_y, ConfigFlag);
+		std::int32_t config_y = game_menu_base_pos_y;
+
+		while (ConfigFlag == 1) {
+			ScreenClear();
+			ConfigMenuDraw(config_y);
+			ConfigMenuKeyMove(config_y);
+			ConfigMenuSelect(config_y, ConfigFlag);
+		}
 	}
 }
