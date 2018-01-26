@@ -12,6 +12,29 @@ extern int EndFlag;
 //タイトル画面
 extern std::int32_t GameTitleGraph;
 
+static constexpr const char* ConfigMenuItem[] = {
+	"ＢＧＭ音量", "ＳＥ音量", "オート速度", "スキップ速度", "文字描画速度", "描画方法", "マウス/キー操作", "戻る"
+};
+
+//コンフィグ画面描画
+void ConfigMenuDraw() {
+
+	for (std::int32_t i = 0; i < 8; i++)
+		DxLib::DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), ConfigMenuItem[i], 255);
+}
+
+//コンフィグ画面ループ
+void ConfigMenuLoop() {
+
+	std::int32_t ConfigFlag = 1;
+
+	while (ConfigFlag == 1) {
+		ScreenClear();
+		ConfigMenuDraw();
+	}
+
+}
+
 namespace {
 
 	//タイトルメニューの描画関数
@@ -56,7 +79,8 @@ namespace {
 		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && cursor_y == title_menu_load_y)
 			SaveDataLoop(2);
 
-		//if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && cursor_y == title_menu_config_y)
+		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && cursor_y == title_menu_config_y)
+			ConfigMenuLoop();
 
 		//if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && cursor_y == title_menu_quick_load_y)
 
