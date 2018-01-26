@@ -112,6 +112,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			GameMenuLoop();
 	}
 
+	std::remove("DATA/SAVE/SAVESNSAP_TEMP.png");
+
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 
 	return 0;					// ソフトの終了

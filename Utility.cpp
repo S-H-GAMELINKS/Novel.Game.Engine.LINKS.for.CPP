@@ -3,6 +3,7 @@
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
 #include "GameMenu.h"
+#include "SaveData.h"
 #include <thread>
 #include <chrono>
 
@@ -95,6 +96,7 @@ void ShortCutKey() {
 	//if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1)
 
 	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) {
+		SaveDataScreenShotGet();
 		EndFlagTemp = EndFlag;
 		SP_Temp = SP;
 		SP = 0;

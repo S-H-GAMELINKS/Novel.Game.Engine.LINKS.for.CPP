@@ -86,8 +86,17 @@ namespace {
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
+	//スクリーンショット名前変更
+	void SaveDataScreenShotRename(const int& Num) {
+		std::string FilePath = "DATA/SAVE/SAVESNAP";
+		std::string FileFormat = ".png";
+		std::string FileName = FilePath + std::to_string(Num) + FileFormat;
+
+		std::rename("DATA/SAVE/SAVESNSAP_TEMP.png", FileName.c_str());
+	}
+
 	//セーブデータをセーブ
-	int SaveDataSave(const char* SaveDataPath, const char* Message) {
+	int SaveDataSave(const char* SaveDataPath, const char* Message, const int& Num) {
 
 		if (IDYES == MessageBoxYesNo(Message)) {
 
@@ -102,6 +111,9 @@ namespace {
 
 			fwrite(&SaveData, sizeof(SaveData), 1, fp); // SaveData_t構造体の中身を出力
 			fclose(fp);
+
+			//スクリーンショットの名前変更
+			SaveDataScreenShotRename(Num);
 
 			MessageBoxOk("セーブしました！");
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
@@ -166,7 +178,7 @@ namespace {
 
 		//セーブ
 		if (Num == 1)
-			SaveFlag = SaveDataSave(SaveDataPath, Message.c_str());
+			SaveFlag = SaveDataSave(SaveDataPath, Message.c_str(), Num);
 
 		//ロード
 		if (Num == 2)
