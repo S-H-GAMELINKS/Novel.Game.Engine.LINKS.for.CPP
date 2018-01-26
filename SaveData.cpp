@@ -17,6 +17,9 @@ extern std::int32_t BackGroundMusicHandle;
 //終了フラグ
 extern int EndFlag;
 
+//tempデータ
+extern int EndFlagTemp, SP_Temp;
+
 namespace {
 
 	//各種分岐表示配列
@@ -84,7 +87,7 @@ namespace {
 
 		if (IDYES == MessageBoxYesNo(Message)) {
 
-			SaveData_t SaveData = { EndFlag, SP, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
+			SaveData_t SaveData = { EndFlagTemp, SP_Temp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
 
 			FILE *fp;
 
