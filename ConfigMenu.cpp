@@ -41,6 +41,7 @@ namespace {
 		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 3, 255, "%d", ConfigData.auto_speed);
 		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 4, 255, "%d", ConfigData.skip_speed);
 		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 5, 255, "%d", ConfigData.string_speed);
+		DxLib::DrawString(save_name_pos_x + cursor_move * 8, game_menu_base_pos_y * 6, ((1 == ConfigData.mouse_key_move) ? "マウス操作" : "キー操作"), 255);
 	}
 
 	//コンフィグ画面キー操作
@@ -189,6 +190,19 @@ namespace {
 		}
 	}
 
+	// マウス操作/キー操作切り替え
+	void MouseAndKeyMoveChange() {
+		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			ConfigData.mouse_key_move = 1;
+		}
+
+		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			ConfigData.mouse_key_move = 0;
+		}
+	}
+
 	//コンフィグ画面選択処理
 	void ConfigMenuSelect(std::int32_t& cursor_y, std::int32_t& ConfigFlag) {
 
@@ -206,6 +220,9 @@ namespace {
 
 		if (game_menu_base_pos_y * 5 == cursor_y)
 			StringDrawSpeedVolChange();
+
+		if (game_menu_base_pos_y * 6 == cursor_y)
+			MouseAndKeyMoveChange();
 
 		if (game_menu_base_pos_y * 7 == cursor_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			if (IDYES == MessageBoxYesNo("戻りますか？")) {
