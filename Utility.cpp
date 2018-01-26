@@ -16,6 +16,15 @@ extern int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
 //終了フラグ
 extern int EndFlag;
 
+//各種素材ハンドル
+extern std::int32_t BackGroundHandle;
+extern std::int32_t CharacterHandle;
+extern std::int32_t BackGroundMusicHandle;
+extern std::int32_t SoundEffectHandle;
+
+//文字列描画位置
+extern int DrawPointX, DrawPointY;
+
 //tempデータ
 extern int EndFlagTemp, SP_Temp;
 
@@ -69,17 +78,37 @@ void GameEndMessageBox() {
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
 
+//ゲーム画面再描画処理
+void DrawGameScreenAgain() {
+	SP = SP_Temp;
+	CP = 0;
+	DrawPointX = 0;
+	DrawPointY = 0;
+	DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
+	DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+	DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+}
+
 //各種ショートカットキー
 void ShortCutKey() {
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1) {
+		SP_Temp = SP;
 		SaveDataLoop(1);
+		DrawGameScreenAgain();
+	}
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1) {
+		SP_Temp = SP;
 		SaveDataLoop(2);
+		DrawGameScreenAgain();
+	}
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1) {
+		SP_Temp = SP;
 		SaveDataLoop(3);
+		DrawGameScreenAgain();
+	}
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1)
 
@@ -91,8 +120,11 @@ void ShortCutKey() {
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1) {
+		SP_Temp = SP;
 		ConfigMenuLoop();
+		DrawGameScreenAgain();
+	}
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F10) == 1)
 
@@ -102,7 +134,6 @@ void ShortCutKey() {
 		SaveDataScreenShotGet();
 		EndFlagTemp = EndFlag;
 		SP_Temp = SP;
-		SP = 0;
 		EndFlag = 17;
 	}
 
