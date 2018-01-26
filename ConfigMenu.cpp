@@ -41,6 +41,7 @@ namespace {
 			if (IDYES == MessageBoxYesNo("ñﬂÇËÇ‹Ç∑Ç©ÅH")) {
 				ConfigFlag = 0;
 			}
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 		}
 	}
 }
