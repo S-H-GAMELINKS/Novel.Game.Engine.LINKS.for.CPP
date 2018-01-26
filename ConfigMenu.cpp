@@ -234,7 +234,7 @@ namespace {
 }
 
 //コンフィグ読込関数
-auto ConfigLoad() {
+int ConfigLoad() {
 
 	FILE *fp;
 
@@ -249,7 +249,7 @@ auto ConfigLoad() {
 }
 
 //コンフィグ保存関数
-auto ConfigSave() {
+int ConfigSave() {
 	FILE* fp;
 
 	fopen_s(&fp, "DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く

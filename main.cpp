@@ -6,6 +6,7 @@
 #include "ScriptTask_Manager.h"
 #include "GameTitleMenu.h"
 #include "GameMenu.h"
+#include "ConfigMenu.h"
 #include "Utility.h"
 #include "Variable.h"
 #include <vector>
@@ -42,8 +43,8 @@ void DxLibInitPostProccessing() {
 	// フォントのサイズセット
 	SetFontSize(moji_size);
 
-	//スクリプト読込関数
-	ScriptRead(Script, EndFlag);
+	//コンフィグ読込関数
+	ConfigLoad();
 
 	//各種素材の読込関数
 	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie, GameTitleGraph);
@@ -111,6 +112,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (EndFlag == 17)
 			GameMenuLoop();
 	}
+
+	ConfigSave();	// 設定データの保存
 
 	std::remove("DATA/SAVE/SAVESNSAP_TEMP.png");
 

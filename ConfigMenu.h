@@ -7,10 +7,10 @@
 void ConfigMenuLoop();
 
 //コンフィグ読込関数
-auto ConfigLoad();
+int ConfigLoad();
 
 //コンフィグ保存関数
-auto ConfigSave();
+int ConfigSave();
 
 //設定データ
 struct alignas(4) ConfigData_t {
