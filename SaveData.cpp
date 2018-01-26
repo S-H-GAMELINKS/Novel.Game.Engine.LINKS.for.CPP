@@ -98,8 +98,8 @@ namespace {
 
 			MessageBoxOk("セーブしました！");
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
-			return 0;
 		}
+		return 0;
 	}
 
 	//セーブデータをロード
@@ -129,22 +129,23 @@ namespace {
 
 			MessageBoxOk("ロードしました！");
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
-			return 0;
 		}
+		return 0;
 	}
 
 	//セーブデータをデリート
-	void SaveDataDelete(const char* SaveDataPath, const char* Message) {
+	int SaveDataDelete(const char* SaveDataPath, const char* Message) {
 		if (IDYES == MessageBoxYesNo(Message)) {
 			std::remove(SaveDataPath);
 
 			MessageBoxOk("削除しました！");
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 		}
+		return 0;
 	}
 
 	//セーブ/ロード/デリート切り替え関数
-	void SaveDataTask(const int& Num, const char* SaveDataPath, const char* SaveDataName) {
+	void SaveDataTask(const int& Num, const char* SaveDataPath, const char* SaveDataName, std::int32_t& SaveFlag) {
 
 		std::string Message = SaveDataName;
 		Message += SaveTaskItemParticle[Num - 1];
@@ -152,39 +153,44 @@ namespace {
 
 		//セーブ
 		if (Num == 1)
-			SaveDataSave(SaveDataPath, Message.c_str());
+			SaveFlag = SaveDataSave(SaveDataPath, Message.c_str());
 
 		//ロード
 		if (Num == 2)
-			SaveDataLoad(SaveDataPath, Message.c_str());
+			SaveFlag = SaveDataLoad(SaveDataPath, Message.c_str());
 
 		//デリート
 		if (Num == 3)
-			SaveDataDelete(SaveDataPath, Message.c_str());
+			SaveFlag = SaveDataDelete(SaveDataPath, Message.c_str());
 	}
 
 	//セーブ/ロード/デリート メニュー選択処理
-	void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y, const int& Num) {
+	void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y, const int& Num, std::int32_t& SaveFlag) {
 
 		if (cursor_y == save_base_pos_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１");
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag);
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 		}
 
 
 		if (cursor_y == save_base_pos_y * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat", "セーブデータ２");
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat", "セーブデータ２", SaveFlag);
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 		}
 
 
 		if (cursor_y == save_base_pos_y * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat", "セーブデータ３");
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat", "セーブデータ３", SaveFlag);
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 		}
 
 
 		if (cursor_y == save_base_pos_y * 4 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+
+			if (IDYES == MessageBoxYesNo("戻りますか？")){
+				SaveFlag = 0;
+				std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			}
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 		}
 	}
@@ -196,6 +202,8 @@ void SaveDataLoop(const int& Num) {
 	//各種分岐表示
 	if (IDYES == MessageBoxYesNo(SaveTaskItem[Num - 1])) {
 
+		std::int32_t SaveFlag = 1;
+
 		DxLib::ClearDrawScreen();
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 
@@ -204,10 +212,10 @@ void SaveDataLoop(const int& Num) {
 
 		std::int32_t save_y = save_base_pos_y;
 
-		while (EndFlag == 17) {
+		while (SaveFlag == 1) {
 			SaveLoadDeleteMenuDraw(save_y);
 			SaveLoadMenuKeyMove(save_y);
-			SaveLoadDeleteMenuSelect(save_y, Num);
+			SaveLoadDeleteMenuSelect(save_y, Num, SaveFlag);
 			ScreenClear();
 		}
 	}
