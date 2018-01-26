@@ -51,21 +51,21 @@ namespace {
 	}
 
 	//セーブ/ロード/デリート メニュー描画
-	void SaveLoadDeleteMenuDraw(std::int32_t& cursor_y) {
+	void SaveLoadDeleteMenuDraw(std::int32_t& cursor_y, unsigned int color) {
 
 		//スクリーンショット描画
 		for (std::int32_t i = 0; i < save_max_num; i++)
 			DxLib::DrawRotaGraph(save_snap_draw_pos_x, save_base_pos_y * (i + 1), 0.2f, 0, SaveSnap[i - 1], TRUE);
 
 		//カーソルの描画
-		DxLib::DrawString(save_base_pos_x, cursor_y, "■", 255);
+		DxLib::DrawString(save_base_pos_x, cursor_y, "■", color);
 
 		//セーブデータ名描画
-		DxLib::DrawString(save_name_pos_x, save_base_pos_y, "セーブデータ1", 255);
-		DxLib::DrawString(save_name_pos_x, save_base_pos_y * 2, "セーブデータ2", 255);
-		DxLib::DrawString(save_name_pos_x, save_base_pos_y * 3, "セーブデータ3", 255);
+		DxLib::DrawString(save_name_pos_x, save_base_pos_y, "セーブデータ1", color);
+		DxLib::DrawString(save_name_pos_x, save_base_pos_y * 2, "セーブデータ2", color);
+		DxLib::DrawString(save_name_pos_x, save_base_pos_y * 3, "セーブデータ3", color);
 
-		DxLib::DrawString(save_name_pos_x - cursor_move, save_base_pos_y * 4, "戻る", 255);
+		DxLib::DrawString(save_name_pos_x - cursor_move, save_base_pos_y * 4, "戻る", color);
 	}
 
 	//セーブ/ロードメニューキー操作
@@ -204,6 +204,8 @@ void SaveDataLoop(const int& Num) {
 
 		std::int32_t SaveFlag = 1;
 
+		unsigned int color = DxLib::GetColor(255, 255, 255);
+
 		DxLib::ClearDrawScreen();
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 
@@ -213,7 +215,7 @@ void SaveDataLoop(const int& Num) {
 		std::int32_t save_y = save_base_pos_y;
 
 		while (SaveFlag == 1) {
-			SaveLoadDeleteMenuDraw(save_y);
+			SaveLoadDeleteMenuDraw(save_y, color);
 			SaveLoadMenuKeyMove(save_y);
 			SaveLoadDeleteMenuSelect(save_y, Num, SaveFlag);
 			ScreenClear();
