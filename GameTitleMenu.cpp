@@ -17,11 +17,24 @@ static constexpr const char* ConfigMenuItem[] = {
 };
 
 //コンフィグ画面描画
-void ConfigMenuDraw() {
+void ConfigMenuDraw(std::int32_t& cursor_y) {
 
 	//各項目の描画
 	for (std::int32_t i = 0; i < 8; i++)
 		DxLib::DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), ConfigMenuItem[i], 255);
+
+	DxLib::DrawString(save_name_pos_x - cursor_move, cursor_y, "■", 255);
+}
+
+//コンフィグ画面キー操作
+void ConfigMenuKeyMove(std::int32_t& cursor_y) {
+	if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
+		cursor_y = (game_menu_base_pos_y * 8 == cursor_y) ? game_menu_base_pos_y : cursor_y + cursor_move;
+
+	if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
+		cursor_y = (game_menu_base_pos_y == cursor_y) ? game_menu_base_pos_y * 8 : cursor_y - cursor_move;
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
 
 //コンフィグ画面ループ
@@ -29,9 +42,12 @@ void ConfigMenuLoop() {
 
 	std::int32_t ConfigFlag = 1;
 
+	std::int32_t config_y = game_menu_base_pos_y;
+
 	while (ConfigFlag == 1) {
 		ScreenClear();
-		ConfigMenuDraw();
+		ConfigMenuDraw(config_y);
+		ConfigMenuKeyMove(config_y);
 	}
 
 }
