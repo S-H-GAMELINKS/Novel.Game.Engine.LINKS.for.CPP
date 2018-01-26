@@ -236,6 +236,20 @@ namespace {
 //コンフィグ読込関数
 auto ConfigLoad() {
 
+	FILE *fp;
+
+	fopen_s(&fp, "DATA/SAVE/Config.dat", "rb");
+	if (nullptr == fp) {
+		return 0;
+	}
+
+	fread(&ConfigData, sizeof(ConfigData_t), 1, fp);
+	fclose(fp);
+	return 0;
+}
+
+//コンフィグ保存関数
+auto ConfigSave() {
 	FILE* fp;
 
 	fopen_s(&fp, "DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く

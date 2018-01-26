@@ -6,6 +6,12 @@
 //コンフィグ画面ループ
 void ConfigMenuLoop();
 
+//コンフィグ読込関数
+auto ConfigLoad();
+
+//コンフィグ保存関数
+auto ConfigSave();
+
 //設定データ
 struct alignas(4) ConfigData_t {
 	std::int32_t bgm_vol;				//BGM音量情報
@@ -20,6 +26,5 @@ struct alignas(4) ConfigData_t {
 	std::int32_t string_speed_count;		//文字列描画速度メーター情報
 	std::int32_t mouse_key_move;			//マウス操作とキー操作の情報 true/false
 };
-
 
 #endif // !CONFIG_MENU_H_
