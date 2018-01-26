@@ -156,31 +156,31 @@ namespace {
 		if (Num == 3)
 			SaveDataDelete(SaveDataPath, SaveTaskItem[Num - 1]);
 	}
-}
 
-//セーブ/ロード/デリート メニュー選択処理
-void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y, const int& Num) {
+	//セーブ/ロード/デリート メニュー選択処理
+	void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y, const int& Num) {
 
-	if (cursor_y == save_base_pos_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
-		SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat");
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
-	}
-
-
-	if (cursor_y == save_base_pos_y * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
-		SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat");
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
-	}
+		if (cursor_y == save_base_pos_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat");
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		}
 
 
-	if (cursor_y == save_base_pos_y * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
-		SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat");
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
-	}
+		if (cursor_y == save_base_pos_y * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat");
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		}
 
 
-	if (cursor_y == save_base_pos_y * 4 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		if (cursor_y == save_base_pos_y * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat");
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		}
+
+
+		if (cursor_y == save_base_pos_y * 4 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		}
 	}
 }
 
