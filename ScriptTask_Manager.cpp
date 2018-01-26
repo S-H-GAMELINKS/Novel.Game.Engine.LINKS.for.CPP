@@ -173,7 +173,7 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		break;
 
 	case 'P':	//ƒNƒŠƒbƒN‘Ò‚¿
-		WaitKey();
+		DxLib::WaitKey();
 		CP++;
 		break;
 
