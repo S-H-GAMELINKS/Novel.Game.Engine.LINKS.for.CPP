@@ -12,7 +12,7 @@ extern int EndFlag;
 
 namespace {
 	//ゲームメニュー描画関数
-	void GameMenuDraw(std::int32_t& cursor_y) {
+	void GameMenuDraw(std::int32_t& cursor_y, unsigned int color) {
 
 		static constexpr const char* GameMenuItem[] = {
 			"セーブ", "ロード", "セーブデータ削除", "既読スキップ", "スキップ", "オート",
@@ -21,10 +21,10 @@ namespace {
 
 		//各メニュー項目の描画
 		for (std::int32_t i = 0; i < 12; i++)
-			DxLib::DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), GameMenuItem[i], 255);
+			DxLib::DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), GameMenuItem[i], color);
 
 		//カーソルの描画
-		DxLib::DrawString(save_base_pos_x - (cursor_move * 6), cursor_y, "■", 255);
+		DxLib::DrawString(save_base_pos_x - (cursor_move * 6), cursor_y, "■", color);
 	}
 
 	//ゲームメニューキー操作
@@ -78,9 +78,10 @@ namespace {
 void GameMenuLoop() {
 
 	std::int32_t gamemenu_y = game_menu_base_pos_y;
+	unsigned int color = DxLib::GetColor(255, 255, 255);
 
 	while (EndFlag == 17) {
-		GameMenuDraw(gamemenu_y);
+		GameMenuDraw(gamemenu_y, color);
 		GameMenuKeyMove(gamemenu_y);
 		GameMenuSelect(gamemenu_y);
 		ScreenClear();
