@@ -4,6 +4,7 @@
 #include "ConstantExpressionVariable.h"
 #include "GameMenu.h"
 #include "SaveData.h"
+#include "ConfigMenu.h"
 #include <thread>
 #include <chrono>
 
@@ -71,11 +72,14 @@ void GameEndMessageBox() {
 //各種ショートカットキー
 void ShortCutKey() {
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1)
+		SaveDataLoop(1);
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1)
+		SaveDataLoop(2);
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1)
+		SaveDataLoop(3);
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1)
 
@@ -87,13 +91,12 @@ void ShortCutKey() {
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1)
+		ConfigMenuLoop();
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F10) == 1)
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1)
-
-	//if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1)
 
 	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) {
 		SaveDataScreenShotGet();
