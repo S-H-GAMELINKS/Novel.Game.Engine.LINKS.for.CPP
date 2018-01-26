@@ -202,8 +202,10 @@ void SaveDataLoop(const int& Num) {
 	//各種分岐表示
 	if (IDYES == MessageBoxYesNo(SaveTaskItem[Num - 1])) {
 
+		//セーブデータループ用フラグ
 		std::int32_t SaveFlag = 1;
 
+		//描画される文字列の色
 		unsigned int color = DxLib::GetColor(255, 255, 255);
 
 		DxLib::ClearDrawScreen();
@@ -212,8 +214,10 @@ void SaveDataLoop(const int& Num) {
 		//スクリーンショットの読込
 		SaveDataSnapLoad();
 
+		//カーソルの初期位置
 		std::int32_t save_y = save_base_pos_y;
 
+		//セーブデータループ
 		while (SaveFlag == 1) {
 			SaveLoadDeleteMenuDraw(save_y, color);
 			SaveLoadMenuKeyMove(save_y);
