@@ -10,6 +10,20 @@
 //終了フラグ
 extern int EndFlag;
 
+//行管理変数
+extern int SP, CP;
+
+//文字列描画位置
+extern int DrawPointX, DrawPointY;
+
+//tempデータ
+extern int EndFlagTemp, SP_Temp;
+
+//各種素材ハンドル
+extern std::int32_t BackGroundHandle;
+extern std::int32_t CharacterHandle;
+extern std::int32_t BackGroundMusicHandle;
+
 namespace {
 	//ゲームメニュー描画関数
 	void GameMenuDraw(std::int32_t& cursor_y, unsigned int color) {
@@ -38,6 +52,17 @@ namespace {
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
+	//ゲームへ戻る
+	void GameMenuBackToGamePlay() {
+		EndFlag = EndFlagTemp;
+		SP = SP_Temp;
+		DrawPointX = 0;
+		DrawPointY = 0;
+		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
+		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+	}
+
 	//ゲームメニュー項目選択処理
 	void GameMenuSelect(std::int32_t& cursor_y) {
 
@@ -64,7 +89,8 @@ namespace {
 
 		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
 
-		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == game_menu_base_pos_y * 11 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+			GameMenuBackToGamePlay();
 
 		if (cursor_y == game_menu_base_pos_y * 12 && CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			if (IDYES == MessageBoxYesNo("ゲームを終了しますか？"))
@@ -83,10 +109,10 @@ void GameMenuLoop() {
 	DxLib::ClearDrawScreen();
 
 	while (EndFlag == 17) {
+		ScreenClear();
 		GameMenuDraw(gamemenu_y, color);
 		GameMenuKeyMove(gamemenu_y);
 		GameMenuSelect(gamemenu_y);
-		ScreenClear();
 
 		//ゲーム終了確認ウインドウ
 		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)

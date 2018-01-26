@@ -40,4 +40,7 @@ std::int32_t SoundEffectHandle;
 
 std::int32_t GameTitleGraph;
 
+//‰æ–Ê•Ï‘J—pTemp•Ï”
+int EndFlagTemp, SP_Temp;
+
 #endif //VALIABLE_H_

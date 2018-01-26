@@ -9,8 +9,13 @@
 //ゲームタイトル名
 extern const char* GameTitle;
 
+extern int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
+
 //終了フラグ
 extern int EndFlag;
+
+//tempデータ
+extern int EndFlagTemp, SP_Temp;
 
 namespace {
 
@@ -89,8 +94,12 @@ void ShortCutKey() {
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1)
 
-	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) {
+		EndFlagTemp = EndFlag;
+		SP_Temp = SP;
+		SP = 0;
 		EndFlag = 17;
+	}
 
 	//ゲーム終了確認ウインドウ
 	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
