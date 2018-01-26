@@ -51,7 +51,7 @@ namespace {
 
 		for (std::int32_t i = 0; i < save_max_num; i++) {
 
-			FileName = (FilePath + std::to_string(i) + FileFormat);
+			FileName = (FilePath + std::to_string(i + 1) + FileFormat);
 
 			SaveSnap[i] = DxLib::LoadGraph(FileName.c_str());
 		}
@@ -62,7 +62,7 @@ namespace {
 
 		//スクリーンショット描画
 		for (std::int32_t i = 0; i < save_max_num; i++)
-			DxLib::DrawRotaGraph(save_snap_draw_pos_x, save_base_pos_y * (i + 1), 0.2f, 0, SaveSnap[i - 1], TRUE);
+			DxLib::DrawRotaGraph(save_snap_draw_pos_x, save_base_pos_y * (i + 1), 0.2f, 0, SaveSnap[i], TRUE);
 
 		//カーソルの描画
 		DxLib::DrawString(save_base_pos_x, cursor_y, "■", color);
