@@ -19,6 +19,9 @@ extern int EndFlag;
 
 namespace {
 
+	//各種分岐表示配列
+	static constexpr const char* SaveTaskItem[] = { "セーブしますか？", "ロードしますか？", "削除しますか？" };
+
 	//セーブデータ用スクリーンショット格納変数
 	std::int32_t SaveSnap[save_max_num];
 
@@ -142,8 +145,6 @@ namespace {
 	//セーブ/ロード/デリート切り替え関数
 	void SaveDataTask(const int& Num, const char* SaveDataPath) {
 
-		static constexpr const char* SaveTaskItem[] = { "セーブしますか？", "ロードしますか？", "削除しますか？" };
-
 		//セーブ
 		if (Num == 1)
 			SaveDataSave(SaveDataPath, SaveTaskItem[Num - 1]);
@@ -187,15 +188,24 @@ namespace {
 //セーブデータ(セーブ/ロード/デリート)ループ
 void SaveDataLoop(const int& Num) {
 
-	//スクリーンショットの読込
-	SaveDataSnapLoad();
+	//各種分岐表示
+	if (IDYES == MessageBoxYesNo(SaveTaskItem[Num - 1])) {
 
-	std::int32_t save_y = save_base_pos_y;
+		DxLib::ClearDrawScreen();
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 
-	while (EndFlag == 17) {
-		SaveLoadDeleteMenuDraw(save_y);
-		SaveLoadMenuKeyMove(save_y);
-		SaveLoadDeleteMenuSelect(save_y, Num);
-		ScreenClear();
+		//スクリーンショットの読込
+		SaveDataSnapLoad();
+
+		std::int32_t save_y = save_base_pos_y;
+
+		while (EndFlag == 17) {
+			SaveLoadDeleteMenuDraw(save_y);
+			SaveLoadMenuKeyMove(save_y);
+			SaveLoadDeleteMenuSelect(save_y, Num);
+			ScreenClear();
+		}
 	}
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
