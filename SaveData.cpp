@@ -241,3 +241,8 @@ void SaveDataLoop(const int& Num) {
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
+
+//セーブデータ用スクリーンショット取得
+void SaveDataScreenShotGet() {
+	DxLib::SaveDrawScreen(0, 0, 640, 480, "DATA/SAVE/SAVESNSAP_TEMP.png");
+}
