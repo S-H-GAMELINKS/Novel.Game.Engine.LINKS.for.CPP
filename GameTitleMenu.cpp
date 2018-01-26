@@ -71,10 +71,10 @@ namespace {
 void GameTitleMenuLoop(unsigned int color, std::int32_t& cursor_y) {
 
 	while (EndFlag == 0) {
+		ScreenClear();
 		GameTitleMenuDraw(color, cursor_y);
 		GameTitleMenuKeyMove(cursor_y);
 		GameTitleMenuChoice(cursor_y);
-		ScreenClear();
 
 		//ゲーム終了確認ウインドウ
 		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
