@@ -37,6 +37,7 @@ namespace {
 		DxLib::DrawString(save_name_pos_x - cursor_move, cursor_y, "■", 255);
 
 		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y, 255, "%d", ConfigData.bgm_vol);
+		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 2, 255, "%d", ConfigData.se_vol);
 	}
 
 	//コンフィグ画面キー操作
@@ -77,11 +78,41 @@ namespace {
 		}
 	}
 
+	//SE音量調節
+	void SoundEffectVolChange() {
+		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+
+			ConfigData.se_vol += 10;
+			ConfigData.se_vol_count += 1;
+
+			if (ConfigData.se_vol_count >= 10) {
+				ConfigData.se_vol = 100;
+				ConfigData.se_vol_count = 10;
+			}
+		}
+
+		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+
+			ConfigData.se_vol -= 10;
+			ConfigData.se_vol_count -= 1;
+
+			if (ConfigData.se_vol_count <= 0) {
+				ConfigData.se_vol = 0;
+				ConfigData.se_vol_count = 0;
+			}
+		}
+	}
+
 	//コンフィグ画面選択処理
 	void ConfigMenuSelect(std::int32_t& cursor_y, std::int32_t& ConfigFlag) {
 
 		if (game_menu_base_pos_y == cursor_y)
 			BackGroundMusicVolChange();
+
+		if (game_menu_base_pos_y * 2 == cursor_y)
+			SoundEffectVolChange();
 
 		if (game_menu_base_pos_y * 8 == cursor_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			if (IDYES == MessageBoxYesNo("戻りますか？")) {
