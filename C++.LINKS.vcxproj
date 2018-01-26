@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Choice.cpp" />
+    <ClCompile Include="ConfigMenu.cpp" />
     <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameTitleMenu.cpp" />
     <ClCompile Include="main.cpp" />
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Choice.h" />
+    <ClInclude Include="ConfigMenu.h" />
     <ClInclude Include="ConstantExpressionVariable.h" />
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameTitleMenu.h" />
