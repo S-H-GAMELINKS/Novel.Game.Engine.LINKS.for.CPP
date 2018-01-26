@@ -23,6 +23,7 @@ extern int EndFlagTemp, SP_Temp;
 extern std::int32_t BackGroundHandle;
 extern std::int32_t CharacterHandle;
 extern std::int32_t BackGroundMusicHandle;
+extern std::int32_t SoundEffectHandle;
 
 namespace {
 	//ƒQ[ƒ€ƒƒjƒ…[•`‰æŠÖ”

@@ -13,6 +13,7 @@ extern int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
 extern std::int32_t BackGroundHandle;
 extern std::int32_t CharacterHandle;
 extern std::int32_t BackGroundMusicHandle;
+extern std::int32_t SoundEffectHandle;
 
 //文字列描画位置
 extern int DrawPointX, DrawPointY;
