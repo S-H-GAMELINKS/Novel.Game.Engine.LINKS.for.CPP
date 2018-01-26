@@ -84,20 +84,17 @@ namespace {
 
 			FILE *fp;
 
-#ifdef LINKS_HAS_FOPEN_S
-			const errno_t er = fopen_s(&fp, SaveDataPath, "wb");
-			if (0 != er || nullptr == fp) {
-				return 0;
-			}
-#else
 			fopen_s(&fp, SaveDataPath, "wb");//バイナリファイルを開く
 			if (nullptr == fp) {//エラーが起きたらnullptrを返す
 				return 0;
 			}
-#endif
 
 			fwrite(&SaveData, sizeof(SaveData), 1, fp); // SaveData_t構造体の中身を出力
 			fclose(fp);
+
+			MessageBoxOk("セーブしました！");
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			return 0;
 		}
 	}
 
@@ -110,27 +107,25 @@ namespace {
 
 			FILE *fp;
 
-#ifdef LINKS_HAS_FOPEN_S
-			const errno_t er = fopen_s(&fp, SaveDataPath, "rb");
-			if (0 != er || nullptr == fp) {
-				MessageBoxOk(ErrorMessage);
-				return 0;
-			}
-#else
 			fopen_s(&fp, SaveDataPath, "rb");
 			if (fp == nullptr) {
 				//MessageBoxOk(ErrorMessage);
 				return 0;
 			}
-#endif
+
 			fread(&SaveData, sizeof(SaveData), 1, fp);
 			fclose(fp);
+
 			EndFlag = SaveData.ENDFLAG;
 			SP = SaveData.SP;
 			CP = SaveData.CP;
 			CharacterHandle = SaveData.CHAR;
 			BackGroundHandle = SaveData.BG;
 			BackGroundMusicHandle = SaveData.BGM;
+
+			MessageBoxOk("ロードしました！");
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			return 0;
 		}
 	}
 
@@ -138,6 +133,9 @@ namespace {
 	void SaveDataDelete(const char* SaveDataPath, const char* Message) {
 		if (IDYES == MessageBoxYesNo(Message)) {
 			std::remove(SaveDataPath);
+
+			MessageBoxOk("削除しました！");
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 		}
 	}
 
