@@ -42,7 +42,7 @@ namespace {
 	void GameMenuSelect(std::int32_t& cursor_y) {
 
 		if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
-			SaveDataLoop();
+			SaveDataLoop(1);
 
 		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
 

@@ -140,7 +140,7 @@ namespace {
 	}
 
 	//セーブ/ロード/デリート切り替え関数
-	void SaveDataTask(std::int32_t Num, const char* SaveDataPath) {
+	void SaveDataTask(const int& Num, const char* SaveDataPath) {
 
 		static constexpr const char* SaveTaskItem[] = { "セーブしますか？", "ロードしますか？", "削除しますか？" };
 
@@ -159,22 +159,22 @@ namespace {
 }
 
 //セーブ/ロード/デリート メニュー選択処理
-void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y) {
+void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y, const int& Num) {
 
 	if (cursor_y == save_base_pos_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
-		SaveDataTask(1, "DATA/SAVE/SAVEDATA1.bat");
+		SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat");
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
 
 	if (cursor_y == save_base_pos_y * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
-		SaveDataTask(1, "DATA/SAVE/SAVEDATA2.bat");
+		SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat");
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
 
 	if (cursor_y == save_base_pos_y * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
-		SaveDataTask(1, "DATA/SAVE/SAVEDATA3.bat");
+		SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat");
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
@@ -185,7 +185,7 @@ void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y) {
 }
 
 //セーブデータ(セーブ/ロード/デリート)ループ
-void SaveDataLoop() {
+void SaveDataLoop(const int& Num) {
 
 	//スクリーンショットの読込
 	SaveDataSnapLoad();
@@ -195,7 +195,7 @@ void SaveDataLoop() {
 	while (EndFlag == 17) {
 		SaveLoadDeleteMenuDraw(save_y);
 		SaveLoadMenuKeyMove(save_y);
-		SaveLoadDeleteMenuSelect(save_y);
+		SaveLoadDeleteMenuSelect(save_y, Num);
 		ScreenClear();
 	}
 }
