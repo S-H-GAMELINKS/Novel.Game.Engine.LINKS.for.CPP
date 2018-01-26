@@ -14,6 +14,9 @@ extern std::int32_t BackGroundHandle;
 extern std::int32_t CharacterHandle;
 extern std::int32_t BackGroundMusicHandle;
 
+//文字列描画位置
+extern int DrawPointX, DrawPointY;
+
 //終了フラグ
 extern int EndFlag;
 
@@ -132,6 +135,12 @@ namespace {
 
 			MessageBoxOk("ロードしました！");
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+
+			DrawPointX = 0;
+			DrawPointY = 0;
+			DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
+			DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+			DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
 		}
 		return 0;
 	}
@@ -222,10 +231,10 @@ void SaveDataLoop(const int& Num) {
 
 		//セーブデータループ
 		while (SaveFlag == 1) {
+			ScreenClear();
 			SaveLoadDeleteMenuDraw(save_y, color);
 			SaveLoadMenuKeyMove(save_y);
 			SaveLoadDeleteMenuSelect(save_y, Num, SaveFlag);
-			ScreenClear();
 		}
 	}
 
