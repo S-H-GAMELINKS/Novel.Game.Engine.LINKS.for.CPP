@@ -78,15 +78,17 @@ void GameEndMessageBox() {
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
 
-//ゲーム画面再描画処理
-void DrawGameScreenAgain() {
-	SP = SP_Temp;
-	CP = 0;
-	DrawPointX = 0;
-	DrawPointY = 0;
-	DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
-	DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
-	DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+namespace {
+	//ゲーム画面再描画処理
+	void DrawGameScreenAgain() {
+		SP = SP_Temp;
+		CP = 0;
+		DrawPointX = 0;
+		DrawPointY = 0;
+		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
+		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+	}
 }
 
 //各種ショートカットキー
