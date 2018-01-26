@@ -64,6 +64,23 @@ namespace {
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
 	}
 
+	//タイトルへ戻る
+	void GameMenuBackToTitle() {
+
+		if (IDYES == MessageBoxYesNo("タイトルに戻りますか？")) {
+			EndFlag = 0;
+			SP = 0;
+			CP = 0;
+			DrawPointX = 0;
+			DrawPointY = 0;
+			BackGroundHandle = 0;
+			CharacterHandle = 0;
+			BackGroundMusicHandle = 0;
+			SoundEffectHandle = 0;
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+	}
+
 	//ゲームメニュー項目選択処理
 	void GameMenuSelect(std::int32_t& cursor_y) {
 
@@ -88,7 +105,8 @@ namespace {
 
 		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
 
-		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == game_menu_base_pos_y * 10 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+			GameMenuBackToTitle();
 
 		if (cursor_y == game_menu_base_pos_y * 11 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			GameMenuBackToGamePlay();
