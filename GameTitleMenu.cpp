@@ -19,6 +19,7 @@ static constexpr const char* ConfigMenuItem[] = {
 //コンフィグ画面描画
 void ConfigMenuDraw() {
 
+	//各項目の描画
 	for (std::int32_t i = 0; i < 8; i++)
 		DxLib::DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), ConfigMenuItem[i], 255);
 }
