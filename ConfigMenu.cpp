@@ -24,14 +24,14 @@ ConfigData_t ConfigData = {
 namespace {
 
 	static constexpr const char* ConfigMenuItem[] = {
-		"ＢＧＭ音量", "ＳＥ音量", "オート速度", "スキップ速度", "文字描画速度", "描画方法", "マウス/キー操作", "戻る"
+		"ＢＧＭ音量", "ＳＥ音量", "オート速度", "スキップ速度", "文字描画速度", "マウス/キー操作", "戻る"
 	};
 
 	//コンフィグ画面描画
 	void ConfigMenuDraw(std::int32_t& cursor_y) {
 
 		//各項目の描画
-		for (std::int32_t i = 0; i < 8; i++)
+		for (std::int32_t i = 0; i < 7; i++)
 			DxLib::DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), ConfigMenuItem[i], 255);
 
 		DxLib::DrawString(save_name_pos_x - cursor_move, cursor_y, "■", 255);
@@ -40,12 +40,13 @@ namespace {
 		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 2, 255, "%d", ConfigData.se_vol);
 		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 3, 255, "%d", ConfigData.auto_speed);
 		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 4, 255, "%d", ConfigData.skip_speed);
+		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 5, 255, "%d", ConfigData.string_speed);
 	}
 
 	//コンフィグ画面キー操作
 	void ConfigMenuKeyMove(std::int32_t& cursor_y) {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			cursor_y = (game_menu_base_pos_y * 8 == cursor_y) ? game_menu_base_pos_y : cursor_y + cursor_move;
+			cursor_y = (game_menu_base_pos_y * 7 == cursor_y) ? game_menu_base_pos_y : cursor_y + cursor_move;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
 			cursor_y = (game_menu_base_pos_y == cursor_y) ? game_menu_base_pos_y * 8 : cursor_y - cursor_move;
@@ -161,6 +162,33 @@ namespace {
 		}
 	}
 
+	//文字列描画速度調節
+	void StringDrawSpeedVolChange() {
+		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+
+			ConfigData.string_speed += 10;
+			ConfigData.string_speed_count += 1;
+
+			if (ConfigData.string_speed_count >= 10) {
+				ConfigData.string_speed = 100;
+				ConfigData.string_speed_count = 10;
+			}
+		}
+
+		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+
+			ConfigData.string_speed -= 10;
+			ConfigData.string_speed_count -= 1;
+
+			if (ConfigData.string_speed_count <= 0) {
+				ConfigData.string_speed = 0;
+				ConfigData.string_speed_count = 0;
+			}
+		}
+	}
+
 	//コンフィグ画面選択処理
 	void ConfigMenuSelect(std::int32_t& cursor_y, std::int32_t& ConfigFlag) {
 
@@ -176,7 +204,10 @@ namespace {
 		if (game_menu_base_pos_y * 4 == cursor_y)
 			SkipSpeedVolChange();
 
-		if (game_menu_base_pos_y * 8 == cursor_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (game_menu_base_pos_y * 5 == cursor_y)
+			StringDrawSpeedVolChange();
+
+		if (game_menu_base_pos_y * 7 == cursor_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			if (IDYES == MessageBoxYesNo("戻りますか？")) {
 				ConfigFlag = 0;
 			}
