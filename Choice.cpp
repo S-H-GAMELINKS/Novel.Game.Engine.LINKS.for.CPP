@@ -10,6 +10,10 @@
 
 extern int EndFlag;
 
+//各種素材ハンドル
+extern std::int32_t BackGroundHandle;
+extern std::int32_t CharacterHandle;
+
 //選択肢用変数
 static std::string Choice[2];
 const char* ChoiceScript[][2] = {
@@ -26,6 +30,9 @@ namespace {
 
 	//選択肢描画関数
 	void DrawChoice(unsigned int color, std::int32_t& choice_y) {
+
+		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
 
 		//カーソルの描画
 		DxLib::DrawString(choice_pos_x, choice_y, "■", color);
