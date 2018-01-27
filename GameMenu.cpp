@@ -26,6 +26,23 @@ extern std::int32_t CharacterHandle;
 extern std::int32_t BackGroundMusicHandle;
 extern std::int32_t SoundEffectHandle;
 
+// 既読スキップ/スキップ/オート変数
+extern int SkipAndAutoFlag;
+
+// 既読スキップ/スキップ/オート切り替え関数
+void SkipAndAutoTask(const std::int32_t& Num) {
+
+	if (Num == 0)
+		SkipAndAutoFlag = 0;
+
+	if (Num == 1)
+		SkipAndAutoFlag = 1;
+
+	if (Num == 2)
+		SkipAndAutoFlag = 2;
+
+}
+
 namespace {
 	//ゲームメニュー描画関数
 	void GameMenuDraw(std::int32_t& cursor_y, unsigned int color) {
@@ -96,11 +113,14 @@ namespace {
 
 		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
 
-		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+			SkipAndAutoTask(1);
 
-		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+			SkipAndAutoTask(2);
 
-		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+			SkipAndAutoTask(0);
 
 		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
 

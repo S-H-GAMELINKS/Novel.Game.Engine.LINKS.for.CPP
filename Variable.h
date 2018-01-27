@@ -44,6 +44,6 @@ std::int32_t GameTitleGraph;
 int EndFlagTemp, SP_Temp;
 
 // 既読スキップ/スキップ/オート変数
-int SkipAndAutoFlag = 1;
+int SkipAndAutoFlag = 0;
 
 #endif //VALIABLE_H_
