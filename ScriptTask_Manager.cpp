@@ -23,7 +23,8 @@ extern std::int32_t CharacterHandle;
 extern std::int32_t BackGroundMusicHandle;
 extern std::int32_t SoundEffectHandle;
 
-int SkipAndAutoFlag = 1;
+// 既読スキップ/スキップ/オート変数
+extern int SkipAndAutoFlag;
 
 extern struct ConfigData_t ConfigData;
 

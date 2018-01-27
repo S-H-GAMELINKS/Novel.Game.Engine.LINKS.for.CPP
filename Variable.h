@@ -43,4 +43,7 @@ std::int32_t GameTitleGraph;
 //画面変遷用Temp変数
 int EndFlagTemp, SP_Temp;
 
+// 既読スキップ/スキップ/オート変数
+int SkipAndAutoFlag = 1;
+
 #endif //VALIABLE_H_
