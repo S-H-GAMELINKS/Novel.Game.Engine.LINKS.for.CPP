@@ -3,6 +3,7 @@
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
+#include "BackLog.h"
 #include <string>
 #include <fstream>
 #include <thread>
@@ -66,6 +67,7 @@ namespace {
 	//選択肢(↑)選択時処理
 	void ChoiceSelectUp() {
 		if (1 <= EndFlag && EndFlag <= 7) {
+			BackLogGet();
 			EndFlag *= 2;
 		}
 	}
@@ -73,6 +75,7 @@ namespace {
 	//選択肢(↑)選択時処理
 	void ChoiceSelectDown() {
 		if (1 <= EndFlag && EndFlag <= 7) {
+			BackLogGet();
 			EndFlag = EndFlag * 2 + 1;
 		}
 	}
@@ -105,6 +108,7 @@ void ChoiceSelect(int RoutteNumber) {
 		ChoiceKeyMove(cursor_y);
 		ChoiceSelectCheck(cursor_y);
 		ScreenClear();
+		ShortCutKey();
 
 		//ゲーム終了確認ウインドウ
 		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
