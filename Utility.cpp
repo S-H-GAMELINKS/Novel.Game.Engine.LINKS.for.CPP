@@ -7,6 +7,7 @@
 #include "ConfigMenu.h"
 #include "Skip_Auto.h"
 #include "BackLog.h"
+#include <string>
 #include <thread>
 #include <chrono>
 
@@ -91,6 +92,19 @@ void GameEndMessageBox() {
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 }
 
+//スクリーンショット取得関数
+void ScreenShotGet() {
+	if (IDYES == MessageBoxYesNo("スクリーンショットを取得しますか？")) {
+		static std::int32_t ScreenShotCount;
+		std::string FileName = "DATA/SCREENSHOT/SCREENSHOT";
+		FileName += std::to_string(ScreenShotCount + 1);
+		FileName += ".png";
+
+		DxLib::SaveDrawScreenToPNG(0, 0, 640, 480, FileName.c_str());
+		ScreenShotCount++;
+	}
+}
+
 //各種ショートカットキー
 void ShortCutKey() {
 
@@ -156,7 +170,15 @@ void ShortCutKey() {
 			DrawGameScreenAgain();
 	}
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1) {
+		ScreenShotGet();
+		CP = 0;
+		DrawPointX = 0;
+		DrawPointY = 0;
+		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
+		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) {
 		SaveDataScreenShotGet();
