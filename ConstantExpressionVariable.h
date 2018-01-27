@@ -47,5 +47,6 @@ constexpr int save_name_pos_x = 250;
 //•¶Žš•`‰æ‘¬“xŠÖŒW
 constexpr int string_speed_skip = 10;
 constexpr int string_speed_auto = 30;
+constexpr int string_speed_wait = 600;
 
 #endif // CONSTANT_EXPRESSION_VARIABLE_H_

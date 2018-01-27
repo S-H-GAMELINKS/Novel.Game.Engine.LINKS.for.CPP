@@ -66,6 +66,23 @@ namespace ScriptTask {
 		}
 	}
 
+	//•¶š—ñ•`‰æ‘¬“x
+	void DrawScriptSpeed() {
+		switch (SkipAndAutoFlag) {
+		case 0:
+			std::this_thread::sleep_for(std::chrono::milliseconds(string_speed_auto * ConfigData.string_speed / 100));
+			break;
+
+		case 1:
+			std::this_thread::sleep_for(std::chrono::milliseconds(string_speed_skip * ConfigData.skip_speed / 100));
+			break;
+
+		case 2:
+			std::this_thread::sleep_for(std::chrono::milliseconds(string_speed_auto * ConfigData.string_speed / 100));
+			break;
+		}
+	}
+
 	//•¶š—ñ•`‰æŠÖ”
 	void DrawScript(const std::vector<std::string>& Script) {
 		// ‚P•¶š•ª”²‚«o‚·
@@ -83,7 +100,7 @@ namespace ScriptTask {
 		DrawPointX++;
 
 		// ­‚µ‘Ò‚Â
-		WaitTimer(10);
+		DrawScriptSpeed();
 	}
 
 	//”wŒi‰æ‘œ•`‰æŠÖ”
@@ -154,13 +171,11 @@ namespace ScriptTask {
 			CP++;
 		}
 
-		if (SkipAndAutoFlag == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds((string_speed_skip * ConfigData.skip_speed / 100)));
+		if (SkipAndAutoFlag == 1)
 			CP++;
-		}
 
 		if (SkipAndAutoFlag == 2) {
-			std::this_thread::sleep_for(std::chrono::milliseconds((string_speed_auto * ConfigData.auto_speed / 100)));
+			std::this_thread::sleep_for(std::chrono::milliseconds((string_speed_auto * string_speed_wait * ConfigData.auto_speed / 100)));
 			CP++;
 		}
 
