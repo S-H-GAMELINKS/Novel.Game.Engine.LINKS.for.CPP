@@ -28,54 +28,6 @@ extern int SkipAndAutoFlag;
 
 extern struct ConfigData_t ConfigData;
 
-
-std::int32_t BackLogCount = 0;
-std::vector<std::int32_t> BackLog;
-
-void BackLogGet() {
-	DxLib::SetDrawScreen(DX_SCREEN_BACK);
-	DxLib::SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-	++BackLogCount;
-	BackLog.emplace_back(std::move(DxLib::LoadGraph("DATA/BACKLOG/BACKLOG1.png")));
-	DxLib::SetDrawScreen(DX_SCREEN_FRONT);
-}
-
-void BackLogDraw(std::int32_t Num) {
-
-	if (Num <= BackLogCount)
-		DxLib::DrawGraph(0, 0, BackLog[Num], TRUE);
-	else
-		MessageBoxOk("これ以上バッグログはありません");
-}
-
-void BackLogKeyMove(std::int32_t& Num, std::int32_t& BackLogFlag) {
-
-	if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-		Num++;
-
-	if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-		Num--;
-
-	if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1)
-		BackLogFlag = 0;
-}
-
-void BackLogLoop() {
-
-	if (IDYES == MessageBoxYesNo("バックログを表示しますか？")) {
-
-		std::int32_t Num = 0;
-		std::int32_t BackLogFlag = 1;
-
-		while (BackLogFlag == 1) {
-			BackLogDraw(Num);
-			BackLogKeyMove(Num, BackLogFlag);
-			ScreenClear();
-		}
-	}
-}
-
-
 namespace ScriptTask {
 
 	char OneMojiBuf[3];	// １文字分一時記憶配列
