@@ -133,6 +133,7 @@
     <ClCompile Include="Material_Manager.cpp" />
     <ClCompile Include="SaveData.cpp" />
     <ClCompile Include="ScriptTask_Manager.cpp" />
+    <ClCompile Include="Skip_Auto.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +145,7 @@
     <ClInclude Include="Material_Manager.h" />
     <ClInclude Include="SaveData.h" />
     <ClInclude Include="ScriptTask_Manager.h" />
+    <ClInclude Include="Skip_Auto.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Variable.h" />
   </ItemGroup>

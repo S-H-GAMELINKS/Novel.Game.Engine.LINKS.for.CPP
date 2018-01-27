@@ -5,6 +5,7 @@
 #include "GameMenu.h"
 #include "SaveData.h"
 #include "ConfigMenu.h"
+#include "Skip_Auto.h"
 #include <thread>
 #include <chrono>
 
@@ -112,11 +113,14 @@ void ShortCutKey() {
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1)
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F5) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F5) == 1)
+		SkipAndAutoTask(1);
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F6) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F6) == 1)
+		SkipAndAutoTask(2);
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1)
+		SkipAndAutoTask(0);
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
 
