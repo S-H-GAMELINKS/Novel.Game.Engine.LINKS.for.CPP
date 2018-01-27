@@ -130,7 +130,21 @@ void ShortCutKey() {
 		DrawGameScreenAgain();
 	}
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F10) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F10) == 1) {
+		if (IDYES == MessageBoxYesNo("タイトル画面に戻りますか？")) {
+			DxLib::ClearDrawScreen();
+			EndFlag = 0;
+			SP = 0;
+			CP = 0;
+			DrawPointX = 0;
+			DrawPointY = 0;
+			BackGroundHandle = 0;
+			CharacterHandle = 0;
+			BackGroundMusicHandle = 0;
+			SoundEffectHandle = 0;
+		} else
+			DrawGameScreenAgain();
+	}
 
 	//if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1)
 
