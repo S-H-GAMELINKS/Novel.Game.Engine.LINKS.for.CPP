@@ -119,6 +119,8 @@ namespace ScriptTask {
 
 	//BGMÄ¶ŠÖ”
 	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGroundMusic) {
+
+		DxLib::ChangeVolumeSoundMem(255 * ConfigData.bgm_vol / 100, BackGroundMusicHandle);
 		
 		//BGMÄ¶’†‚Ìê‡‚ÍABGM‚ğ’â~‚·‚é
 		if (DxLib::CheckSoundMem(BackGroundMusicHandle))
@@ -131,6 +133,8 @@ namespace ScriptTask {
 
 	//Œø‰Ê‰¹Ä¶ŠÖ”
 	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& SoundEffect) {
+
+		DxLib::ChangeVolumeSoundMem(255 * ConfigData.se_vol / 100, SoundEffectHandle);
 
 		//SEÄ¶’†‚Ìê‡‚ÍASE‚ğ’â~‚·‚é
 		if (DxLib::CheckSoundMem(SoundEffectHandle))
