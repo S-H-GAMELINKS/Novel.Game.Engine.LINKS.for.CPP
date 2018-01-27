@@ -6,6 +6,7 @@
 #include "SaveData.h"
 #include "ConfigMenu.h"
 #include "Skip_Auto.h"
+#include "ScriptTask_Manager.h"
 #include <thread>
 #include <chrono>
 
@@ -122,7 +123,8 @@ void ShortCutKey() {
 	if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1)
 		SkipAndAutoTask(0);
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
+		BackLogLoop();
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1) {
 		SP_Temp = SP;

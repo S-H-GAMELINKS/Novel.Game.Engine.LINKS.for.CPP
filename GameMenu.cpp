@@ -6,6 +6,7 @@
 #include "SaveData.h"
 #include "ConfigMenu.h"
 #include "Skip_Auto.h"
+#include "ScriptTask_Manager.h"
 #include <thread>
 #include <chrono>
 
@@ -106,7 +107,8 @@ namespace {
 		if (cursor_y == game_menu_base_pos_y * 7 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			SkipAndAutoTask(0);
 
-		//if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == game_menu_base_pos_y * 8 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+			BackLogLoop();
 
 		if (cursor_y == game_menu_base_pos_y * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			ConfigMenuLoop();
