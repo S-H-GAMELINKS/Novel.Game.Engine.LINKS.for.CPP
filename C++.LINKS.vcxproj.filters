@@ -45,9 +45,6 @@
     <ClCompile Include="Skip_Auto.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="BackLog.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>

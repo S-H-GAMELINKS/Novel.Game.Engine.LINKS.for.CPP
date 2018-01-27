@@ -8,18 +8,9 @@
 #include <thread>
 #include <chrono>
 
-namespace {
+namespace BackLog {
 	std::int32_t BackLogCount = 0;
 	std::vector<std::int32_t> BackLog;
-
-	//バックログ取得
-	void BackLogGet() {
-		DxLib::SetDrawScreen(DX_SCREEN_BACK);
-		DxLib::SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
-		++BackLogCount;
-		BackLog.emplace_back(std::move(DxLib::LoadGraph("DATA/BACKLOG/BACKLOG1.png")));
-		DxLib::SetDrawScreen(DX_SCREEN_FRONT);
-	}
 
 	//バックログのナンバー表示
 	void BackLogNumberDraw(const std::int32_t& Num) {
@@ -59,18 +50,27 @@ namespace {
 	}
 }
 
+//バックログ取得
+void BackLogGet() {
+	DxLib::SetDrawScreen(DX_SCREEN_BACK);
+	DxLib::SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
+	++BackLog::BackLogCount;
+	BackLog::BackLog.emplace_back(std::move(DxLib::LoadGraph("DATA/BACKLOG/BACKLOG1.png")));
+	DxLib::SetDrawScreen(DX_SCREEN_FRONT);
+}
+
 //バックログループ
 void BackLogLoop() {
 
 	if (IDYES == MessageBoxYesNo("バックログを表示しますか？")) {
 
-		if (!BackLog.empty()) {
+		if (!BackLog::BackLog.empty()) {
 			std::int32_t Num = 0;
 			std::int32_t BackLogFlag = 1;
 
 			while (BackLogFlag == 1) {
-				BackLogDraw(Num);
-				BackLogKeyMove(Num, BackLogFlag);
+				BackLog::BackLogDraw(Num);
+				BackLog::BackLogKeyMove(Num, BackLogFlag);
 				ScreenClear();
 			}
 		}

@@ -4,6 +4,7 @@
 #include "Utility.h"
 #include "Choice.h"
 #include "ConfigMenu.h"
+#include "BackLog.h"
 #include <vector>
 #include <string>
 #include <fstream>

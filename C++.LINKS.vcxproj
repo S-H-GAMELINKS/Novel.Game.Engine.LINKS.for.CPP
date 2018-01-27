@@ -135,7 +135,6 @@
     <ClCompile Include="SaveData.cpp" />
     <ClCompile Include="ScriptTask_Manager.cpp" />
     <ClCompile Include="Skip_Auto.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
