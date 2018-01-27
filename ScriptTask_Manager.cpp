@@ -157,6 +157,8 @@ namespace ScriptTask {
 	void ClearScreen() {
 		BackLogGet();
 		ClearDrawScreen();
+		BackGroundHandle = 0;
+		CharacterHandle = 0;
 		DrawPointY = 0;
 		DrawPointX = 0;
 	}
