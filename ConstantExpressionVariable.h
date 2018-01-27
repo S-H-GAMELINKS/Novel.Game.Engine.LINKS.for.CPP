@@ -44,4 +44,8 @@ constexpr int save_buttom_y = save_base_pos_y + save_move_unit * save_max_num;
 constexpr int save_snap_draw_pos_x = 150;
 constexpr int save_name_pos_x = 250;
 
+//•¶Žš•`‰æ‘¬“xŠÖŒW
+constexpr int string_speed_skip = 10;
+constexpr int string_speed_auto = 30;
+
 #endif // CONSTANT_EXPRESSION_VARIABLE_H_

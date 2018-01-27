@@ -3,6 +3,7 @@
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
 #include "Choice.h"
+#include "ConfigMenu.h"
 #include <vector>
 #include <string>
 #include <fstream>
@@ -21,6 +22,10 @@ extern std::int32_t BackGroundHandle;
 extern std::int32_t CharacterHandle;
 extern std::int32_t BackGroundMusicHandle;
 extern std::int32_t SoundEffectHandle;
+
+int SkipAndAutoFlag = 1;
+
+extern struct ConfigData_t ConfigData;
 
 namespace ScriptTask {
 
@@ -140,6 +145,25 @@ namespace ScriptTask {
 			SP++;
 		}
 	}
+
+	//クリック待ち処理関数
+	void ClickWait() {
+		if (SkipAndAutoFlag == 0) {
+			DxLib::WaitKey();
+			CP++;
+		}
+
+		if (SkipAndAutoFlag == 1) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(string_speed_skip * ConfigData.skip_speed / 100));
+			CP++;
+		}
+
+		if (SkipAndAutoFlag == 2) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(string_speed_auto * ConfigData.auto_speed / 100));
+			CP++;
+		}
+
+	}
 }
 
 //スクリプトタグ処理関数
@@ -173,8 +197,7 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		break;
 
 	case 'P':	//クリック待ち
-		DxLib::WaitKey();
-		CP++;
+		ScriptTask::ClickWait();
 		break;
 
 	case 'R':	//画面クリア
