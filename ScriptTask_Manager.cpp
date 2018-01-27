@@ -155,12 +155,12 @@ namespace ScriptTask {
 		}
 
 		if (SkipAndAutoFlag == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(string_speed_skip * ConfigData.skip_speed / 100));
+			std::this_thread::sleep_for(std::chrono::milliseconds((string_speed_skip * ConfigData.skip_speed / 100)));
 			CP++;
 		}
 
 		if (SkipAndAutoFlag == 2) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(string_speed_auto * ConfigData.auto_speed / 100));
+			std::this_thread::sleep_for(std::chrono::milliseconds((string_speed_auto * ConfigData.auto_speed / 100)));
 			CP++;
 		}
 

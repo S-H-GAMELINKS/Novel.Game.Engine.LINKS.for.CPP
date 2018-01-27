@@ -33,18 +33,24 @@ extern int SkipAndAutoFlag;
 void SkipAndAutoTask(const std::int32_t& Num) {
 
 	if (Num == 0) {
-		if (IDYES == MessageBoxYesNo("オート/スキップを停止しますか？"))
+		if (IDYES == MessageBoxYesNo("オート/スキップを停止しますか？")) {
 			SkipAndAutoFlag = 0;
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
 	if (Num == 1) {
-		if (IDYES == MessageBoxYesNo("スキップを実行しますか？"))
+		if (IDYES == MessageBoxYesNo("スキップを実行しますか？")) {
 			SkipAndAutoFlag = 1;
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 
 	if (Num == 2) {
-		if (IDYES == MessageBoxYesNo("オートを実行しますか？"))
+		if (IDYES == MessageBoxYesNo("オートを実行しますか？")) {
 			SkipAndAutoFlag = 2;
+		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
 }
 
