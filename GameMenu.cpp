@@ -32,15 +32,20 @@ extern int SkipAndAutoFlag;
 // 既読スキップ/スキップ/オート切り替え関数
 void SkipAndAutoTask(const std::int32_t& Num) {
 
-	if (Num == 0)
-		SkipAndAutoFlag = 0;
+	if (Num == 0) {
+		if (IDYES == MessageBoxYesNo("オート/スキップを停止しますか？"))
+			SkipAndAutoFlag = 0;
+	}
 
-	if (Num == 1)
-		SkipAndAutoFlag = 1;
+	if (Num == 1) {
+		if (IDYES == MessageBoxYesNo("スキップを実行しますか？"))
+			SkipAndAutoFlag = 1;
+	}
 
-	if (Num == 2)
-		SkipAndAutoFlag = 2;
-
+	if (Num == 2) {
+		if (IDYES == MessageBoxYesNo("オートを実行しますか？"))
+			SkipAndAutoFlag = 2;
+	}
 }
 
 namespace {
