@@ -23,7 +23,7 @@ namespace BackLog {
 	void BackLogDraw(std::int32_t& Num) {
 
 		if (Num < BackLogCount) {
-			DxLib::DrawGraph(0, 0, BackLog[Num], TRUE);
+			DxLib::DrawGraph(0, 0, BackLog[BackLogCount - Num - 1], TRUE);
 			BackLogNumberDraw(Num);
 		}
 		else {
