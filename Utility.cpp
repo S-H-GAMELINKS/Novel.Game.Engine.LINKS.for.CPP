@@ -126,7 +126,11 @@ void ShortCutKey() {
 		DrawGameScreenAgain();
 	}
 
-	//if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1)
+	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1) {
+		SP_Temp = SP;
+		SkipAndAutoTask(3);
+		DrawGameScreenAgain();
+	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F5) == 1) {
 		SkipAndAutoTask(1);

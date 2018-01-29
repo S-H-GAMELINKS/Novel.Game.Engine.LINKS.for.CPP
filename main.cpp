@@ -7,6 +7,7 @@
 #include "GameTitleMenu.h"
 #include "GameMenu.h"
 #include "ConfigMenu.h"
+#include "Skip_Auto.h"
 #include "Utility.h"
 #include "Variable.h"
 #include <vector>
@@ -48,6 +49,9 @@ void DxLibInitPostProccessing() {
 
 	//各種素材の読込関数
 	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie, GameTitleGraph);
+
+	//既読スキップデータの読込
+	SkipDataLoad();
 }
 
 //ゲーム中のループ
@@ -65,6 +69,7 @@ void GamePlayLoop(const int RouteNumber) {
 
 		// 終了フラグが異なっていたら終了する
 		if (EndFlag != RouteNumber) {
+			SkipDataWrite(RouteNumber);
 			SP = 0;
 			CP = 0;
 			break;
@@ -114,6 +119,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	ConfigSave();	// 設定データの保存
+	SkipDataSave(); // 既読スキップデータの保存
 
 	std::remove("DATA/SAVE/SAVESNSAP_TEMP.png");
 	std::remove("DATA/BACKLOG/BACKLOG1.png");
