@@ -59,6 +59,9 @@ void GamePlayLoop(const int RouteNumber) {
 
 	ScriptRead(Script, EndFlag);
 
+	if (SkipAndAutoFlag == 1)
+		SkipDataCheck(RouteNumber);
+
 	while (DxLib::ProcessMessage() == 0) {
 		
 		//スクリプトタグ処理管理関数

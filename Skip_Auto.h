@@ -6,6 +6,9 @@
 //既読スキップデータ書き込み
 void SkipDataWrite(const std::int32_t& RouteNum);
 
+//既読判定
+void SkipDataCheck(const std::int32_t& RouteNum);
+
 //既読スキップデータの読込
 int SkipDataLoad();
 

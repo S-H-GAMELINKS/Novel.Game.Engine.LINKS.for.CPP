@@ -44,6 +44,8 @@ void SkipDataWrite(const std::int32_t& RouteNum) {
 void SkipDataCheck(const std::int32_t& RouteNum) {
 	if (SkipData[RouteNum - 1] == 1)
 		SkipAndAutoFlag = 1;
+	else
+		SkipAndAutoFlag = 0;
 }
 
 //既読スキップデータの読込
