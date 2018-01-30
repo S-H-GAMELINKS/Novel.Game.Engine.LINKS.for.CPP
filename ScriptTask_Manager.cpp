@@ -176,7 +176,8 @@ namespace ScriptTask {
 	void ClickWait() {
 		if (SkipAndAutoFlag == 0) {
 			DxLib::WaitKey();
-			CP++;
+			if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1)
+				CP++;
 		}
 
 		if (SkipAndAutoFlag == 1)
