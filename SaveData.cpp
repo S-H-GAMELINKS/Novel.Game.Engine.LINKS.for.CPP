@@ -314,6 +314,61 @@ int QuickSaveDataLoad() {
 	return 0;
 }
 
+//セーブデータをセーブ(Continue)
+int ContinueSaveDataSave(const std::int32_t& RouteNum) {
+
+	SaveData_t SaveData = { RouteNum, SP_Temp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
+
+	FILE *fp;
+
+	fopen_s(&fp, "DATA/SAVE/ContinueSaveData.dat", "wb");//バイナリファイルを開く
+	if (nullptr == fp) {//エラーが起きたらnullptrを返す
+		return 0;
+	}
+
+	fwrite(&SaveData, sizeof(SaveData), 1, fp); // SaveData_t構造体の中身を出力
+	fclose(fp);
+
+	return 0;
+}
+
+//セーブデータをロード(Continue)
+int ContinueSaveDataLoad() {
+
+	if (IDYES == MessageBoxYesNo("前回プレイした所から再開しますか？")) {
+
+		SaveData_t SaveData;
+
+		FILE *fp;
+
+		fopen_s(&fp, "DATA/SAVE/QuickSaveData.dat", "rb");
+		if (fp == nullptr) {
+			//MessageBoxOk(ErrorMessage);
+			return 0;
+		}
+
+		fread(&SaveData, sizeof(SaveData), 1, fp);
+		fclose(fp);
+
+		EndFlag = SaveData.ENDFLAG;
+		SP = SaveData.SP;
+		CP = SaveData.CP;
+		CharacterHandle = SaveData.CHAR;
+		BackGroundHandle = SaveData.BG;
+		BackGroundMusicHandle = SaveData.BGM;
+
+		MessageBoxOk("ロードしました！");
+		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+
+		DrawPointX = 0;
+		DrawPointY = 0;
+		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
+		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+	}
+	return 0;
+}
+
 //セーブデータ用スクリーンショット取得
 void SaveDataScreenShotGet() {
 	DxLib::SaveDrawScreen(0, 0, 640, 480, "DATA/SAVE/SAVESNSAP_TEMP.png");

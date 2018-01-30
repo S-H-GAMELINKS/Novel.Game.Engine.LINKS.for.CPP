@@ -8,6 +8,7 @@
 #include "GameMenu.h"
 #include "ConfigMenu.h"
 #include "Skip_Auto.h"
+#include "SaveData.h"
 #include "Utility.h"
 #include "Variable.h"
 #include <vector>
@@ -72,6 +73,7 @@ void GamePlayLoop(const int RouteNumber) {
 
 		// 終了フラグが異なっていたら終了する
 		if (EndFlag != RouteNumber) {
+			ContinueSaveDataSave(RouteNumber);
 			SkipDataWrite(RouteNumber);
 			SP = 0;
 			CP = 0;
