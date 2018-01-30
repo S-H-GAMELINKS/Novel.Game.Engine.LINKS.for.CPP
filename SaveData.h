@@ -7,6 +7,9 @@ void SaveDataLoop(const int& Num);
 //セーブデータをセーブ(Quick)
 int QuickSaveDataSave();
 
+//セーブデータをロード(Quick)
+int QuickSaveDataLoad();
+
 //セーブデータ用スクリーンショット取得
 void SaveDataScreenShotGet();
 

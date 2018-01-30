@@ -259,7 +259,7 @@ int QuickSaveDataSave() {
 
 	if (IDYES == MessageBoxYesNo("クイックセーブを実行しますか？")) {
 
-		SaveData_t SaveData = { EndFlagTemp, SP_Temp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
+		SaveData_t SaveData = { EndFlag, SP_Temp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
 
 		FILE *fp;
 
@@ -277,16 +277,16 @@ int QuickSaveDataSave() {
 	return 0;
 }
 
-//セーブデータをロード
-int SaveDataLoad(const char* SaveDataPath, const char* Message) {
+//セーブデータをロード(Quick)
+int QuickSaveDataLoad() {
 
-	if (IDYES == MessageBoxYesNo(Message)) {
+	if (IDYES == MessageBoxYesNo("クイックロードを実行しますか？")) {
 
 		SaveData_t SaveData;
 
 		FILE *fp;
 
-		fopen_s(&fp, SaveDataPath, "rb");
+		fopen_s(&fp, "DATA/SAVE/QuickSaveData.dat", "rb");
 		if (fp == nullptr) {
 			//MessageBoxOk(ErrorMessage);
 			return 0;
