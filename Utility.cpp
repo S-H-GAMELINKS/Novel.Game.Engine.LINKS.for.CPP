@@ -178,6 +178,12 @@ void ShortCutKey() {
 			DrawGameScreenAgain();
 	}
 
+	if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1) {
+		SP_Temp = SP;
+		QuickSaveDataSave();
+		DrawGameScreenAgain();
+	}
+
 	if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1) {
 		ScreenShotGet();
 		CP = 0;
