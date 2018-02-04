@@ -16,83 +16,64 @@ namespace {
 		return Material.is_open();
 	}
 
+	//äeéÌëfçﬁÉtÉ@ÉCÉãÉpÉXèàóù
+	decltype(auto) MaterialPathCalc(const std::int32_t& i, const std::string& FilePath, const std::string& FileFormat) {
+		std::ostringstream Num;
+
+		Num << std::setfill('0') << std::setw(2) << i + 1;
+
+		return (FilePath + Num.str() + FileFormat);
+	}
+
 	//îwåiâÊëúì«çûä÷êî
 	void MaterialLoadBackGround(std::array<int, MaterialMax>& BackGround) {
 
-		std::string FilePath = "DATA/BACKGROUND/BG";
-		std::string FileFormat = ".png";
-		std::string FileName = "";
+		const std::string FilePath = "DATA/BACKGROUND/BG";
+		const std::string FileFormat = ".png";
 
-		for (std::int32_t i = 0; i < 99; i++) {
+		for (std::int32_t i = 0; i < MaterialMax; i++) {
 
-			std::ostringstream Num;
-
-			Num << std::setfill('0') << std::setw(2) << i + 1;
-
-			FileName = (FilePath + Num.str() + FileFormat);
-
-			if (CheckMaterialExistence(FileName))
-				BackGround[i] = DxLib::LoadGraph(FileName.c_str());
+			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
+				BackGround[i] = DxLib::LoadGraph(MaterialPathCalc(i, FilePath, FileFormat).c_str());
 		}
 	}
 
 	//óßÇøäGëfçﬁì«çûä÷êî
 	void MaterialLoadCharacter(std::array<int, MaterialMax>& Character) {
 
-		std::string FilePath = "DATA/CHARACTER/CHAR";
-		std::string FileFormat = ".png";
-		std::string FileName = "";
+		const std::string FilePath = "DATA/CHARACTER/CHAR";
+		const std::string FileFormat = ".png";
 
-		for (std::int32_t i = 0; i < 99; i++) {
+		for (std::int32_t i = 0; i < MaterialMax; i++) {
 
-			std::ostringstream Num;
-
-			Num << std::setfill('0') << std::setw(2) << i + 1;
-
-			FileName = (FilePath + Num.str() + FileFormat);
-
-			if (CheckMaterialExistence(FileName))
-				Character[i] = DxLib::LoadGraph(FileName.c_str());
+			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
+				Character[i] = DxLib::LoadGraph(MaterialPathCalc(i, FilePath, FileFormat).c_str());
 		}
 	}
 
 	//BGMì«çûä÷êî
 	void MaterialLoadBackGroundMusic(std::array<int, MaterialMax>& BackGroundMusic) {
 
-		std::string FilePath = "DATA/BACKGROUNDMUSIC/BGM";
-		std::string FileFormat = ".ogg";
-		std::string FileName = "";
+		const std::string FilePath = "DATA/BACKGROUNDMUSIC/BGM";
+		const std::string FileFormat = ".ogg";
 
-		for (std::int32_t i = 0; i < 99; i++) {
+		for (std::int32_t i = 0; i < MaterialMax; i++) {
 
-			std::ostringstream Num;
-
-			Num << std::setfill('0') << std::setw(2) << i + 1;
-
-			FileName = (FilePath + Num.str() + FileFormat);
-
-			if (CheckMaterialExistence(FileName))
-				BackGroundMusic[i] = DxLib::LoadSoundMem(FileName.c_str());
+			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
+				BackGroundMusic[i] = DxLib::LoadSoundMem(MaterialPathCalc(i, FilePath, FileFormat).c_str());
 		}
 	}
 
 	//SEì«çûä÷êî
 	void MaterialLoadSoundEffect(std::array<int, MaterialMax>& SoundEffect) {
 
-		std::string FilePath = "DATA/SOUNDEFFECT/SE";
-		std::string FileFormat = ".ogg";
-		std::string FileName = "";
+		const std::string FilePath = "DATA/SOUNDEFFECT/SE";
+		const std::string FileFormat = ".ogg";
 
-		for (std::int32_t i = 0; i < 99; i++) {
+		for (std::int32_t i = 0; i < MaterialMax; i++) {
 
-			std::ostringstream Num;
-
-			Num << std::setfill('0') << std::setw(2) << i + 1;
-
-			FileName = (FilePath + Num.str() + FileFormat);
-
-			if (CheckMaterialExistence(FileName))
-				SoundEffect[i] = DxLib::LoadSoundMem(FileName.c_str());
+			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
+				SoundEffect[i] = DxLib::LoadSoundMem(MaterialPathCalc(i, FilePath, FileFormat).c_str());
 		}
 	}
 
@@ -100,20 +81,13 @@ namespace {
 	template <typename T>
 	void MaterialLoadMovie(std::array<T, MaterialMax>& Movie) {
 
-		std::string FilePath = "DATA/MOVIE/MOVIE";
-		std::string FileFormat = ".wmv";
-		std::string FileName = "";
+		const std::string FilePath = "DATA/MOVIE/MOVIE";
+		const std::string FileFormat = ".wmv";
 
-		for (std::int32_t i = 0; i < 99; i++) {
+		for (std::int32_t i = 0; i < MaterialMax; i++) {
 
-			std::ostringstream Num;
-
-			Num << std::setfill('0') << std::setw(2) << i + 1;
-
-			FileName = (FilePath + Num.str() + FileFormat);
-
-			if (CheckMaterialExistence(FileName))
-				Movie[i] = FileName;
+			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
+				Movie[i] = MaterialPathCalc(i, FilePath, FileFormat);
 		}
 	}
 }
