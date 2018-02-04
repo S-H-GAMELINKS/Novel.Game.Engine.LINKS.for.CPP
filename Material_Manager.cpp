@@ -25,55 +25,13 @@ namespace {
 		return (FilePath + Num.str() + FileFormat);
 	}
 
-	//”wŒi‰æ‘œ“ÇŠÖ”
-	void MaterialLoadBackGround(std::array<int, MaterialMax>& BackGround) {
-
-		const std::string FilePath = "DATA/BACKGROUND/BG";
-		const std::string FileFormat = ".png";
-
+	//Šeí‘fŞ“Çƒeƒ“ƒvƒŒ[ƒgŠÖ”
+	template <typename T>
+	void MaterialLoadTemplate(std::array<T, MaterialMax>& Material, const std::string& FilePath, const std::string& FileFormat) {
 		for (std::int32_t i = 0; i < MaterialMax; i++) {
 
 			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-				BackGround[i] = DxLib::LoadGraph(MaterialPathCalc(i, FilePath, FileFormat).c_str());
-		}
-	}
-
-	//—§‚¿ŠG‘fŞ“ÇŠÖ”
-	void MaterialLoadCharacter(std::array<int, MaterialMax>& Character) {
-
-		const std::string FilePath = "DATA/CHARACTER/CHAR";
-		const std::string FileFormat = ".png";
-
-		for (std::int32_t i = 0; i < MaterialMax; i++) {
-
-			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-				Character[i] = DxLib::LoadGraph(MaterialPathCalc(i, FilePath, FileFormat).c_str());
-		}
-	}
-
-	//BGM“ÇŠÖ”
-	void MaterialLoadBackGroundMusic(std::array<int, MaterialMax>& BackGroundMusic) {
-
-		const std::string FilePath = "DATA/BACKGROUNDMUSIC/BGM";
-		const std::string FileFormat = ".ogg";
-
-		for (std::int32_t i = 0; i < MaterialMax; i++) {
-
-			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-				BackGroundMusic[i] = DxLib::LoadSoundMem(MaterialPathCalc(i, FilePath, FileFormat).c_str());
-		}
-	}
-
-	//SE“ÇŠÖ”
-	void MaterialLoadSoundEffect(std::array<int, MaterialMax>& SoundEffect) {
-
-		const std::string FilePath = "DATA/SOUNDEFFECT/SE";
-		const std::string FileFormat = ".ogg";
-
-		for (std::int32_t i = 0; i < MaterialMax; i++) {
-
-			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-				SoundEffect[i] = DxLib::LoadSoundMem(MaterialPathCalc(i, FilePath, FileFormat).c_str());
+				Material[i] = DxLib::LoadGraph(MaterialPathCalc(i, FilePath, FileFormat).c_str());
 		}
 	}
 
@@ -99,16 +57,16 @@ void MaterialLoad(std::array<int, MaterialMax>& BackGround, std::array<int, Mate
 	DxLib::SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
 
 	//”wŒi‰æ‘œ“ÇŠÖ”
-	MaterialLoadBackGround(BackGround);
+	MaterialLoadTemplate(BackGround, "DATA/BACKGROUND/BG", ".png");
 
 	//—§‚¿ŠG‰æ‘œ“ÇŠÖ”
-	MaterialLoadCharacter(Character);
+	MaterialLoadTemplate(Character, "DATA/BACKGROUND/CHAR", ".png");
 
 	//BGM“ÇŠÖ”
-	MaterialLoadBackGroundMusic(BackGroundMusic);
+	MaterialLoadTemplate(BackGroundMusic, "DATA/BACKGROUND/BGM", ".png");
 
 	//SE“ÇŠÖ”
-	MaterialLoadSoundEffect(SoundEffect);
+	MaterialLoadTemplate(SoundEffect, "DATA/BACKGROUND/SE", ".png");
 
 	//“®‰æ“ÇŠÖ”
 	MaterialLoadMovie(Movie);
