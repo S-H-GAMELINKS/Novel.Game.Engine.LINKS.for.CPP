@@ -26,25 +26,11 @@ namespace {
 	}
 
 	//各種素材読込テンプレート関数
-	template <typename T>
-	void MaterialLoadTemplate(std::array<T, MaterialMax>& Material, const std::string& FilePath, const std::string& FileFormat) {
+	template <typename T, typename Func>
+	void MaterialLoadTemplate(std::array<T, MaterialMax>& Material, const std::string& FilePath, const std::string& FileFormat, Func&& loader) {
 		for (std::int32_t i = 0; i < MaterialMax; i++) {
 			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-				Material[i] = (FileFormat == ".png")? DxLib::LoadGraph(MaterialPathCalc(i, FilePath, FileFormat).c_str()) : DxLib::LoadSoundMem(MaterialPathCalc(i, FilePath, FileFormat).c_str());
-		}
-	}
-
-	//動画読込関数
-	template <typename T>
-	void MaterialLoadMovie(std::array<T, MaterialMax>& Movie) {
-
-		const std::string FilePath = "DATA/MOVIE/MOVIE";
-		const std::string FileFormat = ".wmv";
-
-		for (std::int32_t i = 0; i < MaterialMax; i++) {
-
-			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-				Movie[i] = MaterialPathCalc(i, FilePath, FileFormat);
+				Material[i] = loader(MaterialPathCalc(i, FilePath, FileFormat));
 		}
 	}
 }
@@ -56,19 +42,19 @@ void MaterialLoad(std::array<int, MaterialMax>& BackGround, std::array<int, Mate
 	DxLib::SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
 
 	//背景画像読込関数
-	MaterialLoadTemplate(BackGround, "DATA/BACKGROUND/BG", ".png");
+	MaterialLoadTemplate(BackGround, "DATA/BACKGROUND/BG", ".png", [](const std::string& path) {return DxLib::LoadGraph(path.c_str()); });
 
 	//立ち絵画像読込関数
-	MaterialLoadTemplate(Character, "DATA/CHARACTER/CHAR", ".png");
+	MaterialLoadTemplate(Character, "DATA/CHARACTER/CHAR", ".png", [](const std::string& path) {return DxLib::LoadGraph(path.c_str()); });
 
 	//BGM読込関数
-	MaterialLoadTemplate(BackGroundMusic, "DATA/BACKGROUNDMUSIC/BGM", ".ogg");
+	MaterialLoadTemplate(BackGroundMusic, "DATA/BACKGROUNDMUSIC/BGM", ".ogg", [](const std::string& path) {return DxLib::LoadSoundMem(path.c_str());});
 
 	//SE読込関数
-	MaterialLoadTemplate(SoundEffect, "DATA/SOUNDEFFECT/SE", ".ogg");
+	MaterialLoadTemplate(SoundEffect, "DATA/SOUNDEFFECT/SE", ".ogg", [](const std::string& path) {return DxLib::LoadSoundMem(path.c_str()); });
 
 	//動画読込関数
-	MaterialLoadMovie(Movie);
+	MaterialLoadTemplate(Movie, "DATA/MOVIE/MOVIE", ".wmv", [](const std::string& path) {return std::move(path); });
 
 	//タイトル画面読込
 	GameTitleGraph = DxLib::LoadGraph("DATA/BACKGROUND/TITLE.png");
