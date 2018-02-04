@@ -176,6 +176,12 @@ namespace ScriptTask {
 		}
 	}
 
+	//—§‚¿ŠGíœˆ—ŠÖ”
+	void RemoveCharacterGraph() {
+		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(character_pos_x, character_pos_y, character_graph_size_x, character_graph_size_y, BackGroundHandle));
+		DxLib::DrawGraph(character_pos_x, character_pos_y, *CharacterDummy, true);
+	}
+
 	//ƒNƒŠƒbƒN‘Ò‚¿ˆ—ŠÖ”
 	void ClickWait() {
 		if (SkipAndAutoFlag == 0) {
@@ -272,6 +278,7 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		break;
 
 	case '@':	//—§‚¿ŠG‚ğ‰æ–Ê‚©‚çíœ
+		ScriptTask::RemoveCharacterGraph();
 		CP++;
 		break;
 
