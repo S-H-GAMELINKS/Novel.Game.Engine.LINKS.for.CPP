@@ -1,4 +1,4 @@
-//Material Manage Source
+ï»¿//Material Manage Source
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
 #include <vector>
@@ -10,71 +10,55 @@
 
 namespace {
 
-	//Šeí‘fŞƒtƒ@ƒCƒ‹Šm”FŠÖ”
+	//å„ç¨®ç´ æãƒ•ã‚¡ã‚¤ãƒ«ç¢ºèªé–¢æ•°
 	bool CheckMaterialExistence(const std::string& FilePath) {
 		std::ifstream Material(FilePath, std::ios_base::in);
 		return Material.is_open();
 	}
 
-	//Šeí‘fŞƒtƒ@ƒCƒ‹ƒpƒXˆ—
-	decltype(auto) MaterialPathCalc(const std::int32_t& i, const std::string& FilePath, const std::string& FileFormat) {
+	//å„ç¨®ç´ æãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹å‡¦ç†
+	std::string MaterialPathCalc(const std::int32_t& i, const std::string& FilePath, const std::string& ext) {
 		std::ostringstream Num;
-
-		Num << std::setfill('0') << std::setw(2) << i + 1;
-
-		return (FilePath + Num.str() + FileFormat);
+		Num << FilePath << std::setfill('0') << std::setw(2) << i + 1 << '.' << ext;
+		return Num.str();
 	}
 
-	//Šeí‘fŞ“Çƒeƒ“ƒvƒŒ[ƒgŠÖ”
-	template <typename T>
-	void MaterialLoadTemplate(std::array<T, MaterialMax>& Material, const std::string& FilePath, const std::string& FileFormat) {
+	//å„ç¨®ç´ æèª­è¾¼ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆé–¢æ•°
+	template<typename T, typename Func>
+	void MaterialLoad(std::array<T, MaterialMax>& Material, const std::string& FilePath, const std::string& ext, Func&& loader) {
 		for (std::int32_t i = 0; i < MaterialMax; i++) {
-			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-				Material[i] = (FileFormat == ".png")? DxLib::LoadGraph(MaterialPathCalc(i, FilePath, FileFormat).c_str()) : DxLib::LoadSoundMem(MaterialPathCalc(i, FilePath, FileFormat).c_str());
-		}
-	}
-
-	//“®‰æ“ÇŠÖ”
-	template <typename T>
-	void MaterialLoadMovie(std::array<T, MaterialMax>& Movie) {
-
-		const std::string FilePath = "DATA/MOVIE/MOVIE";
-		const std::string FileFormat = ".wmv";
-
-		for (std::int32_t i = 0; i < MaterialMax; i++) {
-
-			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-				Movie[i] = MaterialPathCalc(i, FilePath, FileFormat);
+			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, ext)))
+				Material[i] = loader(MaterialPathCalc(i, FilePath, ext));
 		}
 	}
 }
 
-//Šeí‘fŞ“ÇŠÖ”
+//å„ç¨®ç´ æèª­è¾¼é–¢æ•°
 void MaterialLoad(std::array<int, MaterialMax>& BackGround, std::array<int, MaterialMax>& Character, std::array<int, MaterialMax>& BackGroundMusic, std::array<int, MaterialMax>& SoundEffect, std::array<std::string, MaterialMax>& Movie, std::int32_t& GameTitleGraph) {
 
-	//ƒTƒEƒ“ƒhƒf[ƒ^‚Ì“Ç‚İ‚İŒ`®
+	//ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿ã®èª­ã¿è¾¼ã¿å½¢å¼
 	DxLib::SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
 
-	//”wŒi‰æ‘œ“ÇŠÖ”
-	MaterialLoadTemplate(BackGround, "DATA/BACKGROUND/BG", ".png");
+	//èƒŒæ™¯ç”»åƒèª­è¾¼é–¢æ•°
+	MaterialLoad(BackGround, "DATA/BACKGROUND/BG", "png", [](const std::string& path) { return DxLib::LoadGraph(path.c_str()); });
 
-	//—§‚¿ŠG‰æ‘œ“ÇŠÖ”
-	MaterialLoadTemplate(Character, "DATA/CHARACTER/CHAR", ".png");
+	//ç«‹ã¡çµµç”»åƒèª­è¾¼é–¢æ•°
+	MaterialLoad(Character, "DATA/CHARACTER/CHAR", "png", [](const std::string& path) { return DxLib::LoadGraph(path.c_str()); });
 
-	//BGM“ÇŠÖ”
-	MaterialLoadTemplate(BackGroundMusic, "DATA/BACKGROUNDMUSIC/BGM", ".ogg");
+	//BGMèª­è¾¼é–¢æ•°
+	MaterialLoad(BackGroundMusic, "DATA/BACKGROUNDMUSIC/BGM", "ogg", [](const std::string& path) { return DxLib::LoadSoundMem(path.c_str()); });
 
-	//SE“ÇŠÖ”
-	MaterialLoadTemplate(SoundEffect, "DATA/SOUNDEFFECT/SE", ".ogg");
+	//SEèª­è¾¼é–¢æ•°
+	MaterialLoad(SoundEffect, "DATA/SOUNDEFFECT/SE", "ogg", [](const std::string& path) { return DxLib::LoadSoundMem(path.c_str()); });
 
-	//“®‰æ“ÇŠÖ”
-	MaterialLoadMovie(Movie);
+	//å‹•ç”»èª­è¾¼é–¢æ•°
+	MaterialLoad(SoundEffect, "DATA/MOVIE/MOVIE", "wmv", [](std::string&& path) { return std::move(path); });
 
-	//ƒ^ƒCƒgƒ‹‰æ–Ê“Ç
+	//ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢èª­è¾¼
 	GameTitleGraph = DxLib::LoadGraph("DATA/BACKGROUND/TITLE.png");
 }
 
-//ƒXƒNƒŠƒvƒg“ÇŠÖ”
+//ã‚¹ã‚¯ãƒªãƒ—ãƒˆèª­è¾¼é–¢æ•°
 void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) {
 
 	Script.clear();
