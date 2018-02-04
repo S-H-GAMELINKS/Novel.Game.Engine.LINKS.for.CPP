@@ -43,7 +43,7 @@ void DxLibInitPreProccessing() {
 //DxLib初期化後処理
 void DxLibInitPostProccessing() {
 	// フォントのサイズセット
-	SetFontSize(moji_size);
+	DxLib::SetFontSize(moji_size);
 
 	//コンフィグ読込関数
 	ConfigLoad();
