@@ -45,6 +45,9 @@ void DxLibInitPostProccessing() {
 	// フォントのサイズセット
 	DxLib::SetFontSize(moji_size);
 
+	//フォントの設定
+	DxLib::ChangeFontType(DX_FONTTYPE_ANTIALIASING_EDGE_8X8);
+
 	//コンフィグ読込関数
 	ConfigLoad();
 
