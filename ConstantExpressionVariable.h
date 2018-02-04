@@ -49,4 +49,10 @@ constexpr int string_speed_skip = 10;
 constexpr int string_speed_auto = 30;
 constexpr int string_speed_wait = 600;
 
+//—§‚¿ŠGˆÊ’uŠÖŒW
+constexpr int character_pos_y = 130;
+constexpr int character_pos_x = 150;
+constexpr int character_graph_size_x = 300;
+constexpr int character_graph_size_y = 400;
+
 #endif // CONSTANT_EXPRESSION_VARIABLE_H_

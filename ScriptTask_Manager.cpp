@@ -114,8 +114,12 @@ namespace ScriptTask {
 	//—§‚¿ŠG•`‰æŠÖ”
 	void DrawCharacter(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& Character) {
 		CP++;
+
+		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(character_pos_x, character_pos_y, character_graph_size_x, character_graph_size_y, BackGroundHandle));
+		DxLib::DrawGraph(character_pos_x, character_pos_y, *CharacterDummy, true);
+
 		CharacterHandle = Character[(static_cast<int>(Script[SP][CP]) - 48) * 10 + (static_cast<int>(Script[SP][CP + 1]) - 48) - 1];
-		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+		DxLib::DrawGraph(character_pos_x, character_pos_y, CharacterHandle, TRUE);
 	}
 
 	//BGMÄ¶ŠÖ”
