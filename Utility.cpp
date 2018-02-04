@@ -205,3 +205,9 @@ void ShortCutKey() {
 	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
 		GameEndMessageBox();
 }
+
+//タイトルムービー処理
+void TitleMoviePlay() {
+	PlayMovie("DATA/MOVIE/OP.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
+	ScreenClear();
+}

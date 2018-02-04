@@ -54,6 +54,9 @@ void DxLibInitPostProccessing() {
 	//各種素材の読込関数
 	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie, GameTitleGraph);
 
+	//タイトルムービー処理
+	TitleMoviePlay();
+
 	//既読スキップデータの読込
 	SkipDataLoad();
 }

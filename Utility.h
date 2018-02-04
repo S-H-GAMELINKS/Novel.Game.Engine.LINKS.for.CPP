@@ -16,4 +16,7 @@ void GameEndMessageBox();
 //各種ショートカットキー
 void ShortCutKey();
 
+//タイトルムービー処理
+void TitleMoviePlay();
+
 #endif // !UTILITY_H_
