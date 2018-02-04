@@ -17,7 +17,7 @@ namespace {
 	}
 
 	//各種素材ファイルパス処理
-	decltype(auto) MaterialPathCalc(const std::int32_t& i, const std::string& FilePath, const std::string& FileFormat) {
+	std::string MaterialPathCalc(const std::int32_t& i, const std::string& FilePath, const std::string& FileFormat) {
 		std::ostringstream Num;
 
 		Num << std::setfill('0') << std::setw(2) << i + 1;
