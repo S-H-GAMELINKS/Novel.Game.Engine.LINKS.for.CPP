@@ -29,9 +29,8 @@ namespace {
 	template <typename T>
 	void MaterialLoadTemplate(std::array<T, MaterialMax>& Material, const std::string& FilePath, const std::string& FileFormat) {
 		for (std::int32_t i = 0; i < MaterialMax; i++) {
-
 			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-				Material[i] = DxLib::LoadGraph(MaterialPathCalc(i, FilePath, FileFormat).c_str());
+				Material[i] = (FileFormat == ".png")? DxLib::LoadGraph(MaterialPathCalc(i, FilePath, FileFormat).c_str()) : DxLib::LoadSoundMem(MaterialPathCalc(i, FilePath, FileFormat).c_str());
 		}
 	}
 
@@ -60,13 +59,13 @@ void MaterialLoad(std::array<int, MaterialMax>& BackGround, std::array<int, Mate
 	MaterialLoadTemplate(BackGround, "DATA/BACKGROUND/BG", ".png");
 
 	//—§‚¿ŠG‰æ‘œ“ÇžŠÖ”
-	MaterialLoadTemplate(Character, "DATA/BACKGROUND/CHAR", ".png");
+	MaterialLoadTemplate(Character, "DATA/CHARACTER/CHAR", ".png");
 
 	//BGM“ÇžŠÖ”
-	MaterialLoadTemplate(BackGroundMusic, "DATA/BACKGROUND/BGM", ".png");
+	MaterialLoadTemplate(BackGroundMusic, "DATA/BACKGROUNDMUSIC/BGM", ".ogg");
 
 	//SE“ÇžŠÖ”
-	MaterialLoadTemplate(SoundEffect, "DATA/BACKGROUND/SE", ".png");
+	MaterialLoadTemplate(SoundEffect, "DATA/SOUNDEFFECT/SE", ".ogg");
 
 	//“®‰æ“ÇžŠÖ”
 	MaterialLoadMovie(Movie);
