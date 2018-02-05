@@ -38,9 +38,9 @@ constexpr int GameMenuBasePosY = 30;
 //セーブ・ロード画面関係
 constexpr int SaveDataSlotNum = 3;
 constexpr int SaveDataBasePosX = 400;
-constexpr int SaveBasePosY = 100;
+constexpr int SaveDataBasePosY = 100;
 constexpr int SaveDataCursorMove = 100;
-constexpr int SaveDataPosButtom = SaveBasePosY + SaveDataCursorMove * SaveDataSlotNum;
+constexpr int SaveDataPosButtom = SaveDataBasePosY + SaveDataCursorMove * SaveDataSlotNum;
 constexpr int SaveSnapDrawPosX = 150;
 constexpr int SaveDataNamePosX = 250;
 

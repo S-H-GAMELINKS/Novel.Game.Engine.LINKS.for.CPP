@@ -62,26 +62,26 @@ namespace {
 
 		//スクリーンショット描画
 		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
-			DxLib::DrawRotaGraph(SaveSnapDrawPosX, SaveBasePosY * (i + 1), 0.2f, 0, SaveSnap[i], TRUE);
+			DxLib::DrawRotaGraph(SaveSnapDrawPosX, SaveDataBasePosY * (i + 1), 0.2f, 0, SaveSnap[i], TRUE);
 
 		//カーソルの描画
 		DxLib::DrawString(SaveDataBasePosX, cursor_y, "■", color);
 
 		//セーブデータ名描画
-		DxLib::DrawString(SaveDataNamePosX, SaveBasePosY, "セーブデータ1", color);
-		DxLib::DrawString(SaveDataNamePosX, SaveBasePosY * 2, "セーブデータ2", color);
-		DxLib::DrawString(SaveDataNamePosX, SaveBasePosY * 3, "セーブデータ3", color);
+		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY, "セーブデータ1", color);
+		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * 2, "セーブデータ2", color);
+		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * 3, "セーブデータ3", color);
 
-		DxLib::DrawString(SaveDataNamePosX - CursorMove, SaveBasePosY * 4, "戻る", color);
+		DxLib::DrawString(SaveDataNamePosX - CursorMove, SaveDataBasePosY * 4, "戻る", color);
 	}
 
 	//セーブ/ロードメニューキー操作
 	void SaveLoadMenuKeyMove(std::int32_t& cursor_y) {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			cursor_y = (SaveDataPosButtom == cursor_y) ? SaveBasePosY : cursor_y + SaveDataCursorMove;
+			cursor_y = (SaveDataPosButtom == cursor_y) ? SaveDataBasePosY : cursor_y + SaveDataCursorMove;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			cursor_y = (SaveBasePosY == cursor_y) ? SaveDataPosButtom : cursor_y - SaveDataCursorMove;
+			cursor_y = (SaveDataBasePosY == cursor_y) ? SaveDataPosButtom : cursor_y - SaveDataCursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
@@ -192,25 +192,25 @@ namespace {
 	//セーブ/ロード/デリート メニュー選択処理
 	void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y, const int& Num, std::int32_t& SaveFlag) {
 
-		if (cursor_y == SaveBasePosY && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (cursor_y == SaveDataBasePosY && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
-		if (cursor_y == SaveBasePosY * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (cursor_y == SaveDataBasePosY * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat", "セーブデータ２", SaveFlag);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
-		if (cursor_y == SaveBasePosY * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (cursor_y == SaveDataBasePosY * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat", "セーブデータ３", SaveFlag);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
-		if (cursor_y == SaveBasePosY * 4 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (cursor_y == SaveDataBasePosY * 4 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 
 			if (IDYES == MessageBoxYesNo("戻りますか？")){
 				SaveFlag = 0;
@@ -240,7 +240,7 @@ void SaveDataLoop(const int& Num) {
 		SaveDataSnapLoad();
 
 		//カーソルの初期位置
-		std::int32_t save_y = SaveBasePosY;
+		std::int32_t save_y = SaveDataBasePosY;
 
 		//セーブデータループ
 		while (SaveFlag == 1) {
