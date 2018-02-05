@@ -62,7 +62,7 @@ namespace {
 
 		//スクリーンショット描画
 		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
-			DxLib::DrawRotaGraph(save_snap_draw_pos_x, SaveBasePosY * (i + 1), 0.2f, 0, SaveSnap[i], TRUE);
+			DxLib::DrawRotaGraph(SaveSnapDrawPosX, SaveBasePosY * (i + 1), 0.2f, 0, SaveSnap[i], TRUE);
 
 		//カーソルの描画
 		DxLib::DrawString(SaveBasePosX, cursor_y, "■", color);
