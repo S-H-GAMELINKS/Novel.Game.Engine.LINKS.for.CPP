@@ -28,13 +28,13 @@ namespace {
 	};
 
 	//コンフィグ画面描画
-	void ConfigMenuDraw(std::int32_t& cursor_y) noexcept {
+	void ConfigMenuDraw(std::int32_t& ConfigCursorPosY) noexcept {
 
 		//各項目の描画
 		for (std::int32_t i = 0; i < 7; i++)
 			DxLib::DrawString(SaveDataNamePosX, GameMenuBasePosY * (i + 1), ConfigMenuItem[i], 255);
 
-		DxLib::DrawString(SaveDataNamePosX - CursorMove, cursor_y, "■", 255);
+		DxLib::DrawString(SaveDataNamePosX - CursorMove, ConfigCursorPosY, "■", 255);
 
 		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY, 255, "%d", ConfigData.bgm_vol);
 		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 2, 255, "%d", ConfigData.se_vol);
@@ -45,12 +45,12 @@ namespace {
 	}
 
 	//コンフィグ画面キー操作
-	void ConfigMenuKeyMove(std::int32_t& cursor_y) noexcept {
+	void ConfigMenuKeyMove(std::int32_t& ConfigCursorPosY) noexcept {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			cursor_y = (GameMenuBasePosY * 7 == cursor_y) ? GameMenuBasePosY : cursor_y + CursorMove;
+			ConfigCursorPosY = (GameMenuBasePosY * 7 == ConfigCursorPosY) ? GameMenuBasePosY : ConfigCursorPosY + CursorMove;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			cursor_y = (GameMenuBasePosY == cursor_y) ? GameMenuBasePosY * 7 : cursor_y - CursorMove;
+			ConfigCursorPosY = (GameMenuBasePosY == ConfigCursorPosY) ? GameMenuBasePosY * 7 : ConfigCursorPosY - CursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
@@ -204,27 +204,27 @@ namespace {
 	}
 
 	//コンフィグ画面選択処理
-	void ConfigMenuSelect(std::int32_t& cursor_y, std::int32_t& ConfigFlag) noexcept {
+	void ConfigMenuSelect(std::int32_t& ConfigCursorPosY, std::int32_t& ConfigFlag) noexcept {
 
-		if (GameMenuBasePosY == cursor_y)
+		if (GameMenuBasePosY == ConfigCursorPosY)
 			BackGroundMusicVolChange();
 
-		if (GameMenuBasePosY * 2 == cursor_y)
+		if (GameMenuBasePosY * 2 == ConfigCursorPosY)
 			SoundEffectVolChange();
 
-		if (GameMenuBasePosY * 3 == cursor_y)
+		if (GameMenuBasePosY * 3 == ConfigCursorPosY)
 			AutoSpeedVolChange();
 
-		if (GameMenuBasePosY * 4 == cursor_y)
+		if (GameMenuBasePosY * 4 == ConfigCursorPosY)
 			SkipSpeedVolChange();
 
-		if (GameMenuBasePosY * 5 == cursor_y)
+		if (GameMenuBasePosY * 5 == ConfigCursorPosY)
 			StringDrawSpeedVolChange();
 
-		if (GameMenuBasePosY * 6 == cursor_y)
+		if (GameMenuBasePosY * 6 == ConfigCursorPosY)
 			MouseAndKeyMoveChange();
 
-		if (GameMenuBasePosY * 7 == cursor_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (GameMenuBasePosY * 7 == ConfigCursorPosY && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			if (IDYES == MessageBoxYesNo("戻りますか？")) {
 				ConfigFlag = 0;
 			}
@@ -236,30 +236,30 @@ namespace {
 //コンフィグ読込関数
 int ConfigLoad() noexcept {
 
-	FILE *fp;
+	FILE *Fp;
 
-	fopen_s(&fp, "DATA/SAVE/Config.dat", "rb");
-	if (nullptr == fp) {
+	fopen_s(&Fp, "DATA/SAVE/Config.dat", "rb");
+	if (nullptr == Fp) {
 		return 0;
 	}
 
-	fread(&ConfigData, sizeof(ConfigData_t), 1, fp);
-	fclose(fp);
+	fread(&ConfigData, sizeof(ConfigData_t), 1, Fp);
+	fclose(Fp);
 	return 0;
 }
 
 //コンフィグ保存関数
 int ConfigSave() noexcept {
-	FILE* fp;
+	FILE* Fp;
 
-	fopen_s(&fp, "DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
+	fopen_s(&Fp, "DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
 
-	if (nullptr == fp) {//エラーが起きたらnullptrを返す
+	if (nullptr == Fp) {//エラーが起きたらnullptrを返す
 		return 0;
 	}
 
-	fwrite(&ConfigData, sizeof(ConfigData_t), 1, fp); // ConfigData_t構造体の中身を出力
-	fclose(fp);
+	fwrite(&ConfigData, sizeof(ConfigData_t), 1, Fp); // ConfigData_t構造体の中身を出力
+	fclose(Fp);
 
 	return 0;
 }
@@ -271,13 +271,13 @@ void ConfigMenuLoop() noexcept {
 
 		std::int32_t ConfigFlag = 1;
 
-		std::int32_t config_y = GameMenuBasePosY;
+		std::int32_t ConfigCursorPosY = GameMenuBasePosY;
 
 		while (ConfigFlag == 1) {
 			ScreenClear();
-			ConfigMenuDraw(config_y);
-			ConfigMenuKeyMove(config_y);
-			ConfigMenuSelect(config_y, ConfigFlag);
+			ConfigMenuDraw(ConfigCursorPosY);
+			ConfigMenuKeyMove(ConfigCursorPosY);
+			ConfigMenuSelect(ConfigCursorPosY, ConfigFlag);
 		}
 	}
 }
