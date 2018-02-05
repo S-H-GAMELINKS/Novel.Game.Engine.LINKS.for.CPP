@@ -42,7 +42,7 @@ constexpr int SaveBasePosY = 100;
 constexpr int SaveDataCursorMove = 100;
 constexpr int SaveDataPosButtom = SaveBasePosY + SaveDataCursorMove * SaveDataSlotNum;
 constexpr int SaveSnapDrawPosX = 150;
-constexpr int save_name_pos_x = 250;
+constexpr int SaveDataNamePosX = 250;
 
 //•¶Žš•`‰æ‘¬“xŠÖŒW
 constexpr int StringSpeedSkip = 10;

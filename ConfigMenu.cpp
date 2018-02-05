@@ -32,16 +32,16 @@ namespace {
 
 		//各項目の描画
 		for (std::int32_t i = 0; i < 7; i++)
-			DxLib::DrawString(save_name_pos_x, GameMenuBasePosY * (i + 1), ConfigMenuItem[i], 255);
+			DxLib::DrawString(SaveDataNamePosX, GameMenuBasePosY * (i + 1), ConfigMenuItem[i], 255);
 
-		DxLib::DrawString(save_name_pos_x - CursorMove, cursor_y, "■", 255);
+		DxLib::DrawString(SaveDataNamePosX - CursorMove, cursor_y, "■", 255);
 
-		DxLib::DrawFormatString(save_name_pos_x + CursorMove * 5, GameMenuBasePosY, 255, "%d", ConfigData.bgm_vol);
-		DxLib::DrawFormatString(save_name_pos_x + CursorMove * 5, GameMenuBasePosY * 2, 255, "%d", ConfigData.se_vol);
-		DxLib::DrawFormatString(save_name_pos_x + CursorMove * 5, GameMenuBasePosY * 3, 255, "%d", ConfigData.auto_speed);
-		DxLib::DrawFormatString(save_name_pos_x + CursorMove * 5, GameMenuBasePosY * 4, 255, "%d", ConfigData.skip_speed);
-		DxLib::DrawFormatString(save_name_pos_x + CursorMove * 5, GameMenuBasePosY * 5, 255, "%d", ConfigData.string_speed);
-		DxLib::DrawString(save_name_pos_x + CursorMove * 8, GameMenuBasePosY * 6, ((1 == ConfigData.mouse_key_move) ? "マウス操作" : "キー操作"), 255);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY, 255, "%d", ConfigData.bgm_vol);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 2, 255, "%d", ConfigData.se_vol);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 3, 255, "%d", ConfigData.auto_speed);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 4, 255, "%d", ConfigData.skip_speed);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 5, 255, "%d", ConfigData.string_speed);
+		DxLib::DrawString(SaveDataNamePosX + CursorMove * 8, GameMenuBasePosY * 6, ((1 == ConfigData.mouse_key_move) ? "マウス操作" : "キー操作"), 255);
 	}
 
 	//コンフィグ画面キー操作

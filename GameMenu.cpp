@@ -39,7 +39,7 @@ namespace {
 
 		//各メニュー項目の描画
 		for (std::int32_t i = 0; i < 12; i++)
-			DxLib::DrawString(save_name_pos_x, GameMenuBasePosY * (i + 1), GameMenuItem[i], color);
+			DxLib::DrawString(SaveDataNamePosX, GameMenuBasePosY * (i + 1), GameMenuItem[i], color);
 
 		//カーソルの描画
 		DxLib::DrawString(SaveBasePosX - (CursorMove * 6), cursor_y, "■", color);

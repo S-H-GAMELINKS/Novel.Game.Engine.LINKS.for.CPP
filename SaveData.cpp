@@ -68,11 +68,11 @@ namespace {
 		DxLib::DrawString(SaveBasePosX, cursor_y, "■", color);
 
 		//セーブデータ名描画
-		DxLib::DrawString(save_name_pos_x, SaveBasePosY, "セーブデータ1", color);
-		DxLib::DrawString(save_name_pos_x, SaveBasePosY * 2, "セーブデータ2", color);
-		DxLib::DrawString(save_name_pos_x, SaveBasePosY * 3, "セーブデータ3", color);
+		DxLib::DrawString(SaveDataNamePosX, SaveBasePosY, "セーブデータ1", color);
+		DxLib::DrawString(SaveDataNamePosX, SaveBasePosY * 2, "セーブデータ2", color);
+		DxLib::DrawString(SaveDataNamePosX, SaveBasePosY * 3, "セーブデータ3", color);
 
-		DxLib::DrawString(save_name_pos_x - CursorMove, SaveBasePosY * 4, "戻る", color);
+		DxLib::DrawString(SaveDataNamePosX - CursorMove, SaveBasePosY * 4, "戻る", color);
 	}
 
 	//セーブ/ロードメニューキー操作
