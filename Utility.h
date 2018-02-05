@@ -11,12 +11,12 @@ int MessageBoxOk(LPCTSTR lpText) noexcept;
 void ScreenClear() noexcept;
 
 //ゲーム終了確認ウインドウ
-void GameEndMessageBox();
+void GameEndMessageBox() noexcept;
 
 //各種ショートカットキー
-void ShortCutKey();
+void ShortCutKey() noexcept;
 
 //タイトルムービー処理
-void TitleMoviePlay();
+void TitleMoviePlay() noexcept;
 
 #endif // !UTILITY_H_

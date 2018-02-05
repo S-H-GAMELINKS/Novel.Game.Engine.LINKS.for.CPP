@@ -35,12 +35,12 @@ namespace {
 
 	//処理停止時間計算関数
 	template <typename T>
-	decltype(auto) WaitTimeCalc(const T var) {
+	decltype(auto) WaitTimeCalc(const T var) noexcept {
 		return var * var;
 	}
 
 	//ゲーム画面再描画処理
-	void DrawGameScreenAgain() {
+	void DrawGameScreenAgain() noexcept {
 		Sp = SpTemp;
 		Cp = 0;
 		DrawPointX = 0;
@@ -81,7 +81,7 @@ void ScreenClear() noexcept {
 }
 
 //ゲーム終了確認ウインドウ
-void GameEndMessageBox() {
+void GameEndMessageBox() noexcept {
 
 		if (IDYES == MessageBoxYesNo("終了しますか？"))
 			EndFlag = 99;
@@ -93,7 +93,7 @@ void GameEndMessageBox() {
 }
 
 //スクリーンショット取得関数
-void ScreenShotGet() {
+void ScreenShotGet() noexcept {
 	if (IDYES == MessageBoxYesNo("スクリーンショットを取得しますか？")) {
 		static std::int32_t ScreenShotCount;
 		std::string FileName = "DATA/SCREENSHOT/SCREENSHOT";
@@ -106,7 +106,7 @@ void ScreenShotGet() {
 }
 
 //各種ショートカットキー
-void ShortCutKey() {
+void ShortCutKey() noexcept {
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1) {
 		SpTemp = Sp;
@@ -207,7 +207,7 @@ void ShortCutKey() {
 }
 
 //タイトルムービー処理
-void TitleMoviePlay() {
+void TitleMoviePlay() noexcept {
 	PlayMovie("DATA/MOVIE/OP.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	ScreenClear();
 }
