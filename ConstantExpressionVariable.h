@@ -8,7 +8,7 @@ constexpr int MaterialMax = 99;
 constexpr int MojiSize = 21;
 
 //タイトルメニュー位置
-constexpr int title_menu_y = 300;
+constexpr int TitleMenuPosY = 300;
 constexpr int title_menu_x = 430;
 constexpr int title_menu_load_y = 330;
 constexpr int title_menu_config_y = 360;

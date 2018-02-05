@@ -27,17 +27,17 @@ namespace {
 
 		//各メニュー描画
 		for (std::int32_t i = 0; i < 6; i++)
-			DxLib::DrawString(title_menu_x, title_menu_y + 30 * i, TitleMenuItem[i], Color);
+			DxLib::DrawString(title_menu_x, TitleMenuPosY + 30 * i, TitleMenuItem[i], Color);
 	}
 
 	//タイトルメニューのキー操作
 	void GameTitleMenuKeyMove(std::int32_t& CursorPosY) {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			CursorPosY = (title_menu_exit_y == CursorPosY) ? title_menu_y : CursorPosY + CursorMove;
+			CursorPosY = (title_menu_exit_y == CursorPosY) ? TitleMenuPosY : CursorPosY + CursorMove;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			CursorPosY = (title_menu_y == CursorPosY) ? title_menu_exit_y : CursorPosY - CursorMove;
+			CursorPosY = (TitleMenuPosY == CursorPosY) ? title_menu_exit_y : CursorPosY - CursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
@@ -51,7 +51,7 @@ namespace {
 	//タイトルメニューの項目選択関数
 	void GameTitleMenuChoice(const std::int32_t& CursorPosY) {
 
-		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == title_menu_y)
+		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuPosY)
 			EndFlag = 1;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == title_menu_load_y)
