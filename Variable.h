@@ -19,7 +19,7 @@ int EndFlag = 0;	// I—¹ƒtƒ‰ƒO
 static std::vector<std::string> Script;
 
 //”wŒi‰æ‘œŠi”[•Ï”
-std::array<int, MaterialMax> BackGround;
+static std::array<int, MaterialMax> BackGround;
 
 //—§‚¿ŠGŠi”[•Ï”
 static std::array<int, MaterialMax> Character;
