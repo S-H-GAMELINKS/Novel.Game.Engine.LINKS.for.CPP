@@ -17,7 +17,7 @@
 
 
 //DxLib初期化前処理
-void DxLibInitPreProccessing() {
+void DxLibInitPreProccessing() noexcept {
 	//ログの抽出
 	DxLib::SetOutApplicationLogValidFlag(FALSE);
 
@@ -41,7 +41,7 @@ void DxLibInitPreProccessing() {
 }
 
 //DxLib初期化後処理
-void DxLibInitPostProccessing() {
+void DxLibInitPostProccessing() noexcept {
 	// フォントのサイズセット
 	DxLib::SetFontSize(MojiSize);
 
@@ -62,7 +62,7 @@ void DxLibInitPostProccessing() {
 }
 
 //ゲーム中のループ
-void GamePlayLoop(const int RouteNumber) {
+void GamePlayLoop(const int RouteNumber) noexcept {
 
 	ScriptRead(Script, EndFlag);
 
