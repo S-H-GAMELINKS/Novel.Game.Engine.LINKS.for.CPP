@@ -13,7 +13,7 @@ constexpr int TitleMenuPosX = 430;
 constexpr int TitleMenuLoadPosY = 330;
 constexpr int TitleMenuConfigPosY = 360;
 constexpr int TitleMenuQuickLoadPosY = 390;
-constexpr int title_menu_continue_y = 420;
+constexpr int TitleMenuContinuePosY = 420;
 constexpr int title_menu_exit_y = 450;
 
 //タイトルメニューのカーソル位置
