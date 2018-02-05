@@ -28,7 +28,7 @@ namespace {
 	};
 
 	//コンフィグ画面描画
-	void ConfigMenuDraw(std::int32_t& cursor_y) {
+	void ConfigMenuDraw(std::int32_t& cursor_y) noexcept {
 
 		//各項目の描画
 		for (std::int32_t i = 0; i < 7; i++)
@@ -45,7 +45,7 @@ namespace {
 	}
 
 	//コンフィグ画面キー操作
-	void ConfigMenuKeyMove(std::int32_t& cursor_y) {
+	void ConfigMenuKeyMove(std::int32_t& cursor_y) noexcept {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
 			cursor_y = (GameMenuBasePosY * 7 == cursor_y) ? GameMenuBasePosY : cursor_y + CursorMove;
 
@@ -56,7 +56,7 @@ namespace {
 	}
 
 	//BGM音量調節
-	void BackGroundMusicVolChange() {
+	void BackGroundMusicVolChange() noexcept {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
@@ -83,7 +83,7 @@ namespace {
 	}
 
 	//SE音量調節
-	void SoundEffectVolChange() {
+	void SoundEffectVolChange() noexcept {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
@@ -110,7 +110,7 @@ namespace {
 	}
 
 	//オート速度調節
-	void AutoSpeedVolChange() {
+	void AutoSpeedVolChange() noexcept {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
@@ -137,7 +137,7 @@ namespace {
 	}
 
 	//スキップ速度調節
-	void SkipSpeedVolChange() {
+	void SkipSpeedVolChange() noexcept {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
@@ -164,7 +164,7 @@ namespace {
 	}
 
 	//文字列描画速度調節
-	void StringDrawSpeedVolChange() {
+	void StringDrawSpeedVolChange() noexcept {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
@@ -191,7 +191,7 @@ namespace {
 	}
 
 	// マウス操作/キー操作切り替え
-	void MouseAndKeyMoveChange() {
+	void MouseAndKeyMoveChange() noexcept {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 			ConfigData.mouse_key_move = 1;
@@ -204,7 +204,7 @@ namespace {
 	}
 
 	//コンフィグ画面選択処理
-	void ConfigMenuSelect(std::int32_t& cursor_y, std::int32_t& ConfigFlag) {
+	void ConfigMenuSelect(std::int32_t& cursor_y, std::int32_t& ConfigFlag) noexcept {
 
 		if (GameMenuBasePosY == cursor_y)
 			BackGroundMusicVolChange();
@@ -234,7 +234,7 @@ namespace {
 }
 
 //コンフィグ読込関数
-int ConfigLoad() {
+int ConfigLoad() noexcept {
 
 	FILE *fp;
 
@@ -249,7 +249,7 @@ int ConfigLoad() {
 }
 
 //コンフィグ保存関数
-int ConfigSave() {
+int ConfigSave() noexcept {
 	FILE* fp;
 
 	fopen_s(&fp, "DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
@@ -265,7 +265,7 @@ int ConfigSave() {
 }
 
 //コンフィグ画面ループ
-void ConfigMenuLoop() {
+void ConfigMenuLoop() noexcept {
 
 	if (IDYES == MessageBoxYesNo("コンフィグ画面に移行しますか？")) {
 
