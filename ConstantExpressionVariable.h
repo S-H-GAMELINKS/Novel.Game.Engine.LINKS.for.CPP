@@ -30,7 +30,7 @@ constexpr int CursorMove = 30;
 constexpr int WaitKeyTaskTime = 70;
 
 //ゲームプレイ時の遅延時間
-constexpr int wait_game_time = 3;
+constexpr int WaitGameTime = 3;
 
 //ゲームメニュー位置関係
 constexpr int game_menu_base_pos_y = 30;
