@@ -51,7 +51,7 @@ constexpr int StringSpeedWait = 600;
 
 //—§‚¿ŠGˆÊ’uŠÖŒW
 constexpr int CharacterPosY = 130;
-constexpr int character_pos_x = 150;
+constexpr int CharacterPosX = 150;
 constexpr int character_graph_size_x = 300;
 constexpr int character_graph_size_y = 400;
 
