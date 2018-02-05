@@ -2,9 +2,9 @@
 #define BACK_LOG_H_
 
 //バックログ取得
-void BackLogGet();
+void BackLogGet() noexcept;
 
 //バックログループ
-void BackLogLoop();
+void BackLogLoop() noexcept;
 
 #endif // !BACK_LOG_H_

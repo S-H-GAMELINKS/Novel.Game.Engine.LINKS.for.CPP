@@ -13,14 +13,14 @@ namespace BackLog {
 	std::vector<std::int32_t> BackLog;
 
 	//バックログのナンバー表示
-	void BackLogNumberDraw(const std::int32_t& Num) {
+	void BackLogNumberDraw(const std::int32_t& Num) noexcept {
 		std::string name = "バックログ";
 		name += std::to_string(Num + 1);
 		DxLib::DrawString(0, 400, name.c_str(), DxLib::GetColor(255, 255, 255));
 	}
 
 	//バックログの描画
-	void BackLogDraw(std::int32_t& Num) {
+	void BackLogDraw(std::int32_t& Num) noexcept {
 
 		if (Num < BackLogCount) {
 			DxLib::DrawGraph(0, 0, BackLog[BackLogCount - Num - 1], TRUE);
@@ -35,7 +35,7 @@ namespace BackLog {
 	}
 
 	//バックログ時のキー操作
-	void BackLogKeyMove(std::int32_t& Num, std::int32_t& BackLogFlag) {
+	void BackLogKeyMove(std::int32_t& Num, std::int32_t& BackLogFlag) noexcept {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
 			Num = (Num < BackLogCount) ? Num + 1 : Num;
@@ -51,7 +51,7 @@ namespace BackLog {
 }
 
 //バックログ取得
-void BackLogGet() {
+void BackLogGet() noexcept {
 	DxLib::SetDrawScreen(DX_SCREEN_BACK);
 	DxLib::SaveDrawScreenToPNG(0, 0, 640, 480, "DATA/BACKLOG/BACKLOG1.png");
 	++BackLog::BackLogCount;
@@ -60,7 +60,7 @@ void BackLogGet() {
 }
 
 //バックログループ
-void BackLogLoop() {
+void BackLogLoop() noexcept {
 
 	if (IDYES == MessageBoxYesNo("バックログを表示しますか？")) {
 
