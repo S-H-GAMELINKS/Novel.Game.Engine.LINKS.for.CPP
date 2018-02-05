@@ -34,10 +34,10 @@ namespace {
 	void GameTitleMenuKeyMove(std::int32_t& CursorPosY) {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			CursorPosY = (title_menu_exit_y == CursorPosY) ? TitleMenuPosY : CursorPosY + CursorMove;
+			CursorPosY = (TitleMenuExitPosY == CursorPosY) ? TitleMenuPosY : CursorPosY + CursorMove;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			CursorPosY = (TitleMenuPosY == CursorPosY) ? title_menu_exit_y : CursorPosY - CursorMove;
+			CursorPosY = (TitleMenuPosY == CursorPosY) ? TitleMenuExitPosY : CursorPosY - CursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
@@ -66,7 +66,7 @@ namespace {
 		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuContinuePosY)
 			ContinueSaveDataLoad();
 
-		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == title_menu_exit_y)
+		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuExitPosY)
 			GameTitleMenuExit();
 	}
 }
