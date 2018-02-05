@@ -34,8 +34,7 @@ namespace ScriptTask {
 	char OneMojiBuf[3];	// １文字分一時記憶配列
 
 	// 改行関数
-	void Kaigyou()
-	{
+	void Kaigyou() noexcept {
 		int TempGraph;
 
 		// 描画行位置を一つ下げる
@@ -68,7 +67,7 @@ namespace ScriptTask {
 	}
 
 	//文字列描画速度
-	void DrawScriptSpeed() {
+	void DrawScriptSpeed() noexcept {
 		switch (SkipAndAutoFlag) {
 		case 0:
 			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedAuto * ConfigData.string_speed / 100));
@@ -85,7 +84,7 @@ namespace ScriptTask {
 	}
 
 	//文字列描画関数
-	void DrawScript(const std::vector<std::string>& Script) {
+	void DrawScript(const std::vector<std::string>& Script) noexcept {
 		// １文字分抜き出す
 		OneMojiBuf[0] = Script[Sp][Cp];
 		OneMojiBuf[1] = Script[Sp][Cp + 1];
@@ -105,14 +104,14 @@ namespace ScriptTask {
 	}
 
 	//背景画像描画関数
-	void DrawBackGround(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround) {
+	void DrawBackGround(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround) noexcept {
 		Cp++;
 		BackGroundHandle = BackGround[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 	}
 
 	//立ち絵描画関数
-	void DrawCharacter(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& Character) {
+	void DrawCharacter(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& Character) noexcept {
 		Cp++;
 
 		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, CharacterGraphSizeHeight, BackGroundHandle));
@@ -123,7 +122,7 @@ namespace ScriptTask {
 	}
 
 	//BGM再生関数
-	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGroundMusic) {
+	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGroundMusic) noexcept {
 
 		DxLib::ChangeVolumeSoundMem(255 * ConfigData.bgm_vol / 100, BackGroundMusicHandle);
 		
@@ -137,7 +136,7 @@ namespace ScriptTask {
 	}
 
 	//効果音再生関数
-	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& SoundEffect) {
+	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& SoundEffect) noexcept {
 
 		DxLib::ChangeVolumeSoundMem(255 * ConfigData.se_vol / 100, SoundEffectHandle);
 
@@ -152,13 +151,13 @@ namespace ScriptTask {
 
 	//動画再生関数
 	template <typename T>
-	void PlayMovie(const std::vector<T>& Script, std::array<T, MaterialMax> Movie) {
+	void PlayMovie(const std::vector<T>& Script, std::array<T, MaterialMax> Movie) noexcept {
 		Cp++;
 		DxLib::PlayMovie(Movie[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
 
 	//画面クリア処理関数
-	void ClearScreen() {
+	void ClearScreen() noexcept {
 		BackLogGet();
 		ClearDrawScreen();
 		BackGroundHandle = 0;
@@ -169,7 +168,7 @@ namespace ScriptTask {
 
 	//コメント処理関数
 	template <typename T>
-	void Comment(const std::vector<T>& Script) {
+	void Comment(const std::vector<T>& Script) noexcept {
 		if (Script[Sp][Cp] == '/') {
 			Cp = 0;
 			Sp++;
@@ -177,13 +176,13 @@ namespace ScriptTask {
 	}
 
 	//立ち絵削除処理関数
-	void RemoveCharacterGraph() {
+	void RemoveCharacterGraph() noexcept {
 		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, CharacterGraphSizeHeight, BackGroundHandle));
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, *CharacterDummy, true);
 	}
 
 	//クリック待ち処理関数
-	void ClickWait() {
+	void ClickWait() noexcept {
 		if (SkipAndAutoFlag == 0) {
 			DxLib::WaitKey();
 			if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1)
@@ -202,7 +201,7 @@ namespace ScriptTask {
 }
 
 //スクリプトタグ処理関数
-void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround, const std::array<int, MaterialMax>& Character, const std::array<int, MaterialMax>& BackGroundMusic, const std::array<int, MaterialMax>& SoundEffect, const std::array<std::string, MaterialMax>& Movie) {
+void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround, const std::array<int, MaterialMax>& Character, const std::array<int, MaterialMax>& BackGroundMusic, const std::array<int, MaterialMax>& SoundEffect, const std::array<std::string, MaterialMax>& Movie) noexcept {
 
 	switch (Script[Sp][Cp])
 	{
