@@ -72,7 +72,7 @@ namespace {
 		DxLib::DrawString(save_name_pos_x, save_base_pos_y * 2, "セーブデータ2", color);
 		DxLib::DrawString(save_name_pos_x, save_base_pos_y * 3, "セーブデータ3", color);
 
-		DxLib::DrawString(save_name_pos_x - cursor_move, save_base_pos_y * 4, "戻る", color);
+		DxLib::DrawString(save_name_pos_x - CursorMove, save_base_pos_y * 4, "戻る", color);
 	}
 
 	//セーブ/ロードメニューキー操作

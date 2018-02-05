@@ -34,23 +34,23 @@ namespace {
 		for (std::int32_t i = 0; i < 7; i++)
 			DxLib::DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), ConfigMenuItem[i], 255);
 
-		DxLib::DrawString(save_name_pos_x - cursor_move, cursor_y, "■", 255);
+		DxLib::DrawString(save_name_pos_x - CursorMove, cursor_y, "■", 255);
 
-		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y, 255, "%d", ConfigData.bgm_vol);
-		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 2, 255, "%d", ConfigData.se_vol);
-		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 3, 255, "%d", ConfigData.auto_speed);
-		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 4, 255, "%d", ConfigData.skip_speed);
-		DxLib::DrawFormatString(save_name_pos_x + cursor_move * 5, game_menu_base_pos_y * 5, 255, "%d", ConfigData.string_speed);
-		DxLib::DrawString(save_name_pos_x + cursor_move * 8, game_menu_base_pos_y * 6, ((1 == ConfigData.mouse_key_move) ? "マウス操作" : "キー操作"), 255);
+		DxLib::DrawFormatString(save_name_pos_x + CursorMove * 5, game_menu_base_pos_y, 255, "%d", ConfigData.bgm_vol);
+		DxLib::DrawFormatString(save_name_pos_x + CursorMove * 5, game_menu_base_pos_y * 2, 255, "%d", ConfigData.se_vol);
+		DxLib::DrawFormatString(save_name_pos_x + CursorMove * 5, game_menu_base_pos_y * 3, 255, "%d", ConfigData.auto_speed);
+		DxLib::DrawFormatString(save_name_pos_x + CursorMove * 5, game_menu_base_pos_y * 4, 255, "%d", ConfigData.skip_speed);
+		DxLib::DrawFormatString(save_name_pos_x + CursorMove * 5, game_menu_base_pos_y * 5, 255, "%d", ConfigData.string_speed);
+		DxLib::DrawString(save_name_pos_x + CursorMove * 8, game_menu_base_pos_y * 6, ((1 == ConfigData.mouse_key_move) ? "マウス操作" : "キー操作"), 255);
 	}
 
 	//コンフィグ画面キー操作
 	void ConfigMenuKeyMove(std::int32_t& cursor_y) {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			cursor_y = (game_menu_base_pos_y * 7 == cursor_y) ? game_menu_base_pos_y : cursor_y + cursor_move;
+			cursor_y = (game_menu_base_pos_y * 7 == cursor_y) ? game_menu_base_pos_y : cursor_y + CursorMove;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			cursor_y = (game_menu_base_pos_y == cursor_y) ? game_menu_base_pos_y * 7 : cursor_y - cursor_move;
+			cursor_y = (game_menu_base_pos_y == cursor_y) ? game_menu_base_pos_y * 7 : cursor_y - CursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}

@@ -39,7 +39,7 @@ namespace {
 		DxLib::DrawString(choice_pos_x, choice_y, "Å°", color);
 
 		for (auto&& i : { 0, 1 })
-			DxLib::DrawString(choice_pos_x + cursor_move, choice_pos_y[i], Choice[i].c_str(), color);
+			DxLib::DrawString(choice_pos_x + CursorMove, choice_pos_y[i], Choice[i].c_str(), color);
 	}
 
 	//ëIëéàì«çûä÷êî
@@ -56,10 +56,10 @@ namespace {
 	void ChoiceKeyMove(std::int32_t& cursor_y) {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			cursor_y = (choice_pos_y[1] == cursor_y) ? choice_pos_y[0] : cursor_y + cursor_move;
+			cursor_y = (choice_pos_y[1] == cursor_y) ? choice_pos_y[0] : cursor_y + CursorMove;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			cursor_y = (choice_pos_y[0] == cursor_y) ? choice_pos_y[1] : cursor_y - cursor_move;
+			cursor_y = (choice_pos_y[0] == cursor_y) ? choice_pos_y[1] : cursor_y - CursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}

@@ -34,10 +34,10 @@ namespace {
 	void GameTitleMenuKeyMove(std::int32_t& CursorPosY) {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			CursorPosY = (title_menu_exit_y == CursorPosY) ? title_menu_y : CursorPosY + cursor_move;
+			CursorPosY = (title_menu_exit_y == CursorPosY) ? title_menu_y : CursorPosY + CursorMove;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			CursorPosY = (title_menu_y == CursorPosY) ? title_menu_exit_y : CursorPosY - cursor_move;
+			CursorPosY = (title_menu_y == CursorPosY) ? title_menu_exit_y : CursorPosY - CursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
 	}
