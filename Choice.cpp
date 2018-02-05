@@ -36,10 +36,10 @@ namespace {
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
 
 		//カーソルの描画
-		DxLib::DrawString(choice_pos_x, choice_y, "■", color);
+		DxLib::DrawString(ChoicePosX, choice_y, "■", color);
 
 		for (auto&& i : { 0, 1 })
-			DxLib::DrawString(choice_pos_x + CursorMove, choice_pos_y[i], Choice[i].c_str(), color);
+			DxLib::DrawString(ChoicePosX + CursorMove, choice_pos_y[i], Choice[i].c_str(), color);
 	}
 
 	//選択肢読込関数
