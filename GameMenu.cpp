@@ -20,7 +20,7 @@ extern int SP, CP;
 extern int DrawPointX, DrawPointY;
 
 //tempデータ
-extern int EndFlagTemp, SP_Temp;
+extern int EndFlagTemp, SpTemp;
 
 //各種素材ハンドル
 extern std::int32_t BackGroundHandle;
@@ -59,7 +59,7 @@ namespace {
 	//ゲームへ戻る
 	void GameMenuBackToGamePlay() {
 		EndFlag = EndFlagTemp;
-		SP = SP_Temp;
+		SP = SpTemp;
 		DrawPointX = 0;
 		DrawPointY = 0;
 		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);

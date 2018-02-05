@@ -29,7 +29,7 @@ extern std::int32_t SoundEffectHandle;
 extern int DrawPointX, DrawPointY;
 
 //tempデータ
-extern int EndFlagTemp, SP_Temp;
+extern int EndFlagTemp, SpTemp;
 
 namespace {
 
@@ -41,7 +41,7 @@ namespace {
 
 	//ゲーム画面再描画処理
 	void DrawGameScreenAgain() {
-		SP = SP_Temp;
+		SP = SpTemp;
 		CP = 0;
 		DrawPointX = 0;
 		DrawPointY = 0;
@@ -109,55 +109,55 @@ void ScreenShotGet() {
 void ShortCutKey() {
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1) {
-		SP_Temp = SP;
+		SpTemp = SP;
 		SaveDataLoop(1);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1) {
-		SP_Temp = SP;
+		SpTemp = SP;
 		SaveDataLoop(2);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1) {
-		SP_Temp = SP;
+		SpTemp = SP;
 		SaveDataLoop(3);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1) {
-		SP_Temp = SP;
+		SpTemp = SP;
 		SkipAndAutoTask(3);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F5) == 1) {
-		SP_Temp = SP;
+		SpTemp = SP;
 		SkipAndAutoTask(1);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F6) == 1) {
-		SP_Temp = SP;
+		SpTemp = SP;
 		SkipAndAutoTask(2);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1) {
-		SP_Temp = SP;
+		SpTemp = SP;
 		SkipAndAutoTask(0);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1) {
-		SP_Temp = SP;
+		SpTemp = SP;
 		BackLogLoop();
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1) {
-		SP_Temp = SP;
+		SpTemp = SP;
 		ConfigMenuLoop();
 		DrawGameScreenAgain();
 	}
@@ -179,7 +179,7 @@ void ShortCutKey() {
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1) {
-		SP_Temp = SP;
+		SpTemp = SP;
 		QuickSaveDataSave();
 		DrawGameScreenAgain();
 	}
@@ -197,7 +197,7 @@ void ShortCutKey() {
 	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) {
 		SaveDataScreenShotGet();
 		EndFlagTemp = EndFlag;
-		SP_Temp = SP;
+		SpTemp = SP;
 		EndFlag = 17;
 	}
 

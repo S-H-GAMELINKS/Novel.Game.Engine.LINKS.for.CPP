@@ -41,7 +41,7 @@ std::int32_t SoundEffectHandle;
 std::int32_t GameTitleGraph;
 
 //画面変遷用Temp変数
-int EndFlagTemp, SP_Temp;
+int EndFlagTemp, SpTemp;
 
 // 既読スキップ/スキップ/オート変数
 int SkipAndAutoFlag = 0;

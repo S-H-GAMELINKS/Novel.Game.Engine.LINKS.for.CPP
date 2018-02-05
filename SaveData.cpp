@@ -22,7 +22,7 @@ extern int DrawPointX, DrawPointY;
 extern int EndFlag;
 
 //tempデータ
-extern int EndFlagTemp, SP_Temp;
+extern int EndFlagTemp, SpTemp;
 
 namespace {
 
@@ -100,7 +100,7 @@ namespace {
 
 		if (IDYES == MessageBoxYesNo(Message)) {
 
-			SaveData_t SaveData = { EndFlagTemp, SP_Temp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
+			SaveData_t SaveData = { EndFlagTemp, SpTemp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
 
 			FILE *fp;
 
@@ -259,7 +259,7 @@ int QuickSaveDataSave() {
 
 	if (IDYES == MessageBoxYesNo("クイックセーブを実行しますか？")) {
 
-		SaveData_t SaveData = { EndFlag, SP_Temp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
+		SaveData_t SaveData = { EndFlag, SpTemp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
 
 		FILE *fp;
 
@@ -317,7 +317,7 @@ int QuickSaveDataLoad() {
 //セーブデータをセーブ(Continue)
 int ContinueSaveDataSave(const std::int32_t& RouteNum) {
 
-	SaveData_t SaveData = { RouteNum, SP_Temp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
+	SaveData_t SaveData = { RouteNum, SpTemp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
 
 	FILE *fp;
 
