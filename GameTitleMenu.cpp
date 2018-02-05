@@ -23,7 +23,7 @@ namespace {
 		DxLib::DrawGraph(0, 0, GameTitleGraph, TRUE);
 
 		//カーソルの描画
-		DxLib::DrawString(title_menu_cursor_x, CursorPosY, "■", Color);
+		DxLib::DrawString(TitleMenuCursorPosX, CursorPosY, "■", Color);
 
 		//各メニュー描画
 		for (std::int32_t i = 0; i < 6; i++)
