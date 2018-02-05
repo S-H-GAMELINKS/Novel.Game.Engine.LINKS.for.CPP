@@ -52,12 +52,12 @@ void SkipDataCheck(const std::int32_t& RouteNum) noexcept {
 int SkipDataLoad() noexcept {
 	SkipData_t Data;
 
-	FILE *fp;
-	fopen_s(&fp, "DATA/SAVE/SKIP_READ.dat", "rb");
-	if (nullptr == fp) {
+	FILE *Fp;
+	fopen_s(&Fp, "DATA/SAVE/SKIP_READ.dat", "rb");
+	if (nullptr == Fp) {
 		return 0;
 	}
-	fread(&Data, sizeof(SkipData_t), 1, fp);
+	fread(&Data, sizeof(SkipData_t), 1, Fp);
 
 	SkipData[0] = Data.LINKS;
 	SkipData[1] = Data.A;
@@ -75,7 +75,7 @@ int SkipDataLoad() noexcept {
 	SkipData[13] = Data.M;
 	SkipData[14] = Data.N;
 
-	fclose(fp);
+	fclose(Fp);
 	return 0;
 }
 
@@ -87,13 +87,13 @@ int SkipDataSave() noexcept {
 		SkipData[12], SkipData[13], SkipData[14]
 	};
 
-	FILE *fp;
-	fopen_s(&fp, "DATA/SAVE/SKIP_READ.dat", "wb");//バイナリファイルを開く
-	if (nullptr == fp) {//エラーが起きたらnullptrを返す
+	FILE *Fp;
+	fopen_s(&Fp, "DATA/SAVE/SKIP_READ.dat", "wb");//バイナリファイルを開く
+	if (nullptr == Fp) {//エラーが起きたらnullptrを返す
 		return 0;
 	}
-	fwrite(&Data, sizeof(SkipData_t), 1, fp); // SkipData_t構造体の中身を出力
-	fclose(fp);
+	fwrite(&Data, sizeof(SkipData_t), 1, Fp); // SkipData_t構造体の中身を出力
+	fclose(Fp);
 	return 0;
 }
 
