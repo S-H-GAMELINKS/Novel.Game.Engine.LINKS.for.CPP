@@ -30,7 +30,7 @@ const char* ChoiceScript[][2] = {
 namespace {
 
 	//選択肢描画関数
-	void DrawChoice(unsigned int color, std::int32_t& choice_y) {
+	void DrawChoice(unsigned int color, std::int32_t& choice_y) noexcept {
 
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
@@ -43,7 +43,7 @@ namespace {
 	}
 
 	//選択肢読込関数
-	void ChoiceRead() {
+	void ChoiceRead() noexcept {
 		if (1 <= EndFlag && EndFlag <= 7) {
 			for (std::size_t i : {0, 1}) {
 				std::ifstream file(ChoiceScript[EndFlag - 1][i], std::ios_base::in);
@@ -53,7 +53,7 @@ namespace {
 	}
 
 	//選択肢キー操作
-	void ChoiceKeyMove(std::int32_t& cursor_y) {
+	void ChoiceKeyMove(std::int32_t& cursor_y) noexcept {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
 			cursor_y = (ChoicePosY[1] == cursor_y) ? ChoicePosY[0] : cursor_y + CursorMove;
@@ -65,7 +65,7 @@ namespace {
 	}
 
 	//選択肢(↑)選択時処理
-	void ChoiceSelectUp() {
+	void ChoiceSelectUp() noexcept {
 		if (1 <= EndFlag && EndFlag <= 7) {
 			BackLogGet();
 			EndFlag *= 2;
@@ -73,7 +73,7 @@ namespace {
 	}
 
 	//選択肢(↑)選択時処理
-	void ChoiceSelectDown() {
+	void ChoiceSelectDown() noexcept {
 		if (1 <= EndFlag && EndFlag <= 7) {
 			BackLogGet();
 			EndFlag = EndFlag * 2 + 1;
@@ -81,7 +81,7 @@ namespace {
 	}
 
 	//選択肢の選択されたかをチェック
-	void ChoiceSelectCheck(std::int32_t cursor_y) {
+	void ChoiceSelectCheck(std::int32_t cursor_y) noexcept {
 
 		if (cursor_y == ChoicePosY[0] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			ChoiceSelectUp();
@@ -96,7 +96,7 @@ namespace {
 }
 
 //選択肢処理関数
-void ChoiceSelect(int RoutteNumber) {
+void ChoiceSelect(int RoutteNumber) noexcept {
 
 	ChoiceRead();
 
