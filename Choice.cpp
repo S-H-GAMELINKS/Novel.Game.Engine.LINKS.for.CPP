@@ -30,36 +30,36 @@ const char* ChoiceScript[][2] = {
 namespace {
 
 	//選択肢描画関数
-	void DrawChoice(unsigned int color, std::int32_t& choice_y) noexcept {
+	void DrawChoice(unsigned int Color, std::int32_t& ChoiceCursorPosY) noexcept {
 
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
 
 		//カーソルの描画
-		DxLib::DrawString(ChoicePosX, choice_y, "■", color);
+		DxLib::DrawString(ChoicePosX, ChoiceCursorPosY, "■", Color);
 
 		for (auto&& i : { 0, 1 })
-			DxLib::DrawString(ChoicePosX + CursorMove, ChoicePosY[i], Choice[i].c_str(), color);
+			DxLib::DrawString(ChoicePosX + CursorMove, ChoicePosY[i], Choice[i].c_str(), Color);
 	}
 
 	//選択肢読込関数
 	void ChoiceRead() noexcept {
 		if (1 <= EndFlag && EndFlag <= 7) {
 			for (std::size_t i : {0, 1}) {
-				std::ifstream file(ChoiceScript[EndFlag - 1][i], std::ios_base::in);
-				std::getline(file, Choice[i]);
+				std::ifstream File(ChoiceScript[EndFlag - 1][i], std::ios_base::in);
+				std::getline(File, Choice[i]);
 			}
 		}
 	}
 
 	//選択肢キー操作
-	void ChoiceKeyMove(std::int32_t& cursor_y) noexcept {
+	void ChoiceKeyMove(std::int32_t& ChoiceCursorPosY) noexcept {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			cursor_y = (ChoicePosY[1] == cursor_y) ? ChoicePosY[0] : cursor_y + CursorMove;
+			ChoiceCursorPosY = (ChoicePosY[1] == ChoiceCursorPosY) ? ChoicePosY[0] : ChoiceCursorPosY + CursorMove;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			cursor_y = (ChoicePosY[0] == cursor_y) ? ChoicePosY[1] : cursor_y - CursorMove;
+			ChoiceCursorPosY = (ChoicePosY[0] == ChoiceCursorPosY) ? ChoicePosY[1] : ChoiceCursorPosY - CursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
@@ -81,14 +81,14 @@ namespace {
 	}
 
 	//選択肢の選択されたかをチェック
-	void ChoiceSelectCheck(std::int32_t cursor_y) noexcept {
+	void ChoiceSelectCheck(std::int32_t &ChoiceCursorPosY) noexcept {
 
-		if (cursor_y == ChoicePosY[0] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (ChoiceCursorPosY == ChoicePosY[0] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			ChoiceSelectUp();
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
-		if (cursor_y == ChoicePosY[1] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (ChoiceCursorPosY == ChoicePosY[1] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			ChoiceSelectDown();
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
@@ -100,13 +100,13 @@ void ChoiceSelect(int RoutteNumber) noexcept {
 
 	ChoiceRead();
 
-	std::int32_t cursor_y = ChoicePosY[0];
-	unsigned int color = DxLib::GetColor(255, 255, 255);
+	std::int32_t ChoiceCursorPosY = ChoicePosY[0];
+	unsigned int Color = DxLib::GetColor(255, 255, 255);
 
 	while (EndFlag == RoutteNumber) {
-		DrawChoice(color, cursor_y);
-		ChoiceKeyMove(cursor_y);
-		ChoiceSelectCheck(cursor_y);
+		DrawChoice(Color, ChoiceCursorPosY);
+		ChoiceKeyMove(ChoiceCursorPosY);
+		ChoiceSelectCheck(ChoiceCursorPosY);
 		ScreenClear();
 		ShortCutKey();
 
