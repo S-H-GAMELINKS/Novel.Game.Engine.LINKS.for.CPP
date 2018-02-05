@@ -45,7 +45,7 @@ constexpr int save_snap_draw_pos_x = 150;
 constexpr int save_name_pos_x = 250;
 
 //•¶Žš•`‰æ‘¬“xŠÖŒW
-constexpr int string_speed_skip = 10;
+constexpr int StringSpeedSkip = 10;
 constexpr int string_speed_auto = 30;
 constexpr int string_speed_wait = 600;
 

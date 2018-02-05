@@ -75,7 +75,7 @@ namespace ScriptTask {
 			break;
 
 		case 1:
-			std::this_thread::sleep_for(std::chrono::milliseconds(string_speed_skip * ConfigData.skip_speed / 100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedSkip * ConfigData.skip_speed / 100));
 			break;
 
 		case 2:
