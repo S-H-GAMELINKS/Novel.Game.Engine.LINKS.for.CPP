@@ -27,10 +27,10 @@ namespace {
 
 	//各種素材読込テンプレート関数
 	template <typename T, typename Func>
-	void MaterialLoadTemplate(std::array<T, MaterialMax>& Material, const std::string& FilePath, const std::string& FileFormat, Func&& loader) noexcept {
+	void MaterialLoadTemplate(std::array<T, MaterialMax>& Material, const std::string& FilePath, const std::string& FileFormat, Func&& Loader) noexcept {
 		for (std::int32_t i = 0; i < MaterialMax; i++) {
 			if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-				Material[i] = loader(MaterialPathCalc(i, FilePath, FileFormat));
+				Material[i] = Loader(MaterialPathCalc(i, FilePath, FileFormat));
 		}
 	}
 }
@@ -42,19 +42,19 @@ void MaterialLoad(std::array<int, MaterialMax>& BackGround, std::array<int, Mate
 	DxLib::SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
 
 	//背景画像読込関数
-	MaterialLoadTemplate(BackGround, "DATA/BACKGROUND/BG", ".png", [](const std::string& path) {return DxLib::LoadGraph(path.c_str()); });
+	MaterialLoadTemplate(BackGround, "DATA/BACKGROUND/BG", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
 
 	//立ち絵画像読込関数
-	MaterialLoadTemplate(Character, "DATA/CHARACTER/CHAR", ".png", [](const std::string& path) {return DxLib::LoadGraph(path.c_str()); });
+	MaterialLoadTemplate(Character, "DATA/CHARACTER/CHAR", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
 
 	//BGM読込関数
-	MaterialLoadTemplate(BackGroundMusic, "DATA/BACKGROUNDMUSIC/BGM", ".ogg", [](const std::string& path) {return DxLib::LoadSoundMem(path.c_str());});
+	MaterialLoadTemplate(BackGroundMusic, "DATA/BACKGROUNDMUSIC/BGM", ".ogg", [](const std::string& Path) {return DxLib::LoadSoundMem(Path.c_str());});
 
 	//SE読込関数
-	MaterialLoadTemplate(SoundEffect, "DATA/SOUNDEFFECT/SE", ".ogg", [](const std::string& path) {return DxLib::LoadSoundMem(path.c_str()); });
+	MaterialLoadTemplate(SoundEffect, "DATA/SOUNDEFFECT/SE", ".ogg", [](const std::string& Path) {return DxLib::LoadSoundMem(Path.c_str()); });
 
 	//動画読込関数
-	MaterialLoadTemplate(Movie, "DATA/MOVIE/MOVIE", ".wmv", [](const std::string& path) {return std::move(path); });
+	MaterialLoadTemplate(Movie, "DATA/MOVIE/MOVIE", ".wmv", [](const std::string& Path) {return std::move(Path); });
 
 	//タイトル画面読込
 	GameTitleGraph = DxLib::LoadGraph("DATA/BACKGROUND/TITLE.png");
