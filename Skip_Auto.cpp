@@ -36,12 +36,12 @@ struct alignas(4) SkipData_t {
 };
 
 //既読スキップデータ書き込み
-void SkipDataWrite(const std::int32_t& RouteNum) {
+void SkipDataWrite(const std::int32_t& RouteNum) noexcept {
 	SkipData[RouteNum - 1] = 1;
 }
 
 //既読判定
-void SkipDataCheck(const std::int32_t& RouteNum) {
+void SkipDataCheck(const std::int32_t& RouteNum) noexcept {
 	if (SkipData[RouteNum - 1] == 1)
 		SkipAndAutoFlag = 1;
 	else
@@ -49,8 +49,7 @@ void SkipDataCheck(const std::int32_t& RouteNum) {
 }
 
 //既読スキップデータの読込
-int SkipDataLoad()
-{
+int SkipDataLoad() noexcept {
 	SkipData_t Data;
 
 	FILE *fp;
@@ -81,8 +80,7 @@ int SkipDataLoad()
 }
 
 //SKIP_READ SAVE関数
-int SkipDataSave()
-{
+int SkipDataSave() noexcept {
 	SkipData_t Data = {
 		SkipData[0], SkipData[1], SkipData[2], SkipData[3], SkipData[4], SkipData[5],
 		SkipData[6], SkipData[7], SkipData[8], SkipData[9], SkipData[10], SkipData[11],
@@ -100,7 +98,7 @@ int SkipDataSave()
 }
 
 // 既読スキップ/スキップ/オート切り替え関数
-void SkipAndAutoTask(const std::int32_t& Num) {
+void SkipAndAutoTask(const std::int32_t& Num) noexcept {
 
 	if (Num == 0) {
 		if (IDYES == MessageBoxYesNo("オート/スキップを停止しますか？")) {
