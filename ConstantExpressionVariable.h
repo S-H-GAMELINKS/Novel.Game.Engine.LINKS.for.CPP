@@ -10,7 +10,7 @@ constexpr int MojiSize = 21;
 //タイトルメニュー位置
 constexpr int TitleMenuPosY = 300;
 constexpr int TitleMenuPosX = 430;
-constexpr int title_menu_load_y = 330;
+constexpr int TitleMenuLoadPosY = 330;
 constexpr int title_menu_config_y = 360;
 constexpr int title_menu_quick_load_y = 390;
 constexpr int title_menu_continue_y = 420;
