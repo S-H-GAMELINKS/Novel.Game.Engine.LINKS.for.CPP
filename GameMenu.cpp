@@ -39,7 +39,7 @@ namespace {
 
 		//各メニュー項目の描画
 		for (std::int32_t i = 0; i < 12; i++)
-			DxLib::DrawString(save_name_pos_x, game_menu_base_pos_y * (i + 1), GameMenuItem[i], color);
+			DxLib::DrawString(save_name_pos_x, GameMenuBasePosY * (i + 1), GameMenuItem[i], color);
 
 		//カーソルの描画
 		DxLib::DrawString(save_base_pos_x - (CursorMove * 6), cursor_y, "■", color);
@@ -48,10 +48,10 @@ namespace {
 	//ゲームメニューキー操作
 	void GameMenuKeyMove(std::int32_t& cursor_y) {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			cursor_y = (game_menu_base_pos_y * 12 == cursor_y) ? game_menu_base_pos_y : cursor_y + game_menu_base_pos_y;
+			cursor_y = (GameMenuBasePosY * 12 == cursor_y) ? GameMenuBasePosY : cursor_y + GameMenuBasePosY;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			cursor_y = (game_menu_base_pos_y == cursor_y) ? game_menu_base_pos_y * 12 : cursor_y - game_menu_base_pos_y;
+			cursor_y = (GameMenuBasePosY == cursor_y) ? GameMenuBasePosY * 12 : cursor_y - GameMenuBasePosY;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
@@ -87,40 +87,40 @@ namespace {
 	//ゲームメニュー項目選択処理
 	void GameMenuSelect(std::int32_t& cursor_y) {
 
-		if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			SaveDataLoop(1);
 
-		if (cursor_y == game_menu_base_pos_y * 2 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY * 2 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			SaveDataLoop(2);
 
-		if (cursor_y == game_menu_base_pos_y * 3 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY * 3 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			SaveDataLoop(3);
 
-		if (cursor_y == game_menu_base_pos_y && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			SkipAndAutoTask(3);
 
-		if (cursor_y == game_menu_base_pos_y * 5 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY * 5 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			SkipAndAutoTask(1);
 
-		if (cursor_y == game_menu_base_pos_y * 6 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY * 6 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			SkipAndAutoTask(2);
 
-		if (cursor_y == game_menu_base_pos_y * 7 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY * 7 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			SkipAndAutoTask(0);
 
-		if (cursor_y == game_menu_base_pos_y * 8 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY * 8 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			BackLogLoop();
 
-		if (cursor_y == game_menu_base_pos_y * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			ConfigMenuLoop();
 
-		if (cursor_y == game_menu_base_pos_y * 10 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY * 10 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			GameMenuBackToTitle();
 
-		if (cursor_y == game_menu_base_pos_y * 11 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (cursor_y == GameMenuBasePosY * 11 && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			GameMenuBackToGamePlay();
 
-		if (cursor_y == game_menu_base_pos_y * 12 && CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (cursor_y == GameMenuBasePosY * 12 && CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			if (IDYES == MessageBoxYesNo("ゲームを終了しますか？"))
 				EndFlag = 99;
 		}
@@ -131,7 +131,7 @@ namespace {
 //ゲームメニューループ
 void GameMenuLoop() {
 
-	std::int32_t gamemenu_y = game_menu_base_pos_y;
+	std::int32_t gamemenu_y = GameMenuBasePosY;
 	unsigned int color = DxLib::GetColor(255, 255, 255);
 
 	DxLib::ClearDrawScreen();

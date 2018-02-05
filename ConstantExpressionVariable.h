@@ -33,7 +33,7 @@ constexpr int WaitKeyTaskTime = 70;
 constexpr int WaitGameTime = 3;
 
 //ゲームメニュー位置関係
-constexpr int game_menu_base_pos_y = 30;
+constexpr int GameMenuBasePosY = 30;
 
 //セーブ・ロード画面関係
 constexpr int save_max_num = 3;
