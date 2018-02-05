@@ -58,30 +58,30 @@ namespace {
 	}
 
 	//セーブ/ロード/デリート メニュー描画
-	void SaveLoadDeleteMenuDraw(std::int32_t& cursor_y, unsigned int color) noexcept {
+	void SaveLoadDeleteMenuDraw(std::int32_t& SaveDataMenuPosY, unsigned int Color) noexcept {
 
 		//スクリーンショット描画
 		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
 			DxLib::DrawRotaGraph(SaveSnapDrawPosX, SaveDataBasePosY * (i + 1), 0.2f, 0, SaveSnap[i], TRUE);
 
 		//カーソルの描画
-		DxLib::DrawString(SaveDataBasePosX, cursor_y, "■", color);
+		DxLib::DrawString(SaveDataBasePosX, SaveDataMenuPosY, "■", Color);
 
 		//セーブデータ名描画
-		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY, "セーブデータ1", color);
-		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * 2, "セーブデータ2", color);
-		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * 3, "セーブデータ3", color);
+		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY, "セーブデータ1", Color);
+		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * 2, "セーブデータ2", Color);
+		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * 3, "セーブデータ3", Color);
 
-		DxLib::DrawString(SaveDataNamePosX - CursorMove, SaveDataBasePosY * 4, "戻る", color);
+		DxLib::DrawString(SaveDataNamePosX - CursorMove, SaveDataBasePosY * 4, "戻る", Color);
 	}
 
 	//セーブ/ロードメニューキー操作
-	void SaveLoadMenuKeyMove(std::int32_t& cursor_y) noexcept {
+	void SaveLoadMenuKeyMove(std::int32_t& SaveDataMenuPosY) noexcept {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			cursor_y = (SaveDataPosButtom == cursor_y) ? SaveDataBasePosY : cursor_y + SaveDataCursorMove;
+			SaveDataMenuPosY = (SaveDataPosButtom == SaveDataMenuPosY) ? SaveDataBasePosY : SaveDataMenuPosY + SaveDataCursorMove;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			cursor_y = (SaveDataBasePosY == cursor_y) ? SaveDataPosButtom : cursor_y - SaveDataCursorMove;
+			SaveDataMenuPosY = (SaveDataBasePosY == SaveDataMenuPosY) ? SaveDataPosButtom : SaveDataMenuPosY - SaveDataCursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
@@ -92,7 +92,7 @@ namespace {
 		std::string FileFormat = ".png";
 		std::string FileName = FilePath + std::to_string(Num) + FileFormat;
 
-		std::rename("DATA/SAVE/SAVESNSAP_TEMP.png", FileName.c_str());
+		std::rename("DATA/SAVE/SAVESNSAPTEMP.png", FileName.c_str());
 	}
 
 	//セーブデータをセーブ
@@ -102,15 +102,15 @@ namespace {
 
 			SaveData_t SaveData = { EndFlagTemp, SpTemp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
 
-			FILE *fp;
+			FILE *Fp;
 
-			fopen_s(&fp, SaveDataPath, "wb");//バイナリファイルを開く
-			if (nullptr == fp) {//エラーが起きたらnullptrを返す
+			fopen_s(&Fp, SaveDataPath, "wb");//バイナリファイルを開く
+			if (nullptr == Fp) {//エラーが起きたらnullptrを返す
 				return 0;
 			}
 
-			fwrite(&SaveData, sizeof(SaveData), 1, fp); // SaveData_t構造体の中身を出力
-			fclose(fp);
+			fwrite(&SaveData, sizeof(SaveData), 1, Fp); // SaveData_t構造体の中身を出力
+			fclose(Fp);
 
 			//スクリーンショットの名前変更
 			SaveDataScreenShotRename(Num);
@@ -128,16 +128,16 @@ namespace {
 
 			SaveData_t SaveData;
 
-			FILE *fp;
+			FILE *Fp;
 
-			fopen_s(&fp, SaveDataPath, "rb");
-			if (fp == nullptr) {
+			fopen_s(&Fp, SaveDataPath, "rb");
+			if (Fp == nullptr) {
 				//MessageBoxOk(ErrorMessage);
 				return 0;
 			}
 
-			fread(&SaveData, sizeof(SaveData), 1, fp);
-			fclose(fp);
+			fread(&SaveData, sizeof(SaveData), 1, Fp);
+			fclose(Fp);
 
 			EndFlag = SaveData.EndFlag;
 			Sp = SaveData.Sp;
@@ -190,27 +190,27 @@ namespace {
 	}
 
 	//セーブ/ロード/デリート メニュー選択処理
-	void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y, const int& Num, std::int32_t& SaveFlag) noexcept {
+	void SaveLoadDeleteMenuSelect(std::int32_t& SaveDataMenuPosY, const int& Num, std::int32_t& SaveFlag) noexcept {
 
-		if (cursor_y == SaveDataBasePosY && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (SaveDataMenuPosY == SaveDataBasePosY && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
-		if (cursor_y == SaveDataBasePosY * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (SaveDataMenuPosY == SaveDataBasePosY * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat", "セーブデータ２", SaveFlag);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
-		if (cursor_y == SaveDataBasePosY * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (SaveDataMenuPosY == SaveDataBasePosY * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat", "セーブデータ３", SaveFlag);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
-		if (cursor_y == SaveDataBasePosY * 4 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (SaveDataMenuPosY == SaveDataBasePosY * 4 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 
 			if (IDYES == MessageBoxYesNo("戻りますか？")){
 				SaveFlag = 0;
@@ -231,7 +231,7 @@ void SaveDataLoop(const int& Num) noexcept {
 		std::int32_t SaveFlag = 1;
 
 		//描画される文字列の色
-		unsigned int color = DxLib::GetColor(255, 255, 255);
+		unsigned int Color = DxLib::GetColor(255, 255, 255);
 
 		DxLib::ClearDrawScreen();
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
@@ -240,14 +240,14 @@ void SaveDataLoop(const int& Num) noexcept {
 		SaveDataSnapLoad();
 
 		//カーソルの初期位置
-		std::int32_t save_y = SaveDataBasePosY;
+		std::int32_t SaveDataMenuPosY = SaveDataBasePosY;
 
 		//セーブデータループ
 		while (SaveFlag == 1) {
 			ScreenClear();
-			SaveLoadDeleteMenuDraw(save_y, color);
-			SaveLoadMenuKeyMove(save_y);
-			SaveLoadDeleteMenuSelect(save_y, Num, SaveFlag);
+			SaveLoadDeleteMenuDraw(SaveDataMenuPosY, Color);
+			SaveLoadMenuKeyMove(SaveDataMenuPosY);
+			SaveLoadDeleteMenuSelect(SaveDataMenuPosY, Num, SaveFlag);
 		}
 	}
 
@@ -261,15 +261,15 @@ int QuickSaveDataSave() noexcept {
 
 		SaveData_t SaveData = { EndFlag, SpTemp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
 
-		FILE *fp;
+		FILE *Fp;
 
-		fopen_s(&fp, "DATA/SAVE/QuickSaveData.dat", "wb");//バイナリファイルを開く
-		if (nullptr == fp) {//エラーが起きたらnullptrを返す
+		fopen_s(&Fp, "DATA/SAVE/QuickSaveData.dat", "wb");//バイナリファイルを開く
+		if (nullptr == Fp) {//エラーが起きたらnullptrを返す
 			return 0;
 		}
 
-		fwrite(&SaveData, sizeof(SaveData), 1, fp); // SaveData_t構造体の中身を出力
-		fclose(fp);
+		fwrite(&SaveData, sizeof(SaveData), 1, Fp); // SaveData_t構造体の中身を出力
+		fclose(Fp);
 
 		MessageBoxOk("セーブしました！");
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
@@ -284,16 +284,16 @@ int QuickSaveDataLoad() noexcept {
 
 		SaveData_t SaveData;
 
-		FILE *fp;
+		FILE *Fp;
 
-		fopen_s(&fp, "DATA/SAVE/QuickSaveData.dat", "rb");
-		if (fp == nullptr) {
+		fopen_s(&Fp, "DATA/SAVE/QuickSaveData.dat", "rb");
+		if (Fp == nullptr) {
 			//MessageBoxOk(ErrorMessage);
 			return 0;
 		}
 
-		fread(&SaveData, sizeof(SaveData), 1, fp);
-		fclose(fp);
+		fread(&SaveData, sizeof(SaveData), 1, Fp);
+		fclose(Fp);
 
 		EndFlag = SaveData.EndFlag;
 		Sp = SaveData.Sp;
@@ -319,15 +319,15 @@ int ContinueSaveDataSave(const std::int32_t& RouteNum) noexcept {
 
 	SaveData_t SaveData = { RouteNum, SpTemp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
 
-	FILE *fp;
+	FILE *Fp;
 
-	fopen_s(&fp, "DATA/SAVE/ContinueSaveData.dat", "wb");//バイナリファイルを開く
-	if (nullptr == fp) {//エラーが起きたらnullptrを返す
+	fopen_s(&Fp, "DATA/SAVE/ContinueSaveData.dat", "wb");//バイナリファイルを開く
+	if (nullptr == Fp) {//エラーが起きたらnullptrを返す
 		return 0;
 	}
 
-	fwrite(&SaveData, sizeof(SaveData), 1, fp); // SaveData_t構造体の中身を出力
-	fclose(fp);
+	fwrite(&SaveData, sizeof(SaveData), 1, Fp); // SaveData_t構造体の中身を出力
+	fclose(Fp);
 
 	return 0;
 }
@@ -339,16 +339,16 @@ int ContinueSaveDataLoad() noexcept {
 
 		SaveData_t SaveData;
 
-		FILE *fp;
+		FILE *Fp;
 
-		fopen_s(&fp, "DATA/SAVE/QuickSaveData.dat", "rb");
-		if (fp == nullptr) {
+		fopen_s(&Fp, "DATA/SAVE/QuickSaveData.dat", "rb");
+		if (Fp == nullptr) {
 			//MessageBoxOk(ErrorMessage);
 			return 0;
 		}
 
-		fread(&SaveData, sizeof(SaveData), 1, fp);
-		fclose(fp);
+		fread(&SaveData, sizeof(SaveData), 1, Fp);
+		fclose(Fp);
 
 		EndFlag = SaveData.EndFlag;
 		Sp = SaveData.Sp;
@@ -371,5 +371,5 @@ int ContinueSaveDataLoad() noexcept {
 
 //セーブデータ用スクリーンショット取得
 void SaveDataScreenShotGet() noexcept {
-	DxLib::SaveDrawScreen(0, 0, 640, 480, "DATA/SAVE/SAVESNSAP_TEMP.png");
+	DxLib::SaveDrawScreen(0, 0, 640, 480, "DATA/SAVE/SAVESNSAPTEMP.png");
 }
