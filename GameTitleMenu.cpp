@@ -39,7 +39,7 @@ namespace {
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
 			CursorPosY = (title_menu_y == CursorPosY) ? title_menu_exit_y : CursorPosY - CursorMove;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//ゲーム終了(タイトルメニュー)

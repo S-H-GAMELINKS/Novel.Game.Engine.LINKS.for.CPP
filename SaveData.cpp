@@ -83,7 +83,7 @@ namespace {
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
 			cursor_y = (save_base_pos_y == cursor_y) ? save_buttom_y : cursor_y - save_move_unit;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//スクリーンショット名前変更
@@ -116,7 +116,7 @@ namespace {
 			SaveDataScreenShotRename(Num);
 
 			MessageBoxOk("セーブしました！");
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 		return 0;
 	}
@@ -147,7 +147,7 @@ namespace {
 			BackGroundMusicHandle = SaveData.BackGroundMusic;
 
 			MessageBoxOk("ロードしました！");
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			DrawPointX = 0;
 			DrawPointY = 0;
@@ -164,7 +164,7 @@ namespace {
 			std::remove(SaveDataPath);
 
 			MessageBoxOk("削除しました！");
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 		return 0;
 	}
@@ -194,19 +194,19 @@ namespace {
 
 		if (cursor_y == save_base_pos_y && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag);
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
 		if (cursor_y == save_base_pos_y * 2 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat", "セーブデータ２", SaveFlag);
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
 		if (cursor_y == save_base_pos_y * 3 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat", "セーブデータ３", SaveFlag);
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
@@ -214,9 +214,9 @@ namespace {
 
 			if (IDYES == MessageBoxYesNo("戻りますか？")){
 				SaveFlag = 0;
-				std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+				std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 			}
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 	}
 }
@@ -234,7 +234,7 @@ void SaveDataLoop(const int& Num) {
 		unsigned int color = DxLib::GetColor(255, 255, 255);
 
 		DxLib::ClearDrawScreen();
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 		//スクリーンショットの読込
 		SaveDataSnapLoad();
@@ -251,7 +251,7 @@ void SaveDataLoop(const int& Num) {
 		}
 	}
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+	std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 }
 
 //セーブデータをセーブ(Quick)
@@ -272,7 +272,7 @@ int QuickSaveDataSave() {
 		fclose(fp);
 
 		MessageBoxOk("セーブしました！");
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 	return 0;
 }
@@ -303,7 +303,7 @@ int QuickSaveDataLoad() {
 		BackGroundMusicHandle = SaveData.BackGroundMusic;
 
 		MessageBoxOk("ロードしました！");
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 		DrawPointX = 0;
 		DrawPointY = 0;
@@ -358,7 +358,7 @@ int ContinueSaveDataLoad() {
 		BackGroundMusicHandle = SaveData.BackGroundMusic;
 
 		MessageBoxOk("ロードしました！");
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 		DrawPointX = 0;
 		DrawPointY = 0;

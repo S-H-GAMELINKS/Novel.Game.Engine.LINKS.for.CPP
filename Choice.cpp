@@ -61,7 +61,7 @@ namespace {
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
 			cursor_y = (choice_pos_y[0] == cursor_y) ? choice_pos_y[1] : cursor_y - CursorMove;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//ëIëéà(Å™)ëIëéûèàóù
@@ -85,12 +85,12 @@ namespace {
 
 		if (cursor_y == choice_pos_y[0] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			ChoiceSelectUp();
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 		if (cursor_y == choice_pos_y[1] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			ChoiceSelectDown();
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 	}
 }

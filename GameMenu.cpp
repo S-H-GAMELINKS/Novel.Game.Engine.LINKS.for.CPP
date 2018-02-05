@@ -53,7 +53,7 @@ namespace {
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
 			cursor_y = (game_menu_base_pos_y == cursor_y) ? game_menu_base_pos_y * 12 : cursor_y - game_menu_base_pos_y;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//ゲームへ戻る
@@ -81,7 +81,7 @@ namespace {
 			BackGroundMusicHandle = 0;
 			SoundEffectHandle = 0;
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//ゲームメニュー項目選択処理

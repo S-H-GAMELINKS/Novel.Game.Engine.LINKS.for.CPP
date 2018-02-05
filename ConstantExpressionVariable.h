@@ -27,7 +27,7 @@ constexpr int choice_pos_y[] = { 200, 230 };
 constexpr int CursorMove = 30;
 
 //キー処理停止時間
-constexpr int wait_key_task_time = 70;
+constexpr int WaitKeyTaskTime = 70;
 
 //ゲームプレイ時の遅延時間
 constexpr int wait_game_time = 3;

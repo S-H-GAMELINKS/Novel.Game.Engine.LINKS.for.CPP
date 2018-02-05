@@ -87,9 +87,9 @@ void GameEndMessageBox() {
 			EndFlag = 99;
 
 		if (EndFlag != 99 && EndFlag != 0)
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitTimeCalc(wait_key_task_time) / wait_game_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitTimeCalc(WaitKeyTaskTime) / wait_game_time));
 		else
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 }
 
 //スクリーンショット取得関数

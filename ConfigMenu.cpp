@@ -52,13 +52,13 @@ namespace {
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
 			cursor_y = (game_menu_base_pos_y == cursor_y) ? game_menu_base_pos_y * 7 : cursor_y - CursorMove;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//BGM音量調節
 	void BackGroundMusicVolChange() {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			ConfigData.bgm_vol += 10;
 			ConfigData.bgm_vol_count += 1;
@@ -70,7 +70,7 @@ namespace {
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			ConfigData.bgm_vol -= 10;
 			ConfigData.bgm_vol_count -= 1;
@@ -85,7 +85,7 @@ namespace {
 	//SE音量調節
 	void SoundEffectVolChange() {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			ConfigData.se_vol += 10;
 			ConfigData.se_vol_count += 1;
@@ -97,7 +97,7 @@ namespace {
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			ConfigData.se_vol -= 10;
 			ConfigData.se_vol_count -= 1;
@@ -112,7 +112,7 @@ namespace {
 	//オート速度調節
 	void AutoSpeedVolChange() {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			ConfigData.auto_speed += 10;
 			ConfigData.auto_speed_count += 1;
@@ -124,7 +124,7 @@ namespace {
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			ConfigData.auto_speed -= 10;
 			ConfigData.auto_speed_count -= 1;
@@ -139,7 +139,7 @@ namespace {
 	//スキップ速度調節
 	void SkipSpeedVolChange() {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			ConfigData.skip_speed += 10;
 			ConfigData.skip_speed_count += 1;
@@ -151,7 +151,7 @@ namespace {
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			ConfigData.skip_speed -= 10;
 			ConfigData.skip_speed_count -= 1;
@@ -166,7 +166,7 @@ namespace {
 	//文字列描画速度調節
 	void StringDrawSpeedVolChange() {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			ConfigData.string_speed += 10;
 			ConfigData.string_speed_count += 1;
@@ -178,7 +178,7 @@ namespace {
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
 			ConfigData.string_speed -= 10;
 			ConfigData.string_speed_count -= 1;
@@ -193,12 +193,12 @@ namespace {
 	// マウス操作/キー操作切り替え
 	void MouseAndKeyMoveChange() {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 			ConfigData.mouse_key_move = 1;
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 			ConfigData.mouse_key_move = 0;
 		}
 	}
@@ -228,7 +228,7 @@ namespace {
 			if (IDYES == MessageBoxYesNo("戻りますか？")) {
 				ConfigFlag = 0;
 			}
-			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 	}
 }

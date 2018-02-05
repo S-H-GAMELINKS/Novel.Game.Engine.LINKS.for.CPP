@@ -31,7 +31,7 @@ namespace BackLog {
 			Num--;
 		}
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//バックログ時のキー操作
@@ -77,5 +77,5 @@ void BackLogLoop() {
 		else
 			MessageBoxOk("バックログがありません");
 	}
-	std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+	std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 }

@@ -106,27 +106,27 @@ void SkipAndAutoTask(const std::int32_t& Num) {
 		if (IDYES == MessageBoxYesNo("オート/スキップを停止しますか？")) {
 			SkipAndAutoFlag = 0;
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	if (Num == 1) {
 		if (IDYES == MessageBoxYesNo("スキップを実行しますか？")) {
 			SkipAndAutoFlag = 1;
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	if (Num == 2) {
 		if (IDYES == MessageBoxYesNo("オートを実行しますか？")) {
 			SkipAndAutoFlag = 2;
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	if (Num == 3) {
 		if (IDYES == MessageBoxYesNo("既読スキップを実行しますか？")) {
 			SkipDataCheck(EndFlag);
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 }
