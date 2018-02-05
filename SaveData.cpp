@@ -65,7 +65,7 @@ namespace {
 			DxLib::DrawRotaGraph(SaveSnapDrawPosX, SaveBasePosY * (i + 1), 0.2f, 0, SaveSnap[i], TRUE);
 
 		//カーソルの描画
-		DxLib::DrawString(SaveBasePosX, cursor_y, "■", color);
+		DxLib::DrawString(SaveDataBasePosX, cursor_y, "■", color);
 
 		//セーブデータ名描画
 		DxLib::DrawString(SaveDataNamePosX, SaveBasePosY, "セーブデータ1", color);

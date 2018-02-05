@@ -42,7 +42,7 @@ namespace {
 			DxLib::DrawString(SaveDataNamePosX, GameMenuBasePosY * (i + 1), GameMenuItem[i], color);
 
 		//カーソルの描画
-		DxLib::DrawString(SaveBasePosX - (CursorMove * 6), cursor_y, "■", color);
+		DxLib::DrawString(SaveDataBasePosX - (CursorMove * 6), cursor_y, "■", color);
 	}
 
 	//ゲームメニューキー操作
