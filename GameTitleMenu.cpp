@@ -27,7 +27,7 @@ namespace {
 
 		//各メニュー描画
 		for (std::int32_t i = 0; i < 6; i++)
-			DxLib::DrawString(title_menu_x, TitleMenuPosY + 30 * i, TitleMenuItem[i], Color);
+			DxLib::DrawString(TitleMenuPosX, TitleMenuPosY + 30 * i, TitleMenuItem[i], Color);
 	}
 
 	//タイトルメニューのキー操作
