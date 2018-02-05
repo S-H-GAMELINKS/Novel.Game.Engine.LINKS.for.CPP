@@ -4,21 +4,21 @@
 #include <cstdint>
 
 //セーブデータ(セーブ/ロード/デリート)ループ
-void SaveDataLoop(const int& Num);
+void SaveDataLoop(const int& Num) noexcept;
 
 //セーブデータをセーブ(Quick)
-int QuickSaveDataSave();
+int QuickSaveDataSave() noexcept;
 
 //セーブデータをロード(Quick)
-int QuickSaveDataLoad();
+int QuickSaveDataLoad() noexcept;
 
 //セーブデータをセーブ(Continue)
-int ContinueSaveDataSave(const std::int32_t& RouteNum);
+int ContinueSaveDataSave(const std::int32_t& RouteNum) noexcept;
 
 //セーブデータをロード(Continue)
-int ContinueSaveDataLoad();
+int ContinueSaveDataLoad() noexcept;
 
 //セーブデータ用スクリーンショット取得
-void SaveDataScreenShotGet();
+void SaveDataScreenShotGet() noexcept;
 
 #endif // SAVEDATA_H_

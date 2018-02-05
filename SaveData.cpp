@@ -44,7 +44,7 @@ namespace {
 	};
 
 	//セーブデータ用スクリーンショット読込関数
-	void SaveDataSnapLoad() {
+	void SaveDataSnapLoad() noexcept {
 		std::string FilePath = "DATA/SAVE/SAVESNAP";
 		std::string FileFormat = ".png";
 		std::string FileName = "";
@@ -58,7 +58,7 @@ namespace {
 	}
 
 	//セーブ/ロード/デリート メニュー描画
-	void SaveLoadDeleteMenuDraw(std::int32_t& cursor_y, unsigned int color) {
+	void SaveLoadDeleteMenuDraw(std::int32_t& cursor_y, unsigned int color) noexcept {
 
 		//スクリーンショット描画
 		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
@@ -76,7 +76,7 @@ namespace {
 	}
 
 	//セーブ/ロードメニューキー操作
-	void SaveLoadMenuKeyMove(std::int32_t& cursor_y) {
+	void SaveLoadMenuKeyMove(std::int32_t& cursor_y) noexcept {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
 			cursor_y = (SaveDataPosButtom == cursor_y) ? SaveDataBasePosY : cursor_y + SaveDataCursorMove;
 
@@ -87,7 +87,7 @@ namespace {
 	}
 
 	//スクリーンショット名前変更
-	void SaveDataScreenShotRename(const int& Num) {
+	void SaveDataScreenShotRename(const int& Num) noexcept {
 		std::string FilePath = "DATA/SAVE/SAVESNAP";
 		std::string FileFormat = ".png";
 		std::string FileName = FilePath + std::to_string(Num) + FileFormat;
@@ -96,7 +96,7 @@ namespace {
 	}
 
 	//セーブデータをセーブ
-	int SaveDataSave(const char* SaveDataPath, const char* Message, const int& Num) {
+	int SaveDataSave(const char* SaveDataPath, const char* Message, const int& Num) noexcept {
 
 		if (IDYES == MessageBoxYesNo(Message)) {
 
@@ -122,7 +122,7 @@ namespace {
 	}
 
 	//セーブデータをロード
-	int SaveDataLoad(const char* SaveDataPath, const char* Message) {
+	int SaveDataLoad(const char* SaveDataPath, const char* Message) noexcept {
 
 		if (IDYES == MessageBoxYesNo(Message)) {
 
@@ -159,7 +159,7 @@ namespace {
 	}
 
 	//セーブデータをデリート
-	int SaveDataDelete(const char* SaveDataPath, const char* Message) {
+	int SaveDataDelete(const char* SaveDataPath, const char* Message) noexcept {
 		if (IDYES == MessageBoxYesNo(Message)) {
 			std::remove(SaveDataPath);
 
@@ -170,7 +170,7 @@ namespace {
 	}
 
 	//セーブ/ロード/デリート切り替え関数
-	void SaveDataTask(const int& Num, const char* SaveDataPath, const char* SaveDataName, std::int32_t& SaveFlag) {
+	void SaveDataTask(const int& Num, const char* SaveDataPath, const char* SaveDataName, std::int32_t& SaveFlag) noexcept {
 
 		std::string Message = SaveDataName;
 		Message += SaveTaskItemParticle[Num - 1];
@@ -190,7 +190,7 @@ namespace {
 	}
 
 	//セーブ/ロード/デリート メニュー選択処理
-	void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y, const int& Num, std::int32_t& SaveFlag) {
+	void SaveLoadDeleteMenuSelect(std::int32_t& cursor_y, const int& Num, std::int32_t& SaveFlag) noexcept {
 
 		if (cursor_y == SaveDataBasePosY && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag);
@@ -222,7 +222,7 @@ namespace {
 }
 
 //セーブデータ(セーブ/ロード/デリート)ループ
-void SaveDataLoop(const int& Num) {
+void SaveDataLoop(const int& Num) noexcept {
 
 	//各種分岐表示
 	if (IDYES == MessageBoxYesNo(SaveTaskItem[Num - 1])) {
@@ -255,7 +255,7 @@ void SaveDataLoop(const int& Num) {
 }
 
 //セーブデータをセーブ(Quick)
-int QuickSaveDataSave() {
+int QuickSaveDataSave() noexcept {
 
 	if (IDYES == MessageBoxYesNo("クイックセーブを実行しますか？")) {
 
@@ -278,7 +278,7 @@ int QuickSaveDataSave() {
 }
 
 //セーブデータをロード(Quick)
-int QuickSaveDataLoad() {
+int QuickSaveDataLoad() noexcept {
 
 	if (IDYES == MessageBoxYesNo("クイックロードを実行しますか？")) {
 
@@ -315,7 +315,7 @@ int QuickSaveDataLoad() {
 }
 
 //セーブデータをセーブ(Continue)
-int ContinueSaveDataSave(const std::int32_t& RouteNum) {
+int ContinueSaveDataSave(const std::int32_t& RouteNum) noexcept {
 
 	SaveData_t SaveData = { RouteNum, SpTemp, 0, CharacterHandle, BackGroundHandle, BackGroundMusicHandle };
 
@@ -333,7 +333,7 @@ int ContinueSaveDataSave(const std::int32_t& RouteNum) {
 }
 
 //セーブデータをロード(Continue)
-int ContinueSaveDataLoad() {
+int ContinueSaveDataLoad() noexcept {
 
 	if (IDYES == MessageBoxYesNo("前回プレイした所から再開しますか？")) {
 
@@ -370,6 +370,6 @@ int ContinueSaveDataLoad() {
 }
 
 //セーブデータ用スクリーンショット取得
-void SaveDataScreenShotGet() {
+void SaveDataScreenShotGet() noexcept {
 	DxLib::SaveDrawScreen(0, 0, 640, 480, "DATA/SAVE/SAVESNSAP_TEMP.png");
 }
