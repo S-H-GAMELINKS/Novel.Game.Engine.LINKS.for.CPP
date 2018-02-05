@@ -39,8 +39,8 @@ constexpr int GameMenuBasePosY = 30;
 constexpr int SaveDataSlotNum = 3;
 constexpr int SaveBasePosX = 400;
 constexpr int SaveBasePosY = 100;
-constexpr int save_move_unit = 100;
-constexpr int save_buttom_y = SaveBasePosY + save_move_unit * SaveDataSlotNum;
+constexpr int SaveDataCursorMove = 100;
+constexpr int save_buttom_y = SaveBasePosY + SaveDataCursorMove * SaveDataSlotNum;
 constexpr int save_snap_draw_pos_x = 150;
 constexpr int save_name_pos_x = 250;
 
