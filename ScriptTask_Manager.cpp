@@ -45,7 +45,7 @@ namespace ScriptTask {
 		DrawPointX = 0;
 
 		// もし画面からはみ出るなら画面をスクロールさせる
-		if (DrawPointY * moji_size + moji_size > 480)
+		if (DrawPointY * MojiSize + MojiSize > 480)
 		{
 			// テンポラリグラフィックの作成
 			TempGraph = MakeGraph(640, 480);
@@ -54,10 +54,10 @@ namespace ScriptTask {
 			GetDrawScreenGraph(0, 0, 640, 480, TempGraph);
 
 			// 一行分上に貼り付ける
-			DrawGraph(0, -moji_size, TempGraph, FALSE);
+			DrawGraph(0, -MojiSize, TempGraph, FALSE);
 
 			// 一番下の行の部分を黒で埋める
-			DrawBox(0, 480 - moji_size, 640, 480, 0, TRUE);
+			DrawBox(0, 480 - MojiSize, 640, 480, 0, TRUE);
 
 			// 描画行位置を一つあげる
 			DrawPointY--;
@@ -92,7 +92,7 @@ namespace ScriptTask {
 		OneMojiBuf[2] = '\0';
 
 		// １文字描画
-		DrawString(DrawPointX * moji_size, DrawPointY * moji_size, OneMojiBuf, GetColor(255, 255, 255));
+		DrawString(DrawPointX * MojiSize, DrawPointY * MojiSize, OneMojiBuf, GetColor(255, 255, 255));
 
 		// 参照文字位置を２バイト勧める
 		Cp += 2;
@@ -306,7 +306,7 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		ScriptTask::DrawScript(Script);
 
 		// 画面からはみ出たら改行する
-		if (DrawPointX * moji_size + moji_size > 640) ScriptTask::Kaigyou();
+		if (DrawPointX * MojiSize + MojiSize > 640) ScriptTask::Kaigyou();
 
 		break;
 	}

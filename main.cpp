@@ -43,7 +43,7 @@ void DxLibInitPreProccessing() {
 //DxLib初期化後処理
 void DxLibInitPostProccessing() {
 	// フォントのサイズセット
-	DxLib::SetFontSize(moji_size);
+	DxLib::SetFontSize(MojiSize);
 
 	//フォントの設定
 	DxLib::ChangeFontType(DX_FONTTYPE_ANTIALIASING_EDGE_8X8);

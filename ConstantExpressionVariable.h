@@ -5,7 +5,7 @@
 constexpr int MaterialMax = 99;
 
 // 文字のサイズ
-constexpr int moji_size = 21;
+constexpr int MojiSize = 21;
 
 //タイトルメニュー位置
 constexpr int title_menu_y = 300;
