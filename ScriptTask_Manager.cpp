@@ -71,7 +71,7 @@ namespace ScriptTask {
 	void DrawScriptSpeed() {
 		switch (SkipAndAutoFlag) {
 		case 0:
-			std::this_thread::sleep_for(std::chrono::milliseconds(string_speed_auto * ConfigData.string_speed / 100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedAuto * ConfigData.string_speed / 100));
 			break;
 
 		case 1:
@@ -79,7 +79,7 @@ namespace ScriptTask {
 			break;
 
 		case 2:
-			std::this_thread::sleep_for(std::chrono::milliseconds(string_speed_auto * ConfigData.string_speed / 100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedAuto * ConfigData.string_speed / 100));
 			break;
 		}
 	}
@@ -194,7 +194,7 @@ namespace ScriptTask {
 			Cp++;
 
 		if (SkipAndAutoFlag == 2) {
-			std::this_thread::sleep_for(std::chrono::milliseconds((string_speed_auto * string_speed_wait * ConfigData.auto_speed / 100)));
+			std::this_thread::sleep_for(std::chrono::milliseconds((StringSpeedAuto * string_speed_wait * ConfigData.auto_speed / 100)));
 			Cp++;
 		}
 
