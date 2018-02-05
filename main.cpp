@@ -81,16 +81,16 @@ void GamePlayLoop(const int RouteNumber) {
 		if (EndFlag != RouteNumber) {
 			ContinueSaveDataSave(RouteNumber);
 			SkipDataWrite(RouteNumber);
-			SP = 0;
-			CP = 0;
+			Sp = 0;
+			Cp = 0;
 			break;
 		}
 
 		//参照文字列の終端まで行っていたら参照文字列を進める
-		if (0 < CP && (Script[SP].size() == std::size_t(CP)))
+		if (0 < Cp && (Script[Sp].size() == std::size_t(Cp)))
 		{
-			SP++;
-			CP = 0;
+			Sp++;
+			Cp = 0;
 		}
 	}
 }

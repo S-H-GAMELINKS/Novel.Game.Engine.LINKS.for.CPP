@@ -14,7 +14,7 @@
 extern int EndFlag;
 
 //行管理変数
-extern int SP, CP;
+extern int Sp, Cp;
 
 //文字列描画位置
 extern int DrawPointX, DrawPointY;
@@ -59,7 +59,7 @@ namespace {
 	//ゲームへ戻る
 	void GameMenuBackToGamePlay() {
 		EndFlag = EndFlagTemp;
-		SP = SpTemp;
+		Sp = SpTemp;
 		DrawPointX = 0;
 		DrawPointY = 0;
 		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
@@ -72,8 +72,8 @@ namespace {
 
 		if (IDYES == MessageBoxYesNo("タイトルに戻りますか？")) {
 			EndFlag = 0;
-			SP = 0;
-			CP = 0;
+			Sp = 0;
+			Cp = 0;
 			DrawPointX = 0;
 			DrawPointY = 0;
 			BackGroundHandle = 0;

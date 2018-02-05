@@ -7,7 +7,7 @@
 #include <thread>
 #include <chrono>
 
-extern int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
+extern int Sp, Cp;	// 参照する文字列番号と文字列中の文字ポインタ
 
 //各種素材ハンドル
 extern std::int32_t BackGroundHandle;
@@ -36,8 +36,8 @@ namespace {
 	//通常セーブデータ
 	struct alignas(4) SaveData_t {
 		std::int32_t ENDFLAG;    //ENDFLAG
-		std::int32_t SP;			//行数
-		std::int32_t CP;			//文字位置
+		std::int32_t Sp;			//行数
+		std::int32_t Cp;			//文字位置
 		std::int32_t CHAR;		//立ち絵情報
 		std::int32_t BG;			//背景画像情報
 		std::int32_t BGM;		//BGM情報
@@ -140,8 +140,8 @@ namespace {
 			fclose(fp);
 
 			EndFlag = SaveData.ENDFLAG;
-			SP = SaveData.SP;
-			CP = SaveData.CP;
+			Sp = SaveData.Sp;
+			Cp = SaveData.Cp;
 			CharacterHandle = SaveData.CHAR;
 			BackGroundHandle = SaveData.BG;
 			BackGroundMusicHandle = SaveData.BGM;
@@ -296,8 +296,8 @@ int QuickSaveDataLoad() {
 		fclose(fp);
 
 		EndFlag = SaveData.ENDFLAG;
-		SP = SaveData.SP;
-		CP = SaveData.CP;
+		Sp = SaveData.Sp;
+		Cp = SaveData.Cp;
 		CharacterHandle = SaveData.CHAR;
 		BackGroundHandle = SaveData.BG;
 		BackGroundMusicHandle = SaveData.BGM;
@@ -351,8 +351,8 @@ int ContinueSaveDataLoad() {
 		fclose(fp);
 
 		EndFlag = SaveData.ENDFLAG;
-		SP = SaveData.SP;
-		CP = SaveData.CP;
+		Sp = SaveData.Sp;
+		Cp = SaveData.Cp;
 		CharacterHandle = SaveData.CHAR;
 		BackGroundHandle = SaveData.BG;
 		BackGroundMusicHandle = SaveData.BGM;

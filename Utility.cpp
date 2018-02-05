@@ -14,7 +14,7 @@
 //ゲームタイトル名
 extern const char* GameTitle;
 
-extern int SP, CP;	// 参照する文字列番号と文字列中の文字ポインタ
+extern int Sp, Cp;	// 参照する文字列番号と文字列中の文字ポインタ
 
 //終了フラグ
 extern int EndFlag;
@@ -41,8 +41,8 @@ namespace {
 
 	//ゲーム画面再描画処理
 	void DrawGameScreenAgain() {
-		SP = SpTemp;
-		CP = 0;
+		Sp = SpTemp;
+		Cp = 0;
 		DrawPointX = 0;
 		DrawPointY = 0;
 		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
@@ -109,55 +109,55 @@ void ScreenShotGet() {
 void ShortCutKey() {
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1) {
-		SpTemp = SP;
+		SpTemp = Sp;
 		SaveDataLoop(1);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1) {
-		SpTemp = SP;
+		SpTemp = Sp;
 		SaveDataLoop(2);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1) {
-		SpTemp = SP;
+		SpTemp = Sp;
 		SaveDataLoop(3);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1) {
-		SpTemp = SP;
+		SpTemp = Sp;
 		SkipAndAutoTask(3);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F5) == 1) {
-		SpTemp = SP;
+		SpTemp = Sp;
 		SkipAndAutoTask(1);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F6) == 1) {
-		SpTemp = SP;
+		SpTemp = Sp;
 		SkipAndAutoTask(2);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1) {
-		SpTemp = SP;
+		SpTemp = Sp;
 		SkipAndAutoTask(0);
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1) {
-		SpTemp = SP;
+		SpTemp = Sp;
 		BackLogLoop();
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1) {
-		SpTemp = SP;
+		SpTemp = Sp;
 		ConfigMenuLoop();
 		DrawGameScreenAgain();
 	}
@@ -166,8 +166,8 @@ void ShortCutKey() {
 		if (IDYES == MessageBoxYesNo("タイトル画面に戻りますか？")) {
 			DxLib::ClearDrawScreen();
 			EndFlag = 0;
-			SP = 0;
-			CP = 0;
+			Sp = 0;
+			Cp = 0;
 			DrawPointX = 0;
 			DrawPointY = 0;
 			BackGroundHandle = 0;
@@ -179,14 +179,14 @@ void ShortCutKey() {
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1) {
-		SpTemp = SP;
+		SpTemp = Sp;
 		QuickSaveDataSave();
 		DrawGameScreenAgain();
 	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1) {
 		ScreenShotGet();
-		CP = 0;
+		Cp = 0;
 		DrawPointX = 0;
 		DrawPointY = 0;
 		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
@@ -197,7 +197,7 @@ void ShortCutKey() {
 	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) {
 		SaveDataScreenShotGet();
 		EndFlagTemp = EndFlag;
-		SpTemp = SP;
+		SpTemp = Sp;
 		EndFlag = 17;
 	}
 
