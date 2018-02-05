@@ -31,7 +31,7 @@ namespace {
 	static constexpr const char* SaveTaskItemParticle[] = { "に", "を", "を" };
 
 	//セーブデータ用スクリーンショット格納変数
-	std::int32_t SaveSnap[save_max_num];
+	std::int32_t SaveSnap[SaveDataSlotNum];
 
 	//通常セーブデータ
 	struct alignas(4) SaveData_t {
@@ -49,7 +49,7 @@ namespace {
 		std::string FileFormat = ".png";
 		std::string FileName = "";
 
-		for (std::int32_t i = 0; i < save_max_num; i++) {
+		for (std::int32_t i = 0; i < SaveDataSlotNum; i++) {
 
 			FileName = (FilePath + std::to_string(i + 1) + FileFormat);
 
@@ -61,7 +61,7 @@ namespace {
 	void SaveLoadDeleteMenuDraw(std::int32_t& cursor_y, unsigned int color) {
 
 		//スクリーンショット描画
-		for (std::int32_t i = 0; i < save_max_num; i++)
+		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
 			DxLib::DrawRotaGraph(save_snap_draw_pos_x, save_base_pos_y * (i + 1), 0.2f, 0, SaveSnap[i], TRUE);
 
 		//カーソルの描画
