@@ -21,7 +21,7 @@ constexpr int TitleMenuCursorPosX = 400;
 
 //選択肢
 constexpr int ChoicePosX = 100;
-constexpr int choice_pos_y[] = { 200, 230 };
+constexpr int ChoicePosY[] = { 200, 230 };
 
 //キーカーソルの移動量
 constexpr int CursorMove = 30;
