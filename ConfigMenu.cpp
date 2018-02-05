@@ -8,17 +8,17 @@
 #include <chrono>
 
 ConfigData_t ConfigData = {
-	/*bgm_vol               :*/100,
-	/*bgm_vol_count         :*/10,
-	/*se_vol                :*/100,
-	/*se_vol_count          :*/10,
-	/*skip_speed            :*/100,
-	/*skip_speed_count      :*/10,
-	/*auto_speed            :*/100,
-	/*auto_speed_count      :*/10,
-	/*string_speed          :*/100,
-	/*string_speed_count    :*/10,
-	/*mouse_key_move        :*/1
+	/*BackGroundMusicVolume               :*/100,
+	/*BackGroundMusicVolumeCount          :*/10,
+	/*SoundEffectVolume		              :*/100,
+	/*SoundEffectVolumecount              :*/10,
+	/*SkipSpeedVolume		              :*/100,
+	/*SkipSpeedVolumeCount			      :*/10,
+	/*AutoSpeedVolume		              :*/100,
+	/*AutoSpeedVolumeCount				  :*/10,
+	/*ScriptDrawSpeedVolume		          :*/100,
+	/*ScriptDrawSpeedVolumeCount	      :*/10,
+	/*MouseAndKeyFlag;			          :*/1
 };
 
 namespace {
@@ -36,12 +36,12 @@ namespace {
 
 		DxLib::DrawString(SaveDataNamePosX - CursorMove, ConfigCursorPosY, "■", 255);
 
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY, 255, "%d", ConfigData.bgm_vol);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 2, 255, "%d", ConfigData.se_vol);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 3, 255, "%d", ConfigData.auto_speed);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 4, 255, "%d", ConfigData.skip_speed);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 5, 255, "%d", ConfigData.string_speed);
-		DxLib::DrawString(SaveDataNamePosX + CursorMove * 8, GameMenuBasePosY * 6, ((1 == ConfigData.mouse_key_move) ? "マウス操作" : "キー操作"), 255);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY, 255, "%d", ConfigData.BackGroundMusicVolume);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 2, 255, "%d", ConfigData.SoundEffectVolume);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 3, 255, "%d", ConfigData.AutoSpeedVolume);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 4, 255, "%d", ConfigData.SkipSpeedVolume);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 5, 255, "%d", ConfigData.ScriptDrawSpeedVolume);
+		DxLib::DrawString(SaveDataNamePosX + CursorMove * 8, GameMenuBasePosY * 6, ((1 == ConfigData.MouseAndKeyFlag) ? "マウス操作" : "キー操作"), 255);
 	}
 
 	//コンフィグ画面キー操作
@@ -60,24 +60,24 @@ namespace {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			ConfigData.bgm_vol += 10;
-			ConfigData.bgm_vol_count += 1;
+			ConfigData.BackGroundMusicVolume += 10;
+			ConfigData.BackGroundMusicVolumeCount += 1;
 
-			if (ConfigData.bgm_vol_count >= 10) {
-				ConfigData.bgm_vol = 100;
-				ConfigData.bgm_vol_count = 10;
+			if (ConfigData.BackGroundMusicVolumeCount >= 10) {
+				ConfigData.BackGroundMusicVolume = 100;
+				ConfigData.BackGroundMusicVolumeCount = 10;
 			}
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			ConfigData.bgm_vol -= 10;
-			ConfigData.bgm_vol_count -= 1;
+			ConfigData.BackGroundMusicVolume -= 10;
+			ConfigData.BackGroundMusicVolumeCount -= 1;
 
-			if (ConfigData.bgm_vol_count <= 0) {
-				ConfigData.bgm_vol = 0;
-				ConfigData.bgm_vol_count = 0;
+			if (ConfigData.BackGroundMusicVolumeCount <= 0) {
+				ConfigData.BackGroundMusicVolume = 0;
+				ConfigData.BackGroundMusicVolumeCount = 0;
 			}
 		}
 	}
@@ -87,24 +87,24 @@ namespace {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			ConfigData.se_vol += 10;
-			ConfigData.se_vol_count += 1;
+			ConfigData.SoundEffectVolume += 10;
+			ConfigData.SoundEffectVolumeCount += 1;
 
-			if (ConfigData.se_vol_count >= 10) {
-				ConfigData.se_vol = 100;
-				ConfigData.se_vol_count = 10;
+			if (ConfigData.SoundEffectVolumeCount >= 10) {
+				ConfigData.SoundEffectVolume = 100;
+				ConfigData.SoundEffectVolumeCount = 10;
 			}
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			ConfigData.se_vol -= 10;
-			ConfigData.se_vol_count -= 1;
+			ConfigData.SoundEffectVolume -= 10;
+			ConfigData.SoundEffectVolumeCount -= 1;
 
-			if (ConfigData.se_vol_count <= 0) {
-				ConfigData.se_vol = 0;
-				ConfigData.se_vol_count = 0;
+			if (ConfigData.SoundEffectVolumeCount <= 0) {
+				ConfigData.SoundEffectVolume = 0;
+				ConfigData.SoundEffectVolumeCount = 0;
 			}
 		}
 	}
@@ -114,24 +114,24 @@ namespace {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			ConfigData.auto_speed += 10;
-			ConfigData.auto_speed_count += 1;
+			ConfigData.AutoSpeedVolume += 10;
+			ConfigData.AutoSpeedVolumeCount += 1;
 
-			if (ConfigData.auto_speed_count >= 10) {
-				ConfigData.auto_speed = 100;
-				ConfigData.auto_speed_count = 10;
+			if (ConfigData.AutoSpeedVolumeCount >= 10) {
+				ConfigData.AutoSpeedVolume = 100;
+				ConfigData.AutoSpeedVolumeCount = 10;
 			}
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			ConfigData.auto_speed -= 10;
-			ConfigData.auto_speed_count -= 1;
+			ConfigData.AutoSpeedVolume -= 10;
+			ConfigData.AutoSpeedVolumeCount -= 1;
 
-			if (ConfigData.auto_speed_count <= 0) {
-				ConfigData.auto_speed = 0;
-				ConfigData.auto_speed_count = 0;
+			if (ConfigData.AutoSpeedVolumeCount <= 0) {
+				ConfigData.AutoSpeedVolume = 0;
+				ConfigData.AutoSpeedVolumeCount = 0;
 			}
 		}
 	}
@@ -141,24 +141,24 @@ namespace {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			ConfigData.skip_speed += 10;
-			ConfigData.skip_speed_count += 1;
+			ConfigData.SkipSpeedVolume += 10;
+			ConfigData.SkipSpeedVolumeCount += 1;
 
-			if (ConfigData.skip_speed_count >= 10) {
-				ConfigData.skip_speed = 100;
-				ConfigData.skip_speed_count = 10;
+			if (ConfigData.SkipSpeedVolumeCount >= 10) {
+				ConfigData.SkipSpeedVolume = 100;
+				ConfigData.SkipSpeedVolumeCount = 10;
 			}
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			ConfigData.skip_speed -= 10;
-			ConfigData.skip_speed_count -= 1;
+			ConfigData.SkipSpeedVolume -= 10;
+			ConfigData.SkipSpeedVolumeCount -= 1;
 
-			if (ConfigData.skip_speed_count <= 0) {
-				ConfigData.skip_speed = 0;
-				ConfigData.skip_speed_count = 0;
+			if (ConfigData.SkipSpeedVolumeCount <= 0) {
+				ConfigData.SkipSpeedVolume = 0;
+				ConfigData.SkipSpeedVolumeCount = 0;
 			}
 		}
 	}
@@ -168,24 +168,24 @@ namespace {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			ConfigData.string_speed += 10;
-			ConfigData.string_speed_count += 1;
+			ConfigData.ScriptDrawSpeedVolume += 10;
+			ConfigData.ScriptDrawSpeedVolumeCount += 1;
 
-			if (ConfigData.string_speed_count >= 10) {
-				ConfigData.string_speed = 100;
-				ConfigData.string_speed_count = 10;
+			if (ConfigData.ScriptDrawSpeedVolumeCount >= 10) {
+				ConfigData.ScriptDrawSpeedVolume = 100;
+				ConfigData.ScriptDrawSpeedVolumeCount = 10;
 			}
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			ConfigData.string_speed -= 10;
-			ConfigData.string_speed_count -= 1;
+			ConfigData.ScriptDrawSpeedVolume -= 10;
+			ConfigData.ScriptDrawSpeedVolumeCount -= 1;
 
-			if (ConfigData.string_speed_count <= 0) {
-				ConfigData.string_speed = 0;
-				ConfigData.string_speed_count = 0;
+			if (ConfigData.ScriptDrawSpeedVolumeCount <= 0) {
+				ConfigData.ScriptDrawSpeedVolume = 0;
+				ConfigData.ScriptDrawSpeedVolumeCount = 0;
 			}
 		}
 	}
@@ -194,12 +194,12 @@ namespace {
 	void MouseAndKeyMoveChange() noexcept {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-			ConfigData.mouse_key_move = 1;
+			ConfigData.MouseAndKeyFlag = 1;
 		}
 
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-			ConfigData.mouse_key_move = 0;
+			ConfigData.MouseAndKeyFlag = 0;
 		}
 	}
 

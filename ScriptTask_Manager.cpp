@@ -70,15 +70,15 @@ namespace ScriptTask {
 	void DrawScriptSpeed() noexcept {
 		switch (SkipAndAutoFlag) {
 		case 0:
-			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedAuto * ConfigData.string_speed / 100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedAuto * ConfigData.ScriptDrawSpeedVolume / 100));
 			break;
 
 		case 1:
-			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedSkip * ConfigData.skip_speed / 100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedSkip * ConfigData.ScriptDrawSpeedVolume / 100));
 			break;
 
 		case 2:
-			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedAuto * ConfigData.string_speed / 100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedAuto * ConfigData.ScriptDrawSpeedVolume / 100));
 			break;
 		}
 	}
@@ -124,7 +124,7 @@ namespace ScriptTask {
 	//BGMçƒê∂ä÷êî
 	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGroundMusic) noexcept {
 
-		DxLib::ChangeVolumeSoundMem(255 * ConfigData.bgm_vol / 100, BackGroundMusicHandle);
+		DxLib::ChangeVolumeSoundMem(255 * ConfigData.BackGroundMusicVolume / 100, BackGroundMusicHandle);
 		
 		//BGMçƒê∂íÜÇÃèÍçáÇÕÅABGMÇí‚é~Ç∑ÇÈ
 		if (DxLib::CheckSoundMem(BackGroundMusicHandle))
@@ -138,7 +138,7 @@ namespace ScriptTask {
 	//å¯â âπçƒê∂ä÷êî
 	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& SoundEffect) noexcept {
 
-		DxLib::ChangeVolumeSoundMem(255 * ConfigData.se_vol / 100, SoundEffectHandle);
+		DxLib::ChangeVolumeSoundMem(255 * ConfigData.SoundEffectVolume / 100, SoundEffectHandle);
 
 		//SEçƒê∂íÜÇÃèÍçáÇÕÅASEÇí‚é~Ç∑ÇÈ
 		if (DxLib::CheckSoundMem(SoundEffectHandle))
@@ -193,7 +193,7 @@ namespace ScriptTask {
 			Cp++;
 
 		if (SkipAndAutoFlag == 2) {
-			std::this_thread::sleep_for(std::chrono::milliseconds((StringSpeedAuto * StringSpeedWait * ConfigData.auto_speed / 100)));
+			std::this_thread::sleep_for(std::chrono::milliseconds((StringSpeedAuto * StringSpeedWait * ConfigData.AutoSpeedVolume / 100)));
 			Cp++;
 		}
 
