@@ -2,6 +2,6 @@
 #define GAMEMENU_H_
 
 //ゲームメニューループ
-void GameMenuLoop();
+void GameMenuLoop() noexcept;
 
 #endif // !GAMEMENU_H_

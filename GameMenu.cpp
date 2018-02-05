@@ -30,7 +30,7 @@ extern std::int32_t SoundEffectHandle;
 
 namespace {
 	//ゲームメニュー描画関数
-	void GameMenuDraw(std::int32_t& cursor_y, unsigned int color) {
+	void GameMenuDraw(std::int32_t& cursor_y, unsigned int color) noexcept {
 
 		static constexpr const char* GameMenuItem[] = {
 			"セーブ", "ロード", "セーブデータ削除", "既読スキップ", "スキップ", "オート",
@@ -46,7 +46,7 @@ namespace {
 	}
 
 	//ゲームメニューキー操作
-	void GameMenuKeyMove(std::int32_t& cursor_y) {
+	void GameMenuKeyMove(std::int32_t& cursor_y) noexcept {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
 			cursor_y = (GameMenuBasePosY * 12 == cursor_y) ? GameMenuBasePosY : cursor_y + GameMenuBasePosY;
 
@@ -57,7 +57,7 @@ namespace {
 	}
 
 	//ゲームへ戻る
-	void GameMenuBackToGamePlay() {
+	void GameMenuBackToGamePlay() noexcept {
 		EndFlag = EndFlagTemp;
 		Sp = SpTemp;
 		DrawPointX = 0;
@@ -68,7 +68,7 @@ namespace {
 	}
 
 	//タイトルへ戻る
-	void GameMenuBackToTitle() {
+	void GameMenuBackToTitle() noexcept {
 
 		if (IDYES == MessageBoxYesNo("タイトルに戻りますか？")) {
 			EndFlag = 0;
@@ -85,7 +85,7 @@ namespace {
 	}
 
 	//ゲームメニュー項目選択処理
-	void GameMenuSelect(std::int32_t& cursor_y) {
+	void GameMenuSelect(std::int32_t& cursor_y) noexcept {
 
 		if (cursor_y == GameMenuBasePosY && CheckHitKey(KEY_INPUT_RETURN) == 1)
 			SaveDataLoop(1);
@@ -129,7 +129,7 @@ namespace {
 }
 
 //ゲームメニューループ
-void GameMenuLoop() {
+void GameMenuLoop() noexcept {
 
 	std::int32_t gamemenu_y = GameMenuBasePosY;
 	unsigned int color = DxLib::GetColor(255, 255, 255);
