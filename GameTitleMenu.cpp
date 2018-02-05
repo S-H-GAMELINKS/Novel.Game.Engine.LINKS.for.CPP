@@ -16,7 +16,7 @@ extern std::int32_t GameTitleGraph;
 namespace {
 
 	//タイトルメニューの描画関数
-	void GameTitleMenuDraw(unsigned int Color, std::int32_t CursorPosY) {
+	void GameTitleMenuDraw(unsigned int Color, std::int32_t CursorPosY) noexcept {
 
 		const char* TitleMenuItem[] = { "Start", "Load", "Config", "QuickLoad", "Continue", "Exit" };
 
@@ -31,7 +31,7 @@ namespace {
 	}
 
 	//タイトルメニューのキー操作
-	void GameTitleMenuKeyMove(std::int32_t& CursorPosY) {
+	void GameTitleMenuKeyMove(std::int32_t& CursorPosY) noexcept {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
 			CursorPosY = (TitleMenuExitPosY == CursorPosY) ? TitleMenuPosY : CursorPosY + CursorMove;
@@ -43,13 +43,13 @@ namespace {
 	}
 
 	//ゲーム終了(タイトルメニュー)
-	void GameTitleMenuExit() {
+	void GameTitleMenuExit() noexcept {
 		if (IDYES == MessageBoxYesNo("終了しますか？"))
 			EndFlag = 99;
 	}
 
 	//タイトルメニューの項目選択関数
-	void GameTitleMenuChoice(const std::int32_t& CursorPosY) {
+	void GameTitleMenuChoice(const std::int32_t& CursorPosY) noexcept {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuPosY)
 			EndFlag = 1;
@@ -72,7 +72,7 @@ namespace {
 }
 
 //タイトルメニューのループ関数
-void GameTitleMenuLoop(unsigned int Color, std::int32_t& CursorPosY) {
+void GameTitleMenuLoop(unsigned int Color, std::int32_t& CursorPosY) noexcept {
 
 	while (EndFlag == 0) {
 		ScreenClear();
