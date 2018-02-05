@@ -2,6 +2,6 @@
 #define GAME_TITLE_MENU_H_
 
 //タイトルメニューのループ関数
-void GameTitleMenuLoop(unsigned int color, std::int32_t& cursor_y);
+void GameTitleMenuLoop(unsigned int Color, std::int32_t& CursorPosY);
 
 #endif // !GAME_TITLE_MENU_H_
