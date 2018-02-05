@@ -35,12 +35,12 @@ namespace {
 
 	//通常セーブデータ
 	struct alignas(4) SaveData_t {
-		std::int32_t ENDFLAG;    //ENDFLAG
+		std::int32_t EndFlag;    //EndFlag
 		std::int32_t Sp;			//行数
 		std::int32_t Cp;			//文字位置
-		std::int32_t CHAR;		//立ち絵情報
-		std::int32_t BG;			//背景画像情報
-		std::int32_t BGM;		//BGM情報
+		std::int32_t Character;		//立ち絵情報
+		std::int32_t BackGround;			//背景画像情報
+		std::int32_t BackGroundMusic;		//BGM情報
 	};
 
 	//セーブデータ用スクリーンショット読込関数
@@ -139,12 +139,12 @@ namespace {
 			fread(&SaveData, sizeof(SaveData), 1, fp);
 			fclose(fp);
 
-			EndFlag = SaveData.ENDFLAG;
+			EndFlag = SaveData.EndFlag;
 			Sp = SaveData.Sp;
 			Cp = SaveData.Cp;
-			CharacterHandle = SaveData.CHAR;
-			BackGroundHandle = SaveData.BG;
-			BackGroundMusicHandle = SaveData.BGM;
+			CharacterHandle = SaveData.Character;
+			BackGroundHandle = SaveData.BackGround;
+			BackGroundMusicHandle = SaveData.BackGroundMusic;
 
 			MessageBoxOk("ロードしました！");
 			std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
@@ -295,12 +295,12 @@ int QuickSaveDataLoad() {
 		fread(&SaveData, sizeof(SaveData), 1, fp);
 		fclose(fp);
 
-		EndFlag = SaveData.ENDFLAG;
+		EndFlag = SaveData.EndFlag;
 		Sp = SaveData.Sp;
 		Cp = SaveData.Cp;
-		CharacterHandle = SaveData.CHAR;
-		BackGroundHandle = SaveData.BG;
-		BackGroundMusicHandle = SaveData.BGM;
+		CharacterHandle = SaveData.Character;
+		BackGroundHandle = SaveData.BackGround;
+		BackGroundMusicHandle = SaveData.BackGroundMusic;
 
 		MessageBoxOk("ロードしました！");
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
@@ -350,12 +350,12 @@ int ContinueSaveDataLoad() {
 		fread(&SaveData, sizeof(SaveData), 1, fp);
 		fclose(fp);
 
-		EndFlag = SaveData.ENDFLAG;
+		EndFlag = SaveData.EndFlag;
 		Sp = SaveData.Sp;
 		Cp = SaveData.Cp;
-		CharacterHandle = SaveData.CHAR;
-		BackGroundHandle = SaveData.BG;
-		BackGroundMusicHandle = SaveData.BGM;
+		CharacterHandle = SaveData.Character;
+		BackGroundHandle = SaveData.BackGround;
+		BackGroundMusicHandle = SaveData.BackGroundMusic;
 
 		MessageBoxOk("ロードしました！");
 		std::this_thread::sleep_for(std::chrono::milliseconds(wait_key_task_time));
