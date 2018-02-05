@@ -194,7 +194,7 @@ namespace ScriptTask {
 			Cp++;
 
 		if (SkipAndAutoFlag == 2) {
-			std::this_thread::sleep_for(std::chrono::milliseconds((StringSpeedAuto * string_speed_wait * ConfigData.auto_speed / 100)));
+			std::this_thread::sleep_for(std::chrono::milliseconds((StringSpeedAuto * StringSpeedWait * ConfigData.auto_speed / 100)));
 			Cp++;
 		}
 

@@ -47,7 +47,7 @@ constexpr int save_name_pos_x = 250;
 //•¶Žš•`‰æ‘¬“xŠÖŒW
 constexpr int StringSpeedSkip = 10;
 constexpr int StringSpeedAuto = 30;
-constexpr int string_speed_wait = 600;
+constexpr int StringSpeedWait = 600;
 
 //—§‚¿ŠGˆÊ’uŠÖŒW
 constexpr int character_pos_y = 130;
