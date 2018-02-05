@@ -57,7 +57,7 @@ namespace {
 		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuLoadPosY)
 			SaveDataLoop(2);
 
-		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == title_menu_config_y)
+		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuConfigPosY)
 			ConfigMenuLoop();
 
 		if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == title_menu_quick_load_y)
