@@ -78,10 +78,10 @@ namespace {
 	//セーブ/ロードメニューキー操作
 	void SaveLoadMenuKeyMove(std::int32_t& cursor_y) {
 		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			cursor_y = (save_buttom_y == cursor_y) ? SaveBasePosY : cursor_y + SaveDataCursorMove;
+			cursor_y = (SaveDataPosButtom == cursor_y) ? SaveBasePosY : cursor_y + SaveDataCursorMove;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			cursor_y = (SaveBasePosY == cursor_y) ? save_buttom_y : cursor_y - SaveDataCursorMove;
+			cursor_y = (SaveBasePosY == cursor_y) ? SaveDataPosButtom : cursor_y - SaveDataCursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
