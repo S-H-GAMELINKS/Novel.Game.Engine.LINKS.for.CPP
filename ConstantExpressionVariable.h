@@ -12,7 +12,7 @@ constexpr int TitleMenuPosY = 300;
 constexpr int TitleMenuPosX = 430;
 constexpr int TitleMenuLoadPosY = 330;
 constexpr int TitleMenuConfigPosY = 360;
-constexpr int title_menu_quick_load_y = 390;
+constexpr int TitleMenuQuickLoadPosY = 390;
 constexpr int title_menu_continue_y = 420;
 constexpr int title_menu_exit_y = 450;
 
