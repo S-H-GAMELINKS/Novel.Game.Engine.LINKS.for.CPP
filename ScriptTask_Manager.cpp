@@ -115,7 +115,7 @@ namespace ScriptTask {
 	void DrawCharacter(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& Character) {
 		Cp++;
 
-		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, character_graph_size_y, BackGroundHandle));
+		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, CharacterGraphSizeHeight, BackGroundHandle));
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, *CharacterDummy, true);
 
 		CharacterHandle = Character[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
@@ -178,7 +178,7 @@ namespace ScriptTask {
 
 	//óßÇøäGçÌèúèàóùä÷êî
 	void RemoveCharacterGraph() {
-		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, character_graph_size_y, BackGroundHandle));
+		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, CharacterGraphSizeHeight, BackGroundHandle));
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, *CharacterDummy, true);
 	}
 

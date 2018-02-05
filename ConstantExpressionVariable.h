@@ -53,6 +53,6 @@ constexpr int StringSpeedWait = 600;
 constexpr int CharacterPosY = 130;
 constexpr int CharacterPosX = 150;
 constexpr int CharacterGraphSizeWidth = 300;
-constexpr int character_graph_size_y = 400;
+constexpr int CharacterGraphSizeHeight = 400;
 
 #endif // CONSTANT_EXPRESSION_VARIABLE_H_
