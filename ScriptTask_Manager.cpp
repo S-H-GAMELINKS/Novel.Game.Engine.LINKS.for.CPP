@@ -110,12 +110,17 @@ namespace ScriptTask {
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 	}
 
+	//—§‚¿ŠGíœˆ—ŠÖ”
+	void RemoveCharacterGraph() noexcept {
+		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, CharacterGraphSizeHeight, BackGroundHandle));
+		DxLib::DrawGraph(CharacterPosX, CharacterPosY, *CharacterDummy, true);
+	}
+
 	//—§‚¿ŠG•`‰æŠÖ”
 	void DrawCharacter(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& Character) noexcept {
 		Cp++;
 
-		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, CharacterGraphSizeHeight, BackGroundHandle));
-		DxLib::DrawGraph(CharacterPosX, CharacterPosY, *CharacterDummy, true);
+		ScriptTask::RemoveCharacterGraph();
 
 		CharacterHandle = Character[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, CharacterHandle, TRUE);
@@ -173,12 +178,6 @@ namespace ScriptTask {
 			Cp = 0;
 			Sp++;
 		}
-	}
-
-	//—§‚¿ŠGíœˆ—ŠÖ”
-	void RemoveCharacterGraph() noexcept {
-		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, CharacterGraphSizeHeight, BackGroundHandle));
-		DxLib::DrawGraph(CharacterPosX, CharacterPosY, *CharacterDummy, true);
 	}
 
 	//ƒNƒŠƒbƒN‘Ò‚¿ˆ—ŠÖ”
