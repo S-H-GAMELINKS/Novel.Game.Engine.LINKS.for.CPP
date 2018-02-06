@@ -340,7 +340,7 @@ int ContinueSaveDataLoad() noexcept {
 
 		fopen_s(&Fp, "DATA/SAVE/QuickSaveData.dat", "rb");
 		if (Fp == nullptr) {
-			//MessageBoxOk(ErrorMessage);
+			MessageBoxOk("ƒ[ƒh‚Å‚«‚Ü‚¹‚ñ");
 			return 0;
 		}
 
