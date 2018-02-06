@@ -126,32 +126,18 @@ namespace ScriptTask {
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, CharacterHandle, TRUE);
 	}
 
-	//BGMÄ¶ŠÖ”
-	void PlayBackGroundMusic(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGroundMusic) noexcept {
+	//BGM or SEÄ¶ŠÖ”
+	template <typename S, typename T, typename H, typename Func1, typename Func2, typename Func3, typename Func4>
+	void PlayBackGroundMusicAndSoundEffect(const std::vector<S>& Script, const std::array<T, MaterialMax>& Material, H Handle, Func1&& SetVolumeFunc, Func2&& CheckFunc, Func3&& StopFunc, Func4&& PlayFunc) {
 
-		DxLib::ChangeVolumeSoundMem(255 * ConfigData.BackGroundMusicVolume / 100, BackGroundMusicHandle);
-		
-		//BGMÄ¶’†‚Ìê‡‚ÍABGM‚ğ’â~‚·‚é
-		if (DxLib::CheckSoundMem(BackGroundMusicHandle))
-			DxLib::StopSoundMem(BackGroundMusicHandle);
+		SetVolumeFunc();
 
-		Cp++;
-		BackGroundMusicHandle = BackGroundMusic[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
-		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
-	}
-
-	//Œø‰Ê‰¹Ä¶ŠÖ”
-	void PlaySoundEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& SoundEffect) noexcept {
-
-		DxLib::ChangeVolumeSoundMem(255 * ConfigData.SoundEffectVolume / 100, SoundEffectHandle);
-
-		//SEÄ¶’†‚Ìê‡‚ÍASE‚ğ’â~‚·‚é
-		if (DxLib::CheckSoundMem(SoundEffectHandle))
-			DxLib::StopSoundMem(SoundEffectHandle);
+		if (CheckFunc())
+			StopFunc();
 
 		Cp++;
-		SoundEffectHandle = SoundEffect[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
-		DxLib::PlaySoundMem(SoundEffectHandle, DX_PLAYTYPE_BACK);
+		Handle = Material[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
+		PlayFunc();
 	}
 
 	//“®‰æÄ¶ŠÖ”
@@ -213,11 +199,11 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		break;
 
 	case 'M':	//BGMÄ¶
-		ScriptTask::PlayBackGroundMusic(Script, BackGroundMusic);
+		ScriptTask::PlayBackGroundMusicAndSoundEffect(Script, BackGroundMusic, BackGroundMusicHandle, []() {return DxLib::ChangeVolumeSoundMem(255 * ConfigData.SoundEffectVolume / 100, SoundEffectHandle); }, []() {return DxLib::CheckSoundMem(BackGroundMusicHandle); }, []() {return DxLib::StopSoundMem(BackGroundMusicHandle); }, []() {return DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP); });
 		break;
 
 	case 'S':	//SEÄ¶
-		ScriptTask::PlaySoundEffect(Script, SoundEffect);
+		ScriptTask::PlayBackGroundMusicAndSoundEffect(Script, SoundEffect, SoundEffectHandle, []() {return DxLib::ChangeVolumeSoundMem(255 * ConfigData.SoundEffectVolume / 100, SoundEffectHandle); }, []() {return DxLib::CheckSoundMem(SoundEffectHandle); }, []() {return DxLib::StopSoundMem(SoundEffectHandle); }, []() {return DxLib::PlaySoundMem(SoundEffectHandle, DX_PLAYTYPE_BACK); });
 		break;
 
 	case 'V':	//“®‰æÄ¶
