@@ -132,7 +132,7 @@ namespace {
 
 			fopen_s(&Fp, SaveDataPath, "rb");
 			if (Fp == nullptr) {
-				//MessageBoxOk(ErrorMessage);
+				MessageBoxOk("セーブデータをロードできません");
 				return 0;
 			}
 
