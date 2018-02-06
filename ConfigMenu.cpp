@@ -32,16 +32,16 @@ namespace {
 
 		//各項目の描画
 		for (std::int32_t i = 0; i < 7; i++)
-			DxLib::DrawString(SaveDataNamePosX, GameMenuBasePosY * (i + 1), ConfigMenuItem[i], 255);
+			DxLib::DrawString(SaveDataNamePosX, GameMenuBasePosY * (i + 1), ConfigMenuItem[i], Color);
 
-		DxLib::DrawString(SaveDataNamePosX - CursorMove, ConfigCursorPosY, "■", 255);
+		DxLib::DrawString(SaveDataNamePosX - CursorMove, ConfigCursorPosY, "■", Color);
 
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY, 255, "%d", ConfigData.BackGroundMusicVolume);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 2, 255, "%d", ConfigData.SoundEffectVolume);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 3, 255, "%d", ConfigData.AutoSpeedVolume);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 4, 255, "%d", ConfigData.SkipSpeedVolume);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 5, 255, "%d", ConfigData.ScriptDrawSpeedVolume);
-		DxLib::DrawString(SaveDataNamePosX + CursorMove * 8, GameMenuBasePosY * 6, ((1 == ConfigData.MouseAndKeyFlag) ? "マウス操作" : "キー操作"), 255);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY, Color, "%d", ConfigData.BackGroundMusicVolume);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 2, Color, "%d", ConfigData.SoundEffectVolume);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 3, Color, "%d", ConfigData.AutoSpeedVolume);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 4, Color, "%d", ConfigData.SkipSpeedVolume);
+		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 5, Color, "%d", ConfigData.ScriptDrawSpeedVolume);
+		DxLib::DrawString(SaveDataNamePosX + CursorMove * 8, GameMenuBasePosY * 6, ((1 == ConfigData.MouseAndKeyFlag) ? "マウス操作" : "キー操作"), Color);
 	}
 
 	//コンフィグ画面キー操作

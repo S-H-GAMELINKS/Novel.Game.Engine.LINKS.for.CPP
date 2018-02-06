@@ -30,7 +30,7 @@ extern std::int32_t SoundEffectHandle;
 
 namespace {
 	//ゲームメニュー描画関数
-	void GameMenuDraw(std::int32_t& GameMenuCursorPosY, unsigned int Color) noexcept {
+	void GameMenuDraw(std::int32_t& GameMenuCursorPosY) noexcept {
 
 		static constexpr const char* GameMenuItem[] = {
 			"セーブ", "ロード", "セーブデータ削除", "既読スキップ", "スキップ", "オート",
@@ -132,13 +132,12 @@ namespace {
 void GameMenuLoop() noexcept {
 
 	std::int32_t GameMenuCursorPosY = GameMenuBasePosY;
-	unsigned int Color = DxLib::GetColor(255, 255, 255);
 
 	DxLib::ClearDrawScreen();
 
 	while (EndFlag == 17) {
 		ScreenClear();
-		GameMenuDraw(GameMenuCursorPosY, Color);
+		GameMenuDraw(GameMenuCursorPosY);
 		GameMenuKeyMove(GameMenuCursorPosY);
 		GameMenuSelect(GameMenuCursorPosY);
 

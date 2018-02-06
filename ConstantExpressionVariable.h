@@ -1,6 +1,8 @@
 #ifndef CONSTANT_EXPRESSION_VARIABLE_H_
 #define CONSTANT_EXPRESSION_VARIABLE_H_
 
+#include "DxLib.h"
+
 //äeéÌëfçﬁç≈ëÂêî
 constexpr int MaterialMax = 99;
 
@@ -54,5 +56,8 @@ constexpr int CharacterPosY = 130;
 constexpr int CharacterPosX = 150;
 constexpr int CharacterGraphSizeWidth  = 300;
 constexpr int CharacterGraphSizeHeight = 400;
+
+//ï∂éöÇ»Ç«ÇÃêF
+constexpr int Color = 0xFFFFFF;
 
 #endif // CONSTANT_EXPRESSION_VARIABLE_H_

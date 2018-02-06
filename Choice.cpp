@@ -30,7 +30,7 @@ const char* ChoiceScript[][2] = {
 namespace {
 
 	//ëIëéàï`âÊä÷êî
-	void DrawChoice(unsigned int Color, std::int32_t& ChoiceCursorPosY) noexcept {
+	void DrawChoice(std::int32_t& ChoiceCursorPosY) noexcept {
 
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
@@ -101,10 +101,9 @@ void ChoiceSelect(int RoutteNumber) noexcept {
 	ChoiceRead();
 
 	std::int32_t ChoiceCursorPosY = ChoicePosY[0];
-	unsigned int Color = DxLib::GetColor(255, 255, 255);
 
 	while (EndFlag == RoutteNumber) {
-		DrawChoice(Color, ChoiceCursorPosY);
+		DrawChoice(ChoiceCursorPosY);
 		ChoiceKeyMove(ChoiceCursorPosY);
 		ChoiceSelectCheck(ChoiceCursorPosY);
 		ScreenClear();

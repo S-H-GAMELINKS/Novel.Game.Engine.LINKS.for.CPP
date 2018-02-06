@@ -58,7 +58,7 @@ namespace {
 	}
 
 	//セーブ/ロード/デリート メニュー描画
-	void SaveLoadDeleteMenuDraw(std::int32_t& SaveDataMenuPosY, unsigned int Color) noexcept {
+	void SaveLoadDeleteMenuDraw(std::int32_t& SaveDataMenuPosY) noexcept {
 
 		//スクリーンショット描画
 		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
@@ -230,9 +230,6 @@ void SaveDataLoop(const int& Num) noexcept {
 		//セーブデータループ用フラグ
 		std::int32_t SaveFlag = 1;
 
-		//描画される文字列の色
-		unsigned int Color = DxLib::GetColor(255, 255, 255);
-
 		DxLib::ClearDrawScreen();
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
@@ -245,7 +242,7 @@ void SaveDataLoop(const int& Num) noexcept {
 		//セーブデータループ
 		while (SaveFlag == 1) {
 			ScreenClear();
-			SaveLoadDeleteMenuDraw(SaveDataMenuPosY, Color);
+			SaveLoadDeleteMenuDraw(SaveDataMenuPosY);
 			SaveLoadMenuKeyMove(SaveDataMenuPosY);
 			SaveLoadDeleteMenuSelect(SaveDataMenuPosY, Num, SaveFlag);
 		}

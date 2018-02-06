@@ -16,7 +16,7 @@ extern std::int32_t GameTitleGraph;
 namespace {
 
 	//タイトルメニューの描画関数
-	void GameTitleMenuDraw(unsigned int Color, std::int32_t CursorPosY) noexcept {
+	void GameTitleMenuDraw(std::int32_t CursorPosY) noexcept {
 
 		const char* TitleMenuItem[] = { "Start", "Load", "Config", "QuickLoad", "Continue", "Exit" };
 
@@ -72,11 +72,11 @@ namespace {
 }
 
 //タイトルメニューのループ関数
-void GameTitleMenuLoop(unsigned int Color, std::int32_t& CursorPosY) noexcept {
+void GameTitleMenuLoop(std::int32_t& CursorPosY) noexcept {
 
 	while (EndFlag == 0) {
 		ScreenClear();
-		GameTitleMenuDraw(Color, CursorPosY);
+		GameTitleMenuDraw(CursorPosY);
 		GameTitleMenuKeyMove(CursorPosY);
 		GameTitleMenuChoice(CursorPosY);
 

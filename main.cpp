@@ -109,16 +109,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	//初期化後処理
 	DxLibInitPostProccessing();
 
-	//文字などの色
-	std::int32_t Color = DxLib::GetColor(255, 255, 255);
-
 	//カーソルの位置
 	std::int32_t CursorPosY = 300;
 
 	while (EndFlag != 99 && DxLib::ProcessMessage() == 0) {
 
 		//タイトル画面
-		GameTitleMenuLoop(Color, CursorPosY);
+		GameTitleMenuLoop(CursorPosY);
 
 		//ゲームループ
 		if (1 <= EndFlag && EndFlag <= 16)

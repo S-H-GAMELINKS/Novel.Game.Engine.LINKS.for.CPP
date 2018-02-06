@@ -16,7 +16,7 @@ namespace BackLog {
 	void BackLogNumberDraw(const std::int32_t& Num) noexcept {
 		std::string Name = "バックログ";
 		Name += std::to_string(Num + 1);
-		DxLib::DrawString(0, 400, Name.c_str(), DxLib::GetColor(255, 255, 255));
+		DxLib::DrawString(0, 400, Name.c_str(), Color);
 	}
 
 	//バックログの描画

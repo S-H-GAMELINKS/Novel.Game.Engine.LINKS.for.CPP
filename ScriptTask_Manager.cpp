@@ -91,7 +91,7 @@ namespace ScriptTask {
 		OneMojiBuf[2] = '\0';
 
 		// １文字描画
-		DrawString(DrawPointX * MojiSize, DrawPointY * MojiSize, OneMojiBuf, GetColor(255, 255, 255));
+		DrawString(DrawPointX * MojiSize, DrawPointY * MojiSize, OneMojiBuf, Color);
 
 		// 参照文字位置を２バイト勧める
 		Cp += 2;
