@@ -11,7 +11,6 @@
 #include <array>
 #include <thread>
 #include <chrono>
-#include <type_traits>
 
 extern int DrawPointX, DrawPointY;	// 文字列描画の位置
 extern int Sp, Cp;	// 参照する文字列番号と文字列中の文字ポインタ
@@ -130,11 +129,6 @@ namespace ScriptTask {
 	//BGM or SE再生関数
 	template <typename S, typename T, typename H, typename Func1, typename Func2, typename Func3, typename Func4>
 	void PlayBackGroundMusicAndSoundEffect(const std::vector<S>& Script, const std::array<T, MaterialMax>& Material, H Handle, Func1&& SetVolumeFunc, Func2&& CheckFunc, Func3&& StopFunc, Func4&& PlayFunc) {
-
-		static_assert(std::is_invocable<Func1>::value);
-		static_assert(std::is_invocable<Func2>::value);
-		static_assert(std::is_invocable<Func3>::value);
-		static_assert(std::is_invocable<Func4>::value);
 
 		SetVolumeFunc();
 
