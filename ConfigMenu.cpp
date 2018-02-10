@@ -4,6 +4,7 @@
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
 #include "ConfigMenu.h"
+#include "MouseAndKeyState.hpp"
 #include <thread>
 #include <chrono>
 
@@ -42,37 +43,6 @@ namespace {
 		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 4, Color, "%d", ConfigData.SkipSpeedVolume);
 		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 5, Color, "%d", ConfigData.ScriptDrawSpeedVolume);
 		DxLib::DrawString(SaveDataNamePosX + CursorMove * 8, GameMenuBasePosY * 6, ((1 == ConfigData.MouseAndKeyFlag) ? "マウス操作" : "キー操作"), Color);
-	}
-
-	//コンフィグ画面キー操作
-	void ConfigMenuKeyMove(std::int32_t& ConfigCursorPosY) noexcept {
-		if (ConfigData.MouseAndKeyFlag == 0) {
-			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-				ConfigCursorPosY = (GameMenuBasePosY * 7 == ConfigCursorPosY) ? GameMenuBasePosY : ConfigCursorPosY + CursorMove;
-
-			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-				ConfigCursorPosY = (GameMenuBasePosY == ConfigCursorPosY) ? GameMenuBasePosY * 7 : ConfigCursorPosY - CursorMove;
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-		}
-	}
-
-	//コンフィグ画面マウス操作
-	void ConfigMenuMouseMove(std::int32_t& ConfigCursorPosY) noexcept {
-
-		std::int32_t MousePosY, MousePosX;
-
-		DxLib::GetMousePoint(&MousePosX, &MousePosY);
-
-		if (ConfigData.MouseAndKeyFlag == 1) {
-			ConfigCursorPosY = (MousePosY <= (GameMenuBasePosY * 2) - 1) ? GameMenuBasePosY
-				: (MousePosY <= (GameMenuBasePosY * 3) - 1) ? GameMenuBasePosY * 2
-				: (MousePosY <= (GameMenuBasePosY * 4) - 1) ? GameMenuBasePosY * 3
-				: (MousePosY <= (GameMenuBasePosY * 5) - 1) ? GameMenuBasePosY * 4
-				: (MousePosY <= (GameMenuBasePosY * 6) - 1) ? GameMenuBasePosY * 5
-				: (MousePosY <= (GameMenuBasePosY * 7) - 1) ? GameMenuBasePosY * 6
-				: GameMenuBasePosY * 7;
-		}
 	}
 
 	//BGM音量調節
@@ -297,8 +267,8 @@ void ConfigMenuLoop() noexcept {
 		while (ConfigFlag == 1) {
 			ScreenClear();
 			ConfigMenuDraw(ConfigCursorPosY);
-			ConfigMenuKeyMove(ConfigCursorPosY);
-			ConfigMenuMouseMove(ConfigCursorPosY);
+			KeyState::ConfigMenuKeyMove(ConfigCursorPosY);
+			MouseState::ConfigMenuMouseMove(ConfigCursorPosY);
 			ConfigMenuSelect(ConfigCursorPosY, ConfigFlag);
 		}
 	}

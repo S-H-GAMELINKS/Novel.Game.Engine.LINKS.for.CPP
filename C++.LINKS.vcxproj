@@ -132,6 +132,7 @@
     <ClCompile Include="GameTitleMenu.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material_Manager.cpp" />
+    <ClCompile Include="MouseAndKeyState.cpp" />
     <ClCompile Include="SaveData.cpp" />
     <ClCompile Include="ScriptTask_Manager.cpp" />
     <ClCompile Include="Skip_Auto.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameTitleMenu.h" />
     <ClInclude Include="Material_Manager.h" />
+    <ClInclude Include="MouseAndKeyState.hpp" />
     <ClInclude Include="SaveData.h" />
     <ClInclude Include="ScriptTask_Manager.h" />
     <ClInclude Include="Skip_Auto.h" />

@@ -4,6 +4,7 @@
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
 #include "ConfigMenu.h"
+#include "MouseAndKeyState.hpp"
 #include <string>
 #include <thread>
 #include <chrono>
@@ -76,32 +77,6 @@ namespace {
 		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * 3, "セーブデータ3", Color);
 
 		DxLib::DrawString(SaveDataNamePosX - CursorMove, SaveDataBasePosY * 4, "戻る", Color);
-	}
-
-	//セーブ/ロードメニューキー操作
-	void SaveLoadMenuKeyMove(std::int32_t& SaveDataMenuPosY) noexcept {
-		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			SaveDataMenuPosY = (SaveDataPosButtom == SaveDataMenuPosY) ? SaveDataBasePosY : SaveDataMenuPosY + SaveDataCursorMove;
-
-		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			SaveDataMenuPosY = (SaveDataBasePosY == SaveDataMenuPosY) ? SaveDataPosButtom : SaveDataMenuPosY - SaveDataCursorMove;
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-	}
-
-	//セーブ/ロードメニューマウス操作
-	void SaveLoadMenuMouseMove(std::int32_t& SaveDataMenuPosY) noexcept {
-
-		std::int32_t MousePosY, MousePosX;
-
-		DxLib::GetMousePoint(&MousePosX, &MousePosY);
-
-		if (ConfigData.MouseAndKeyFlag == 1) {
-			SaveDataMenuPosY = (MousePosY <= (SaveDataBasePosY * 2) - 1) ? SaveDataBasePosY
-				: (MousePosY <= (SaveDataBasePosY * 3) - 1) ? SaveDataBasePosY * 2
-				: (MousePosY <= (SaveDataBasePosY * 4) - 1) ? SaveDataBasePosY * 3
-				: SaveDataPosButtom;
-		}
 	}
 
 	//スクリーンショット名前変更
@@ -261,8 +236,8 @@ void SaveDataLoop(const int& Num) noexcept {
 		while (SaveFlag == 1) {
 			ScreenClear();
 			SaveLoadDeleteMenuDraw(SaveDataMenuPosY);
-			SaveLoadMenuKeyMove(SaveDataMenuPosY);
-			SaveLoadMenuMouseMove(SaveDataMenuPosY);
+			KeyState::SaveDataMenuKeyMove(SaveDataMenuPosY);
+			MouseState::SaveDataMenuMouseMove(SaveDataMenuPosY);
 			SaveLoadDeleteMenuSelect(SaveDataMenuPosY, Num, SaveFlag);
 		}
 	}

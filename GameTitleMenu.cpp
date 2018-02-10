@@ -4,6 +4,7 @@
 #include "Utility.h"
 #include "SaveData.h"
 #include "ConfigMenu.h"
+#include "MouseAndKeyState.hpp"
 #include <thread>
 #include <chrono>
 
@@ -30,37 +31,6 @@ namespace {
 		//各メニュー描画
 		for (std::int32_t i = 0; i < 6; i++)
 			DxLib::DrawString(TitleMenuPosX, TitleMenuPosY + 30 * i, TitleMenuItem[i], Color);
-	}
-
-	//タイトルメニューのキー操作
-	void GameTitleMenuKeyMove(std::int32_t& CursorPosY) noexcept {
-
-		if (ConfigData.MouseAndKeyFlag == 0) {
-			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-				CursorPosY = (TitleMenuExitPosY == CursorPosY) ? TitleMenuPosY : CursorPosY + CursorMove;
-
-			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-				CursorPosY = (TitleMenuPosY == CursorPosY) ? TitleMenuExitPosY : CursorPosY - CursorMove;
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-		}
-	}
-
-	//タイトルメニューのマウス操作
-	void GameTitleMenuMouseMove(std::int32_t& CursorPosY) noexcept {
-
-		std::int32_t MousePosY, MousePosX;
-
-		DxLib::GetMousePoint(&MousePosX, &MousePosY);
-
-		if (ConfigData.MouseAndKeyFlag == 1) {
-			CursorPosY = (MousePosY <= 329) ? TitleMenuPosY
-				: (MousePosY <= (TitleMenuPosY + CursorMove * 2) - 1) ? TitleMenuPosY + CursorMove
-				: (MousePosY <= (TitleMenuPosY + CursorMove * 3) - 1) ? TitleMenuPosY + CursorMove * 2
-				: (MousePosY <= (TitleMenuPosY + CursorMove * 4) - 1) ? TitleMenuPosY + CursorMove * 3
-				: (MousePosY <= TitleMenuExitPosY - 1) ? TitleMenuPosY + CursorMove * 4
-				: TitleMenuExitPosY;
-		}
 	}
 
 	//ゲーム終了(タイトルメニュー)
@@ -98,8 +68,8 @@ void GameTitleMenuLoop(std::int32_t& CursorPosY) noexcept {
 	while (EndFlag == 0) {
 		ScreenClear();
 		GameTitleMenuDraw(CursorPosY);
-		GameTitleMenuKeyMove(CursorPosY);
-		GameTitleMenuMouseMove(CursorPosY);
+		KeyState::GameTitleMenuKeyMove(CursorPosY);
+		MouseState::GameTitleMenuMouseMove(CursorPosY);
 		GameTitleMenuChoice(CursorPosY);
 
 		//ゲーム終了確認ウインドウ

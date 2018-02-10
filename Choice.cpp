@@ -5,6 +5,7 @@
 #include "Utility.h"
 #include "BackLog.h"
 #include "ConfigMenu.h"
+#include "MouseAndKeyState.hpp"
 #include <string>
 #include <fstream>
 #include <thread>
@@ -55,31 +56,6 @@ namespace {
 		}
 	}
 
-	//選択肢キー操作
-	void ChoiceKeyMove(std::int32_t& ChoiceCursorPosY) noexcept {
-		if (ConfigData.MouseAndKeyFlag == 0) {
-			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-				ChoiceCursorPosY = (ChoicePosY[1] == ChoiceCursorPosY) ? ChoicePosY[0] : ChoiceCursorPosY + CursorMove;
-
-			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-				ChoiceCursorPosY = (ChoicePosY[0] == ChoiceCursorPosY) ? ChoicePosY[1] : ChoiceCursorPosY - CursorMove;
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-		}
-	}
-
-	//選択肢マウス操作
-	void ChoiceMouseMove(std::int32_t& ChoiceCursorPosY) noexcept {
-
-		std::int32_t MousePosY, MousePosX;
-
-		DxLib::GetMousePoint(&MousePosX, &MousePosY);
-
-		if (ConfigData.MouseAndKeyFlag == 1) {
-			ChoiceCursorPosY = (MousePosY <= (ChoicePosY[1] - 1)) ? ChoicePosY[0] : ChoicePosY[1];
-		}
-	}
-
 	//選択肢(↑)選択時処理
 	void ChoiceSelectUp() noexcept {
 		if (1 <= EndFlag && EndFlag <= 7) {
@@ -120,8 +96,8 @@ void ChoiceSelect(int RoutteNumber) noexcept {
 
 	while (EndFlag == RoutteNumber) {
 		DrawChoice(ChoiceCursorPosY);
-		ChoiceKeyMove(ChoiceCursorPosY);
-		ChoiceMouseMove(ChoiceCursorPosY);
+		KeyState::ChoiceKeyMove(ChoiceCursorPosY);
+		MouseState::ChoiceMouseMove(ChoiceCursorPosY);
 		ChoiceSelectCheck(ChoiceCursorPosY);
 		ScreenClear();
 		ShortCutKey();
