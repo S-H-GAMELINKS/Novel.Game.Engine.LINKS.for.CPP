@@ -31,6 +31,8 @@ extern int DrawPointX, DrawPointY;
 //tempデータ
 extern int EndFlagTemp, SpTemp;
 
+extern ConfigData_t ConfigData;
+
 namespace {
 
 	//処理停止時間計算関数
@@ -194,7 +196,7 @@ void ShortCutKey() noexcept {
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
 	}
 
-	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) {
+	if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_RIGHT) == 1)) {
 		SaveDataScreenShotGet();
 		EndFlagTemp = EndFlag;
 		SpTemp = Sp;
