@@ -72,22 +72,22 @@ namespace {
 	//タイトルメニューの項目選択関数
 	void GameTitleMenuChoice(const std::int32_t& CursorPosY) noexcept {
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1) && CursorPosY == TitleMenuPosY)
+		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1 && CursorPosY == TitleMenuPosY))
 			EndFlag = 1;
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1) && CursorPosY == TitleMenuLoadPosY)
+		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuLoadPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1 && CursorPosY == TitleMenuLoadPosY))
 			SaveDataLoop(2);
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1) && CursorPosY == TitleMenuConfigPosY)
+		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuConfigPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1 && CursorPosY == TitleMenuConfigPosY))
 			ConfigMenuLoop();
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1) && CursorPosY == TitleMenuQuickLoadPosY)
+		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuQuickLoadPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1 && CursorPosY == TitleMenuQuickLoadPosY))
 			QuickSaveDataLoad();
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1) && CursorPosY == TitleMenuContinuePosY)
+		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuContinuePosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1 && CursorPosY == TitleMenuContinuePosY))
 			ContinueSaveDataLoad();
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1) && CursorPosY == TitleMenuExitPosY)
+		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuExitPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1 && CursorPosY == TitleMenuExitPosY))
 			GameTitleMenuExit();
 	}
 }
