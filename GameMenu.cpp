@@ -28,6 +28,8 @@ extern std::int32_t CharacterHandle;
 extern std::int32_t BackGroundMusicHandle;
 extern std::int32_t SoundEffectHandle;
 
+extern ConfigData_t ConfigData;
+
 namespace {
 	//ゲームメニュー描画関数
 	void GameMenuDraw(std::int32_t& GameMenuCursorPosY) noexcept {
@@ -47,13 +49,38 @@ namespace {
 
 	//ゲームメニューキー操作
 	void GameMenuKeyMove(std::int32_t& GameMenuCursorPosY) noexcept {
-		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			GameMenuCursorPosY = (GameMenuBasePosY * 12 == GameMenuCursorPosY) ? GameMenuBasePosY : GameMenuCursorPosY + GameMenuBasePosY;
+		if (ConfigData.MouseAndKeyFlag == 0) {
+			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
+				GameMenuCursorPosY = (GameMenuBasePosY * 12 == GameMenuCursorPosY) ? GameMenuBasePosY : GameMenuCursorPosY + GameMenuBasePosY;
 
-		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			GameMenuCursorPosY = (GameMenuBasePosY == GameMenuCursorPosY) ? GameMenuBasePosY * 12 : GameMenuCursorPosY - GameMenuBasePosY;
+			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
+				GameMenuCursorPosY = (GameMenuBasePosY == GameMenuCursorPosY) ? GameMenuBasePosY * 12 : GameMenuCursorPosY - GameMenuBasePosY;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		}
+	}
+
+	//ゲームメニューのマウス操作
+	void GameMenuMouseMove(std::int32_t& GameMenuCursorPosY) noexcept {
+
+		std::int32_t MousePosY, MousePosX;
+
+		DxLib::GetMousePoint(&MousePosX, &MousePosY);
+
+		if (ConfigData.MouseAndKeyFlag == 1) {
+			GameMenuCursorPosY = (MousePosY <= (GameMenuBasePosY * 2) - 1) ? GameMenuBasePosY
+				: (MousePosY <= (GameMenuBasePosY * 3) - 1) ? (GameMenuBasePosY * 2)
+				: (MousePosY <= (GameMenuBasePosY * 4) - 1) ? (GameMenuBasePosY * 3)
+				: (MousePosY <= (GameMenuBasePosY * 5) - 1) ? (GameMenuBasePosY * 4)
+				: (MousePosY <= (GameMenuBasePosY * 6) - 1) ? (GameMenuBasePosY * 5)
+				: (MousePosY <= (GameMenuBasePosY * 7) - 1) ? (GameMenuBasePosY * 6)
+				: (MousePosY <= (GameMenuBasePosY * 8) - 1) ? (GameMenuBasePosY * 7)
+				: (MousePosY <= (GameMenuBasePosY * 9) - 1) ? (GameMenuBasePosY * 8)
+				: (MousePosY <= (GameMenuBasePosY * 10) - 1) ? (GameMenuBasePosY * 9)
+				: (MousePosY <= (GameMenuBasePosY * 11) - 1) ? (GameMenuBasePosY * 10)
+				: (MousePosY <= (GameMenuBasePosY * 12) - 1) ? (GameMenuBasePosY * 11)
+				: (GameMenuBasePosY * 12);
+		}
 	}
 
 	//ゲームへ戻る
@@ -139,6 +166,7 @@ void GameMenuLoop() noexcept {
 		ScreenClear();
 		GameMenuDraw(GameMenuCursorPosY);
 		GameMenuKeyMove(GameMenuCursorPosY);
+		GameMenuMouseMove(GameMenuCursorPosY);
 		GameMenuSelect(GameMenuCursorPosY);
 
 		//ゲーム終了確認ウインドウ
