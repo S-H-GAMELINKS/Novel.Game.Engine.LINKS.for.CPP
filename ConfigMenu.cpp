@@ -245,7 +245,7 @@ namespace {
 		if (GameMenuBasePosY * 6 == ConfigCursorPosY)
 			MouseAndKeyMoveChange();
 
-		if (GameMenuBasePosY * 7 == ConfigCursorPosY && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1)) {
+		if ((GameMenuBasePosY * 7 == ConfigCursorPosY && ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (GameMenuBasePosY * 7 == ConfigCursorPosY && ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1)) {
 			if (IDYES == MessageBoxYesNo("ñﬂÇËÇ‹Ç∑Ç©ÅH")) {
 				ConfigFlag = 0;
 			}
