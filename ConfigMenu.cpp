@@ -55,6 +55,26 @@ namespace {
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
+	//コンフィグ画面マウス操作
+	void ConfigMenuMouseMove(std::int32_t& ConfigCursorPosY) noexcept {
+
+		std::int32_t MousePosY, MousePosX;
+
+		DxLib::GetMousePoint(&MousePosX, &MousePosY);
+
+		if (ConfigData.MouseAndKeyFlag == 1) {
+			ConfigCursorPosY = (MousePosY <= (GameMenuBasePosY * 2) - 1) ? GameMenuBasePosY
+				: (MousePosY <= (GameMenuBasePosY * 3) - 1) ? GameMenuBasePosY *2
+				: (MousePosY <= (GameMenuBasePosY * 4) - 1) ? GameMenuBasePosY * 3
+				: (MousePosY <= (GameMenuBasePosY * 5) - 1) ? GameMenuBasePosY * 4
+				: (MousePosY <= (GameMenuBasePosY * 6) - 1) ? GameMenuBasePosY * 5
+				: (MousePosY <= (GameMenuBasePosY * 7) - 1) ? GameMenuBasePosY * 6
+				: (MousePosY <= (GameMenuBasePosY * 8) - 1) ? GameMenuBasePosY * 7
+				: (MousePosY <= (GameMenuBasePosY * 9) - 1) ? GameMenuBasePosY * 8
+				: GameMenuBasePosY * 9;
+		}
+	}
+
 	//BGM音量調節
 	void BackGroundMusicVolChange() noexcept {
 		if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
@@ -277,6 +297,7 @@ void ConfigMenuLoop() noexcept {
 			ScreenClear();
 			ConfigMenuDraw(ConfigCursorPosY);
 			ConfigMenuKeyMove(ConfigCursorPosY);
+			ConfigMenuMouseMove(ConfigCursorPosY);
 			ConfigMenuSelect(ConfigCursorPosY, ConfigFlag);
 		}
 	}
