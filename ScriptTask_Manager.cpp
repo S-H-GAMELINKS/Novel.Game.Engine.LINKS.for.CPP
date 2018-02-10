@@ -184,7 +184,7 @@ namespace ScriptTask {
 	void ClickWait() noexcept {
 		if (SkipAndAutoFlag == 0) {
 			DxLib::WaitKey();
-			if (DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1)
+			if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 				Cp++;
 		}
 
