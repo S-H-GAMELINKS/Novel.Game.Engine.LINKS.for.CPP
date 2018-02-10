@@ -13,6 +13,8 @@ extern int EndFlag;
 //タイトル画面
 extern std::int32_t GameTitleGraph;
 
+extern ConfigData_t ConfigData;
+
 namespace {
 
 	//タイトルメニューの描画関数
@@ -40,6 +42,23 @@ namespace {
 			CursorPosY = (TitleMenuPosY == CursorPosY) ? TitleMenuExitPosY : CursorPosY - CursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+	}
+
+	//タイトルメニューのマウス操作
+	void GameTitleMenuMouseMove(std::int32_t& CursorPosY) noexcept {
+
+		std::int32_t MousePosY, MousePosX;
+
+		DxLib::GetMousePoint(&MousePosX, &MousePosY);
+
+		if (ConfigData.MouseAndKeyFlag == 1) {
+			CursorPosY = (MousePosY <= 329) ? TitleMenuPosY
+				: (MousePosY <= (TitleMenuPosY + CursorMove * 2) - 1) ? TitleMenuPosY + CursorMove
+				: (MousePosY <= (TitleMenuPosY + CursorMove * 3) - 1) ? TitleMenuPosY + CursorMove * 2
+				: (MousePosY <= (TitleMenuPosY + CursorMove * 4) - 1) ? TitleMenuPosY + CursorMove * 3
+				: (MousePosY <= TitleMenuExitPosY - 1) ? TitleMenuPosY + CursorMove * 4
+				: TitleMenuExitPosY;
+		}
 	}
 
 	//ゲーム終了(タイトルメニュー)
@@ -78,6 +97,7 @@ void GameTitleMenuLoop(std::int32_t& CursorPosY) noexcept {
 		ScreenClear();
 		GameTitleMenuDraw(CursorPosY);
 		GameTitleMenuKeyMove(CursorPosY);
+		GameTitleMenuMouseMove(CursorPosY);
 		GameTitleMenuChoice(CursorPosY);
 
 		//ゲーム終了確認ウインドウ
