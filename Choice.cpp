@@ -99,12 +99,12 @@ namespace {
 	//選択肢の選択されたかをチェック
 	void ChoiceSelectCheck(std::int32_t &ChoiceCursorPosY) noexcept {
 
-		if (ChoiceCursorPosY == ChoicePosY[0] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (ChoiceCursorPosY == ChoicePosY[0] && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1)) {
 			ChoiceSelectUp();
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
-		if (ChoiceCursorPosY == ChoicePosY[1] && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (ChoiceCursorPosY == ChoicePosY[1] && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1)) {
 			ChoiceSelectDown();
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
