@@ -61,8 +61,8 @@ namespace {
 		}
 	}
 
-	//セーブ/ロード/デリート メニュー描画
-	void SaveLoadDeleteMenuDraw(std::int32_t& SaveDataMenuPosY) noexcept {
+	//セーブデータ メニュー描画
+	void SaveDataMenuDraw(std::int32_t& SaveDataMenuPosY) noexcept {
 
 		//スクリーンショット描画
 		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
@@ -182,8 +182,8 @@ namespace {
 			SaveFlag = SaveDataDelete(SaveDataPath, Message.c_str());
 	}
 
-	//セーブ/ロード/デリート メニュー選択処理
-	void SaveLoadDeleteMenuSelect(std::int32_t& SaveDataMenuPosY, const int& Num, std::int32_t& SaveFlag) noexcept {
+	//セーブデータ メニュー選択処理
+	void SaveDataMenuSelect(std::int32_t& SaveDataMenuPosY, const int& Num, std::int32_t& SaveFlag) noexcept {
 
 		if ((SaveDataMenuPosY == SaveDataBasePosY && ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (SaveDataMenuPosY == SaveDataBasePosY && ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
 			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag);
@@ -235,10 +235,10 @@ void SaveDataLoop(const int& Num) noexcept {
 		//セーブデータループ
 		while (SaveFlag == 1) {
 			ScreenClear();
-			SaveLoadDeleteMenuDraw(SaveDataMenuPosY);
+			SaveDataMenuDraw(SaveDataMenuPosY);
 			KeyState::SaveDataMenuKeyMove(SaveDataMenuPosY);
 			MouseState::SaveDataMenuMouseMove(SaveDataMenuPosY);
-			SaveLoadDeleteMenuSelect(SaveDataMenuPosY, Num, SaveFlag);
+			SaveDataMenuSelect(SaveDataMenuPosY, Num, SaveFlag);
 		}
 	}
 
