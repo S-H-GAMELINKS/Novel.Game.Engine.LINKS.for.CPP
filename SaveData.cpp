@@ -3,6 +3,7 @@
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
+#include "ConfigMenu.h"
 #include <string>
 #include <thread>
 #include <chrono>
@@ -23,6 +24,8 @@ extern int EndFlag;
 
 //tempデータ
 extern int EndFlagTemp, SpTemp;
+
+extern ConfigData_t ConfigData;
 
 namespace {
 
@@ -84,6 +87,21 @@ namespace {
 			SaveDataMenuPosY = (SaveDataBasePosY == SaveDataMenuPosY) ? SaveDataPosButtom : SaveDataMenuPosY - SaveDataCursorMove;
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+	}
+
+	//セーブ/ロードメニューマウス操作
+	void SaveLoadMenuMouseMove(std::int32_t& SaveDataMenuPosY) noexcept {
+
+		std::int32_t MousePosY, MousePosX;
+
+		DxLib::GetMousePoint(&MousePosX, &MousePosY);
+
+		if (ConfigData.MouseAndKeyFlag == 1) {
+			SaveDataMenuPosY = (MousePosY <= (SaveDataBasePosY * 2) - 1) ? SaveDataBasePosY
+				: (MousePosY <= (SaveDataBasePosY * 3) - 1) ? SaveDataBasePosY * 2
+				: (MousePosY <= (SaveDataBasePosY * 4) - 1) ? SaveDataBasePosY * 3
+				: SaveDataPosButtom;
+		}
 	}
 
 	//スクリーンショット名前変更
@@ -244,6 +262,7 @@ void SaveDataLoop(const int& Num) noexcept {
 			ScreenClear();
 			SaveLoadDeleteMenuDraw(SaveDataMenuPosY);
 			SaveLoadMenuKeyMove(SaveDataMenuPosY);
+			SaveLoadMenuMouseMove(SaveDataMenuPosY);
 			SaveLoadDeleteMenuSelect(SaveDataMenuPosY, Num, SaveFlag);
 		}
 	}
