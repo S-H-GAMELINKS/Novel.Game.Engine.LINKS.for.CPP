@@ -46,13 +46,15 @@ namespace {
 
 	//コンフィグ画面キー操作
 	void ConfigMenuKeyMove(std::int32_t& ConfigCursorPosY) noexcept {
-		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			ConfigCursorPosY = (GameMenuBasePosY * 7 == ConfigCursorPosY) ? GameMenuBasePosY : ConfigCursorPosY + CursorMove;
+		if (ConfigData.MouseAndKeyFlag == 0) {
+			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
+				ConfigCursorPosY = (GameMenuBasePosY * 7 == ConfigCursorPosY) ? GameMenuBasePosY : ConfigCursorPosY + CursorMove;
 
-		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			ConfigCursorPosY = (GameMenuBasePosY == ConfigCursorPosY) ? GameMenuBasePosY * 7 : ConfigCursorPosY - CursorMove;
+			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
+				ConfigCursorPosY = (GameMenuBasePosY == ConfigCursorPosY) ? GameMenuBasePosY * 7 : ConfigCursorPosY - CursorMove;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		}
 	}
 
 	//コンフィグ画面マウス操作
