@@ -64,14 +64,12 @@ namespace {
 
 		if (ConfigData.MouseAndKeyFlag == 1) {
 			ConfigCursorPosY = (MousePosY <= (GameMenuBasePosY * 2) - 1) ? GameMenuBasePosY
-				: (MousePosY <= (GameMenuBasePosY * 3) - 1) ? GameMenuBasePosY *2
+				: (MousePosY <= (GameMenuBasePosY * 3) - 1) ? GameMenuBasePosY * 2
 				: (MousePosY <= (GameMenuBasePosY * 4) - 1) ? GameMenuBasePosY * 3
 				: (MousePosY <= (GameMenuBasePosY * 5) - 1) ? GameMenuBasePosY * 4
 				: (MousePosY <= (GameMenuBasePosY * 6) - 1) ? GameMenuBasePosY * 5
 				: (MousePosY <= (GameMenuBasePosY * 7) - 1) ? GameMenuBasePosY * 6
-				: (MousePosY <= (GameMenuBasePosY * 8) - 1) ? GameMenuBasePosY * 7
-				: (MousePosY <= (GameMenuBasePosY * 9) - 1) ? GameMenuBasePosY * 8
-				: GameMenuBasePosY * 9;
+				: GameMenuBasePosY * 7;
 		}
 	}
 
