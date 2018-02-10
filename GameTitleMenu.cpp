@@ -35,13 +35,15 @@ namespace {
 	//タイトルメニューのキー操作
 	void GameTitleMenuKeyMove(std::int32_t& CursorPosY) noexcept {
 
-		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			CursorPosY = (TitleMenuExitPosY == CursorPosY) ? TitleMenuPosY : CursorPosY + CursorMove;
+		if (ConfigData.MouseAndKeyFlag == 0) {
+			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
+				CursorPosY = (TitleMenuExitPosY == CursorPosY) ? TitleMenuPosY : CursorPosY + CursorMove;
 
-		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			CursorPosY = (TitleMenuPosY == CursorPosY) ? TitleMenuExitPosY : CursorPosY - CursorMove;
+			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
+				CursorPosY = (TitleMenuPosY == CursorPosY) ? TitleMenuExitPosY : CursorPosY - CursorMove;
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		}
 	}
 
 	//タイトルメニューのマウス操作
