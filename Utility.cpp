@@ -196,7 +196,7 @@ void ShortCutKey() noexcept {
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
 	}
 
-	if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() & MOUSE_INPUT_RIGHT) == 1)) {
+	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1 || (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)) {
 		SaveDataScreenShotGet();
 		EndFlagTemp = EndFlag;
 		SpTemp = Sp;
