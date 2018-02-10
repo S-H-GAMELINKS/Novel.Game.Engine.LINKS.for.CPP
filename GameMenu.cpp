@@ -114,40 +114,40 @@ namespace {
 	//ゲームメニュー項目選択処理
 	void GameMenuSelect(std::int32_t& GameMenuCursorPosY) noexcept {
 
-		if (GameMenuCursorPosY == GameMenuBasePosY && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			SaveDataLoop(1);
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 2 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY * 2 && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			SaveDataLoop(2);
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 3 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY * 3 && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			SaveDataLoop(3);
 
-		if (GameMenuCursorPosY == GameMenuBasePosY && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			SkipAndAutoTask(3);
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 5 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY * 5 && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			SkipAndAutoTask(1);
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 6 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY * 6 && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			SkipAndAutoTask(2);
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 7 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY * 7 && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			SkipAndAutoTask(0);
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 8 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY * 8 && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			BackLogLoop();
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 9 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY * 9 && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			ConfigMenuLoop();
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 10 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY * 10 && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			GameMenuBackToTitle();
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 11 && CheckHitKey(KEY_INPUT_RETURN) == 1)
+		if (GameMenuCursorPosY == GameMenuBasePosY * 11 && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1))
 			GameMenuBackToGamePlay();
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 12 && CheckHitKey(KEY_INPUT_RETURN) == 1) {
+		if (GameMenuCursorPosY == GameMenuBasePosY * 12 && (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() && MOUSE_INPUT_LEFT) == 1)) {
 			if (IDYES == MessageBoxYesNo("ゲームを終了しますか？"))
 				EndFlag = 99;
 		}
