@@ -52,7 +52,7 @@ void DxLibInitPostProccessing() noexcept {
 	ConfigLoad();
 
 	//各種素材の読込関数
-	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie, GameTitleGraph);
+	MaterialLoad(BackGround, Character, BackGroundMusic, SoundEffect, Movie, ImageEffect, GameTitleGraph);
 
 	//タイトルムービー処理
 	TitleMoviePlay();

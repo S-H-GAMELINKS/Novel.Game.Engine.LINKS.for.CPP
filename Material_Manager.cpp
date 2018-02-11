@@ -36,7 +36,7 @@ namespace {
 }
 
 //各種素材読込関数
-void MaterialLoad(std::array<int, MaterialMax>& BackGround, std::array<int, MaterialMax>& Character, std::array<int, MaterialMax>& BackGroundMusic, std::array<int, MaterialMax>& SoundEffect, std::array<std::string, MaterialMax>& Movie, std::int32_t& GameTitleGraph) noexcept {
+void MaterialLoad(std::array<int, MaterialMax>& BackGround, std::array<int, MaterialMax>& Character, std::array<int, MaterialMax>& BackGroundMusic, std::array<int, MaterialMax>& SoundEffect, std::array<std::string, MaterialMax>& Movie, std::array<int, MaterialMax>& ImageEffect, std::int32_t& GameTitleGraph) noexcept {
 
 	//サウンドデータの読み込み形式
 	DxLib::SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
@@ -55,6 +55,9 @@ void MaterialLoad(std::array<int, MaterialMax>& BackGround, std::array<int, Mate
 
 	//動画読込関数
 	MaterialLoadTemplate(Movie, "DATA/MOVIE/MOVIE", ".wmv", [](const std::string& Path) {return std::move(Path); });
+
+	//イメージエフェクト読込関数
+	MaterialLoadTemplate(ImageEffect, "DATA/IMAGEEFFECT/IE", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
 
 	//タイトル画面読込
 	GameTitleGraph = DxLib::LoadGraph("DATA/BACKGROUND/TITLE.png");
