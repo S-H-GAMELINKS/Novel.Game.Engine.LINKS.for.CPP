@@ -27,6 +27,7 @@ static std::array<int, MaterialMax> Character;
 //BGMŠi”[•Ï”
 static std::array<int, MaterialMax> BackGroundMusic;
 
+//Œø‰Ê‰¹Ši”[•Ï”
 static std::array<int, MaterialMax> SoundEffect;
 
 //“®‰æŠi”[•Ï”
