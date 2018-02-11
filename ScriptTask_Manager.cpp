@@ -166,7 +166,7 @@ namespace ScriptTask {
 	void DrawImageEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& ImageEffect) {
 		Cp++;
 		ImageEffectHandle = ImageEffect[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
-		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+		DxLib::DrawGraph(0, 0, ImageEffectHandle, TRUE);
 	}
 
 	//‰æ–ÊƒNƒŠƒAˆ—ŠÖ”
