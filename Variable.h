@@ -33,11 +33,15 @@ static std::array<int, MaterialMax> SoundEffect;
 //動画格納変数
 static std::array<std::string, MaterialMax> Movie;
 
+//イメージエフェクト格納変数
+static std::array<int, MaterialMax> ImageEffect;
+
 //各種素材ハンドル
 std::int32_t BackGroundHandle;
 std::int32_t CharacterHandle;
 std::int32_t BackGroundMusicHandle;
 std::int32_t SoundEffectHandle;
+std::int32_t ImageEffectHandle;
 
 std::int32_t GameTitleGraph;
 
