@@ -23,6 +23,7 @@ extern std::int32_t BackGroundHandle;
 extern std::int32_t CharacterHandle;
 extern std::int32_t BackGroundMusicHandle;
 extern std::int32_t SoundEffectHandle;
+extern std::int32_t ImageEffectHandle;
 
 // 既読スキップ/スキップ/オート変数
 extern int SkipAndAutoFlag;
@@ -161,6 +162,13 @@ namespace ScriptTask {
 		DxLib::PlayMovie(Movie[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
 
+	//イメージエフェクト描画関数
+	void DrawImageEffect(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& ImageEffect) {
+		Cp++;
+		ImageEffectHandle = ImageEffect[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
+		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+	}
+
 	//画面クリア処理関数
 	void ClearScreen() noexcept {
 		BackLogGet();
@@ -200,7 +208,7 @@ namespace ScriptTask {
 }
 
 //スクリプトタグ処理関数
-void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround, const std::array<int, MaterialMax>& Character, const std::array<int, MaterialMax>& BackGroundMusic, const std::array<int, MaterialMax>& SoundEffect, const std::array<std::string, MaterialMax>& Movie) noexcept {
+void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround, const std::array<int, MaterialMax>& Character, const std::array<int, MaterialMax>& BackGroundMusic, const std::array<int, MaterialMax>& SoundEffect, const std::array<std::string, MaterialMax>& Movie, std::array<int, MaterialMax>& ImageEffect) noexcept {
 
 	switch (Script[Sp][Cp])
 	{
@@ -222,6 +230,10 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 
 	case 'V':	//動画再生
 		ScriptTask::PlayMovie(Script, Movie);
+		break;
+
+	case 'I':	//イメージエフェクト描画
+		ScriptTask::DrawImageEffect(Script, ImageEffect);
 		break;
 
 	case 'L':	//改行文字
