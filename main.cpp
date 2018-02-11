@@ -72,7 +72,7 @@ void GamePlayLoop(const int RouteNumber) noexcept {
 	while (DxLib::ProcessMessage() == 0) {
 		
 		//スクリプトタグ処理管理関数
-		ScriptTagTaskManager(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie);
+		ScriptTagTaskManager(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie, ImageEffect);
 
 		//ショートカットキー
 		ShortCutKey();
