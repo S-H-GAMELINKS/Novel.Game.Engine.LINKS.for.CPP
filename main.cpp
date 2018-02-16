@@ -14,6 +14,8 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <thread>
+#include <chrono>
 
 
 //DxLib初期化前処理
@@ -108,6 +110,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//初期化後処理
 	DxLibInitPostProccessing();
+
+	std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime * WaitGameTime));
 
 	//カーソルの位置
 	std::int32_t CursorPosY = 300;
