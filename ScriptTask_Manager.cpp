@@ -205,6 +205,12 @@ namespace ScriptTask {
 		}
 
 	}
+
+	//ゲームオーバー画面の描画
+	void GameOverScreenDraw() {
+		std::unique_ptr<std::int32_t> GameOverHandle = std::make_unique<std::int32_t>(DxLib::LoadGraph("DATA/BACKGROUND/GAMEOVER.png"));
+		DxLib::DrawGraph(0, 0, *GameOverHandle, TRUE);
+	}
 }
 
 //スクリプトタグ処理関数
@@ -256,6 +262,7 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		break;
 
 	case 'G':	//ゲームオーバー画面
+		ScriptTask::GameOverScreenDraw();
 		Cp++;
 		break;
 
