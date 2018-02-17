@@ -267,6 +267,7 @@ void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::arr
 		break;
 
 	case 'F':	//エンディング画面
+		DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
 		Cp++;
 		break;
 
