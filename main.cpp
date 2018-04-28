@@ -84,7 +84,9 @@ void DxLibInitPostProccessing() noexcept {
 //ゲーム中のループ
 void GamePlayLoop(const int RouteNumber) noexcept {
 
-	ScriptRead(Script, EndFlag);
+	Script.clear();
+
+	Script = ScriptRead(EndFlag);
 
 	if (SkipAndAutoFlag == 1)
 		SkipDataCheck(RouteNumber);

@@ -43,6 +43,6 @@ std::array<T, MaterialMax> MaterialLoad(std::array<T, MaterialMax>& Material, co
 }
 
 //スクリプト読込関数
-void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) noexcept;
+std::vector<std::string> ScriptRead(unsigned int EndFlag) noexcept;
 
 #endif // MATERIAL_MANAGER_CPP_

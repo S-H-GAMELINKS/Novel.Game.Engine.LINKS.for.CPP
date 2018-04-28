@@ -6,9 +6,9 @@
 #include <fstream>
 
 //スクリプト読込関数
-void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) noexcept {
+std::vector<std::string> ScriptRead(unsigned int EndFlag) noexcept {
 
-	Script.clear();
+	std::vector<std::string> Script;
 
 	const char* ScriptFilePath[] = {
 		"DATA/STR/LINKS.txt",
@@ -33,4 +33,6 @@ void ScriptRead(std::vector<std::string>& Script, unsigned int EndFlag) noexcept
 
 		for (std::string line; std::getline(file, line); ) if (!line.empty()) Script.emplace_back(std::move(line));
 	}
+
+	return Script;
 }
