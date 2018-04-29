@@ -88,10 +88,10 @@ namespace KeyState {
 
 namespace MouseState {
 
-	//タイトルメニューのマウス操作
-	void GameTitleMenuMouseMove(std::int32_t& CursorPosY) noexcept {
+	std::int32_t MousePosY, MousePosX;
 
-		std::int32_t MousePosY, MousePosX;
+	//タイトルメニューのマウス操作
+	std::int32_t GameTitleMenuMouseMove(std::int32_t CursorPosY) noexcept {
 
 		DxLib::GetMousePoint(&MousePosX, &MousePosY);
 
@@ -103,12 +103,12 @@ namespace MouseState {
 				: (MousePosY <= TitleMenuExitPosY - 1) ? TitleMenuPosY + CursorMove * 4
 				: TitleMenuExitPosY;
 		}
+
+		return CursorPosY;
 	}
 
 	//コンフィグ画面マウス操作
-	void ConfigMenuMouseMove(std::int32_t& ConfigCursorPosY) noexcept {
-
-		std::int32_t MousePosY, MousePosX;
+	std::int32_t ConfigMenuMouseMove(std::int32_t ConfigCursorPosY) noexcept {
 
 		DxLib::GetMousePoint(&MousePosX, &MousePosY);
 
@@ -121,12 +121,12 @@ namespace MouseState {
 				: (MousePosY <= (GameMenuBasePosY * 7) - 1) ? GameMenuBasePosY * 6
 				: GameMenuBasePosY * 7;
 		}
+
+		return ConfigCursorPosY;
 	}
 
 	//ゲームメニューのマウス操作
-	void GameMenuMouseMove(std::int32_t& GameMenuCursorPosY) noexcept {
-
-		std::int32_t MousePosY, MousePosX;
+	std::int32_t GameMenuMouseMove(std::int32_t GameMenuCursorPosY) noexcept {
 
 		DxLib::GetMousePoint(&MousePosX, &MousePosY);
 
@@ -144,24 +144,24 @@ namespace MouseState {
 				: (MousePosY <= (GameMenuBasePosY * 12) - 1) ? (GameMenuBasePosY * 11)
 				: (GameMenuBasePosY * 12);
 		}
+
+		return GameMenuCursorPosY;
 	}
 
 	//選択肢マウス操作
-	void ChoiceMouseMove(std::int32_t& ChoiceCursorPosY) noexcept {
-
-		std::int32_t MousePosY, MousePosX;
+	std::int32_t ChoiceMouseMove(std::int32_t ChoiceCursorPosY) noexcept {
 
 		DxLib::GetMousePoint(&MousePosX, &MousePosY);
 
 		if (ConfigData.MouseAndKeyFlag == 1) {
 			ChoiceCursorPosY = (MousePosY <= (ChoicePosY[1] - 1)) ? ChoicePosY[0] : ChoicePosY[1];
 		}
+
+		return ChoiceCursorPosY;
 	}
 
 	//セーブデータメニューマウス操作
-	void SaveDataMenuMouseMove(std::int32_t& SaveDataMenuPosY) noexcept {
-
-		std::int32_t MousePosY, MousePosX;
+	std::int32_t SaveDataMenuMouseMove(std::int32_t SaveDataMenuPosY) noexcept {
 
 		DxLib::GetMousePoint(&MousePosX, &MousePosY);
 
@@ -171,6 +171,8 @@ namespace MouseState {
 				: (MousePosY <= (SaveDataBasePosY * 4) - 1) ? SaveDataBasePosY * 3
 				: SaveDataPosButtom;
 		}
+
+		return SaveDataMenuPosY;
 	}
 
 }

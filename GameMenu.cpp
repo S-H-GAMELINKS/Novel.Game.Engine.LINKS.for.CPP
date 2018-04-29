@@ -130,7 +130,7 @@ void GameMenuLoop() noexcept {
 		ScreenClear();
 		GameMenuDraw(GameMenuCursorPosY);
 		GameMenuCursorPosY = KeyState::GameMenuKeyMove(GameMenuCursorPosY);
-		MouseState::GameMenuMouseMove(GameMenuCursorPosY);
+		GameMenuCursorPosY = MouseState::GameMenuMouseMove(GameMenuCursorPosY);
 		GameMenuSelect(GameMenuCursorPosY);
 
 		//ゲーム終了確認ウインドウ
