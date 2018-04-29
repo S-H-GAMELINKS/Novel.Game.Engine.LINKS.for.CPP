@@ -129,7 +129,7 @@ void GameMenuLoop() noexcept {
 	while (EndFlag == 17) {
 		ScreenClear();
 		GameMenuDraw(GameMenuCursorPosY);
-		KeyState::GameMenuKeyMove(GameMenuCursorPosY);
+		GameMenuCursorPosY = KeyState::GameMenuKeyMove(GameMenuCursorPosY);
 		MouseState::GameMenuMouseMove(GameMenuCursorPosY);
 		GameMenuSelect(GameMenuCursorPosY);
 

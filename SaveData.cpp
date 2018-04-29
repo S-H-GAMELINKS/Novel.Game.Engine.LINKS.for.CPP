@@ -236,7 +236,7 @@ void SaveDataLoop(const int& Num) noexcept {
 		while (SaveFlag == 1) {
 			ScreenClear();
 			SaveDataMenuDraw(SaveDataMenuPosY);
-			KeyState::SaveDataMenuKeyMove(SaveDataMenuPosY);
+			SaveDataMenuPosY = KeyState::SaveDataMenuKeyMove(SaveDataMenuPosY);
 			MouseState::SaveDataMenuMouseMove(SaveDataMenuPosY);
 			SaveDataMenuSelect(SaveDataMenuPosY, Num, SaveFlag);
 		}

@@ -267,7 +267,7 @@ void ConfigMenuLoop() noexcept {
 		while (ConfigFlag == 1) {
 			ScreenClear();
 			ConfigMenuDraw(ConfigCursorPosY);
-			KeyState::ConfigMenuKeyMove(ConfigCursorPosY);
+			ConfigCursorPosY = KeyState::ConfigMenuKeyMove(ConfigCursorPosY);
 			MouseState::ConfigMenuMouseMove(ConfigCursorPosY);
 			ConfigMenuSelect(ConfigCursorPosY, ConfigFlag);
 		}
