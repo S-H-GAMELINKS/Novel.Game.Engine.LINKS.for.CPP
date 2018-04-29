@@ -33,12 +33,6 @@ namespace {
 			DxLib::DrawString(TitleMenuPosX, TitleMenuPosY + 30 * i, TitleMenuItem[i], Color);
 	}
 
-	//ゲーム終了(タイトルメニュー)
-	void GameTitleMenuExit() noexcept {
-		if (IDYES == MessageBoxYesNo("終了しますか？"))
-			EndFlag = 99;
-	}
-
 	//タイトルメニューの項目選択関数
 	void GameTitleMenuChoice(const std::int32_t& CursorPosY) noexcept {
 
@@ -58,7 +52,7 @@ namespace {
 			ContinueSaveDataLoad();
 
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuExitPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) && CursorPosY == TitleMenuExitPosY))
-			GameTitleMenuExit();
+			GameEndMessageBox();
 	}
 }
 
