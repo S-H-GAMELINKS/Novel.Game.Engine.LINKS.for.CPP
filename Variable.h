@@ -18,32 +18,15 @@ int EndFlag = 0;	// I—¹ƒtƒ‰ƒO
 //ƒXƒNƒŠƒvƒgŠi”[•Ï”
 static std::vector<std::string> Script;
 
-//”wŒi‰æ‘œŠi”[•Ï”
-static std::array<int, MaterialMax> BackGround;
+//Šeí‘fŞŠi”[•Ï”
+template <typename T>
+using Material = std::array<T, MaterialMax>;
 
-//—§‚¿ŠGŠi”[•Ï”
-static std::array<int, MaterialMax> Character;
-
-//BGMŠi”[•Ï”
-static std::array<int, MaterialMax> BackGroundMusic;
-
-//Œø‰Ê‰¹Ši”[•Ï”
-static std::array<int, MaterialMax> SoundEffect;
-
-//“®‰æŠi”[•Ï”
-static std::array<std::string, MaterialMax> Movie;
-
-//ƒCƒ[ƒWƒGƒtƒFƒNƒgŠi”[•Ï”
-static std::array<int, MaterialMax> ImageEffect;
+static Material<int> BackGround, Character, BackGroundMusic, SoundEffect, ImageEffect;
+static Material<std::string> Movie;
 
 //Šeí‘fŞƒnƒ“ƒhƒ‹
-std::int32_t BackGroundHandle;
-std::int32_t CharacterHandle;
-std::int32_t BackGroundMusicHandle;
-std::int32_t SoundEffectHandle;
-std::int32_t ImageEffectHandle;
-
-std::int32_t GameTitleGraph;
+std::int32_t BackGroundHandle, CharacterHandle, BackGroundMusicHandle, SoundEffectHandle, ImageEffectHandle, GameTitleGraph;
 
 //‰æ–Ê•Ï‘J—pTemp•Ï”
 int EndFlagTemp, SpTemp;
