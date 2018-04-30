@@ -11,10 +11,10 @@
 namespace BackLog {
 	std::int32_t BackLogCount = 0;
 	std::vector<std::int32_t> BackLog;
+	std::string Name = "バックログ";
 
 	//バックログのナンバー表示
 	void BackLogNumberDraw(const std::int32_t& Num) noexcept {
-		std::string Name = "バックログ";
 		Name += std::to_string(Num + 1);
 		DxLib::DrawString(0, 400, Name.c_str(), Color);
 	}
