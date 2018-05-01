@@ -20,7 +20,7 @@ namespace BackLog {
 	}
 
 	//バックログの描画
-	void BackLogDraw(std::int32_t& Num) noexcept {
+	std::int32_t BackLogDraw(std::int32_t Num) noexcept {
 
 		if (Num < BackLogCount) {
 			DxLib::DrawGraph(0, 0, BackLog[BackLogCount - Num - 1], TRUE);
@@ -32,6 +32,8 @@ namespace BackLog {
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+
+		return Num;
 	}
 
 	//バックログ時のキー操作
@@ -69,7 +71,7 @@ void BackLogLoop() noexcept {
 			std::int32_t BackLogFlag = 1;
 
 			while (BackLogFlag == 1) {
-				BackLog::BackLogDraw(Num);
+				Num = BackLog::BackLogDraw(Num);
 				BackLog::BackLogKeyMove(Num, BackLogFlag);
 				ScreenClear();
 			}
