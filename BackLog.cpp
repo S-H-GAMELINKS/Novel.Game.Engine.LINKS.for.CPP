@@ -47,7 +47,7 @@ namespace BackLog {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) {
 			if (IDYES == MessageBoxYesNo("バックログを終了しますか？"))
-				BackLogFlag = false;
+				BackLogFlag = false	;
 		}
 	}
 }
