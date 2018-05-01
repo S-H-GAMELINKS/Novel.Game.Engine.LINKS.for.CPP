@@ -62,8 +62,7 @@ void GameTitleMenuLoop(std::int32_t& CursorPosY) noexcept {
 	while (EndFlag == 0) {
 		ScreenClear();
 		GameTitleMenuDraw(CursorPosY);
-		CursorPosY = KeyState::GameTitleMenuKeyMove(CursorPosY);
-		CursorPosY = MouseState::GameTitleMenuMouseMove(CursorPosY);
+		CursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::GameTitleMenuMouseMove(CursorPosY) : KeyState::GameTitleMenuKeyMove(CursorPosY);
 		GameTitleMenuChoice(CursorPosY);
 
 		//ゲーム終了確認ウインドウ

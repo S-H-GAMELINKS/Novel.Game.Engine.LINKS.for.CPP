@@ -96,8 +96,7 @@ void ChoiceSelect(const int& RoutteNumber) noexcept {
 
 	while (EndFlag == RoutteNumber) {
 		DrawChoice(ChoiceCursorPosY);
-		ChoiceCursorPosY = KeyState::ChoiceKeyMove(ChoiceCursorPosY);
-		ChoiceCursorPosY = MouseState::ChoiceMouseMove(ChoiceCursorPosY);
+		ChoiceCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::ChoiceMouseMove(ChoiceCursorPosY) : KeyState::ChoiceKeyMove(ChoiceCursorPosY);
 		ChoiceSelectCheck(ChoiceCursorPosY);
 		ScreenClear();
 		ShortCutKey();
