@@ -37,7 +37,7 @@ namespace BackLog {
 	}
 
 	//バックログ時のキー操作
-	void BackLogKeyMove(std::int32_t& Num, std::int32_t& BackLogFlag) noexcept {
+	void BackLogKeyMove(std::int32_t& Num, bool& BackLogFlag) noexcept {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
 			Num = (Num < BackLogCount) ? Num + 1 : Num;
@@ -47,7 +47,7 @@ namespace BackLog {
 
 		if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) {
 			if (IDYES == MessageBoxYesNo("バックログを終了しますか？"))
-				BackLogFlag = 0;
+				BackLogFlag = false;
 		}
 	}
 }
@@ -68,9 +68,9 @@ void BackLogLoop() noexcept {
 
 		if (!BackLog::BackLog.empty()) {
 			std::int32_t Num = 0;
-			std::int32_t BackLogFlag = 1;
+			bool BackLogFlag = true;
 
-			while (BackLogFlag == 1) {
+			while (BackLogFlag) {
 				Num = BackLog::BackLogDraw(Num);
 				BackLog::BackLogKeyMove(Num, BackLogFlag);
 				ScreenClear();
