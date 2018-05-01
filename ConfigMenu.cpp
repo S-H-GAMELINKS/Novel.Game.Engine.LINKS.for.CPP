@@ -195,7 +195,7 @@ namespace {
 	}
 
 	//コンフィグ画面選択処理
-	void ConfigMenuSelect(std::int32_t& ConfigCursorPosY, std::int32_t& ConfigFlag) noexcept {
+	bool ConfigMenuSelect(std::int32_t& ConfigCursorPosY, bool ConfigFlag) noexcept {
 
 		if (GameMenuBasePosY == ConfigCursorPosY)
 			BackGroundMusicVolChange();
@@ -217,10 +217,12 @@ namespace {
 
 		if ((GameMenuBasePosY * 7 == ConfigCursorPosY && ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (GameMenuBasePosY * 7 == ConfigCursorPosY && ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) == 1)) {
 			if (IDYES == MessageBoxYesNo("戻りますか？")) {
-				ConfigFlag = 0;
+				ConfigFlag = false;
 			}
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
+
+		return ConfigFlag;
 	}
 }
 
@@ -260,11 +262,11 @@ void ConfigMenuLoop() noexcept {
 
 	if (IDYES == MessageBoxYesNo("コンフィグ画面に移行しますか？")) {
 
-		std::int32_t ConfigFlag = 1;
+		bool ConfigFlag = true;
 
 		std::int32_t ConfigCursorPosY = GameMenuBasePosY;
 
-		while (ConfigFlag == 1) {
+		while (ConfigFlag) {
 			ScreenClear();
 			ConfigMenuDraw(ConfigCursorPosY);
 			ConfigCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::ConfigMenuMouseMove(ConfigCursorPosY) : KeyState::ConfigMenuKeyMove(ConfigCursorPosY);
