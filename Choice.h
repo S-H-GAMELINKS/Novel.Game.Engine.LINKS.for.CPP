@@ -2,6 +2,6 @@
 #define CHOICE_H_
 
 //‘I‘ğˆˆ—ŠÖ”
-void ChoiceSelect(int RoutteNumber) noexcept;
+void ChoiceSelect(const int& RoutteNumber) noexcept;
 
 #endif //CHOICE_H_

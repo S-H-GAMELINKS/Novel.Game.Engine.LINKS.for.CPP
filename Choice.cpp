@@ -88,7 +88,7 @@ namespace {
 }
 
 //‘I‘ğˆˆ—ŠÖ”
-void ChoiceSelect(int RoutteNumber) noexcept {
+void ChoiceSelect(const int& RoutteNumber) noexcept {
 
 	ChoiceRead();
 
