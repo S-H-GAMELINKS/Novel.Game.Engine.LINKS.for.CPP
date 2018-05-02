@@ -24,10 +24,7 @@ extern int DrawPointX, DrawPointY;
 extern int EndFlagTemp, SpTemp;
 
 //Šeí‘fŞƒnƒ“ƒhƒ‹
-extern std::int32_t BackGroundHandle;
-extern std::int32_t CharacterHandle;
-extern std::int32_t BackGroundMusicHandle;
-extern std::int32_t SoundEffectHandle;
+extern std::int32_t BackGroundHandle, CharacterHandle, BackGroundMusicHandle, SoundEffectHandle;
 
 extern ConfigData_t ConfigData;
 
