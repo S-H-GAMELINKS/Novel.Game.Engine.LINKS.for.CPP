@@ -33,7 +33,7 @@ extern ConfigData_t ConfigData;
 
 namespace {
 	//ゲームメニュー描画関数
-	void GameMenuDraw(std::int32_t& GameMenuCursorPosY) noexcept {
+	void GameMenuDraw(const std::int32_t& GameMenuCursorPosY) noexcept {
 
 		static constexpr const char* GameMenuItem[] = {
 			"セーブ", "ロード", "セーブデータ削除", "既読スキップ", "スキップ", "オート",
@@ -77,7 +77,7 @@ namespace {
 	}
 
 	//ゲームメニュー項目選択処理
-	void GameMenuSelect(std::int32_t& GameMenuCursorPosY) noexcept {
+	void GameMenuSelect(const std::int32_t& GameMenuCursorPosY) noexcept {
 
 		if ((GameMenuCursorPosY == GameMenuBasePosY && ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (GameMenuCursorPosY == GameMenuBasePosY && ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT)))
 			SaveDataLoop(1);
