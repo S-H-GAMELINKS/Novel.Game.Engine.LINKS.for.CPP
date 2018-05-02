@@ -124,8 +124,6 @@ void GameMenuLoop() noexcept {
 
 	std::int32_t GameMenuCursorPosY = GameMenuBasePosY;
 
-	DxLib::ClearDrawScreen();
-
 	while (EndFlag == 17) {
 		ScreenClear();
 		GameMenuDraw(GameMenuCursorPosY);
