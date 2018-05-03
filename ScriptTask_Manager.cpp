@@ -170,13 +170,6 @@ namespace ScriptTask {
 		DxLib::PlayMovie(Movie[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
 
-	//イメージエフェクト描画関数
-	void DrawImageEffect(Script& Script, Material<int>& ImageEffect) {
-		Cp++;
-		ImageEffectHandle = ImageEffect[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
-		DxLib::DrawGraph(0, 0, ImageEffectHandle, TRUE);
-	}
-
 	//画面クリア処理関数
 	void ClearScreen() noexcept {
 		BackLogGet();
