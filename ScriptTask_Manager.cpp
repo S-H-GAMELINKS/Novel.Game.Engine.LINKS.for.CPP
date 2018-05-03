@@ -111,11 +111,12 @@ namespace ScriptTask {
 		DrawScriptSpeed();
 	}
 
-	//”wŒi‰æ‘œ•`‰æŠÖ”
-	void DrawBackGround(Script& Script, Material<int>& BackGround) noexcept {
+	//”wŒi‰æ‘œ•ƒCƒ[ƒWƒGƒtƒFƒNƒg•`‰æŠÖ”
+	template <typename T, typename Func>
+	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle) noexcept {
 		Cp++;
-		BackGroundHandle = BackGround[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
-		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+		Handle = Material[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
+		DrawFunc(Handle);
 	}
 
 	//—§‚¿ŠGíœˆ—ŠÖ”
@@ -225,7 +226,7 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 	switch (Script[Sp][Cp])
 	{
 	case 'B':	//”wŒi‰æ‘œ•`‰æ
-		ScriptTask::DrawBackGround(Script, BackGround);
+		ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle);
 		break;
 
 	case 'C':	//—§‚¿ŠG‰æ‘œ•`‰æ
@@ -245,7 +246,7 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 		break;
 
 	case 'I':	//ƒCƒ[ƒWƒGƒtƒFƒNƒg•`‰æ
-		ScriptTask::DrawImageEffect(Script, ImageEffect);
+		ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle);
 		break;
 
 	case 'L':	//‰üs•¶š
