@@ -164,8 +164,7 @@ namespace ScriptTask {
 	}
 
 	//ìÆâÊçƒê∂ä÷êî
-	template <typename T>
-	void PlayMovie(Script& Script, std::array<T, MaterialMax> Movie) noexcept {
+	void PlayMovie(Script& Script, Material<std::string>& Movie) noexcept {
 		Cp++;
 		DxLib::PlayMovie(Movie[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
