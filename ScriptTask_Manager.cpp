@@ -111,11 +111,16 @@ namespace ScriptTask {
 		DrawScriptSpeed();
 	}
 
+	//素材番号処理
+	int MaterialNumCheck(Script& Script) {
+		return (static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1;
+	}
+
 	//背景画像＆イメージエフェクト描画関数
 	template <typename T, typename Func>
 	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle) noexcept {
 		Cp++;
-		Handle = Material[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
+		Handle = Material[MaterialNumCheck(Script)];
 		DrawFunc(Handle);
 	}
 
@@ -131,7 +136,7 @@ namespace ScriptTask {
 
 		ScriptTask::RemoveCharacterGraph();
 
-		CharacterHandle = Character[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
+		CharacterHandle = Character[MaterialNumCheck(Script)];
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, CharacterHandle, TRUE);
 	}
 
@@ -145,7 +150,7 @@ namespace ScriptTask {
 			DxLib::StopSoundMem(BackGroundMusicHandle);
 
 		Cp++;
-		BackGroundMusicHandle = BackGroundMusic[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
+		BackGroundMusicHandle = BackGroundMusic[MaterialNumCheck(Script)];
 		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
 	}
 
@@ -159,14 +164,14 @@ namespace ScriptTask {
 			DxLib::StopSoundMem(SoundEffectHandle);
 
 		Cp++;
-		SoundEffectHandle = SoundEffect[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
+		SoundEffectHandle = SoundEffect[MaterialNumCheck(Script)];
 		DxLib::PlaySoundMem(SoundEffectHandle, DX_PLAYTYPE_BACK);
 	}
 
 	//動画再生関数
 	void PlayMovie(Script& Script, Material<std::string>& Movie) noexcept {
 		Cp++;
-		DxLib::PlayMovie(Movie[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
+		DxLib::PlayMovie(Movie[MaterialNumCheck(Script)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
 
 	//画面クリア処理関数
