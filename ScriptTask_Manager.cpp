@@ -34,6 +34,9 @@ extern struct ConfigData_t ConfigData;
 template <class T>
 using Material = const std::array<T, MaterialMax>;
 
+//スクリプト用エイリアス
+using Script = const std::vector<std::string>;
+
 namespace ScriptTask {
 
 	char OneMojiBuf[3];	// １文字分一時記憶配列
@@ -89,7 +92,7 @@ namespace ScriptTask {
 	}
 
 	//文字列描画関数
-	void DrawScript(const std::vector<std::string>& Script) noexcept {
+	void DrawScript(Script& Script) noexcept {
 		// １文字分抜き出す
 		OneMojiBuf[0] = Script[Sp][Cp];
 		OneMojiBuf[1] = Script[Sp][Cp + 1];
@@ -109,7 +112,7 @@ namespace ScriptTask {
 	}
 
 	//背景画像描画関数
-	void DrawBackGround(const std::vector<std::string>& Script, Material<int>& BackGround) noexcept {
+	void DrawBackGround(Script& Script, Material<int>& BackGround) noexcept {
 		Cp++;
 		BackGroundHandle = BackGround[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
@@ -122,7 +125,7 @@ namespace ScriptTask {
 	}
 
 	//立ち絵描画関数
-	void DrawCharacter(const std::vector<std::string>& Script, Material<int>& Character) noexcept {
+	void DrawCharacter(Script& Script, Material<int>& Character) noexcept {
 		Cp++;
 
 		ScriptTask::RemoveCharacterGraph();
@@ -132,7 +135,7 @@ namespace ScriptTask {
 	}
 
 	//BGM再生関数
-	void PlayBackGroundMusic(const std::vector<std::string>& Script, Material<int>& BackGroundMusic) noexcept {
+	void PlayBackGroundMusic(Script& Script, Material<int>& BackGroundMusic) noexcept {
 
 		DxLib::ChangeVolumeSoundMem(255 * ConfigData.BackGroundMusicVolume / 100, BackGroundMusicHandle);
 		
@@ -146,7 +149,7 @@ namespace ScriptTask {
 	}
 
 	//効果音再生関数
-	void PlaySoundEffect(const std::vector<std::string>& Script, Material<int>& SoundEffect) noexcept {
+	void PlaySoundEffect(Script& Script, Material<int>& SoundEffect) noexcept {
 
 		DxLib::ChangeVolumeSoundMem(255 * ConfigData.SoundEffectVolume / 100, SoundEffectHandle);
 
@@ -161,13 +164,13 @@ namespace ScriptTask {
 
 	//動画再生関数
 	template <typename T>
-	void PlayMovie(const std::vector<T>& Script, std::array<T, MaterialMax> Movie) noexcept {
+	void PlayMovie(Script& Script, std::array<T, MaterialMax> Movie) noexcept {
 		Cp++;
 		DxLib::PlayMovie(Movie[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
 
 	//イメージエフェクト描画関数
-	void DrawImageEffect(const std::vector<std::string>& Script, Material<int>& ImageEffect) {
+	void DrawImageEffect(Script& Script, Material<int>& ImageEffect) {
 		Cp++;
 		ImageEffectHandle = ImageEffect[(static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1];
 		DxLib::DrawGraph(0, 0, ImageEffectHandle, TRUE);
@@ -184,8 +187,7 @@ namespace ScriptTask {
 	}
 
 	//コメント処理関数
-	template <typename T>
-	void Comment(const std::vector<T>& Script) noexcept {
+	void Comment(Script& Script) noexcept {
 		if (Script[Sp][Cp] == '/') {
 			Cp = 0;
 			Sp++;
@@ -218,7 +220,7 @@ namespace ScriptTask {
 }
 
 //スクリプトタグ処理関数
-void ScriptTagTaskManager(const std::vector<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) noexcept {
+void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) noexcept {
 
 	switch (Script[Sp][Cp])
 	{
