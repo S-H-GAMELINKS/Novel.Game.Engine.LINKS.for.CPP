@@ -19,11 +19,7 @@ extern int Sp, Cp;	// 参照する文字列番号と文字列中の文字ポインタ
 extern int EndFlag;
 
 //各種素材ハンドル
-extern std::int32_t BackGroundHandle;
-extern std::int32_t CharacterHandle;
-extern std::int32_t BackGroundMusicHandle;
-extern std::int32_t SoundEffectHandle;
-extern std::int32_t ImageEffectHandle;
+extern std::int32_t BackGroundHandle, CharacterHandle, BackGroundMusicHandle, SoundEffectHandle, ImageEffectHandle;
 
 // 既読スキップ/スキップ/オート変数
 extern int SkipAndAutoFlag;
