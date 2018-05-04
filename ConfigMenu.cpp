@@ -270,7 +270,7 @@ void ConfigMenuLoop() noexcept {
 			ScreenClear();
 			ConfigMenuDraw(ConfigCursorPosY);
 			ConfigCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::ConfigMenuMouseMove(ConfigCursorPosY) : KeyState::ConfigMenuKeyMove(ConfigCursorPosY);
-			ConfigMenuSelect(ConfigCursorPosY, ConfigFlag);
+			ConfigFlag = ConfigMenuSelect(ConfigCursorPosY, ConfigFlag);
 		}
 	}
 }
