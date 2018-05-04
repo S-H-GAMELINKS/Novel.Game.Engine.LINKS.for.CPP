@@ -136,32 +136,29 @@ namespace ScriptTask {
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, CharacterHandle, TRUE);
 	}
 
-	//BGM再生関数
-	void PlayBackGroundMusic(Script& Script, Material<int>& BackGroundMusic) noexcept {
-
-		DxLib::ChangeVolumeSoundMem(255 * ConfigData.BackGroundMusicVolume / 100, BackGroundMusicHandle);
-		
-		//BGM再生中の場合は、BGMを停止する
-		if (DxLib::CheckSoundMem(BackGroundMusicHandle))
-			DxLib::StopSoundMem(BackGroundMusicHandle);
-
-		Cp++;
-		BackGroundMusicHandle = BackGroundMusic[MaterialNumCheck(Script)];
-		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
+	//音量セット関数
+	void ChangeSoundVolumne(const std::int32_t& Volumne, const int& Handle) {
+		DxLib::ChangeVolumeSoundMem(255 * Volumne / 100, Handle);
 	}
 
-	//効果音再生関数
-	void PlaySoundEffect(Script& Script, Material<int>& SoundEffect) noexcept {
+	//音源再生確認関数
+	void CheckSoundPlay(const int& Handle) {
+		//BGM再生中の場合は、BGMを停止する
+		if (DxLib::CheckSoundMem(Handle))
+			DxLib::StopSoundMem(Handle);
+	}
 
-		DxLib::ChangeVolumeSoundMem(255 * ConfigData.SoundEffectVolume / 100, SoundEffectHandle);
+	//BGM再生関数
+	template <typename T, typename Func>
+	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, T& Volumne, Func&& SoundPlay) noexcept {
 
-		//SE再生中の場合は、SEを停止する
-		if (DxLib::CheckSoundMem(SoundEffectHandle))
-			DxLib::StopSoundMem(SoundEffectHandle);
+		ChangeSoundVolumne(Volumne, Handle);
+
+		CheckSoundPlay(Handle);
 
 		Cp++;
-		SoundEffectHandle = SoundEffect[MaterialNumCheck(Script)];
-		DxLib::PlaySoundMem(SoundEffectHandle, DX_PLAYTYPE_BACK);
+		Handle = Material[MaterialNumCheck(Script)];
+		SoundPlay();
 	}
 
 	//動画再生関数
@@ -227,11 +224,11 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 		break;
 
 	case 'M':	//BGM再生
-		ScriptTask::PlayBackGroundMusic(Script, BackGroundMusic);
+		ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, ConfigData.BackGroundMusicVolume, []() {DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP); });
 		break;
 
 	case 'S':	//SE再生
-		ScriptTask::PlaySoundEffect(Script, SoundEffect);
+		ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, ConfigData.SoundEffectVolume, []() {DxLib::PlaySoundMem(SoundEffectHandle, DX_PLAYTYPE_BACK); });
 		break;
 
 	case 'V':	//動画再生
