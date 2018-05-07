@@ -49,149 +49,88 @@ namespace {
 	void BackGroundMusicVolChange() noexcept {
 		
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			ConfigData.BackGroundMusicVolumeCount = (ConfigData.BackGroundMusicVolumeCount >= 10) ? ConfigData.BackGroundMusicVolumeCount = 10 : ConfigData.BackGroundMusicVolumeCount += 1;
+			ConfigData.BackGroundMusicVolume = (ConfigData.BackGroundMusicVolumeCount >= 10) ? ConfigData.BackGroundMusicVolume = 100 : ConfigData.BackGroundMusicVolume += 10;
 
-			ConfigData.BackGroundMusicVolume += 10;
-			ConfigData.BackGroundMusicVolumeCount += 1;
-
-			if (ConfigData.BackGroundMusicVolumeCount >= 10) {
-				ConfigData.BackGroundMusicVolume = 100;
-				ConfigData.BackGroundMusicVolumeCount = 10;
-			}
 		}
 
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
-			ConfigData.BackGroundMusicVolume -= 10;
-			ConfigData.BackGroundMusicVolumeCount -= 1;
-
-			if (ConfigData.BackGroundMusicVolumeCount <= 0) {
-				ConfigData.BackGroundMusicVolume = 0;
-				ConfigData.BackGroundMusicVolumeCount = 0;
-			}
+			ConfigData.BackGroundMusicVolumeCount = (ConfigData.BackGroundMusicVolumeCount <= 0) ? ConfigData.BackGroundMusicVolume = 0 : ConfigData.BackGroundMusicVolumeCount -= 1;
+			ConfigData.BackGroundMusicVolume = (ConfigData.BackGroundMusicVolumeCount <= 0) ? ConfigData.BackGroundMusicVolumeCount = 0 : ConfigData.BackGroundMusicVolume -= 10;
 		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//SE音量調節
 	void SoundEffectVolChange() noexcept {
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
-			ConfigData.SoundEffectVolume += 10;
-			ConfigData.SoundEffectVolumeCount += 1;
-
-			if (ConfigData.SoundEffectVolumeCount >= 10) {
-				ConfigData.SoundEffectVolume = 100;
-				ConfigData.SoundEffectVolumeCount = 10;
-			}
+			ConfigData.SoundEffectVolumeCount = (ConfigData.SoundEffectVolumeCount >= 10) ? ConfigData.SoundEffectVolumeCount = 10 : ConfigData.SoundEffectVolumeCount += 1;
+			ConfigData.SoundEffectVolume = (ConfigData.SoundEffectVolumeCount >= 10) ? ConfigData.SoundEffectVolume = 100 : ConfigData.SoundEffectVolume += 10;
 		}
 
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
-			ConfigData.SoundEffectVolume -= 10;
-			ConfigData.SoundEffectVolumeCount -= 1;
-
-			if (ConfigData.SoundEffectVolumeCount <= 0) {
-				ConfigData.SoundEffectVolume = 0;
-				ConfigData.SoundEffectVolumeCount = 0;
-			}
+			ConfigData.SoundEffectVolumeCount = (ConfigData.SoundEffectVolumeCount <= 0) ? ConfigData.SoundEffectVolumeCount = 0 : ConfigData.SoundEffectVolumeCount -= 1;
+			ConfigData.SoundEffectVolume = (ConfigData.SoundEffectVolumeCount <= 0) ? ConfigData.SoundEffectVolume = 0 : ConfigData.SoundEffectVolume -= 10;
 		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//オート速度調節
 	void AutoSpeedVolChange() noexcept {
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
-			ConfigData.AutoSpeedVolume += 10;
-			ConfigData.AutoSpeedVolumeCount += 1;
-
-			if (ConfigData.AutoSpeedVolumeCount >= 10) {
-				ConfigData.AutoSpeedVolume = 100;
-				ConfigData.AutoSpeedVolumeCount = 10;
-			}
+			ConfigData.AutoSpeedVolumeCount = (ConfigData.AutoSpeedVolumeCount >= 10) ? ConfigData.AutoSpeedVolumeCount = 10 : ConfigData.AutoSpeedVolumeCount += 1;
+			ConfigData.AutoSpeedVolume = (ConfigData.AutoSpeedVolumeCount >= 10) ? ConfigData.AutoSpeedVolume = 100 : ConfigData.AutoSpeedVolume += 10;
 		}
 
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
-			ConfigData.AutoSpeedVolume -= 10;
-			ConfigData.AutoSpeedVolumeCount -= 1;
-
-			if (ConfigData.AutoSpeedVolumeCount <= 0) {
-				ConfigData.AutoSpeedVolume = 0;
-				ConfigData.AutoSpeedVolumeCount = 0;
-			}
+			ConfigData.AutoSpeedVolumeCount = (ConfigData.AutoSpeedVolumeCount <= 0) ? ConfigData.AutoSpeedVolumeCount = 0 : ConfigData.AutoSpeedVolumeCount -= 1;
+			ConfigData.AutoSpeedVolume = (ConfigData.AutoSpeedVolumeCount <= 0) ? ConfigData.AutoSpeedVolume = 0 : ConfigData.AutoSpeedVolume -= 10;
 		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//スキップ速度調節
 	void SkipSpeedVolChange() noexcept {
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
-			ConfigData.SkipSpeedVolume += 10;
-			ConfigData.SkipSpeedVolumeCount += 1;
-
-			if (ConfigData.SkipSpeedVolumeCount >= 10) {
-				ConfigData.SkipSpeedVolume = 100;
-				ConfigData.SkipSpeedVolumeCount = 10;
-			}
+			ConfigData.SkipSpeedVolumeCount = (ConfigData.SkipSpeedVolumeCount >= 10) ? ConfigData.SkipSpeedVolumeCount = 10 : ConfigData.SkipSpeedVolumeCount += 1;
+			ConfigData.SkipSpeedVolume = (ConfigData.SkipSpeedVolumeCount >= 10) ? ConfigData.SkipSpeedVolume = 100 : ConfigData.SkipSpeedVolume += 10;
 		}
 
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
-			ConfigData.SkipSpeedVolume -= 10;
-			ConfigData.SkipSpeedVolumeCount -= 1;
-
-			if (ConfigData.SkipSpeedVolumeCount <= 0) {
-				ConfigData.SkipSpeedVolume = 0;
-				ConfigData.SkipSpeedVolumeCount = 0;
-			}
+			ConfigData.SkipSpeedVolumeCount = (ConfigData.SkipSpeedVolumeCount <= 0) ? ConfigData.SkipSpeedVolumeCount = 0 : ConfigData.SkipSpeedVolumeCount -= 1;
+			ConfigData.SkipSpeedVolume = (ConfigData.SkipSpeedVolumeCount <= 0) ? ConfigData.SkipSpeedVolume = 0 : ConfigData.SkipSpeedVolume -= 10;
 		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//文字列描画速度調節
 	void StringDrawSpeedVolChange() noexcept {
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
-			ConfigData.ScriptDrawSpeedVolume += 10;
-			ConfigData.ScriptDrawSpeedVolumeCount += 1;
-
-			if (ConfigData.ScriptDrawSpeedVolumeCount >= 10) {
-				ConfigData.ScriptDrawSpeedVolume = 100;
-				ConfigData.ScriptDrawSpeedVolumeCount = 10;
-			}
+			ConfigData.ScriptDrawSpeedVolumeCount = (ConfigData.ScriptDrawSpeedVolumeCount >= 10) ? ConfigData.ScriptDrawSpeedVolumeCount = 10 : ConfigData.ScriptDrawSpeedVolumeCount += 1;
+			ConfigData.ScriptDrawSpeedVolume = (ConfigData.ScriptDrawSpeedVolumeCount >= 10) ? ConfigData.ScriptDrawSpeedVolume = 100 : ConfigData.ScriptDrawSpeedVolume += 10;
 		}
 
 		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) == 1)) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
-			ConfigData.ScriptDrawSpeedVolume -= 10;
-			ConfigData.ScriptDrawSpeedVolumeCount -= 1;
-
-			if (ConfigData.ScriptDrawSpeedVolumeCount <= 0) {
-				ConfigData.ScriptDrawSpeedVolume = 0;
-				ConfigData.ScriptDrawSpeedVolumeCount = 0;
-			}
+			ConfigData.ScriptDrawSpeedVolumeCount = (ConfigData.ScriptDrawSpeedVolumeCount <= 0) ? ConfigData.ScriptDrawSpeedVolumeCount = 0 : ConfigData.ScriptDrawSpeedVolumeCount -= 1;
+			ConfigData.ScriptDrawSpeedVolume = (ConfigData.ScriptDrawSpeedVolumeCount <= 0) ? ConfigData.ScriptDrawSpeedVolume = 0 : ConfigData.ScriptDrawSpeedVolume -= 10;
 		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	// マウス操作/キー操作切り替え
 	void MouseAndKeyMoveChange() noexcept {
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)))
 			ConfigData.MouseAndKeyFlag = 1;
-		}
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) == 1)) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) == 1))
 			ConfigData.MouseAndKeyFlag = 0;
-		}
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//コンフィグ画面選択処理
