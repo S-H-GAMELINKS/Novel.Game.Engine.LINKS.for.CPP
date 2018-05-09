@@ -39,4 +39,16 @@ namespace MouseState {
 	std::int32_t SaveDataMenuMouseMove(std::int32_t SaveDataMenuPosY) noexcept;
 }
 
+namespace MouseAndKey {
+
+	//マウス＆キー確認（右）
+	bool CheckMouseAndKeyRight();
+
+	//マウス＆キー確認（左）
+	bool CheckMouseAndKeyLeft();
+
+	//マウス＆キー確認（決定）
+	bool CheckMouseAndKeyEnter();
+}
+
 #endif // !MOUSE_AND_KEY_STATE_

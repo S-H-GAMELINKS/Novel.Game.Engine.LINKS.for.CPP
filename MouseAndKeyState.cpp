@@ -176,3 +176,21 @@ namespace MouseState {
 	}
 
 }
+
+namespace MouseAndKey {
+
+	//マウス＆キー確認（右）
+	bool CheckMouseAndKeyRight() {
+		return (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)) ? true : false;
+	}
+
+	//マウス＆キー確認（左）
+	bool CheckMouseAndKeyLeft() {
+		return (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT)) ? true : false;
+	}
+
+	//マウス＆キー確認（決定）
+	bool CheckMouseAndKeyEnter() {
+		return (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) ? true : false;
+	}
+}
