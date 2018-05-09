@@ -36,22 +36,22 @@ namespace {
 	//タイトルメニューの項目選択関数
 	void GameTitleMenuChoice(const std::int32_t& CursorPosY) noexcept {
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) && CursorPosY == TitleMenuPosY))
+		if (CursorPosY == TitleMenuPosY && MouseAndKey::CheckMouseAndKeyEnter())
 			EndFlag = 1;
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuLoadPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) && CursorPosY == TitleMenuLoadPosY))
+		if (CursorPosY == TitleMenuLoadPosY && MouseAndKey::CheckMouseAndKeyEnter())
 			SaveDataLoop(2);
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuConfigPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) && CursorPosY == TitleMenuConfigPosY))
+		if (CursorPosY == TitleMenuConfigPosY && MouseAndKey::CheckMouseAndKeyEnter())
 			ConfigMenuLoop();
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuQuickLoadPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) && CursorPosY == TitleMenuQuickLoadPosY))
+		if (CursorPosY == TitleMenuQuickLoadPosY && MouseAndKey::CheckMouseAndKeyEnter())
 			QuickSaveDataLoad();
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuContinuePosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) && CursorPosY == TitleMenuContinuePosY))
+		if (CursorPosY == TitleMenuContinuePosY && MouseAndKey::CheckMouseAndKeyEnter())
 			ContinueSaveDataLoad();
 
-		if ((ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1 && CursorPosY == TitleMenuExitPosY) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) && CursorPosY == TitleMenuExitPosY))
+		if (CursorPosY == TitleMenuExitPosY && MouseAndKey::CheckMouseAndKeyEnter())
 			GameEndMessageBox();
 	}
 }
