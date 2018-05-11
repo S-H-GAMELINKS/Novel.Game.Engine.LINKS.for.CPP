@@ -75,12 +75,12 @@ namespace {
 	//選択肢の選択されたかをチェック
 	void ChoiceSelectCheck(std::int32_t &ChoiceCursorPosY) noexcept {
 
-		if (ChoiceCursorPosY == ChoicePosY[0] && MouseAndKey::CheckMouseAndKeyEnter()) {
+		if ((ChoiceCursorPosY == ChoicePosY[0] && ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ChoiceCursorPosY == ChoicePosY[0] && ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
 			ChoiceSelectUp();
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
-		if (ChoiceCursorPosY == ChoicePosY[1] && MouseAndKey::CheckMouseAndKeyEnter()) {
+		if ((ChoiceCursorPosY == ChoicePosY[1] && ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || (ChoiceCursorPosY == ChoicePosY[1] && ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT))) {
 			ChoiceSelectDown();
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
@@ -88,13 +88,13 @@ namespace {
 }
 
 //選択肢処理関数
-void ChoiceSelect(const int& RouteNumber) noexcept {
+void ChoiceSelect(const int RoutteNumber) noexcept {
 
 	ChoiceRead();
 
 	std::int32_t ChoiceCursorPosY = ChoicePosY[0];
 
-	while (EndFlag == RouteNumber) {
+	while (EndFlag == RoutteNumber) {
 		DrawChoice(ChoiceCursorPosY);
 		ChoiceCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::ChoiceMouseMove(ChoiceCursorPosY) : KeyState::ChoiceKeyMove(ChoiceCursorPosY);
 		ChoiceSelectCheck(ChoiceCursorPosY);
