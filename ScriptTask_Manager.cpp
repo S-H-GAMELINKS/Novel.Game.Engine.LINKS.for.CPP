@@ -34,6 +34,9 @@ using Material = const std::array<T, MaterialMax>;
 //スクリプト用エイリアス
 using Script = const std::vector<std::string>;
 
+//立ち絵削除＆ゲームオーバー用エイリアス
+using unique = std::unique_ptr<int>;
+
 namespace ScriptTask {
 
 	char OneMojiBuf[3];	// １文字分一時記憶配列
@@ -128,7 +131,7 @@ namespace ScriptTask {
 
 	//立ち絵削除処理関数
 	void RemoveCharacterGraph() noexcept {
-		std::unique_ptr<int> CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, CharacterGraphSizeHeight, BackGroundHandle));
+		unique CharacterDummy = std::make_unique<int>(DxLib::DerivationGraph(CharacterPosX, CharacterPosY, CharacterGraphSizeWidth, CharacterGraphSizeHeight, BackGroundHandle));
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, *CharacterDummy, true);
 	}
 
@@ -212,7 +215,7 @@ namespace ScriptTask {
 
 	//ゲームオーバー画面の描画
 	void GameOverScreenDraw() {
-		std::unique_ptr<std::int32_t> GameOverHandle = std::make_unique<std::int32_t>(DxLib::LoadGraph("DATA/BACKGROUND/GAMEOVER.png"));
+		unique GameOverHandle = std::make_unique<std::int32_t>(DxLib::LoadGraph("DATA/BACKGROUND/GAMEOVER.png"));
 		DxLib::DrawGraph(0, 0, *GameOverHandle, TRUE);
 	}
 }
