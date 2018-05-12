@@ -56,34 +56,24 @@ namespace {
 		}
 	}
 
-	//選択肢(↑)選択時処理
-	void ChoiceSelectUp() noexcept {
+	//選択肢分岐処理
+	void ChoiceSelect(const int& Num) noexcept {
 		if (1 <= EndFlag && EndFlag <= 7) {
 			BackLogGet();
-			EndFlag *= 2;
+			EndFlag = Num;
 		}
-	}
 
-	//選択肢(↑)選択時処理
-	void ChoiceSelectDown() noexcept {
-		if (1 <= EndFlag && EndFlag <= 7) {
-			BackLogGet();
-			EndFlag = EndFlag * 2 + 1;
-		}
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	//選択肢の選択されたかをチェック
 	void ChoiceSelectCheck(std::int32_t &ChoiceCursorPosY) noexcept {
 
-		if (ChoiceCursorPosY == ChoicePosY[0] && MouseAndKey::CheckMouseAndKeyEnter()) {
-			ChoiceSelectUp();
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-		}
+		if (ChoiceCursorPosY == ChoicePosY[0] && MouseAndKey::CheckMouseAndKeyEnter())
+			ChoiceSelect(EndFlag * 2);
 
-		if (ChoiceCursorPosY == ChoicePosY[1] && MouseAndKey::CheckMouseAndKeyEnter()) {
-			ChoiceSelectDown();
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-		}
+		if (ChoiceCursorPosY == ChoicePosY[1] && MouseAndKey::CheckMouseAndKeyEnter())
+			ChoiceSelect(EndFlag * 2 + 1);
 	}
 }
 
