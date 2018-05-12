@@ -149,7 +149,7 @@ namespace ScriptTask {
 			DxLib::StopSoundMem(Handle);
 	}
 
-	//BGMÄ¶ŠÖ”
+	//‰¹Œ¹Ä¶ŠÖ”
 	template <typename T>
 	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType) noexcept {
 
