@@ -137,8 +137,9 @@ namespace ScriptTask {
 	}
 
 	//音量セット関数
-	void ChangeSoundVolumne(const std::int32_t& Volumne, const int& Handle) {
-		DxLib::ChangeVolumeSoundMem(255 * Volumne / 100, Handle);
+	void ChangeSoundVolumne() {
+			DxLib::ChangeVolumeSoundMem(255 * ConfigData.BackGroundMusicVolume / 100, BackGroundMusicHandle);
+			DxLib::ChangeVolumeSoundMem(255 * ConfigData.SoundEffectVolume / 100, SoundEffectHandle);
 	}
 
 	//音源再生確認関数
@@ -149,16 +150,17 @@ namespace ScriptTask {
 	}
 
 	//BGM再生関数
-	template <typename T, typename Func>
-	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, T& Volumne, Func&& SoundPlay) noexcept {
-
-		ChangeSoundVolumne(Volumne, Handle);
+	template <typename T>
+	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType) noexcept {
 
 		CheckSoundPlay(Handle);
 
 		Cp++;
 		Handle = Material[MaterialNumCheck(Script)];
-		SoundPlay();
+
+		ChangeSoundVolumne();
+
+		DxLib::PlaySoundMem(Handle, PlayType);
 	}
 
 	//動画再生関数
@@ -224,11 +226,11 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 		break;
 
 	case 'M':	//BGM再生
-		ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, ConfigData.BackGroundMusicVolume, []() {DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP); });
+		ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
 		break;
 
 	case 'S':	//SE再生
-		ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, ConfigData.SoundEffectVolume, []() {DxLib::PlaySoundMem(SoundEffectHandle, DX_PLAYTYPE_BACK); });
+		ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK);
 		break;
 
 	case 'V':	//動画再生
