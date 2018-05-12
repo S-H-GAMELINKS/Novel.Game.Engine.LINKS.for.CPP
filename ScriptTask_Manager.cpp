@@ -71,19 +71,24 @@ namespace ScriptTask {
 		}
 	}
 
+	//ï∂éöë¨ìxä÷êî
+	void DrawSpeed(const int& Speed, const int& SpeedVolume) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(SpeedVolume * Speed / 100));
+	}
+
 	//ï∂éöóÒï`âÊë¨ìx
 	void DrawScriptSpeed() noexcept {
 		switch (SkipAndAutoFlag) {
 		case 0:
-			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedAuto * ConfigData.ScriptDrawSpeedVolume / 100));
+			DrawSpeed(StringSpeedAuto, ConfigData.ScriptDrawSpeedVolume);
 			break;
 
 		case 1:
-			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedSkip * ConfigData.ScriptDrawSpeedVolume / 100));
+			DrawSpeed(StringSpeedSkip, ConfigData.SkipSpeedVolumeCount);
 			break;
 
 		case 2:
-			std::this_thread::sleep_for(std::chrono::milliseconds(StringSpeedAuto * ConfigData.ScriptDrawSpeedVolume / 100));
+			DrawSpeed(StringSpeedAuto, ConfigData.AutoSpeedVolume);
 			break;
 		}
 	}
