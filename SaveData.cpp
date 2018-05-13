@@ -8,6 +8,9 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <boost/filesystem.hpp>
+
+namespace fs = boost::filesystem;
 
 extern int Sp, Cp;	// 参照する文字列番号と文字列中の文字ポインタ
 
@@ -85,7 +88,10 @@ namespace {
 		std::string FileFormat = ".png";
 		std::string FileName = FilePath + std::to_string(Num) + FileFormat;
 
-		std::rename("DATA/SAVE/SAVESNSAPTEMP.png", FileName.c_str());
+		const fs::path path("DATA/SAVE/SAVESNSAPTEMP.png");
+		const fs::path dest(FileName.c_str());
+
+		fs::copy_file(path, dest, fs::copy_option::overwrite_if_exists);
 	}
 
 	//セーブデータをセーブ
