@@ -163,7 +163,7 @@ namespace {
 	}
 
 	//セーブ/ロード/デリート切り替え関数
-	void SaveDataTask(const int& Num, const char* SaveDataPath, const char* SaveDataName, std::int32_t& SaveFlag) noexcept {
+	void SaveDataTask(const int& Num, const char* SaveDataPath, const char* SaveDataName, std::int32_t& SaveFlag, const int& SaveSlot) noexcept {
 
 		std::string Message = SaveDataName;
 		Message += SaveTaskItemParticle[Num - 1];
@@ -171,7 +171,7 @@ namespace {
 
 		//セーブ
 		if (Num == 1)
-			SaveFlag = SaveDataSave(SaveDataPath, Message.c_str(), Num);
+			SaveFlag = SaveDataSave(SaveDataPath, Message.c_str(), SaveSlot);
 
 		//ロード
 		if (Num == 2)
@@ -186,19 +186,19 @@ namespace {
 	void SaveDataMenuSelect(std::int32_t& SaveDataMenuPosY, const int& Num, std::int32_t& SaveFlag) noexcept {
 
 		if (SaveDataMenuPosY == SaveDataBasePosY && MouseAndKey::CheckMouseAndKeyEnter()) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag);
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag, 1);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
 		if (SaveDataMenuPosY == SaveDataBasePosY * 2 && MouseAndKey::CheckMouseAndKeyEnter()) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat", "セーブデータ２", SaveFlag);
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat", "セーブデータ２", SaveFlag, 2);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
 
 		if (SaveDataMenuPosY == SaveDataBasePosY * 3 && MouseAndKey::CheckMouseAndKeyEnter()) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat", "セーブデータ３", SaveFlag);
+			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat", "セーブデータ３", SaveFlag, 3);
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 
