@@ -201,6 +201,7 @@ void ShortCutKey() noexcept {
 		EndFlagTemp = EndFlag;
 		SpTemp = Sp;
 		EndFlag = 17;
+		std::this_thread::sleep_for(std::chrono::milliseconds(WaitTimeCalc(WaitKeyTaskTime) / WaitGameTime));
 	}
 
 	//ゲーム終了確認ウインドウ
