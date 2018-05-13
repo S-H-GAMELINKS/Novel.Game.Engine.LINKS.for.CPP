@@ -88,8 +88,8 @@ void ChoiceSelect(const int RoutteNumber) noexcept {
 		DrawChoice(ChoiceCursorPosY);
 		ChoiceCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::ChoiceMouseMove(ChoiceCursorPosY) : KeyState::ChoiceKeyMove(ChoiceCursorPosY);
 		ChoiceSelectCheck(ChoiceCursorPosY);
-		ScreenClear();
 		ShortCutKey();
+		ScreenClear();
 
 		//ゲーム終了確認ウインドウ
 		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
