@@ -153,7 +153,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ConfigSave();	// 設定データの保存
 	SkipDataSave(); // 既読スキップデータの保存
 
-	std::remove("DATA/SAVE/SAVESNSAP_TEMP.png");
+	std::remove("DATA/SAVE/SAVESNSAPTEMP.png");
 	std::remove("DATA/BACKLOG/BACKLOG1.png");
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
