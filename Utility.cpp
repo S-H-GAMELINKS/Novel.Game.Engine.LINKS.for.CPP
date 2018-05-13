@@ -198,6 +198,8 @@ void ShortCutKey() noexcept {
 
 	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1 || (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)) {
 		SaveDataScreenShotGet();
+		DxLib::StopSoundMem(BackGroundMusicHandle);
+		DxLib::StopSoundMem(SoundEffectHandle);
 		EndFlagTemp = EndFlag;
 		SpTemp = Sp;
 		EndFlag = 17;
