@@ -107,26 +107,26 @@ void ScreenShotGet() noexcept {
 	}
 }
 
+namespace {
+	//セーブデータ関連
+	void SaveDataTask(const int Num) {
+		SpTemp = Sp;
+		SaveDataLoop(Num);
+		DrawGameScreenAgain();
+	}
+}
+
 //各種ショートカットキー
 void ShortCutKey() noexcept {
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1) {
-		SpTemp = Sp;
-		SaveDataLoop(1);
-		DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1)
+		SaveDataTask(1);
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1) {
-		SpTemp = Sp;
-		SaveDataLoop(2);
-		DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1)
+		SaveDataTask(2);
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1) {
-		SpTemp = Sp;
-		SaveDataLoop(3);
-		DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1) 
+		SaveDataTask(3);
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1) {
 		SpTemp = Sp;
