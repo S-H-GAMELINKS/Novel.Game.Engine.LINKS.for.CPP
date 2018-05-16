@@ -128,6 +128,13 @@ namespace {
 		BackLogLoop();
 		DrawGameScreenAgain();
 	}
+
+	//コンフィグ関係
+	void Config() {
+		SpTemp = Sp;
+		ConfigMenuLoop();
+		DrawGameScreenAgain();
+	}
 }
 
 //各種ショートカットキー
@@ -157,11 +164,8 @@ void ShortCutKey() noexcept {
 	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
 		BackLog();
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1) {
-		SpTemp = Sp;
-		ConfigMenuLoop();
-		DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1)
+		Config();
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F10) == 1) {
 		if (IDYES == MessageBoxYesNo("タイトル画面に戻りますか？")) {
