@@ -109,7 +109,7 @@ void ScreenShotGet() noexcept {
 
 namespace {
 	//セーブデータ関連
-	void SaveDataTask(const int Num) {
+	void SaveData(const int Num) {
 		SpTemp = Sp;
 		SaveDataLoop(Num);
 		DrawGameScreenAgain();
@@ -120,13 +120,13 @@ namespace {
 void ShortCutKey() noexcept {
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F1) == 1)
-		SaveDataTask(1);
+		SaveData(1);
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F2) == 1)
-		SaveDataTask(2);
+		SaveData(2);
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1) 
-		SaveDataTask(3);
+		SaveData(3);
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1) {
 		SpTemp = Sp;
