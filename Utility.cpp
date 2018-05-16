@@ -160,6 +160,17 @@ namespace {
 		QuickSaveDataSave();
 		DrawGameScreenAgain();
 	}
+
+	//スクリーンショット関連
+	void ScreenShot() {
+		ScreenShotGet();
+		Cp = 0;
+		DrawPointX = 0;
+		DrawPointY = 0;
+		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
+		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+	}
 }
 
 //各種ショートカットキー
@@ -198,15 +209,8 @@ void ShortCutKey() noexcept {
 	if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1)
 		QuickSave();
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1) {
-		ScreenShotGet();
-		Cp = 0;
-		DrawPointX = 0;
-		DrawPointY = 0;
-		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
-		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
-		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1)
+		ScreenShot();
 
 	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1 || (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)) {
 		SaveDataScreenShotGet();
