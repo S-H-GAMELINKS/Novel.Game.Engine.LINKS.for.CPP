@@ -114,6 +114,13 @@ namespace {
 		SaveDataLoop(Num);
 		DrawGameScreenAgain();
 	}
+
+	//スキップ・オート関係
+	void SkipAndAuto(const int Num) {
+		SpTemp = Sp;
+		SkipAndAutoTask(Num);
+		DrawGameScreenAgain();
+	}
 }
 
 //各種ショートカットキー
@@ -128,29 +135,17 @@ void ShortCutKey() noexcept {
 	if (DxLib::CheckHitKey(KEY_INPUT_F3) == 1) 
 		SaveData(3);
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1) {
-		SpTemp = Sp;
-		SkipAndAutoTask(3);
-		DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1)
+		SkipAndAuto(3);
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F5) == 1) {
-		SpTemp = Sp;
-		SkipAndAutoTask(1);
-		DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F5) == 1)
+		SkipAndAuto(1);
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F6) == 1) {
-		SpTemp = Sp;
-		SkipAndAutoTask(2);
-		DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F6) == 1) 
+		SkipAndAuto(2);
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1) {
-		SpTemp = Sp;
-		SkipAndAutoTask(0);
-		DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1)
+		SkipAndAuto(0);
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1) {
 		SpTemp = Sp;
