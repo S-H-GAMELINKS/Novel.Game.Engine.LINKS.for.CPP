@@ -77,11 +77,15 @@ int SkipDataLoad() noexcept {
 
 //SKIP_READ SAVE関数
 int SkipDataSave() noexcept {
-	SkipData_t Data = {
-		SkipData[0], SkipData[1], SkipData[2], SkipData[3], SkipData[4], SkipData[5],
-		SkipData[6], SkipData[7], SkipData[8], SkipData[9], SkipData[10], SkipData[11],
-		SkipData[12], SkipData[13], SkipData[14]
-	};
+
+	SkipData_t Data;
+
+	std::int32_t i = 0;
+
+	for (auto&& d : Data) {
+		d = SkipData[i];
+		i++;
+	}
 
 	FILE *Fp;
 	fopen_s(&Fp, "DATA/SAVE/SKIP_READ.dat", "wb");//バイナリファイルを開く
