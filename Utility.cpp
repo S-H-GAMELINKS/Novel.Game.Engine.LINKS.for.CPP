@@ -135,6 +135,24 @@ namespace {
 		ConfigMenuLoop();
 		DrawGameScreenAgain();
 	}
+
+	//タイトルへ戻る
+	void BackToTitle() {
+		if (IDYES == MessageBoxYesNo("タイトル画面に戻りますか？")) {
+			DxLib::ClearDrawScreen();
+			EndFlag = 0;
+			Sp = 0;
+			Cp = 0;
+			DrawPointX = 0;
+			DrawPointY = 0;
+			BackGroundHandle = 0;
+			CharacterHandle = 0;
+			BackGroundMusicHandle = 0;
+			SoundEffectHandle = 0;
+		}
+		else
+			DrawGameScreenAgain();
+	}
 }
 
 //各種ショートカットキー
@@ -167,21 +185,8 @@ void ShortCutKey() noexcept {
 	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1)
 		Config();
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F10) == 1) {
-		if (IDYES == MessageBoxYesNo("タイトル画面に戻りますか？")) {
-			DxLib::ClearDrawScreen();
-			EndFlag = 0;
-			Sp = 0;
-			Cp = 0;
-			DrawPointX = 0;
-			DrawPointY = 0;
-			BackGroundHandle = 0;
-			CharacterHandle = 0;
-			BackGroundMusicHandle = 0;
-			SoundEffectHandle = 0;
-		} else
-			DrawGameScreenAgain();
-	}
+	if (DxLib::CheckHitKey(KEY_INPUT_F10) == 1)
+		BackToTitle();
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1) {
 		SpTemp = Sp;
