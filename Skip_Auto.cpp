@@ -36,6 +36,8 @@ struct alignas(4) SkipData_t {
 	std::int32_t L;			//Lルートの既読情報
 	std::int32_t M;			//Mルートの既読情報
 	std::int32_t N;			//Nルートの既読情報
+	int* begin() { return &this->LINKS; };
+	int* end() { return &this->N + 1; };
 };
 
 //既読スキップデータ書き込み
@@ -62,21 +64,12 @@ int SkipDataLoad() noexcept {
 	}
 	fread(&Data, sizeof(SkipData_t), 1, Fp);
 
-	SkipData[0] = Data.LINKS;
-	SkipData[1] = Data.A;
-	SkipData[2] = Data.B;
-	SkipData[3] = Data.C;
-	SkipData[4] = Data.D;
-	SkipData[5] = Data.E;
-	SkipData[6] = Data.F;
-	SkipData[7] = Data.G;
-	SkipData[8] = Data.H;
-	SkipData[9] = Data.I;
-	SkipData[10] = Data.J;
-	SkipData[11] = Data.K;
-	SkipData[12] = Data.L;
-	SkipData[13] = Data.M;
-	SkipData[14] = Data.N;
+	std::int32_t i = 0;
+
+	for (auto&& d : Data) {
+		SkipData[i] = d;
+		i++;
+	}
 
 	fclose(Fp);
 	return 0;
