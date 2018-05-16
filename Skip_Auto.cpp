@@ -21,23 +21,8 @@ std::array<std::int32_t, 15> SkipData;
 
 //既読スキップ
 struct alignas(4) SkipData_t {
-	std::int32_t LINKS;		//メインルートの既読情報
-	std::int32_t A;			//Aルートの既読情報
-	std::int32_t B;			//Bルートの既読情報
-	std::int32_t C;			//Cルートの既読情報
-	std::int32_t D;			//Dルートの既読情報
-	std::int32_t E;			//Eルートの既読情報
-	std::int32_t F;			//Fルートの既読情報
-	std::int32_t G;			//Gルートの既読情報
-	std::int32_t H;			//Hルートの既読情報
-	std::int32_t I;			//Iルートの既読情報
-	std::int32_t J;			//Jルートの既読情報
-	std::int32_t K;			//Kルートの既読情報
-	std::int32_t L;			//Lルートの既読情報
-	std::int32_t M;			//Mルートの既読情報
-	std::int32_t N;			//Nルートの既読情報
-	int* begin() { return &this->LINKS; };
-	int* end() { return &this->N + 1; };
+	//既読スキップ判定用変数
+	std::array<std::int32_t, 15> SkipFlag;
 };
 
 //既読スキップデータ書き込み
@@ -58,7 +43,7 @@ int SkipDataLoad() noexcept {
 	SkipData_t Data;
 
 	FILE *Fp;
-	fopen_s(&Fp, "DATA/SAVE/SKIP_READ.dat", "rb");
+	fopen_s(&Fp, "DATA/SAVE/SKIP_READ.bat", "rb");
 	if (nullptr == Fp) {
 		return 0;
 	}
@@ -66,7 +51,7 @@ int SkipDataLoad() noexcept {
 
 	std::int32_t i = 0;
 
-	for (auto&& d : Data) {
+	for (auto&& d : Data.SkipFlag) {
 		SkipData[i] = d;
 		i++;
 	}
@@ -82,13 +67,13 @@ int SkipDataSave() noexcept {
 
 	std::int32_t i = 0;
 
-	for (auto&& d : Data) {
+	for (auto&& d : Data.SkipFlag) {
 		d = SkipData[i];
 		i++;
 	}
 
 	FILE *Fp;
-	fopen_s(&Fp, "DATA/SAVE/SKIP_READ.dat", "wb");//バイナリファイルを開く
+	fopen_s(&Fp, "DATA/SAVE/SKIP_READ.bat", "wb");//バイナリファイルを開く
 	if (nullptr == Fp) {//エラーが起きたらnullptrを返す
 		return 0;
 	}
