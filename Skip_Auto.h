@@ -16,7 +16,7 @@ int SkipDataLoad() noexcept;
 int SkipDataSave() noexcept;
 
 // 既読スキップ/スキップ/オート切り替え関数
-void SkipAndAutoTask(const std::int32_t& Num) noexcept;
+void SkipAndAutoTask(const std::int32_t& Num, const int Flag) noexcept;
 
 #endif // !SKIP_AUTO_H_
 

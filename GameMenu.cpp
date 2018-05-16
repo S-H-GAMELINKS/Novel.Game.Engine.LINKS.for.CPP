@@ -86,16 +86,16 @@ namespace {
 			SaveDataLoop(3);
 
 		if (GameMenuCursorPosY == GameMenuBasePosY * 4 && MouseAndKey::CheckMouseAndKeyEnter())
-			SkipAndAutoTask(3);
+			SkipAndAutoTask(3, EndFlagTemp);
 
 		if (GameMenuCursorPosY == GameMenuBasePosY * 5 && MouseAndKey::CheckMouseAndKeyEnter())
-			SkipAndAutoTask(1);
+			SkipAndAutoTask(1, EndFlagTemp);
 
 		if (GameMenuCursorPosY == GameMenuBasePosY * 6 && MouseAndKey::CheckMouseAndKeyEnter())
-			SkipAndAutoTask(2);
+			SkipAndAutoTask(2, EndFlagTemp);
 
 		if (GameMenuCursorPosY == GameMenuBasePosY * 7 && MouseAndKey::CheckMouseAndKeyEnter())
-			SkipAndAutoTask(0);
+			SkipAndAutoTask(0, EndFlagTemp);
 
 		if (GameMenuCursorPosY == GameMenuBasePosY * 8 && MouseAndKey::CheckMouseAndKeyEnter())
 			BackLogLoop();

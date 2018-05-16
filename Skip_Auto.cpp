@@ -10,6 +10,9 @@
 //終了フラグ
 extern int EndFlag;
 
+//文字列描画位置
+extern int DrawPointX, DrawPointY;
+
 // 既読スキップ/スキップ/オート変数
 extern int SkipAndAutoFlag;
 
@@ -98,7 +101,7 @@ int SkipDataSave() noexcept {
 }
 
 // 既読スキップ/スキップ/オート切り替え関数
-void SkipAndAutoTask(const std::int32_t& Num) noexcept {
+void SkipAndAutoTask(const std::int32_t& Num, const int Flag) noexcept {
 
 	if (Num == 0) {
 		if (IDYES == MessageBoxYesNo("オート/スキップを停止しますか？")) {
@@ -123,8 +126,11 @@ void SkipAndAutoTask(const std::int32_t& Num) noexcept {
 
 	if (Num == 3) {
 		if (IDYES == MessageBoxYesNo("既読スキップを実行しますか？")) {
-			SkipDataCheck(EndFlag);
+			SkipDataCheck(Flag);
 		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
+	EndFlag = Flag;
+	DrawPointX = 0;
+	DrawPointY = 0;
 }
