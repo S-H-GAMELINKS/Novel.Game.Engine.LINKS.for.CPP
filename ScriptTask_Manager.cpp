@@ -34,7 +34,7 @@ extern struct ConfigData_t ConfigData;
 
 //素材用エイリアス
 template <class T>
-using Material = const std::array<T, MaterialMax>;
+using Material = std::vector<T>;
 
 //スクリプト用エイリアス
 using Script = const std::vector<std::string>;
@@ -235,7 +235,7 @@ namespace ScriptTask {
 }
 
 //スクリプトタグ処理関数
-void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) noexcept {
+void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) noexcept {
 
 	switch (Script[Sp][Cp])
 	{
