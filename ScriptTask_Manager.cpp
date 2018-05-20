@@ -42,6 +42,14 @@ using Script = const std::vector<std::string>;
 //立ち絵削除＆ゲームオーバー用エイリアス
 using unique = std::unique_ptr<int>;
 
+//タグ正規表現
+std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "Background(\\d+)"},
+														 { "C(\\d+)", "Character(\\d+)" },
+														 { "M(\\d+)", "Music(\\d+)" },
+														 { "S(\\d+)" , "Sound(\\d+)" },
+														 { "V(\\d+)","Video(\\d+)" },
+														 { "I(\\d+)", "Image(\\d+)" } };
+
 namespace ScriptTask {
 
 	char OneMojiBuf[3];	// １文字分一時記憶配列
@@ -122,22 +130,33 @@ namespace ScriptTask {
 	}
 
 	//素材番号処理
-	int MaterialNumCheck(const Script& Script, const char* Tag) {
+	int MaterialNumCheck(const Script& Script, const std::pair<std::string, std::string>& Tag) {
 
 		std::string str = Script[Sp];
 
-		sregex rex = sregex::compile(Tag);
+		sregex rex = sregex::compile(Tag.first);
 		smatch what;
-		regex_search(str, what, rex);
-		std::string text(what[1]);
-		int n = std::stoi(text);
 
-		return n - 1;
+		if (regex_search(str, what, rex)) {
+			std::string text(what[1]);
+			int n = std::stoi(text);
+
+			return n - 1;
+		}
+
+		rex = sregex::compile(Tag.second);
+
+		if (regex_search(str, what, rex)) {
+			std::string text(what[1]);
+			int n = std::stoi(text);
+
+			return n - 1;
+		}
 	}
 
 	//背景画像＆イメージエフェクト描画関数
 	template <typename T, typename Func>
-	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle, const char* Tag) noexcept {
+	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle, const std::pair<std::string, std::string> Tag) noexcept {
 		Cp++;
 		Handle = Material[MaterialNumCheck(Script, Tag)];
 		DrawFunc(Handle);
@@ -155,7 +174,7 @@ namespace ScriptTask {
 
 		ScriptTask::RemoveCharacterGraph();
 
-		CharacterHandle = Character[MaterialNumCheck(Script, "C(\\d+)")];
+		CharacterHandle = Character[MaterialNumCheck(Script, Tag[1])];
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, CharacterHandle, TRUE);
 	}
 
@@ -174,7 +193,7 @@ namespace ScriptTask {
 
 	//音源再生関数
 	template <typename T>
-	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType, const char* Tag) noexcept {
+	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType, const std::pair<std::string, std::string> Tag) noexcept {
 
 		CheckSoundPlay(Handle);
 
@@ -189,7 +208,7 @@ namespace ScriptTask {
 	//動画再生関数
 	void PlayMovie(Script& Script, Material<std::string>& Movie) noexcept {
 		Cp++;
-		DxLib::PlayMovie(Movie[MaterialNumCheck(Script, "V(\\d+)")].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
+		DxLib::PlayMovie(Movie[MaterialNumCheck(Script, Tag[4])].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
 
 	//画面クリア処理関数
@@ -240,7 +259,7 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 	switch (Script[Sp][Cp])
 	{
 	case 'B':	//背景画像描画
-		ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, "B(\\d+)");
+		ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, Tag[0]);
 		break;
 
 	case 'C':	//立ち絵画像描画
@@ -248,11 +267,11 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 		break;
 
 	case 'M':	//BGM再生
-		ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP, "M(\\d+)");
+		ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP, Tag[2]);
 		break;
 
 	case 'S':	//SE再生
-		ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK, "S(\\d+)");
+		ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK, Tag[3]);
 		break;
 
 	case 'V':	//動画再生
@@ -260,7 +279,7 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 		break;
 
 	case 'I':	//イメージエフェクト描画
-		ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle, "I(\\d+)");
+		ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle, Tag[5]);
 		break;
 
 	case 'L':	//改行文字
