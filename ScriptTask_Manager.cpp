@@ -113,22 +113,29 @@ namespace ScriptTask {
 
 	//文字列描画関数
 	void DrawScript(Script& Script) noexcept {
-		// １文字分抜き出す
-		OneMojiBuf[0] = Script[Sp][Cp];
-		OneMojiBuf[1] = Script[Sp][Cp + 1];
-		OneMojiBuf[2] = '\0';
 
-		// １文字描画
-		DrawString(DrawPointX * MojiSize, DrawPointY * MojiSize, OneMojiBuf, Color);
+		std::string str = "";
 
-		// 参照文字位置を２バイト勧める
-		Cp += 2;
+		if (Script[Sp] == str)
+			Sp++;
+		else {
+			// １文字分抜き出す
+			OneMojiBuf[0] = Script[Sp][Cp];
+			OneMojiBuf[1] = Script[Sp][Cp + 1];
+			OneMojiBuf[2] = '\0';
 
-		// カーソルを一文字文進める
-		DrawPointX++;
+			// １文字描画
+			DrawString(DrawPointX * MojiSize, DrawPointY * MojiSize, OneMojiBuf, Color);
 
-		// 少し待つ
-		DrawScriptSpeed();
+			// 参照文字位置を２バイト勧める
+			Cp += 2;
+
+			// カーソルを一文字文進める
+			DrawPointX++;
+
+			// 少し待つ
+			DrawScriptSpeed();
+		}
 	}
 
 	//素材番号処理
