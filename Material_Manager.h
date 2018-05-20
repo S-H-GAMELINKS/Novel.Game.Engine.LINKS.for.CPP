@@ -9,7 +9,7 @@
 #include <sstream>
 #include <iomanip>
 #include <boost/filesystem.hpp>
-#include <boost/foreach.hpp>
+#include <boost/range/iterator_range.hpp>
 
 namespace fs = boost::filesystem;
 
@@ -22,10 +22,9 @@ namespace {
 
 		const fs::path path(Path);
 
-		BOOST_FOREACH(const fs::path& p, std::make_pair(fs::directory_iterator(path),
-			fs::directory_iterator())) {
-			if (!fs::is_directory(p)) {
-				std::string File = Path + "/" + p.filename().string();
+		for (const auto& p : boost::make_iterator_range(fs::directory_iterator(path), {})) {
+			if (!fs::is_directory(p.path())) {
+				std::string File = Path + "/" + p.path().filename().string();
 				Container.emplace_back(std::move(File));
 			}
 		}
