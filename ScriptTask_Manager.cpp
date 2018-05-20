@@ -45,12 +45,12 @@ using Script = std::vector<std::string>;
 using unique = std::unique_ptr<int>;
 
 //É^ÉOê≥ãKï\åª
-std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "Background(\\d+)"},
-														 { "C(\\d+)", "Character(\\d+)" },
-														 { "M(\\d+)", "Music(\\d+)" },
-														 { "S(\\d+)" , "Sound(\\d+)" },
-														 { "V(\\d+)","Video(\\d+)" },
-														 { "I(\\d+)", "Image(\\d+)" } };
+std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back(\\d+)"},
+														 { "C(\\d+)", "draw_char(\\d+)" },
+														 { "M(\\d+)", "play_bgm(\\d+)" },
+														 { "S(\\d+)" , "play_se(\\d+)" },
+														 { "V(\\d+)","play_movie(\\d+)" },
+														 { "I(\\d+)", "draw_effect(\\d+)" } };
 
 namespace ScriptTask {
 
