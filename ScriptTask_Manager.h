@@ -6,7 +6,11 @@
 #include <string>
 #include <array>
 
+//各種素材格納変数
+template <typename T>
+using Material = std::vector<T>;
+
 //スクリプトタグ処理関数
-void ScriptTagTaskManager(const std::vector<std::string>& Script, const std::array<int, MaterialMax>& BackGround, const std::array<int, MaterialMax>& Character, const std::array<int, MaterialMax>& BackGroundMusic, const std::array<int, MaterialMax>& SoundEffect, const std::array<std::string, MaterialMax>& Movie, const std::array<int, MaterialMax>& ImageEffect) noexcept;
+void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) noexcept;
 
 #endif //SCRIPT_TASK_MANAGER_CPP_

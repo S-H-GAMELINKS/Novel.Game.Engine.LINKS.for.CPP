@@ -54,22 +54,22 @@ void DxLibInitPostProccessing() noexcept {
 	ConfigLoad();
 
 	//背景画像読込関数
-	BackGround = MaterialLoad(BackGround, "DATA/BACKGROUND/BG", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
+	BackGround = MaterialLoad(BackGround, "DATA/BACKGROUND", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
 
 	//立ち絵画像読込関数
-	Character = MaterialLoad(Character, "DATA/CHARACTER/CHAR", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
+	Character = MaterialLoad(Character, "DATA/CHARACTER", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
 
 	//BGM読込関数
-	BackGroundMusic = MaterialLoad(BackGroundMusic, "DATA/BACKGROUNDMUSIC/BGM", ".ogg", [](const std::string& Path) {return DxLib::LoadSoundMem(Path.c_str()); });
+	BackGroundMusic = MaterialLoad(BackGroundMusic, "DATA/BACKGROUNDMUSIC", [](const std::string& Path) {return DxLib::LoadSoundMem(Path.c_str()); });
 
 	//SE読込関数
-	SoundEffect = MaterialLoad(SoundEffect, "DATA/SOUNDEFFECT/SE", ".ogg", [](const std::string& Path) {return DxLib::LoadSoundMem(Path.c_str()); });
+	SoundEffect = MaterialLoad(SoundEffect, "DATA/SOUNDEFFECT", [](const std::string& Path) {return DxLib::LoadSoundMem(Path.c_str()); });
 
 	//動画読込関数
-	Movie = MaterialLoad(Movie, "DATA/MOVIE/MOVIE", ".wmv", [](const std::string& Path) {return std::move(Path); });
+	Movie = MaterialLoad(Movie, "DATA/MOVIE", [](const std::string& Path) {return std::move(Path); });
 
 	//イメージエフェクト読込関数
-	ImageEffect = MaterialLoad(ImageEffect, "DATA/IMAGEEFFECT/IE", ".png", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
+	ImageEffect = MaterialLoad(ImageEffect, "DATA/IMAGEEFFECT", [](const std::string& Path) {return DxLib::LoadGraph(Path.c_str()); });
 
 	//タイトル画面読込
 	GameTitleGraph = DxLib::LoadGraph("DATA/BACKGROUND/TITLE.png");

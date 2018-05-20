@@ -1,4 +1,8 @@
 //Script Tag Task Maneger Source
+#define _SCL_SECURE_NO_WARNINGS 
+#define _CRT_SECURE_NO_WARNINGS 
+
+
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
 #include "Utility.h"
@@ -12,6 +16,9 @@
 #include <array>
 #include <thread>
 #include <chrono>
+#include <boost/xpressive/xpressive.hpp>
+
+using namespace boost::xpressive;
 
 extern int DrawPointX, DrawPointY;	// 文字列描画の位置
 extern int Sp, Cp;	// 参照する文字列番号と文字列中の文字ポインタ
@@ -29,13 +36,21 @@ extern struct ConfigData_t ConfigData;
 
 //素材用エイリアス
 template <class T>
-using Material = const std::array<T, MaterialMax>;
+using Material = std::vector<T>;
 
 //スクリプト用エイリアス
-using Script = const std::vector<std::string>;
+using Script = std::vector<std::string>;
 
 //立ち絵削除＆ゲームオーバー用エイリアス
 using unique = std::unique_ptr<int>;
+
+//タグ正規表現
+std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "Background(\\d+)"},
+														 { "C(\\d+)", "Character(\\d+)" },
+														 { "M(\\d+)", "Music(\\d+)" },
+														 { "S(\\d+)" , "Sound(\\d+)" },
+														 { "V(\\d+)","Video(\\d+)" },
+														 { "I(\\d+)", "Image(\\d+)" } };
 
 namespace ScriptTask {
 
@@ -98,34 +113,69 @@ namespace ScriptTask {
 
 	//文字列描画関数
 	void DrawScript(Script& Script) noexcept {
-		// １文字分抜き出す
-		OneMojiBuf[0] = Script[Sp][Cp];
-		OneMojiBuf[1] = Script[Sp][Cp + 1];
-		OneMojiBuf[2] = '\0';
 
-		// １文字描画
-		DrawString(DrawPointX * MojiSize, DrawPointY * MojiSize, OneMojiBuf, Color);
+		std::string str = "";
 
-		// 参照文字位置を２バイト勧める
-		Cp += 2;
+		if (Script[Sp] == str)
+			Sp++;
+		else {
+			// １文字分抜き出す
+			OneMojiBuf[0] = Script[Sp][Cp];
+			OneMojiBuf[1] = Script[Sp][Cp + 1];
+			OneMojiBuf[2] = '\0';
 
-		// カーソルを一文字文進める
-		DrawPointX++;
+			// １文字描画
+			DrawString(DrawPointX * MojiSize, DrawPointY * MojiSize, OneMojiBuf, Color);
 
-		// 少し待つ
-		DrawScriptSpeed();
+			// 参照文字位置を２バイト勧める
+			Cp += 2;
+
+			// カーソルを一文字文進める
+			DrawPointX++;
+
+			// 少し待つ
+			DrawScriptSpeed();
+		}
 	}
 
 	//素材番号処理
-	int MaterialNumCheck(Script& Script) {
-		return (static_cast<int>(Script[Sp][Cp]) - 48) * 10 + (static_cast<int>(Script[Sp][Cp + 1]) - 48) - 1;
+	int MaterialNumCheck(Script& Script, const std::pair<std::string, std::string>& Tag) {
+
+		std::string str = Script[Sp];
+
+		sregex rex = sregex::compile(Tag.first);
+		smatch what;
+
+		if (regex_search(str, what, rex)) {
+
+			std::string text(what[1]);
+			int n = std::stoi(text);
+
+			Script[Sp] = regex_replace(str, rex, "");
+			Cp = 0;
+
+			return n - 1;
+		}
+
+		rex = sregex::compile(Tag.second);
+
+		if (regex_search(str, what, rex)) {
+
+			std::string text(what[1]);
+			int n = std::stoi(text);
+
+			Script[Sp] = regex_replace(str, rex, "");
+			Cp = 0;
+
+			return n - 1;
+		}
 	}
 
 	//背景画像＆イメージエフェクト描画関数
 	template <typename T, typename Func>
-	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle) noexcept {
+	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle, const std::pair<std::string, std::string> Tag) noexcept {
 		Cp++;
-		Handle = Material[MaterialNumCheck(Script)];
+		Handle = Material[MaterialNumCheck(Script, Tag)];
 		DrawFunc(Handle);
 	}
 
@@ -141,7 +191,7 @@ namespace ScriptTask {
 
 		ScriptTask::RemoveCharacterGraph();
 
-		CharacterHandle = Character[MaterialNumCheck(Script)];
+		CharacterHandle = Character[MaterialNumCheck(Script, Tag[1])];
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, CharacterHandle, TRUE);
 	}
 
@@ -160,12 +210,12 @@ namespace ScriptTask {
 
 	//音源再生関数
 	template <typename T>
-	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType) noexcept {
+	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType, const std::pair<std::string, std::string> Tag) noexcept {
 
 		CheckSoundPlay(Handle);
 
 		Cp++;
-		Handle = Material[MaterialNumCheck(Script)];
+		Handle = Material[MaterialNumCheck(Script, Tag)];
 
 		ChangeSoundVolumne();
 
@@ -175,17 +225,27 @@ namespace ScriptTask {
 	//動画再生関数
 	void PlayMovie(Script& Script, Material<std::string>& Movie) noexcept {
 		Cp++;
-		DxLib::PlayMovie(Movie[MaterialNumCheck(Script)].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
+		DxLib::PlayMovie(Movie[MaterialNumCheck(Script, Tag[4])].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	}
 
 	//画面クリア処理関数
-	void ClearScreen() noexcept {
+	void ClearScreen(Script& Script) noexcept {
 		BackLogGet();
 		ClearDrawScreen();
 		BackGroundHandle = 0;
 		CharacterHandle = 0;
 		DrawPointY = 0;
 		DrawPointX = 0;
+
+		std::string str = Script[Sp];
+
+		sregex rex = sregex::compile("R");
+		smatch what;
+
+		regex_search(str, what, rex);
+
+		Script[Sp] = regex_replace(str, rex, "");
+		Cp = 0;
 	}
 
 	//コメント処理関数
@@ -218,36 +278,65 @@ namespace ScriptTask {
 		unique GameOverHandle = std::make_unique<std::int32_t>(DxLib::LoadGraph("DATA/BACKGROUND/GAMEOVER.png"));
 		DxLib::DrawGraph(0, 0, *GameOverHandle, TRUE);
 	}
+
+	//タグチェック関数
+	bool ScriptTagCheck(const Script& Script, const std::pair<std::string, std::string>& Tag) {
+
+		sregex rex = sregex::compile(Tag.first);
+		smatch what;
+
+		if (regex_search(Script[Sp], what, rex))
+			return true;
+
+		rex = sregex::compile(Tag.second);
+
+		if (regex_search(Script[Sp], what, rex))
+			return true;
+
+		return false;
+	}
+
+	//各種素材描画
+	bool DrawMaterial(Material<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) {
+		if (ScriptTask::ScriptTagCheck(Script, Tag[0])) {	//背景画像描画
+			ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, Tag[0]);
+			return true;
+		}
+
+		if (ScriptTask::ScriptTagCheck(Script, Tag[1])) {	//立ち絵画像描画
+			ScriptTask::DrawCharacter(Script, Character);
+			return true;
+		}
+
+		if (ScriptTask::ScriptTagCheck(Script, Tag[2])) {	//BGM再生
+			ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP, Tag[2]);
+			return true;
+		}
+
+		if (ScriptTask::ScriptTagCheck(Script, Tag[3])) {	//SE再生
+			ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK, Tag[3]);
+			return true;
+		}
+
+		if (ScriptTask::ScriptTagCheck(Script, Tag[4])) {	//動画再生
+			ScriptTask::PlayMovie(Script, Movie);
+			return true;
+		}
+
+		if (ScriptTask::ScriptTagCheck(Script, Tag[5])) {	//イメージエフェクト描画
+			ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle, Tag[5]);
+			return true;
+		}
+
+		return false;
+	}
 }
 
 //スクリプトタグ処理関数
-void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) noexcept {
+void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) noexcept {
 
 	switch (Script[Sp][Cp])
 	{
-	case 'B':	//背景画像描画
-		ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle);
-		break;
-
-	case 'C':	//立ち絵画像描画
-		ScriptTask::DrawCharacter(Script, Character);
-		break;
-
-	case 'M':	//BGM再生
-		ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
-		break;
-
-	case 'S':	//SE再生
-		ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK);
-		break;
-
-	case 'V':	//動画再生
-		ScriptTask::PlayMovie(Script, Movie);
-		break;
-
-	case 'I':	//イメージエフェクト描画
-		ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle);
-		break;
 
 	case 'L':	//改行文字
 		ScriptTask::Kaigyou();
@@ -259,8 +348,8 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 		break;
 
 	case 'R':	//画面クリア
-		ScriptTask::ClearScreen();
 		Cp++;
+		ScriptTask::ClearScreen(Script);
 		break;
 
 	case 'W': //遅延処理
@@ -312,20 +401,15 @@ void ScriptTagTaskManager(Script& Script, Material<int>& BackGround, Material<in
 		break;
 
 	case ' ':
-	case '0':
-	case '1':
-	case '2':
-	case '3':
-	case '4':
-	case '5':
-	case '6':
-	case '7':
-	case '8':
-	case '9':
 		Cp++;
 		break;
 
 	default:	// その他の文字
+
+		//各種素材描画
+		if (ScriptTask::DrawMaterial(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie, ImageEffect))
+			break;
+
 
 		//文字列描画
 		ScriptTask::DrawScript(Script);

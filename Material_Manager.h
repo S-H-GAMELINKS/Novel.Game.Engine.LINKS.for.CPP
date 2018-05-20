@@ -8,36 +8,42 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <boost/filesystem.hpp>
+#include <boost/range/iterator_range.hpp>
+
+namespace fs = boost::filesystem;
 
 namespace {
 
-	//各種素材ファイル確認関数
-	bool CheckMaterialExistence(const std::string& FilePath) noexcept {
-		std::ifstream Material(FilePath, std::ios_base::in);
-		return Material.is_open();
-	}
+	//各素材ファイルパス取得
+	std::vector<std::string> AllFilePath(const std::string& Path) {
 
-	//各種素材ファイルパス処理
-	std::string MaterialPathCalc(const std::int32_t& i, const std::string& FilePath, const std::string& FileFormat) noexcept {
-		std::ostringstream Num;
+		std::vector<std::string> Container;
 
-		Num << std::setfill('0') << std::setw(2) << i + 1;
+		const fs::path path(Path);
 
-		return (FilePath + Num.str() + FileFormat);
+		for (const auto& p : boost::make_iterator_range(fs::directory_iterator(path), {})) {
+			if (!fs::is_directory(p.path())) {
+				std::string File = Path + "/" + p.path().filename().string();
+				Container.emplace_back(std::move(File));
+			}
+		}
+
+		return Container;
 	}
 }
 
 //各種素材読込テンプレート関数
 template <typename T, typename Func>
-std::array<T, MaterialMax> MaterialLoad(std::array<T, MaterialMax>& Material, const std::string& FilePath, const std::string& FileFormat, Func&& Loader) noexcept {
+std::vector<T> MaterialLoad(std::vector<T> Material, const std::string& Path, Func&& Loader) noexcept {
 
 	//サウンドデータの読み込み形式
 	DxLib::SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
 
-	for (std::int32_t i = 0; i < MaterialMax; i++) {
-		if (CheckMaterialExistence(MaterialPathCalc(i, FilePath, FileFormat)))
-			Material[i] = Loader(MaterialPathCalc(i, FilePath, FileFormat));
-	}
+	std::vector<std::string> Container = AllFilePath(Path);
+
+	for (auto&& c : Container)
+		Material.emplace_back(std::move(Loader(c.c_str())));
 
 	return Material;
 }

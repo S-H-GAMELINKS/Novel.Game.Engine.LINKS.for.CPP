@@ -19,11 +19,8 @@ int EndFlag = 0;	// 終了フラグ
 static std::vector<std::string> Script;
 
 //各種素材格納変数
-template <typename T>
-using Material = std::array<T, MaterialMax>;
-
-static Material<int> BackGround, Character, BackGroundMusic, SoundEffect, ImageEffect;
-static Material<std::string> Movie;
+static std::vector<int> BackGround, Character, BackGroundMusic, SoundEffect, ImageEffect;
+static std::vector<std::string> Movie;
 
 //各種素材ハンドル
 std::int32_t BackGroundHandle, CharacterHandle, BackGroundMusicHandle, SoundEffectHandle, ImageEffectHandle, GameTitleGraph;
