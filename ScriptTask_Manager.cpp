@@ -278,6 +278,58 @@ namespace ScriptTask {
 		unique GameOverHandle = std::make_unique<std::int32_t>(DxLib::LoadGraph("DATA/BACKGROUND/GAMEOVER.png"));
 		DxLib::DrawGraph(0, 0, *GameOverHandle, TRUE);
 	}
+
+	//タグチェック関数
+	bool ScriptTagCheck(const Script& Script, const std::pair<std::string, std::string>& Tag) {
+
+		sregex rex = sregex::compile(Tag.first);
+		smatch what;
+
+		if (regex_search(Script[Sp], what, rex))
+			return true;
+
+		rex = sregex::compile(Tag.second);
+
+		if (regex_search(Script[Sp], what, rex))
+			return true;
+
+		return false;
+	}
+
+	//各種素材描画
+	bool DrawMaterial(Material<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) {
+		if (ScriptTask::ScriptTagCheck(Script, Tag[0])) {	//背景画像描画
+			ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, Tag[0]);
+			return true;
+		}
+
+		if (ScriptTask::ScriptTagCheck(Script, Tag[1])) {	//立ち絵画像描画
+			ScriptTask::DrawCharacter(Script, Character);
+			return true;
+		}
+
+		if (ScriptTask::ScriptTagCheck(Script, Tag[2])) {	//BGM再生
+			ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP, Tag[2]);
+			return true;
+		}
+
+		if (ScriptTask::ScriptTagCheck(Script, Tag[3])) {	//SE再生
+			ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK, Tag[3]);
+			return true;
+		}
+
+		if (ScriptTask::ScriptTagCheck(Script, Tag[4])) {	//動画再生
+			ScriptTask::PlayMovie(Script, Movie);
+			return true;
+		}
+
+		if (ScriptTask::ScriptTagCheck(Script, Tag[5])) {	//イメージエフェクト描画
+			ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle, Tag[5]);
+			return true;
+		}
+
+		return false;
+	}
 }
 
 //スクリプトタグ処理関数
@@ -285,29 +337,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 
 	switch (Script[Sp][Cp])
 	{
-	case 'B':	//背景画像描画
-		ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, Tag[0]);
-		break;
-
-	case 'C':	//立ち絵画像描画
-		ScriptTask::DrawCharacter(Script, Character);
-		break;
-
-	case 'M':	//BGM再生
-		ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP, Tag[2]);
-		break;
-
-	case 'S':	//SE再生
-		ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK, Tag[3]);
-		break;
-
-	case 'V':	//動画再生
-		ScriptTask::PlayMovie(Script, Movie);
-		break;
-
-	case 'I':	//イメージエフェクト描画
-		ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle, Tag[5]);
-		break;
 
 	case 'L':	//改行文字
 		ScriptTask::Kaigyou();
@@ -376,6 +405,11 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 		break;
 
 	default:	// その他の文字
+
+		//各種素材描画
+		if (ScriptTask::DrawMaterial(Script, BackGround, Character, BackGroundMusic, SoundEffect, Movie, ImageEffect))
+			break;
+
 
 		//文字列描画
 		ScriptTask::DrawScript(Script);
