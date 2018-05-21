@@ -44,6 +44,9 @@ using Script = std::vector<std::string>;
 //立ち絵削除＆ゲームオーバー用エイリアス
 using unique = std::unique_ptr<int>;
 
+//タグ正規表現用エイリアス
+using ScriptTag = const std::pair<std::string, std::string>;
+
 //タグ正規表現
 std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back(\\d+)"},
 														 { "C(\\d+)", "draw_char(\\d+)" },
@@ -281,7 +284,7 @@ namespace ScriptTask {
 	}
 
 	//タグチェック関数
-	bool ScriptTagCheck(const Script& Script, const std::pair<std::string, std::string>& Tag) {
+	bool ScriptTagCheck(const Script& Script, ScriptTag& Tag) {
 
 		sregex rex = sregex::compile(Tag.first);
 		smatch what;
@@ -333,7 +336,7 @@ namespace ScriptTask {
 	}
 
 	//システムタグチェック関数
-	bool SystemTag(Material <std::string>& Script, const std::pair<std::string, std::string>& Tag) {
+	bool SystemTag(Material <std::string>& Script, ScriptTag& Tag) {
 
 		for (int i = Cp; i < Script[Sp].length(); i++) {
 			if (Script[Sp][i] == Tag.first[0] || Script[Sp][i] == Tag.second[0]) {
