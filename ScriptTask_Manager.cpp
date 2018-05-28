@@ -61,7 +61,8 @@ std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back
 														 { "G", "draw_gameover" },
 														 { "F", "play_ending_movie" },
 														 { "O", "stop_bgm" },
-														 { "Q", "stop_se" } };
+														 { "Q", "stop_se" },
+														 { "D", "choice_scene" } };
 
 namespace ScriptTask {
 
@@ -420,6 +421,10 @@ namespace ScriptTask {
 		if (SystemTag(Script, Tag[13])) {		//SE’âŽ~
 			Cp++;
 			DxLib::StopSoundMem(SoundEffectHandle);
+		}
+
+		if (SystemTag(Script, Tag[14])) {		//‘I‘ðŽˆ
+			ChoiceSelect(EndFlag);
 		}
 
 		return false;
