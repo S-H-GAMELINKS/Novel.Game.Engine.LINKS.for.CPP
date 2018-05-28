@@ -437,10 +437,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 	switch (Script[Sp][Cp])
 	{
 
-	case 'D':	//‘I‘ğˆ
-		ChoiceSelect(EndFlag);
-		break;
-
 	case 'E':	//ƒQ[ƒ€I—¹
 		EndFlag = 99;
 		Cp++;
