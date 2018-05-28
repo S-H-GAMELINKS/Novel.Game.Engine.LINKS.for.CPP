@@ -91,6 +91,16 @@ namespace {
 		fs::copy_file(path, dest, fs::copy_option::overwrite_if_exists);
 	}
 
+	//セーブデータ適用処理
+	void LoadingSaveData(const SaveData_t& SaveData) {
+		EndFlag = SaveData.EndFlag;
+		Sp = SaveData.Sp;
+		Cp = SaveData.Cp;
+		CharacterHandle = SaveData.Character;
+		BackGroundHandle = SaveData.BackGround;
+		BackGroundMusicHandle = SaveData.BackGroundMusic;
+	}
+
 	//セーブデータをセーブ
 	int SaveDataSave(const char* SaveDataPath, const char* Message, const int& Num) noexcept {
 
@@ -135,12 +145,7 @@ namespace {
 			fread(&SaveData, sizeof(SaveData), 1, Fp);
 			fclose(Fp);
 
-			EndFlag = SaveData.EndFlag;
-			Sp = SaveData.Sp;
-			Cp = SaveData.Cp;
-			CharacterHandle = SaveData.Character;
-			BackGroundHandle = SaveData.BackGround;
-			BackGroundMusicHandle = SaveData.BackGroundMusic;
+			LoadingSaveData(SaveData);
 
 			MessageBoxOk("ロードしました！");
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
@@ -289,12 +294,7 @@ int QuickSaveDataLoad() noexcept {
 		fread(&SaveData, sizeof(SaveData), 1, Fp);
 		fclose(Fp);
 
-		EndFlag = SaveData.EndFlag;
-		Sp = SaveData.Sp;
-		Cp = SaveData.Cp;
-		CharacterHandle = SaveData.Character;
-		BackGroundHandle = SaveData.BackGround;
-		BackGroundMusicHandle = SaveData.BackGroundMusic;
+		LoadingSaveData(SaveData);
 
 		MessageBoxOk("ロードしました！");
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
@@ -344,12 +344,7 @@ int ContinueSaveDataLoad() noexcept {
 		fread(&SaveData, sizeof(SaveData), 1, Fp);
 		fclose(Fp);
 
-		EndFlag = SaveData.EndFlag;
-		Sp = SaveData.Sp;
-		Cp = SaveData.Cp;
-		CharacterHandle = SaveData.Character;
-		BackGroundHandle = SaveData.BackGround;
-		BackGroundMusicHandle = SaveData.BackGroundMusic;
+		LoadingSaveData(SaveData);
 
 		MessageBoxOk("ロードしました！");
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
