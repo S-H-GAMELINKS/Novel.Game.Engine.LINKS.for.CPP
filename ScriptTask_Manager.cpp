@@ -17,6 +17,8 @@
 #include <thread>
 #include <chrono>
 #include <boost/xpressive/xpressive.hpp>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/split.hpp>
 
 using namespace boost::xpressive;
 
@@ -68,6 +70,39 @@ std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back
 namespace ScriptTask {
 
 	char OneMojiBuf[3];	// １文字分一時記憶配列
+
+	//スクリプトタグ処理
+	std::vector<std::string> LoadingScriptTag() {
+
+		std::vector<std::string> Str, Container, Temp;
+		
+		std::fstream file("DATA/STR/ScriptTag.txt", std::ios_base::in);
+		
+		for (std::string line; std::getline(file, line); ) if (!line.empty()) Str.emplace_back(std::move(line));
+		
+			for (auto&& s : Str) {
+				boost::algorithm::split(Temp, s, boost::is_any_of(",")); // カンマで分割
+			
+				for (auto&& t : Temp)
+				Container.emplace_back(std::move(t));
+			}
+
+		return Container;
+	}
+
+	//スクリプトタグ反映処理
+	std::vector<std::pair<std::string, std::string>> SettingScriptTag(const std::vector<std::string> Container) {
+
+		std::vector<std::pair<std::string, std::string>> ScriptTag;
+		
+		for (unsigned int i = 0, j = 0; i < Container.size(); i += 2, j++)
+			ScriptTag.emplace_back(std::move(std::make_pair(Container[i], Container[i + 1])));
+
+		return ScriptTag;
+	}
+
+	//タグ正規表現
+	std::vector<std::pair<std::string, std::string>> Tag = SettingScriptTag(LoadingScriptTag());
 
 	// 改行関数
 	void Kaigyou() noexcept {
