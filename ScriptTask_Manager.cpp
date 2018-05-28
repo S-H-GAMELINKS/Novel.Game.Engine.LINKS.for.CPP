@@ -426,11 +426,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 	switch (Script[Sp][Cp])
 	{
 
-	case 'O':	//BGMí‚é~
-		DxLib::StopSoundMem(BackGroundMusicHandle);
-		Cp++;
-		break;
-
 	case 'Q':	//SEí‚é~
 		Cp++;
 		DxLib::StopSoundMem(SoundEffectHandle);
