@@ -55,7 +55,8 @@ std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back
 														 { "V(\\d+)","play_movie(\\d+)" },
 														 { "I(\\d+)", "draw_effect(\\d+)" },
 														 { "L", "new_line"},
-														 { "P", "wait_key" } };
+														 { "P", "wait_key" },
+														 { "R", "clear_screen" } };
 
 namespace ScriptTask {
 
@@ -383,6 +384,11 @@ namespace ScriptTask {
 
 		if (SystemTag(Script, Tag[7])) {		//クリック待ち
 			ScriptTask::ClickWait();
+			Cp++;
+		}
+
+		if (SystemTag(Script, Tag[8])) {		//画面クリア処理
+			ScriptTask::ClearScreen(Script);
 			Cp++;
 		}
 
