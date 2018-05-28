@@ -101,6 +101,15 @@ namespace {
 		BackGroundMusicHandle = SaveData.BackGroundMusic;
 	}
 
+	//セーブデータ読込後処理
+	void DrawGameScreen() {
+		DrawPointX = 0;
+		DrawPointY = 0;
+		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
+		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
+		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+	}
+
 	//セーブデータをセーブ
 	int SaveDataSave(const char* SaveDataPath, const char* Message, const int& Num) noexcept {
 
@@ -150,11 +159,7 @@ namespace {
 			MessageBoxOk("ロードしました！");
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-			DrawPointX = 0;
-			DrawPointY = 0;
-			DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
-			DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
-			DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+			DrawGameScreen();
 		}
 		return 0;
 	}
@@ -299,11 +304,7 @@ int QuickSaveDataLoad() noexcept {
 		MessageBoxOk("ロードしました！");
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-		DrawPointX = 0;
-		DrawPointY = 0;
-		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
-		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
-		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+		DrawGameScreen();
 	}
 	return 0;
 }
@@ -349,11 +350,7 @@ int ContinueSaveDataLoad() noexcept {
 		MessageBoxOk("ロードしました！");
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 
-		DrawPointX = 0;
-		DrawPointY = 0;
-		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
-		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
-		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
+		DrawGameScreen();
 	}
 	return 0;
 }
