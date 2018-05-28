@@ -402,11 +402,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 	switch (Script[Sp][Cp])
 	{
 
-	case 'R':	//‰æ–ÊƒNƒŠƒA
-		Cp++;
-		ScriptTask::ClearScreen(Script);
-		break;
-
 	case 'W': //’x‰„ˆ—
 		std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
 		Cp++;
