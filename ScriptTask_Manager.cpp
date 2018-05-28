@@ -408,11 +408,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 	switch (Script[Sp][Cp])
 	{
 
-	case 'W': //遅延処理
-		std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
-		Cp++;
-		break;
-
 	case 'G':	//ゲームオーバー画面
 		ScriptTask::GameOverScreenDraw();
 		Cp++;
