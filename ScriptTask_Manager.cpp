@@ -59,7 +59,8 @@ std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back
 														 { "R", "clear_screen" },
 														 { "W", "wait_time" },
 														 { "G", "draw_gameover" },
-														 { "F", "play_ending_movie" } };
+														 { "F", "play_ending_movie" },
+														 { "O", "stop_bgm" } };
 
 namespace ScriptTask {
 
@@ -410,6 +411,10 @@ namespace ScriptTask {
 			Cp++;
 		}
 
+		if (SystemTag(Script, Tag[12])) {		//BGMí‚é~
+			DxLib::StopSoundMem(BackGroundMusicHandle);
+			Cp++;
+		}
 
 		return false;
 	}
