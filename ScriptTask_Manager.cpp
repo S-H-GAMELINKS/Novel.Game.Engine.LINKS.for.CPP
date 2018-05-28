@@ -387,50 +387,60 @@ namespace ScriptTask {
 		if (SystemTag(Script, Tag[6])) {		//改行
 			ScriptTask::Kaigyou();
 			Cp++;
+			return true;
 		}
 
 		if (SystemTag(Script, Tag[7])) {		//クリック待ち
 			ScriptTask::ClickWait();
 			Cp++;
+			return true;
 		}
 
 		if (SystemTag(Script, Tag[8])) {		//画面クリア処理
 			ScriptTask::ClearScreen(Script);
 			Cp++;
+			return true;
 		}
 
 		if (SystemTag(Script, Tag[9])) {		//遅延処理
 			std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
 			Cp++;
+			return true;
 		}
 
 		if (SystemTag(Script, Tag[10])) {		//ゲームオーバー画面描画
 			ScriptTask::GameOverScreenDraw();
 			Cp++;
+			return true;
 		}
 
 		if (SystemTag(Script, Tag[11])) {		//エンディング画面描画
 			DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
 			Cp++;
+			return true;
 		}
 
 		if (SystemTag(Script, Tag[12])) {		//BGM停止
 			DxLib::StopSoundMem(BackGroundMusicHandle);
 			Cp++;
+			return true;
 		}
 
 		if (SystemTag(Script, Tag[13])) {		//SE停止
 			Cp++;
 			DxLib::StopSoundMem(SoundEffectHandle);
+			return true;
 		}
 
 		if (SystemTag(Script, Tag[14])) {		//選択肢
 			ChoiceSelect(EndFlag);
+			return true;
 		}
 
 		if (SystemTag(Script, Tag[15])) {		//ゲーム終了
 			EndFlag = 99;
 			Cp++;
+			return true;
 		}
 
 		return false;
