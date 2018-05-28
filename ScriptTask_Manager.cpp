@@ -443,11 +443,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 	switch (Script[Sp][Cp])
 	{
 
-	case 'E':	//ゲーム終了
-		EndFlag = 99;
-		Cp++;
-		break;
-
 	case '/':	//コメント
 		Cp++;
 		ScriptTask::Comment(Script);
