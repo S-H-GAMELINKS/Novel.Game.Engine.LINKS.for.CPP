@@ -49,24 +49,6 @@ using unique = std::unique_ptr<int>;
 //タグ正規表現用エイリアス
 using ScriptTag = const std::pair<std::string, std::string>;
 
-//タグ正規表現
-std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back(\\d+)"},
-														 { "C(\\d+)", "draw_char(\\d+)" },
-														 { "M(\\d+)", "play_bgm(\\d+)" },
-														 { "S(\\d+)" , "play_se(\\d+)" },
-														 { "V(\\d+)","play_movie(\\d+)" },
-														 { "I(\\d+)", "draw_effect(\\d+)" },
-														 { "L", "new_line"},
-														 { "P", "wait_key" },
-														 { "R", "clear_screen" },
-														 { "W", "wait_time" },
-														 { "G", "draw_gameover" },
-														 { "F", "play_ending_movie" },
-														 { "O", "stop_bgm" },
-														 { "Q", "stop_se" },
-														 { "D", "choice_scene" },
-														 { "E", "game_end" } };
-
 namespace ScriptTask {
 
 	char OneMojiBuf[3];	// １文字分一時記憶配列
@@ -87,6 +69,8 @@ namespace ScriptTask {
 				Container.emplace_back(std::move(t));
 			}
 
+		file.close();
+
 		return Container;
 	}
 
@@ -101,8 +85,10 @@ namespace ScriptTask {
 		return ScriptTag;
 	}
 
+	std::vector<std::string> ScriptTagContainer = LoadingScriptTag();
+
 	//タグ正規表現
-	std::vector<std::pair<std::string, std::string>> Tag = SettingScriptTag(LoadingScriptTag());
+	std::vector<std::pair<std::string, std::string>> Tag = SettingScriptTag(ScriptTagContainer);
 
 	// 改行関数
 	void Kaigyou() noexcept {
