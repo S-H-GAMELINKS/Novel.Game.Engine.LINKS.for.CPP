@@ -414,11 +414,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 	switch (Script[Sp][Cp])
 	{
 
-	case 'G':	//ゲームオーバー画面
-		ScriptTask::GameOverScreenDraw();
-		Cp++;
-		break;
-
 	case 'F':	//エンディング画面
 		DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
 		Cp++;
