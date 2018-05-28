@@ -37,6 +37,9 @@ namespace {
 	//セーブデータ用スクリーンショット格納変数
 	std::int32_t SaveSnap[SaveDataSlotNum];
 
+	//セーブデータ名描画用配列
+	static constexpr const char* SaveDataName[] = { "セーブデータ1", "セーブデータ2", "セーブデータ3" };
+
 	//通常セーブデータ
 	struct alignas(4) SaveData_t {
 		std::int32_t EndFlag;    //EndFlag
@@ -72,9 +75,8 @@ namespace {
 		DxLib::DrawString(SaveDataBasePosX, SaveDataMenuPosY, "■", Color);
 
 		//セーブデータ名描画
-		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY, "セーブデータ1", Color);
-		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * 2, "セーブデータ2", Color);
-		DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * 3, "セーブデータ3", Color);
+		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
+			DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * (i + 1), SaveDataName[i], Color);
 
 		DxLib::DrawString(SaveDataNamePosX - CursorMove, SaveDataBasePosY * 4, "戻る", Color);
 	}
