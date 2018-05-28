@@ -62,7 +62,8 @@ std::vector<std::pair<std::string, std::string>> Tag = { { "B(\\d+)", "draw_back
 														 { "F", "play_ending_movie" },
 														 { "O", "stop_bgm" },
 														 { "Q", "stop_se" },
-														 { "D", "choice_scene" } };
+														 { "D", "choice_scene" },
+														 { "E", "game_end" } };
 
 namespace ScriptTask {
 
@@ -425,6 +426,11 @@ namespace ScriptTask {
 
 		if (SystemTag(Script, Tag[14])) {		//ëIëéà
 			ChoiceSelect(EndFlag);
+		}
+
+		if (SystemTag(Script, Tag[15])) {		//ÉQÅ[ÉÄèIóπ
+			EndFlag = 99;
+			Cp++;
 		}
 
 		return false;
