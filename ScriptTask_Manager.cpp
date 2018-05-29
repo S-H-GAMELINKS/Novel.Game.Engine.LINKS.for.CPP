@@ -208,7 +208,6 @@ namespace ScriptTask {
 	//背景画像＆イメージエフェクト描画関数
 	template <typename T, typename Func>
 	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle, const std::pair<std::string, std::string> Tag) noexcept {
-		Cp++;
 		Handle = Material[MaterialNumCheck(Script, Tag)];
 		DrawFunc(Handle);
 	}
@@ -334,6 +333,7 @@ namespace ScriptTask {
 	bool DrawMaterial(Material<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) {
 		if (ScriptTask::ScriptTagCheck(Script, Tag[0])) {	//背景画像描画
 			ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, Tag[0]);
+			Cp = 0;
 			return true;
 		}
 
@@ -407,48 +407,40 @@ namespace ScriptTask {
 
 		if (SystemTag(Script, Tag[6])) {		//改行
 			ScriptTask::Kaigyou();
-			Cp++;
 			return true;
 		}
 
 		if (SystemTag(Script, Tag[7])) {		//クリック待ち
 			ScriptTask::ClickWait();
-			Cp++;
 			return true;
 		}
 
 		if (SystemTag(Script, Tag[8])) {		//画面クリア処理
 			ScriptTask::ClearScreen(Script);
-			Cp++;
 			return true;
 		}
 
 		if (SystemTag(Script, Tag[9])) {		//遅延処理
 			std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
-			Cp++;
 			return true;
 		}
 
 		if (SystemTag(Script, Tag[10])) {		//ゲームオーバー画面描画
 			ScriptTask::GameOverScreenDraw();
-			Cp++;
 			return true;
 		}
 
 		if (SystemTag(Script, Tag[11])) {		//エンディング画面描画
 			DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
-			Cp++;
 			return true;
 		}
 
 		if (SystemTag(Script, Tag[12])) {		//BGM停止
 			DxLib::StopSoundMem(BackGroundMusicHandle);
-			Cp++;
 			return true;
 		}
 
 		if (SystemTag(Script, Tag[13])) {		//SE停止
-			Cp++;
 			DxLib::StopSoundMem(SoundEffectHandle);
 			return true;
 		}
@@ -460,7 +452,6 @@ namespace ScriptTask {
 
 		if (SystemTag(Script, Tag[15])) {		//ゲーム終了
 			EndFlag = 99;
-			Cp++;
 			return true;
 		}
 
