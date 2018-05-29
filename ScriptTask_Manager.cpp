@@ -294,7 +294,7 @@ namespace ScriptTask {
 		if (SkipAndAutoFlag == 0) {
 			DxLib::WaitKey();
 			if (MouseAndKey::CheckMouseAndKeyEnter())
-				Cp++;
+				Cp = 0;//Cp++;
 		}
 
 		if (SkipAndAutoFlag == 1)
