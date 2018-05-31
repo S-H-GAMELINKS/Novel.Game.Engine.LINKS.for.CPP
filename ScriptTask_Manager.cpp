@@ -363,32 +363,27 @@ namespace ScriptTask {
 	//システムタグチェック関数
 	bool SystemTag(Material <std::string>& Script, ScriptTag& Tag) {
 
+		std::string Str = Script[Sp];
+
+		smatch what;
+
+		std::array<std::string, 2> ScriptTagContainer = { Tag.first, Tag.second };
+
 		for (int i = Cp; i < Script[Sp].length(); i++) {
 			if (Script[Sp][i] == Tag.first[0] || Script[Sp][i] == Tag.second[0]) {
 
-				std::string Str = Script[Sp];
+				for (std::int32_t i = 0; i < 2; i++) {
 
-				sregex rex = sregex::compile(Tag.first);
-				smatch what;
+					sregex rex = sregex::compile(ScriptTagContainer[i]);
 
-				if (regex_match(Script[Sp], what, rex)) {
+					if (regex_match(Script[Sp], what, rex)) {
 
-					Script[Sp] = regex_replace(Str, rex, "");
+						Script[Sp] = regex_replace(Str, rex, "");
 
-					Cp = 0;
+						Cp = 0;
 
-					return true;
-				}
-
-				rex = sregex::compile(Tag.second);
-
-				if (regex_match(Script[Sp], what, rex)) {
-
-					Script[Sp] = regex_replace(Str, rex, "");
-
-					Cp = 0;
-
-					return true;
+						return true;
+					}
 				}
 			}
 		}
