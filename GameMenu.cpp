@@ -124,7 +124,8 @@ void GameMenuLoop() noexcept {
 	while (EndFlag == 17) {
 		ScreenClear();
 		GameMenuDraw(GameMenuCursorPosY);
-		GameMenuCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::GameMenuMouseMove(GameMenuCursorPosY) : KeyState::GameMenuKeyMove(GameMenuCursorPosY);
+		GameMenuCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::GameMenuMouseMove(GameMenuCursorPosY)
+																: KeyState::KeyMoveTemplate(GameMenuCursorPosY, GameMenuBasePosY, GameMenuBasePosY * 12, CursorMove, ConfigData.MouseAndKeyFlag);
 		GameMenuSelect(GameMenuCursorPosY);
 
 		//ゲーム終了確認ウインドウ
