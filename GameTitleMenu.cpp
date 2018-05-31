@@ -62,7 +62,7 @@ void GameTitleMenuLoop(std::int32_t& CursorPosY) noexcept {
 	while (EndFlag == 0) {
 		ScreenClear();
 		GameTitleMenuDraw(CursorPosY);
-		CursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::GameTitleMenuMouseMove(CursorPosY)
+		CursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::MouseMoveTemplate(CursorPosY, TitleMenuPosY, CursorMove, 6, ConfigData.MouseAndKeyFlag)
 														: KeyState::KeyMoveTemplate(CursorPosY, TitleMenuPosY, TitleMenuExitPosY, CursorMove, ConfigData.MouseAndKeyFlag);
 		GameTitleMenuChoice(CursorPosY);
 

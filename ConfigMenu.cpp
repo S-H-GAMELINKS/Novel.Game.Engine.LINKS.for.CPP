@@ -208,7 +208,7 @@ void ConfigMenuLoop() noexcept {
 		while (ConfigFlag) {
 			ScreenClear();
 			ConfigMenuDraw(ConfigCursorPosY);
-			ConfigCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::ConfigMenuMouseMove(ConfigCursorPosY)
+			ConfigCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::MouseMoveTemplate(ConfigCursorPosY, GameMenuBasePosY, CursorMove, 7, ConfigData.MouseAndKeyFlag)
 																: KeyState::KeyMoveTemplate(ConfigCursorPosY, GameMenuBasePosY, GameMenuBasePosY * 7, CursorMove, ConfigData.MouseAndKeyFlag);
 			ConfigFlag = ConfigMenuSelect(ConfigCursorPosY, ConfigFlag);
 		}

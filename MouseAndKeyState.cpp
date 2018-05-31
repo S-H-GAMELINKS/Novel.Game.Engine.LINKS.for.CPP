@@ -44,32 +44,6 @@ namespace MouseState {
 
 		return CursorPosY;
 	}
-
-	//タイトルメニューのマウス操作
-	std::int32_t GameTitleMenuMouseMove(std::int32_t CursorPosY) noexcept {
-		return MouseMoveTemplate(CursorPosY, TitleMenuPosY, CursorMove, 6, ConfigData.MouseAndKeyFlag);
-	}
-
-	//コンフィグ画面マウス操作
-	std::int32_t ConfigMenuMouseMove(std::int32_t ConfigCursorPosY) noexcept {
-		return MouseMoveTemplate(ConfigCursorPosY, GameMenuBasePosY, CursorMove, 7, ConfigData.MouseAndKeyFlag);
-	}
-
-	//ゲームメニューのマウス操作
-	std::int32_t GameMenuMouseMove(std::int32_t GameMenuCursorPosY) noexcept {
-		return MouseMoveTemplate(GameMenuCursorPosY, GameMenuBasePosY, CursorMove, 12, ConfigData.MouseAndKeyFlag);
-	}
-
-	//選択肢マウス操作
-	std::int32_t ChoiceMouseMove(std::int32_t ChoiceCursorPosY) noexcept {
-		return MouseMoveTemplate(ChoiceCursorPosY, (ChoicePosY[1] - CursorMove), CursorMove, 2, ConfigData.MouseAndKeyFlag);
-	}
-
-	//セーブデータメニューマウス操作
-	std::int32_t SaveDataMenuMouseMove(std::int32_t SaveDataMenuPosY) noexcept {
-		return MouseMoveTemplate(SaveDataMenuPosY, SaveDataBasePosY, SaveDataBasePosY, 4, ConfigData.MouseAndKeyFlag);
-	}
-
 }
 
 namespace MouseAndKey {

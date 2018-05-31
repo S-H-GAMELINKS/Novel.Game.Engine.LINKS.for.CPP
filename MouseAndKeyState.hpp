@@ -11,20 +11,8 @@ namespace KeyState {
 
 namespace MouseState {
 
-	//タイトルメニューのマウス操作
-	std::int32_t GameTitleMenuMouseMove(std::int32_t CursorPosY) noexcept;
-
-	//コンフィグ画面マウス操作
-	std::int32_t ConfigMenuMouseMove(std::int32_t ConfigCursorPosY) noexcept;
-
-	//ゲームメニューのマウス操作
-	std::int32_t GameMenuMouseMove(std::int32_t GameMenuCursorPosY) noexcept;
-
-	//選択肢マウス操作
-	std::int32_t ChoiceMouseMove(std::int32_t ChoiceCursorPosY) noexcept;
-
-	//セーブデータメニューマウス操作
-	std::int32_t SaveDataMenuMouseMove(std::int32_t SaveDataMenuPosY) noexcept;
+	//マウス操作判定のテンプレート
+	std::int32_t MouseMoveTemplate(std::int32_t CursorPosY, std::int32_t TopPosY, std::int32_t Move, std::int32_t Num, std::int32_t Flag);
 }
 
 namespace MouseAndKey {
