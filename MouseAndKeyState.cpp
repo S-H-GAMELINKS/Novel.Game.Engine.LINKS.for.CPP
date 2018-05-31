@@ -10,15 +10,14 @@ extern ConfigData_t ConfigData;
 
 namespace KeyState {
 
-	//タイトルメニューのキー操作
-	std::int32_t GameTitleMenuKeyMove(std::int32_t CursorPosY) noexcept {
-
-		if (ConfigData.MouseAndKeyFlag == 0) {
+	//キー操作判定のテンプレート
+	std::int32_t KeyMoveTemplate(std::int32_t CursorPosY, std::int32_t TopPosY, std::int32_t ButtomPosY, std::int32_t Move, std::int32_t Flag) {
+		if (Flag == 0) {
 			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-				CursorPosY = (TitleMenuExitPosY == CursorPosY) ? TitleMenuPosY : CursorPosY + CursorMove;
+				CursorPosY = (ButtomPosY == CursorPosY) ? TopPosY : CursorPosY + Move;
 
 			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-				CursorPosY = (TitleMenuPosY == CursorPosY) ? TitleMenuExitPosY : CursorPosY - CursorMove;
+				CursorPosY = (TopPosY == CursorPosY) ? ButtomPosY : CursorPosY - Move;
 
 			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
@@ -26,62 +25,29 @@ namespace KeyState {
 		return CursorPosY;
 	}
 
+	//タイトルメニューのキー操作
+	std::int32_t GameTitleMenuKeyMove(std::int32_t CursorPosY) noexcept {
+		return KeyMoveTemplate(CursorPosY, TitleMenuPosY, TitleMenuExitPosY, CursorMove, ConfigData.MouseAndKeyFlag);
+	}
+
 	//コンフィグ画面キー操作
 	std::int32_t ConfigMenuKeyMove(std::int32_t ConfigCursorPosY) noexcept {
-		if (ConfigData.MouseAndKeyFlag == 0) {
-			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-				ConfigCursorPosY = (GameMenuBasePosY * 7 == ConfigCursorPosY) ? GameMenuBasePosY : ConfigCursorPosY + CursorMove;
-
-			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-				ConfigCursorPosY = (GameMenuBasePosY == ConfigCursorPosY) ? GameMenuBasePosY * 7 : ConfigCursorPosY - CursorMove;
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-		}
-
-		return ConfigCursorPosY;
+		return KeyMoveTemplate(ConfigCursorPosY, GameMenuBasePosY, GameMenuBasePosY * 7, CursorMove, ConfigData.MouseAndKeyFlag);
 	}
 
 	//ゲームメニューキー操作
 	std::int32_t GameMenuKeyMove(std::int32_t GameMenuCursorPosY) noexcept {
-		if (ConfigData.MouseAndKeyFlag == 0) {
-			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-				GameMenuCursorPosY = (GameMenuBasePosY * 12 == GameMenuCursorPosY) ? GameMenuBasePosY : GameMenuCursorPosY + GameMenuBasePosY;
-
-			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-				GameMenuCursorPosY = (GameMenuBasePosY == GameMenuCursorPosY) ? GameMenuBasePosY * 12 : GameMenuCursorPosY - GameMenuBasePosY;
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-		}
-
-		return GameMenuCursorPosY;
+		return KeyMoveTemplate(GameMenuCursorPosY, GameMenuBasePosY, GameMenuBasePosY * 12, CursorMove, ConfigData.MouseAndKeyFlag);
 	}
 
 	//選択肢キー操作
 	std::int32_t ChoiceKeyMove(std::int32_t ChoiceCursorPosY) noexcept {
-		if (ConfigData.MouseAndKeyFlag == 0) {
-			if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-				ChoiceCursorPosY = (ChoicePosY[1] == ChoiceCursorPosY) ? ChoicePosY[0] : ChoiceCursorPosY + CursorMove;
-
-			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-				ChoiceCursorPosY = (ChoicePosY[0] == ChoiceCursorPosY) ? ChoicePosY[1] : ChoiceCursorPosY - CursorMove;
-
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-		}
-
-		return ChoiceCursorPosY;
+		return KeyMoveTemplate(ChoiceCursorPosY, ChoicePosY[0], ChoicePosY[1], CursorMove, ConfigData.MouseAndKeyFlag);
 	}
 
 	//セーブデータメニューキー操作
 	std::int32_t SaveDataMenuKeyMove(std::int32_t SaveDataMenuPosY) noexcept {
-		if (DxLib::CheckHitKey(KEY_INPUT_DOWN) == 1)
-			SaveDataMenuPosY = (SaveDataPosButtom == SaveDataMenuPosY) ? SaveDataBasePosY : SaveDataMenuPosY + SaveDataCursorMove;
-
-		if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
-			SaveDataMenuPosY = (SaveDataBasePosY == SaveDataMenuPosY) ? SaveDataPosButtom : SaveDataMenuPosY - SaveDataCursorMove;
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
-		return SaveDataMenuPosY;
+		return KeyMoveTemplate(SaveDataMenuPosY, SaveDataBasePosY, SaveDataPosButtom, SaveDataCursorMove, ConfigData.MouseAndKeyFlag);
 	}
 
 }
