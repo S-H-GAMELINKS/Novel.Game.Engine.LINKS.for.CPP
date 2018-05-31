@@ -56,89 +56,44 @@ namespace MouseState {
 
 	std::int32_t MousePosY, MousePosX;
 
-	//タイトルメニューのマウス操作
-	std::int32_t GameTitleMenuMouseMove(std::int32_t CursorPosY) noexcept {
+	//マウス操作判定のテンプレート
+	std::int32_t MouseMoveTemplate(std::int32_t CursorPosY, std::int32_t TopPosY, std::int32_t Move, std::int32_t Num, std::int32_t Flag) {
 
 		DxLib::GetMousePoint(&MousePosX, &MousePosY);
 
-		if (ConfigData.MouseAndKeyFlag == 1) {
-			CursorPosY = (MousePosY <= 329) ? TitleMenuPosY
-				: (MousePosY <= (TitleMenuPosY + CursorMove * 2) - 1) ? TitleMenuPosY + CursorMove
-				: (MousePosY <= (TitleMenuPosY + CursorMove * 3) - 1) ? TitleMenuPosY + CursorMove * 2
-				: (MousePosY <= (TitleMenuPosY + CursorMove * 4) - 1) ? TitleMenuPosY + CursorMove * 3
-				: (MousePosY <= TitleMenuExitPosY - 1) ? TitleMenuPosY + CursorMove * 4
-				: TitleMenuExitPosY;
+		if (Flag == 1) {
+			for (std::int32_t i = 0; i < Num; i++) {
+				if ((TopPosY + Move * i) <= MousePosY && MousePosY <= (TopPosY + Move * (i + 1) - 1))
+					CursorPosY = TopPosY + Move * i;
+			}
 		}
 
 		return CursorPosY;
 	}
 
+	//タイトルメニューのマウス操作
+	std::int32_t GameTitleMenuMouseMove(std::int32_t CursorPosY) noexcept {
+		return MouseMoveTemplate(CursorPosY, TitleMenuPosY, CursorMove, 6, ConfigData.MouseAndKeyFlag);
+	}
+
 	//コンフィグ画面マウス操作
 	std::int32_t ConfigMenuMouseMove(std::int32_t ConfigCursorPosY) noexcept {
-
-		DxLib::GetMousePoint(&MousePosX, &MousePosY);
-
-		if (ConfigData.MouseAndKeyFlag == 1) {
-			ConfigCursorPosY = (MousePosY <= (GameMenuBasePosY * 2) - 1) ? GameMenuBasePosY
-				: (MousePosY <= (GameMenuBasePosY * 3) - 1) ? GameMenuBasePosY * 2
-				: (MousePosY <= (GameMenuBasePosY * 4) - 1) ? GameMenuBasePosY * 3
-				: (MousePosY <= (GameMenuBasePosY * 5) - 1) ? GameMenuBasePosY * 4
-				: (MousePosY <= (GameMenuBasePosY * 6) - 1) ? GameMenuBasePosY * 5
-				: (MousePosY <= (GameMenuBasePosY * 7) - 1) ? GameMenuBasePosY * 6
-				: GameMenuBasePosY * 7;
-		}
-
-		return ConfigCursorPosY;
+		return MouseMoveTemplate(ConfigCursorPosY, GameMenuBasePosY, CursorMove, 7, ConfigData.MouseAndKeyFlag);
 	}
 
 	//ゲームメニューのマウス操作
 	std::int32_t GameMenuMouseMove(std::int32_t GameMenuCursorPosY) noexcept {
-
-		DxLib::GetMousePoint(&MousePosX, &MousePosY);
-
-		if (ConfigData.MouseAndKeyFlag == 1) {
-			GameMenuCursorPosY = (MousePosY <= (GameMenuBasePosY * 2) - 1) ? GameMenuBasePosY
-				: (MousePosY <= (GameMenuBasePosY * 3) - 1) ? (GameMenuBasePosY * 2)
-				: (MousePosY <= (GameMenuBasePosY * 4) - 1) ? (GameMenuBasePosY * 3)
-				: (MousePosY <= (GameMenuBasePosY * 5) - 1) ? (GameMenuBasePosY * 4)
-				: (MousePosY <= (GameMenuBasePosY * 6) - 1) ? (GameMenuBasePosY * 5)
-				: (MousePosY <= (GameMenuBasePosY * 7) - 1) ? (GameMenuBasePosY * 6)
-				: (MousePosY <= (GameMenuBasePosY * 8) - 1) ? (GameMenuBasePosY * 7)
-				: (MousePosY <= (GameMenuBasePosY * 9) - 1) ? (GameMenuBasePosY * 8)
-				: (MousePosY <= (GameMenuBasePosY * 10) - 1) ? (GameMenuBasePosY * 9)
-				: (MousePosY <= (GameMenuBasePosY * 11) - 1) ? (GameMenuBasePosY * 10)
-				: (MousePosY <= (GameMenuBasePosY * 12) - 1) ? (GameMenuBasePosY * 11)
-				: (GameMenuBasePosY * 12);
-		}
-
-		return GameMenuCursorPosY;
+		return MouseMoveTemplate(GameMenuCursorPosY, GameMenuBasePosY, CursorMove, 12, ConfigData.MouseAndKeyFlag);
 	}
 
 	//選択肢マウス操作
 	std::int32_t ChoiceMouseMove(std::int32_t ChoiceCursorPosY) noexcept {
-
-		DxLib::GetMousePoint(&MousePosX, &MousePosY);
-
-		if (ConfigData.MouseAndKeyFlag == 1) {
-			ChoiceCursorPosY = (MousePosY <= (ChoicePosY[1] - 1)) ? ChoicePosY[0] : ChoicePosY[1];
-		}
-
-		return ChoiceCursorPosY;
+		return MouseMoveTemplate(ChoiceCursorPosY, (ChoicePosY[1] - CursorMove), CursorMove, 2, ConfigData.MouseAndKeyFlag);
 	}
 
 	//セーブデータメニューマウス操作
 	std::int32_t SaveDataMenuMouseMove(std::int32_t SaveDataMenuPosY) noexcept {
-
-		DxLib::GetMousePoint(&MousePosX, &MousePosY);
-
-		if (ConfigData.MouseAndKeyFlag == 1) {
-			SaveDataMenuPosY = (MousePosY <= (SaveDataBasePosY * 2) - 1) ? SaveDataBasePosY
-				: (MousePosY <= (SaveDataBasePosY * 3) - 1) ? SaveDataBasePosY * 2
-				: (MousePosY <= (SaveDataBasePosY * 4) - 1) ? SaveDataBasePosY * 3
-				: SaveDataPosButtom;
-		}
-
-		return SaveDataMenuPosY;
+		return MouseMoveTemplate(SaveDataMenuPosY, SaveDataBasePosY, SaveDataBasePosY, 4, ConfigData.MouseAndKeyFlag);
 	}
 
 }
