@@ -177,32 +177,27 @@ namespace ScriptTask {
 
 		std::string str = Script[Sp];
 
-		sregex rex = sregex::compile(Tag.first);
 		smatch what;
 
-		if (regex_search(str, what, rex)) {
+		std::array<std::string, 2> ScriptTagContainer = { Tag.first, Tag.second };
 
-			std::string text(what[1]);
-			int n = std::stoi(text);
+		for (std::int32_t i = 0; i < 2; i++) {
 
-			Script[Sp] = regex_replace(str, rex, "");
-			Cp = 0;
+			sregex rex = sregex::compile(ScriptTagContainer[i]);
 
-			return n - 1;
+			if (regex_search(str, what, rex)) {
+
+				std::string text(what[1]);
+				int n = std::stoi(text);
+
+				Script[Sp] = regex_replace(str, rex, "");
+				Cp = 0;
+
+				return n - 1;
+			}
 		}
 
-		rex = sregex::compile(Tag.second);
-
-		if (regex_search(str, what, rex)) {
-
-			std::string text(what[1]);
-			int n = std::stoi(text);
-
-			Script[Sp] = regex_replace(str, rex, "");
-			Cp = 0;
-
-			return n - 1;
-		}
+		return 0;
 	}
 
 	//背景画像＆イメージエフェクト描画関数
