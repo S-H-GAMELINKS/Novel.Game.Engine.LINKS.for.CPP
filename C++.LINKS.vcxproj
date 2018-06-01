@@ -151,7 +151,7 @@
     <ClInclude Include="ScriptTask_Manager.h" />
     <ClInclude Include="Skip_Auto.h" />
     <ClInclude Include="Utility.h" />
-    <ClInclude Include="Variable.h" />
+    <ClInclude Include="Variable.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
