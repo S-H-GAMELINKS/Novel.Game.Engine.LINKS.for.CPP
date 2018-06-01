@@ -310,16 +310,17 @@ namespace ScriptTask {
 	//タグチェック関数
 	bool ScriptTagCheck(const Script& Script, ScriptTag& Tag) {
 
-		sregex rex = sregex::compile(Tag.first);
+		std::array<std::string, 2> Container = { Tag.first, Tag.second };
+		
 		smatch what;
 
-		if (regex_search(Script[Sp], what, rex))
-			return true;
+		for (std::int32_t i = 0; i < 2; i++) {
 
-		rex = sregex::compile(Tag.second);
+			sregex rex = sregex::compile(Container[i]);
 
-		if (regex_search(Script[Sp], what, rex))
-			return true;
+			if (regex_search(Script[Sp], what, rex))
+				return true;
+		}
 
 		return false;
 	}
