@@ -66,16 +66,14 @@ namespace {
 	//セーブデータ メニュー描画
 	void SaveDataMenuDraw(std::int32_t& SaveDataMenuPosY) noexcept {
 
-		//スクリーンショット描画
-		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
+		//スクリーンショット描画 && セーブデータ名描画
+		for (std::int32_t i = 0; i < SaveDataSlotNum; i++) {
 			DxLib::DrawRotaGraph(SaveSnapDrawPosX, SaveDataBasePosY * (i + 1), 0.2f, 0, SaveSnap[i], TRUE);
+			DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * (i + 1), SaveDataName[i], Color);
+		}
 
 		//カーソルの描画
 		DxLib::DrawString(SaveDataBasePosX, SaveDataMenuPosY, "■", Color);
-
-		//セーブデータ名描画
-		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
-			DxLib::DrawString(SaveDataNamePosX, SaveDataBasePosY * (i + 1), SaveDataName[i], Color);
 
 		DxLib::DrawString(SaveDataNamePosX - CursorMove, SaveDataBasePosY * 4, "戻る", Color);
 	}
