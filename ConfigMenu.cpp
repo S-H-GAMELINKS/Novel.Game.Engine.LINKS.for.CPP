@@ -5,6 +5,7 @@
 #include "Utility.h"
 #include "ConfigMenu.h"
 #include "MouseAndKeyState.hpp"
+#include <array>
 #include <thread>
 #include <chrono>
 
@@ -31,17 +32,19 @@ namespace {
 	//コンフィグ画面描画
 	void ConfigMenuDraw(std::int32_t& ConfigCursorPosY) noexcept {
 
+		std::array<std::int32_t, 5> Container = { ConfigData.BackGroundMusicVolume, ConfigData.SoundEffectVolume, ConfigData.AutoSpeedVolume,
+															ConfigData.SkipSpeedVolume,  ConfigData.ScriptDrawSpeedVolume };
+
 		//各項目の描画
 		for (std::int32_t i = 0; i < 7; i++)
 			DxLib::DrawString(SaveDataNamePosX, GameMenuBasePosY * (i + 1), ConfigMenuItem[i], Color);
 
 		DxLib::DrawString(SaveDataNamePosX - CursorMove, ConfigCursorPosY, "■", Color);
 
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY, Color, "%d", ConfigData.BackGroundMusicVolume);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 2, Color, "%d", ConfigData.SoundEffectVolume);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 3, Color, "%d", ConfigData.AutoSpeedVolume);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 4, Color, "%d", ConfigData.SkipSpeedVolume);
-		DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * 5, Color, "%d", ConfigData.ScriptDrawSpeedVolume);
+		//各項目の数値描画(マウス操作&キー操作除く)
+		for (std::int32_t i = 0; i < 5; i++)
+			DxLib::DrawFormatString(SaveDataNamePosX + CursorMove * 5, GameMenuBasePosY * (i + 1), Color, "%d", Container[i]);
+
 		DxLib::DrawString(SaveDataNamePosX + CursorMove * 8, GameMenuBasePosY * 6, ((1 == ConfigData.MouseAndKeyFlag) ? "マウス操作" : "キー操作"), Color);
 	}
 
