@@ -40,6 +40,9 @@ namespace {
 	//セーブデータ名描画用配列
 	static constexpr const char* SaveDataName[] = { "セーブデータ1", "セーブデータ2", "セーブデータ3" };
 
+	//セーブデータPath配列
+	static constexpr const char* SaveDataPath[] = { "DATA/SAVE/SAVEDATA1.bat", "DATA/SAVE/SAVEDATA2.bat", "DATA/SAVE/SAVEDATA3.bat" };
+
 	//通常セーブデータ
 	struct alignas(4) SaveData_t {
 		std::int32_t EndFlag;    //EndFlag
@@ -198,23 +201,12 @@ namespace {
 	//セーブデータ メニュー選択処理
 	void SaveDataMenuSelect(std::int32_t& SaveDataMenuPosY, const int& Num, std::int32_t& SaveFlag) noexcept {
 
-		if (SaveDataMenuPosY == SaveDataBasePosY && MouseAndKey::CheckMouseAndKeyEnter()) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA1.bat", "セーブデータ１", SaveFlag, 1);
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		for (std::int32_t i = 0; i < 3; i++) {
+			if (SaveDataMenuPosY == SaveDataBasePosY * (i + 1) && MouseAndKey::CheckMouseAndKeyEnter()) {
+				SaveDataTask(Num, SaveDataPath[i], SaveDataName[i], SaveFlag, i + 1);
+				std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			}
 		}
-
-
-		if (SaveDataMenuPosY == SaveDataBasePosY * 2 && MouseAndKey::CheckMouseAndKeyEnter()) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA2.bat", "セーブデータ２", SaveFlag, 2);
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-		}
-
-
-		if (SaveDataMenuPosY == SaveDataBasePosY * 3 && MouseAndKey::CheckMouseAndKeyEnter()) {
-			SaveDataTask(Num, "DATA/SAVE/SAVEDATA3.bat", "セーブデータ３", SaveFlag, 3);
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-		}
-
 
 		if (SaveDataMenuPosY == SaveDataBasePosY * 4 && MouseAndKey::CheckMouseAndKeyEnter()) {
 
