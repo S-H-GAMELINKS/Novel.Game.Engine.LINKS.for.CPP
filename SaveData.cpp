@@ -44,6 +44,9 @@ namespace {
 	//セーブデータPath配列
 	static constexpr const char* SaveDataPath[] = { "DATA/SAVE/SAVEDATA1.bat", "DATA/SAVE/SAVEDATA2.bat", "DATA/SAVE/SAVEDATA3.bat" };
 
+	//セーブデータ用スクリーンショットPath
+	const std::array<std::string, 3> SaveDataSnapPath = { "DATA/SAVE/SAVESNAP1.png", "DATA/SAVE/SAVESNAP2.png", "DATA/SAVE/SAVESNAP3.png" };
+
 	//通常セーブデータ
 	struct alignas(4) SaveData_t {
 		std::int32_t EndFlag;    //EndFlag
@@ -56,8 +59,6 @@ namespace {
 
 	//セーブデータ用スクリーンショット読込関数
 	void SaveDataSnapLoad() noexcept {
-
-		const std::array<std::string, 3> SaveDataSnapPath = { "DATA/SAVE/SAVESNAP1.png", "DATA/SAVE/SAVESNAP2.png", "DATA/SAVE/SAVESNAP3.png" };
 
 		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
 			SaveSnap[i] = DxLib::LoadGraph(SaveDataSnapPath[i].c_str());
@@ -80,10 +81,9 @@ namespace {
 
 	//スクリーンショット名前変更
 	void SaveDataScreenShotRename(const int& Num) noexcept {
-		std::string FileName = "DATA/SAVE/SAVESNAP" + std::to_string(Num) + ".png";
 
 		const fs::path path("DATA/SAVE/SAVESNSAPTEMP.png");
-		const fs::path dest(FileName.c_str());
+		const fs::path dest(SaveDataSnapPath[Num - 1].c_str());
 
 		fs::copy_file(path, dest, fs::copy_option::overwrite_if_exists);
 	}
