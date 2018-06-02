@@ -5,6 +5,7 @@
 #include "Utility.h"
 #include "ConfigMenu.h"
 #include "MouseAndKeyState.hpp"
+#include <array>
 #include <string>
 #include <thread>
 #include <chrono>
@@ -55,16 +56,11 @@ namespace {
 
 	//セーブデータ用スクリーンショット読込関数
 	void SaveDataSnapLoad() noexcept {
-		std::string FilePath = "DATA/SAVE/SAVESNAP";
-		std::string FileFormat = ".png";
-		std::string FileName = "";
 
-		for (std::int32_t i = 0; i < SaveDataSlotNum; i++) {
+		const std::array<std::string, 3> SaveDataSnapPath = { "DATA/SAVE/SAVESNAP1.png", "DATA/SAVE/SAVESNAP2.png", "DATA/SAVE/SAVESNAP3.png" };
 
-			FileName = (FilePath + std::to_string(i + 1) + FileFormat);
-
-			SaveSnap[i] = DxLib::LoadGraph(FileName.c_str());
-		}
+		for (std::int32_t i = 0; i < SaveDataSlotNum; i++)
+			SaveSnap[i] = DxLib::LoadGraph(SaveDataSnapPath[i].c_str());
 	}
 
 	//セーブデータ メニュー描画
