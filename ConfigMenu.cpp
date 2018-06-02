@@ -48,78 +48,18 @@ namespace {
 		DxLib::DrawString(SaveDataNamePosX + CursorMove * 8, GameMenuBasePosY * 6, ((1 == ConfigData.MouseAndKeyFlag) ? "マウス操作" : "キー操作"), Color);
 	}
 
-	//BGM音量調節
-	void BackGroundMusicVolChange() noexcept {
-		
+	//各種パラメータ調節機能
+	void VolChangeTemplate(std::int32_t& Count, std::int32_t& Param) {
+
 		if (MouseAndKey::CheckMouseAndKeyRight()) {
-			ConfigData.BackGroundMusicVolumeCount = (ConfigData.BackGroundMusicVolumeCount >= 10) ? ConfigData.BackGroundMusicVolumeCount = 10 : ConfigData.BackGroundMusicVolumeCount += 1;
-			ConfigData.BackGroundMusicVolume = (ConfigData.BackGroundMusicVolumeCount >= 10) ? ConfigData.BackGroundMusicVolume = 100 : ConfigData.BackGroundMusicVolume += 10;
+			Count = (Count >= 10) ? Count = 10 : Count += 1;
+			Param = (Count >= 10) ? Param = 100 : Param += 10;
 
 		}
 
 		if (MouseAndKey::CheckMouseAndKeyLeft()) {
-			ConfigData.BackGroundMusicVolumeCount = (ConfigData.BackGroundMusicVolumeCount <= 0) ? ConfigData.BackGroundMusicVolume = 0 : ConfigData.BackGroundMusicVolumeCount -= 1;
-			ConfigData.BackGroundMusicVolume = (ConfigData.BackGroundMusicVolumeCount <= 0) ? ConfigData.BackGroundMusicVolumeCount = 0 : ConfigData.BackGroundMusicVolume -= 10;
-		}
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-	}
-
-	//SE音量調節
-	void SoundEffectVolChange() noexcept {
-		if (MouseAndKey::CheckMouseAndKeyRight()) {
-			ConfigData.SoundEffectVolumeCount = (ConfigData.SoundEffectVolumeCount >= 10) ? ConfigData.SoundEffectVolumeCount = 10 : ConfigData.SoundEffectVolumeCount += 1;
-			ConfigData.SoundEffectVolume = (ConfigData.SoundEffectVolumeCount >= 10) ? ConfigData.SoundEffectVolume = 100 : ConfigData.SoundEffectVolume += 10;
-		}
-
-		if (MouseAndKey::CheckMouseAndKeyLeft()) {
-			ConfigData.SoundEffectVolumeCount = (ConfigData.SoundEffectVolumeCount <= 0) ? ConfigData.SoundEffectVolumeCount = 0 : ConfigData.SoundEffectVolumeCount -= 1;
-			ConfigData.SoundEffectVolume = (ConfigData.SoundEffectVolumeCount <= 0) ? ConfigData.SoundEffectVolume = 0 : ConfigData.SoundEffectVolume -= 10;
-		}
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-	}
-
-	//オート速度調節
-	void AutoSpeedVolChange() noexcept {
-		if (MouseAndKey::CheckMouseAndKeyRight()) {
-			ConfigData.AutoSpeedVolumeCount = (ConfigData.AutoSpeedVolumeCount >= 10) ? ConfigData.AutoSpeedVolumeCount = 10 : ConfigData.AutoSpeedVolumeCount += 1;
-			ConfigData.AutoSpeedVolume = (ConfigData.AutoSpeedVolumeCount >= 10) ? ConfigData.AutoSpeedVolume = 100 : ConfigData.AutoSpeedVolume += 10;
-		}
-
-		if (MouseAndKey::CheckMouseAndKeyLeft()) {
-			ConfigData.AutoSpeedVolumeCount = (ConfigData.AutoSpeedVolumeCount <= 0) ? ConfigData.AutoSpeedVolumeCount = 0 : ConfigData.AutoSpeedVolumeCount -= 1;
-			ConfigData.AutoSpeedVolume = (ConfigData.AutoSpeedVolumeCount <= 0) ? ConfigData.AutoSpeedVolume = 0 : ConfigData.AutoSpeedVolume -= 10;
-		}
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-	}
-
-	//スキップ速度調節
-	void SkipSpeedVolChange() noexcept {
-		if (MouseAndKey::CheckMouseAndKeyRight()) {
-			ConfigData.SkipSpeedVolumeCount = (ConfigData.SkipSpeedVolumeCount >= 10) ? ConfigData.SkipSpeedVolumeCount = 10 : ConfigData.SkipSpeedVolumeCount += 1;
-			ConfigData.SkipSpeedVolume = (ConfigData.SkipSpeedVolumeCount >= 10) ? ConfigData.SkipSpeedVolume = 100 : ConfigData.SkipSpeedVolume += 10;
-		}
-
-		if (MouseAndKey::CheckMouseAndKeyLeft()) {
-			ConfigData.SkipSpeedVolumeCount = (ConfigData.SkipSpeedVolumeCount <= 0) ? ConfigData.SkipSpeedVolumeCount = 0 : ConfigData.SkipSpeedVolumeCount -= 1;
-			ConfigData.SkipSpeedVolume = (ConfigData.SkipSpeedVolumeCount <= 0) ? ConfigData.SkipSpeedVolume = 0 : ConfigData.SkipSpeedVolume -= 10;
-		}
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-	}
-
-	//文字列描画速度調節
-	void StringDrawSpeedVolChange() noexcept {
-		if (MouseAndKey::CheckMouseAndKeyRight()) {
-			ConfigData.ScriptDrawSpeedVolumeCount = (ConfigData.ScriptDrawSpeedVolumeCount >= 10) ? ConfigData.ScriptDrawSpeedVolumeCount = 10 : ConfigData.ScriptDrawSpeedVolumeCount += 1;
-			ConfigData.ScriptDrawSpeedVolume = (ConfigData.ScriptDrawSpeedVolumeCount >= 10) ? ConfigData.ScriptDrawSpeedVolume = 100 : ConfigData.ScriptDrawSpeedVolume += 10;
-		}
-
-		if (MouseAndKey::CheckMouseAndKeyLeft()) {
-			ConfigData.ScriptDrawSpeedVolumeCount = (ConfigData.ScriptDrawSpeedVolumeCount <= 0) ? ConfigData.ScriptDrawSpeedVolumeCount = 0 : ConfigData.ScriptDrawSpeedVolumeCount -= 1;
-			ConfigData.ScriptDrawSpeedVolume = (ConfigData.ScriptDrawSpeedVolumeCount <= 0) ? ConfigData.ScriptDrawSpeedVolume = 0 : ConfigData.ScriptDrawSpeedVolume -= 10;
+			Count = (Count <= 0) ? Count = 0 : Count -= 1;
+			Param = (Count <= 0) ? Param = 0 : Param -= 10;
 		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
@@ -140,19 +80,19 @@ namespace {
 	bool ConfigMenuSelect(std::int32_t& ConfigCursorPosY, bool ConfigFlag) noexcept {
 
 		if (GameMenuBasePosY == ConfigCursorPosY)
-			BackGroundMusicVolChange();
+			VolChangeTemplate(ConfigData.BackGroundMusicVolumeCount, ConfigData.BackGroundMusicVolume);
 
 		if (GameMenuBasePosY * 2 == ConfigCursorPosY)
-			SoundEffectVolChange();
+			VolChangeTemplate(ConfigData.SoundEffectVolumeCount, ConfigData.SoundEffectVolume);
 
 		if (GameMenuBasePosY * 3 == ConfigCursorPosY)
-			AutoSpeedVolChange();
+			VolChangeTemplate(ConfigData.AutoSpeedVolumeCount, ConfigData.AutoSpeedVolume);
 
 		if (GameMenuBasePosY * 4 == ConfigCursorPosY)
-			SkipSpeedVolChange();
+			VolChangeTemplate(ConfigData.SkipSpeedVolumeCount, ConfigData.SkipSpeedVolume);
 
 		if (GameMenuBasePosY * 5 == ConfigCursorPosY)
-			StringDrawSpeedVolChange();
+			VolChangeTemplate(ConfigData.ScriptDrawSpeedVolumeCount, ConfigData.ScriptDrawSpeedVolume);
 
 		if (GameMenuBasePosY * 6 == ConfigCursorPosY)
 			MouseAndKeyMoveChange();
