@@ -5,7 +5,7 @@
 #include "Utility.hpp"
 #include "SaveData.h"
 #include "ConfigMenu.h"
-#include "Skip_Auto.h"
+#include "Skip_Auto.hpp"
 #include "BackLog.h"
 #include "MouseAndKeyState.hpp"
 #include <thread>

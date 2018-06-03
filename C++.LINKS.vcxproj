@@ -149,7 +149,7 @@
     <ClInclude Include="MouseAndKeyState.hpp" />
     <ClInclude Include="SaveData.h" />
     <ClInclude Include="ScriptTask_Manager.h" />
-    <ClInclude Include="Skip_Auto.h" />
+    <ClInclude Include="Skip_Auto.hpp" />
     <ClInclude Include="Utility.hpp" />
     <ClInclude Include="Variable.hpp" />
   </ItemGroup>

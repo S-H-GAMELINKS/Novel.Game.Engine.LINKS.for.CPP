@@ -5,7 +5,7 @@
 #include "GameMenu.h"
 #include "SaveData.h"
 #include "ConfigMenu.h"
-#include "Skip_Auto.h"
+#include "Skip_Auto.hpp"
 #include "BackLog.h"
 #include <string>
 #include <thread>
