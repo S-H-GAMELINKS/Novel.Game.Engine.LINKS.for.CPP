@@ -148,7 +148,7 @@
     <ClInclude Include="Material_Manager.h" />
     <ClInclude Include="MouseAndKeyState.hpp" />
     <ClInclude Include="SaveData.h" />
-    <ClInclude Include="ScriptTask_Manager.h" />
+    <ClInclude Include="ScriptTask_Manager.hpp" />
     <ClInclude Include="Skip_Auto.hpp" />
     <ClInclude Include="Utility.hpp" />
     <ClInclude Include="Variable.hpp" />

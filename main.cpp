@@ -3,7 +3,7 @@
 
 #include "DxLib.h"
 #include "Material_Manager.h"
-#include "ScriptTask_Manager.h"
+#include "ScriptTask_Manager.hpp"
 #include "GameTitleMenu.h"
 #include "GameMenu.h"
 #include "ConfigMenu.h"
