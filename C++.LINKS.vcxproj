@@ -147,7 +147,7 @@
     <ClInclude Include="GameTitleMenu.h" />
     <ClInclude Include="Material_Manager.h" />
     <ClInclude Include="MouseAndKeyState.hpp" />
-    <ClInclude Include="SaveData.h" />
+    <ClInclude Include="SaveData.hpp" />
     <ClInclude Include="ScriptTask_Manager.hpp" />
     <ClInclude Include="Skip_Auto.hpp" />
     <ClInclude Include="Utility.hpp" />
