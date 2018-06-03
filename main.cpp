@@ -9,7 +9,7 @@
 #include "ConfigMenu.h"
 #include "Skip_Auto.h"
 #include "SaveData.h"
-#include "Utility.h"
+#include "Utility.hpp"
 #include "Variable.hpp"
 #include <vector>
 #include <string>

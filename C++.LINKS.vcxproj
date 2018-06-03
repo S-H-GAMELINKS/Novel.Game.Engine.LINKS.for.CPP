@@ -150,7 +150,7 @@
     <ClInclude Include="SaveData.h" />
     <ClInclude Include="ScriptTask_Manager.h" />
     <ClInclude Include="Skip_Auto.h" />
-    <ClInclude Include="Utility.h" />
+    <ClInclude Include="Utility.hpp" />
     <ClInclude Include="Variable.hpp" />
   </ItemGroup>
   <ItemGroup>

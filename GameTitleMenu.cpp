@@ -1,7 +1,7 @@
 // Game Title Menu Source 
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
-#include "Utility.h"
+#include "Utility.hpp"
 #include "SaveData.h"
 #include "ConfigMenu.h"
 #include "MouseAndKeyState.hpp"

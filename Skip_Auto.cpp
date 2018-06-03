@@ -1,7 +1,7 @@
 // Skip Auto Source
 
 #include "DxLib.h"
-#include "Utility.h"
+#include "Utility.hpp"
 #include "ConstantExpressionVariable.h"
 #include <array>
 #include <thread>

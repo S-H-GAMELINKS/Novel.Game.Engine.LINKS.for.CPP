@@ -2,7 +2,7 @@
 
 #include "DxLib.h"
 #include "ConstantExpressionVariable.h"
-#include "Utility.h"
+#include "Utility.hpp"
 #include "SaveData.h"
 #include "ConfigMenu.h"
 #include "Skip_Auto.h"
