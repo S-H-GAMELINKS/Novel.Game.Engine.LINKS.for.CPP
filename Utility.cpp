@@ -1,7 +1,7 @@
 // Utility Source
 
 #include "DxLib.h"
-#include "ConstantExpressionVariable.h"
+#include "ConstantExpressionVariable.hpp"
 #include "GameMenu.hpp"
 #include "SaveData.hpp"
 #include "ConfigMenu.h"

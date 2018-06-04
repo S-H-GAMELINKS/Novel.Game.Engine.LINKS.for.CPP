@@ -1,7 +1,7 @@
 // Config Menu Source
 
 #include "DxLib.h"
-#include "ConstantExpressionVariable.h"
+#include "ConstantExpressionVariable.hpp"
 #include "Utility.hpp"
 #include "ConfigMenu.h"
 #include "MouseAndKeyState.hpp"

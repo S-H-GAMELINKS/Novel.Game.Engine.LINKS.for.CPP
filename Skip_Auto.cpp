@@ -2,7 +2,7 @@
 
 #include "DxLib.h"
 #include "Utility.hpp"
-#include "ConstantExpressionVariable.h"
+#include "ConstantExpressionVariable.hpp"
 #include <array>
 #include <thread>
 #include <chrono>

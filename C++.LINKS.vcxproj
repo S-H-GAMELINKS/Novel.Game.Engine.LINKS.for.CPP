@@ -142,7 +142,7 @@
     <ClInclude Include="BackLog.h" />
     <ClInclude Include="Choice.h" />
     <ClInclude Include="ConfigMenu.h" />
-    <ClInclude Include="ConstantExpressionVariable.h" />
+    <ClInclude Include="ConstantExpressionVariable.hpp" />
     <ClInclude Include="GameMenu.hpp" />
     <ClInclude Include="GameTitleMenu.hpp" />
     <ClInclude Include="Material_Manager.hpp" />

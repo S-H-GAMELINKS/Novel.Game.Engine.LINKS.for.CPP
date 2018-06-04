@@ -1,7 +1,7 @@
 // GameMenu Source
 
 #include "DxLib.h"
-#include "ConstantExpressionVariable.h"
+#include "ConstantExpressionVariable.hpp"
 #include "Utility.hpp"
 #include "SaveData.hpp"
 #include "ConfigMenu.h"
