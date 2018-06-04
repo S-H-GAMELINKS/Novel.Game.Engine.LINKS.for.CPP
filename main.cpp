@@ -5,7 +5,7 @@
 #include "Material_Manager.hpp"
 #include "ScriptTask_Manager.hpp"
 #include "GameTitleMenu.hpp"
-#include "GameMenu.h"
+#include "GameMenu.hpp"
 #include "ConfigMenu.h"
 #include "Skip_Auto.hpp"
 #include "SaveData.hpp"
