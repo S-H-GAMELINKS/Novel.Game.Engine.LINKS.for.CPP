@@ -2,7 +2,7 @@
 // Coding by S.H.(GAMELINKS)
 
 #include "DxLib.h"
-#include "Material_Manager.h"
+#include "Material_Manager.hpp"
 #include "ScriptTask_Manager.hpp"
 #include "GameTitleMenu.h"
 #include "GameMenu.h"

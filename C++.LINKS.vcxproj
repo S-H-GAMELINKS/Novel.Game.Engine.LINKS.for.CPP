@@ -145,7 +145,7 @@
     <ClInclude Include="ConstantExpressionVariable.h" />
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameTitleMenu.h" />
-    <ClInclude Include="Material_Manager.h" />
+    <ClInclude Include="Material_Manager.hpp" />
     <ClInclude Include="MouseAndKeyState.hpp" />
     <ClInclude Include="SaveData.hpp" />
     <ClInclude Include="ScriptTask_Manager.hpp" />
