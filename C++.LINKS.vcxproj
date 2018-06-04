@@ -140,7 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackLog.h" />
-    <ClInclude Include="Choice.h" />
+    <ClInclude Include="Choice.hpp" />
     <ClInclude Include="ConfigMenu.hpp" />
     <ClInclude Include="ConstantExpressionVariable.hpp" />
     <ClInclude Include="GameMenu.hpp" />
