@@ -4,7 +4,7 @@
 #include "DxLib.h"
 #include "Material_Manager.hpp"
 #include "ScriptTask_Manager.hpp"
-#include "GameTitleMenu.h"
+#include "GameTitleMenu.hpp"
 #include "GameMenu.h"
 #include "ConfigMenu.h"
 #include "Skip_Auto.hpp"
