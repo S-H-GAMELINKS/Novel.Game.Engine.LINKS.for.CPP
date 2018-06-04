@@ -4,7 +4,7 @@
 #include "ConstantExpressionVariable.hpp"
 #include "Utility.hpp"
 #include "BackLog.h"
-#include "ConfigMenu.h"
+#include "ConfigMenu.hpp"
 #include "MouseAndKeyState.hpp"
 #include <string>
 #include <fstream>

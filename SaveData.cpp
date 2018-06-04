@@ -3,7 +3,7 @@
 #include "DxLib.h"
 #include "ConstantExpressionVariable.hpp"
 #include "Utility.hpp"
-#include "ConfigMenu.h"
+#include "ConfigMenu.hpp"
 #include "MouseAndKeyState.hpp"
 #include <array>
 #include <string>

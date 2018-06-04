@@ -6,7 +6,7 @@
 #include "ScriptTask_Manager.hpp"
 #include "GameTitleMenu.hpp"
 #include "GameMenu.hpp"
-#include "ConfigMenu.h"
+#include "ConfigMenu.hpp"
 #include "Skip_Auto.hpp"
 #include "SaveData.hpp"
 #include "Utility.hpp"

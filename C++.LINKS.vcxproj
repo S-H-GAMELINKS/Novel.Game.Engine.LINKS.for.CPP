@@ -141,7 +141,7 @@
   <ItemGroup>
     <ClInclude Include="BackLog.h" />
     <ClInclude Include="Choice.h" />
-    <ClInclude Include="ConfigMenu.h" />
+    <ClInclude Include="ConfigMenu.hpp" />
     <ClInclude Include="ConstantExpressionVariable.hpp" />
     <ClInclude Include="GameMenu.hpp" />
     <ClInclude Include="GameTitleMenu.hpp" />

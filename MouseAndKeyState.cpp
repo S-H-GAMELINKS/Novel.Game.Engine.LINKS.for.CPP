@@ -1,7 +1,7 @@
 
 #include "DxLib.h"
 #include "ConstantExpressionVariable.hpp"
-#include "ConfigMenu.h"
+#include "ConfigMenu.hpp"
 #include <cstdint>
 #include <thread>
 #include <chrono>

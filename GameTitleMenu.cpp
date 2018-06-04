@@ -3,7 +3,7 @@
 #include "ConstantExpressionVariable.hpp"
 #include "Utility.hpp"
 #include "SaveData.hpp"
-#include "ConfigMenu.h"
+#include "ConfigMenu.hpp"
 #include "MouseAndKeyState.hpp"
 #include <thread>
 #include <chrono>

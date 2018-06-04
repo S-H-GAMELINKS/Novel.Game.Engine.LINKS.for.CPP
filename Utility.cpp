@@ -4,7 +4,7 @@
 #include "ConstantExpressionVariable.hpp"
 #include "GameMenu.hpp"
 #include "SaveData.hpp"
-#include "ConfigMenu.h"
+#include "ConfigMenu.hpp"
 #include "Skip_Auto.hpp"
 #include "BackLog.h"
 #include <string>
