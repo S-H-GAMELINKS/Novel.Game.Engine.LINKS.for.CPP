@@ -244,7 +244,7 @@ namespace ScriptTask {
 
 	//‰¹Œ¹Ä¶ŠÖ”
 	template <typename T>
-	void PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType, const std::pair<std::string, std::string> Tag) noexcept {
+	bool PlaySounds(Script& Script, Material<int>& Material, T& Handle, const T& PlayType, const std::pair<std::string, std::string> Tag) noexcept {
 
 		CheckSoundPlay(Handle);
 
@@ -254,6 +254,8 @@ namespace ScriptTask {
 		ChangeSoundVolumne();
 
 		DxLib::PlaySoundMem(Handle, PlayType);
+
+		return true;
 	}
 
 	//“®‰æÄ¶ŠÖ”
@@ -369,15 +371,11 @@ namespace ScriptTask {
 		if (ScriptTask::ScriptTagCheck(Script, Tag[1])) 	//—§‚¿ŠG‰æ‘œ•`‰æ
 			return ScriptTask::DrawCharacter(Script, Character);
 
-		if (ScriptTask::ScriptTagCheck(Script, Tag[2])) {	//BGMÄ¶
-			ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP, Tag[2]);
-			return true;
-		}
+		if (ScriptTask::ScriptTagCheck(Script, Tag[2])) 	//BGMÄ¶
+			return ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP, Tag[2]);
 
-		if (ScriptTask::ScriptTagCheck(Script, Tag[3])) {	//SEÄ¶
-			ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK, Tag[3]);
-			return true;
-		}
+		if (ScriptTask::ScriptTagCheck(Script, Tag[3])) 	//SEÄ¶
+			return ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK, Tag[3]);
 
 		if (ScriptTask::ScriptTagCheck(Script, Tag[4])) {	//“®‰æÄ¶
 			ScriptTask::PlayMovie(Script, Movie);
