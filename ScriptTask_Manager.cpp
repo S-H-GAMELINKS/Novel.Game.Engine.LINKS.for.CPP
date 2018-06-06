@@ -288,7 +288,7 @@ namespace ScriptTask {
 	}
 
 	//クリック待ち処理関数
-	void ClickWait() noexcept {
+	bool ClickWait() noexcept {
 		if (SkipAndAutoFlag == 0) {
 			DxLib::WaitKey();
 			if (MouseAndKey::CheckMouseAndKeyEnter())
@@ -302,6 +302,8 @@ namespace ScriptTask {
 			std::this_thread::sleep_for(std::chrono::milliseconds((StringSpeedAuto * StringSpeedWait * ConfigData.AutoSpeedVolume / 100)));
 			Cp++;
 		}
+
+		return true;
 	}
 
 	//ゲームオーバー画面の描画
@@ -401,10 +403,8 @@ namespace ScriptTask {
 		if (SystemTag(Script, Tag[6]))		//改行
 			return ScriptTask::Kaigyou();
 
-		if (SystemTag(Script, Tag[7])) {		//クリック待ち
-			ScriptTask::ClickWait();
-			return true;
-		}
+		if (SystemTag(Script, Tag[7]))		//クリック待ち
+			return ScriptTask::ClickWait();
 
 		if (SystemTag(Script, Tag[8])) {		//画面クリア処理
 			ScriptTask::ClearScreen(Script);
