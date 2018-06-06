@@ -85,6 +85,7 @@ namespace ScriptTask {
 		return ScriptTag;
 	}
 
+	//ƒ^ƒO³‹K•\Œ»ˆêŠi”[
 	std::vector<std::string> ScriptTagContainer = LoadingScriptTag();
 
 	//ƒ^ƒO³‹K•\Œ»
