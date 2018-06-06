@@ -260,7 +260,7 @@ namespace ScriptTask {
 	}
 
 	//画面クリア処理関数
-	void ClearScreen(Script& Script) noexcept {
+	bool ClearScreen(Script& Script) noexcept {
 		BackLogGet();
 		ClearDrawScreen();
 		BackGroundHandle = 0;
@@ -277,6 +277,8 @@ namespace ScriptTask {
 
 		Script[Sp] = regex_replace(str, rex, "");
 		Cp = 0;
+
+		return true;
 	}
 
 	//コメント処理関数
@@ -406,10 +408,8 @@ namespace ScriptTask {
 		if (SystemTag(Script, Tag[7]))		//クリック待ち
 			return ScriptTask::ClickWait();
 
-		if (SystemTag(Script, Tag[8])) {		//画面クリア処理
-			ScriptTask::ClearScreen(Script);
-			return true;
-		}
+		if (SystemTag(Script, Tag[8])) 		//画面クリア処理
+			return ScriptTask::ClearScreen(Script);
 
 		if (SystemTag(Script, Tag[9])) {		//遅延処理
 			std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
