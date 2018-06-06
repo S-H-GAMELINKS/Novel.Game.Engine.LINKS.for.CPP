@@ -259,9 +259,11 @@ namespace ScriptTask {
 	}
 
 	//動画再生関数
-	void PlayMovie(Script& Script, Material<std::string>& Movie) noexcept {
+	bool PlayMovie(Script& Script, Material<std::string>& Movie) noexcept {
 		Cp++;
 		DxLib::PlayMovie(Movie[MaterialNumCheck(Script, Tag[4])].c_str(), 1, DX_MOVIEPLAYTYPE_BCANCEL);
+
+		return true;
 	}
 
 	//画面クリア処理関数
@@ -377,10 +379,8 @@ namespace ScriptTask {
 		if (ScriptTask::ScriptTagCheck(Script, Tag[3])) 	//SE再生
 			return ScriptTask::PlaySounds(Script, SoundEffect, SoundEffectHandle, DX_PLAYTYPE_BACK, Tag[3]);
 
-		if (ScriptTask::ScriptTagCheck(Script, Tag[4])) {	//動画再生
-			ScriptTask::PlayMovie(Script, Movie);
-			return true;
-		}
+		if (ScriptTask::ScriptTagCheck(Script, Tag[4])) 	//動画再生
+			return ScriptTask::PlayMovie(Script, Movie);
 
 		if (ScriptTask::ScriptTagCheck(Script, Tag[5])) 	//イメージエフェクト描画
 			return ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle, Tag[5]);
