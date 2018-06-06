@@ -317,9 +317,11 @@ namespace ScriptTask {
 	}
 
 	//ゲームオーバー画面の描画
-	void GameOverScreenDraw() {
+	bool GameOverScreenDraw() {
 		unique GameOverHandle = std::make_unique<std::int32_t>(DxLib::LoadGraph("DATA/BACKGROUND/GAMEOVER.png"));
 		DxLib::DrawGraph(0, 0, *GameOverHandle, TRUE);
+
+		return true;
 	}
 
 	//タグチェック関数
@@ -422,10 +424,8 @@ namespace ScriptTask {
 		if (SystemTag(Script, Tag[9]))		//遅延処理
 			return ScriptTask::WaitTime();
 
-		if (SystemTag(Script, Tag[10])) {		//ゲームオーバー画面描画
-			ScriptTask::GameOverScreenDraw();
-			return true;
-		}
+		if (SystemTag(Script, Tag[10]))		//ゲームオーバー画面描画
+			return ScriptTask::GameOverScreenDraw();
 
 		if (SystemTag(Script, Tag[11])) {		//エンディング画面描画
 			DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
