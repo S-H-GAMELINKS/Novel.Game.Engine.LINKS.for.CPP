@@ -332,6 +332,14 @@ namespace ScriptTask {
 		return true;
 	}
 
+	//‰¹Œ¹ŠÖŒW‚Ìˆ—’â~
+	bool StopSounds(const std::int32_t& SoundHandle) {
+
+		DxLib::StopSoundMem(SoundHandle);
+
+		return true;
+	}
+
 	//ƒ^ƒOƒ`ƒFƒbƒNŠÖ”
 	bool ScriptTagCheck(const Script& Script, ScriptTag& Tag) {
 
@@ -439,9 +447,7 @@ namespace ScriptTask {
 			return ScriptTask::DrawEndingMovie();
 
 		if (SystemTag(Script, Tag[12])) {		//BGM’â~
-			DxLib::StopSoundMem(BackGroundMusicHandle);
-			return true;
-		}
+			return ScriptTask::StopSounds(BackGroundMusicHandle);
 
 		if (SystemTag(Script, Tag[13])) {		//SE’â~
 			DxLib::StopSoundMem(SoundEffectHandle);
