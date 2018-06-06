@@ -121,11 +121,15 @@ void GameMenuLoop() noexcept {
 
 	std::int32_t GameMenuCursorPosY = GameMenuBasePosY;
 
+	//ネームスペースの省略
+	using namespace MouseState;
+	using namespace KeyState;
+
 	while (EndFlag == 17) {
 		ScreenClear();
 		GameMenuDraw(GameMenuCursorPosY);
-		GameMenuCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::MouseMoveTemplate(GameMenuCursorPosY, GameMenuBasePosY, CursorMove, 12, ConfigData.MouseAndKeyFlag)
-																: KeyState::KeyMoveTemplate(GameMenuCursorPosY, GameMenuBasePosY, GameMenuBasePosY * 12, CursorMove, ConfigData.MouseAndKeyFlag);
+		GameMenuCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseMoveTemplate(GameMenuCursorPosY, GameMenuBasePosY, CursorMove, 12, ConfigData.MouseAndKeyFlag)
+																: KeyMoveTemplate(GameMenuCursorPosY, GameMenuBasePosY, GameMenuBasePosY * 12, CursorMove, ConfigData.MouseAndKeyFlag);
 		GameMenuSelect(GameMenuCursorPosY);
 
 		//ゲーム終了確認ウインドウ
