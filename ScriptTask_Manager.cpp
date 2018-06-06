@@ -446,13 +446,11 @@ namespace ScriptTask {
 		if (SystemTag(Script, Tag[11]))		//ƒGƒ“ƒfƒBƒ“ƒO‰æ–Ê•`‰æ
 			return ScriptTask::DrawEndingMovie();
 
-		if (SystemTag(Script, Tag[12])) {		//BGM’â~
+		if (SystemTag(Script, Tag[12]))		//BGM’â~
 			return ScriptTask::StopSounds(BackGroundMusicHandle);
 
-		if (SystemTag(Script, Tag[13])) {		//SE’â~
-			DxLib::StopSoundMem(SoundEffectHandle);
-			return true;
-		}
+		if (SystemTag(Script, Tag[13]))		//SE’â~
+			return ScriptTask::StopSounds(SoundEffectHandle);
 
 		if (SystemTag(Script, Tag[14])) {		//‘I‘ğˆ
 			ChoiceSelect(EndFlag);
