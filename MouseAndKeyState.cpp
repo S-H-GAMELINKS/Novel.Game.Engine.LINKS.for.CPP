@@ -48,18 +48,24 @@ namespace MouseState {
 
 namespace MouseAndKey {
 
+	//判定用ラムダ式
+	auto MouseCheck = [](const int& Flag, const int& Args) {return (Flag == 0 && DxLib::CheckHitKey(Args) == 1); };
+	auto KeyCheck = [](const int& Flag, const int& Args) {return (Flag == 1 && DxLib::GetMouseInput() == Args); };
+
+	const int Flag = ConfigData.MouseAndKeyFlag;
+
 	//マウス＆キー確認（右）
 	bool CheckMouseAndKeyRight() {
-		return (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RIGHT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT)) ? true : false;
+		return (MouseCheck(Flag, KEY_INPUT_RIGHT) || KeyCheck(Flag, MOUSE_INPUT_RIGHT)) ? true : false;
 	}
 
 	//マウス＆キー確認（左）
 	bool CheckMouseAndKeyLeft() {
-		return (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_LEFT) == 1) || (ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT)) ? true : false;
+		return (MouseCheck(Flag, KEY_INPUT_LEFT) || KeyCheck(Flag, MOUSE_INPUT_LEFT)) ? true : false;
 	}
 
 	//マウス＆キー確認（決定）
 	bool CheckMouseAndKeyEnter() {
-		return (ConfigData.MouseAndKeyFlag == 0 && DxLib::CheckHitKey(KEY_INPUT_RETURN) == 1) || ConfigData.MouseAndKeyFlag == 1 && (DxLib::GetMouseInput() == MOUSE_INPUT_LEFT) ? true : false;
+		return (MouseCheck(Flag, KEY_INPUT_RETURN) || KeyCheck(Flag, MOUSE_INPUT_LEFT)) ? true : false;
 	}
 }
