@@ -148,11 +148,15 @@ void ConfigMenuLoop() noexcept {
 
 		std::int32_t ConfigCursorPosY = GameMenuBasePosY;
 
+		//ネームスペースの省略
+		using namespace MouseState;
+		using namespace KeyState;
+
 		while (ConfigFlag) {
 			ScreenClear();
 			ConfigMenuDraw(ConfigCursorPosY);
-			ConfigCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseState::MouseMoveTemplate(ConfigCursorPosY, GameMenuBasePosY, CursorMove, 7, ConfigData.MouseAndKeyFlag)
-																: KeyState::KeyMoveTemplate(ConfigCursorPosY, GameMenuBasePosY, GameMenuBasePosY * 7, CursorMove, ConfigData.MouseAndKeyFlag);
+			ConfigCursorPosY = (ConfigData.MouseAndKeyFlag == 1) ? MouseMoveTemplate(ConfigCursorPosY, GameMenuBasePosY, CursorMove, 7, ConfigData.MouseAndKeyFlag)
+																: KeyMoveTemplate(ConfigCursorPosY, GameMenuBasePosY, GameMenuBasePosY * 7, CursorMove, ConfigData.MouseAndKeyFlag);
 			ConfigFlag = ConfigMenuSelect(ConfigCursorPosY, ConfigFlag);
 		}
 	}
