@@ -218,13 +218,15 @@ namespace ScriptTask {
 	}
 
 	//—§‚¿ŠG•`‰æŠÖ”
-	void DrawCharacter(Script& Script, Material<int>& Character) noexcept {
+	bool DrawCharacter(Script& Script, Material<int>& Character) noexcept {
 		Cp++;
 
 		ScriptTask::RemoveCharacterGraph();
 
 		CharacterHandle = Character[MaterialNumCheck(Script, Tag[1])];
 		DxLib::DrawGraph(CharacterPosX, CharacterPosY, CharacterHandle, TRUE);
+
+		return true;
 	}
 
 	//‰¹—ÊƒZƒbƒgŠÖ”
@@ -364,10 +366,8 @@ namespace ScriptTask {
 		if (ScriptTask::ScriptTagCheck(Script, Tag[0]))		//”wŒi‰æ‘œ•`‰æ
 			return ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, Tag[0]);
 
-		if (ScriptTask::ScriptTagCheck(Script, Tag[1])) {	//—§‚¿ŠG‰æ‘œ•`‰æ
-			ScriptTask::DrawCharacter(Script, Character);
-			return true;
-		}
+		if (ScriptTask::ScriptTagCheck(Script, Tag[1])) 	//—§‚¿ŠG‰æ‘œ•`‰æ
+			return ScriptTask::DrawCharacter(Script, Character);
 
 		if (ScriptTask::ScriptTagCheck(Script, Tag[2])) {	//BGMÄ¶
 			ScriptTask::PlaySounds(Script, BackGroundMusic, BackGroundMusicHandle, DX_PLAYTYPE_LOOP, Tag[2]);
