@@ -332,7 +332,6 @@ namespace ScriptTask {
 	bool DrawMaterial(Material<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) {
 		if (ScriptTask::ScriptTagCheck(Script, Tag[0])) {	//”wŒi‰æ‘œ•`‰æ
 			ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, Tag[0]);
-			Cp = 0;
 			return true;
 		}
 
