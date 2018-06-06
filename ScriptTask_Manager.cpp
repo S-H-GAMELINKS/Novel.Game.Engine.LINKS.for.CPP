@@ -92,7 +92,7 @@ namespace ScriptTask {
 	std::vector<std::pair<std::string, std::string>> Tag = SettingScriptTag(ScriptTagContainer);
 
 	// 改行関数
-	void Kaigyou() noexcept {
+	bool Kaigyou() noexcept {
 		int TempGraph;
 
 		// 描画行位置を一つ下げる
@@ -122,6 +122,8 @@ namespace ScriptTask {
 			// グラフィックを削除する
 			DeleteGraph(TempGraph);
 		}
+
+		return true;
 	}
 
 	//文字速度関数
@@ -397,10 +399,8 @@ namespace ScriptTask {
 	//各種システム処理
 	bool SystemTagTask(Material<std::string>& Script) {
 
-		if (SystemTag(Script, Tag[6])) {		//改行
-			ScriptTask::Kaigyou();
-			return true;
-		}
+		if (SystemTag(Script, Tag[6]))		//改行
+			return ScriptTask::Kaigyou();
 
 		if (SystemTag(Script, Tag[7])) {		//クリック待ち
 			ScriptTask::ClickWait();
