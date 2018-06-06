@@ -308,6 +308,14 @@ namespace ScriptTask {
 		return true;
 	}
 
+	//遅延処理
+	bool WaitTime() {
+
+		std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
+
+		return true;
+	}
+
 	//ゲームオーバー画面の描画
 	void GameOverScreenDraw() {
 		unique GameOverHandle = std::make_unique<std::int32_t>(DxLib::LoadGraph("DATA/BACKGROUND/GAMEOVER.png"));
@@ -411,10 +419,8 @@ namespace ScriptTask {
 		if (SystemTag(Script, Tag[8])) 		//画面クリア処理
 			return ScriptTask::ClearScreen(Script);
 
-		if (SystemTag(Script, Tag[9])) {		//遅延処理
-			std::this_thread::sleep_for(std::chrono::seconds(WaitGameTime));
-			return true;
-		}
+		if (SystemTag(Script, Tag[9]))		//遅延処理
+			return ScriptTask::WaitTime();
 
 		if (SystemTag(Script, Tag[10])) {		//ゲームオーバー画面描画
 			ScriptTask::GameOverScreenDraw();
