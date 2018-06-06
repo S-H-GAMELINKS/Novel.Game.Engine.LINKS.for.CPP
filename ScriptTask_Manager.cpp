@@ -205,9 +205,10 @@ namespace ScriptTask {
 
 	//”wŒi‰æ‘œ•ƒCƒ[ƒWƒGƒtƒFƒNƒg•`‰æŠÖ”
 	template <typename T, typename Func>
-	void DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle, const std::pair<std::string, std::string> Tag) noexcept {
+	bool DrawImages(Script& Script, Material<T>& Material, Func&& DrawFunc, T& Handle, const std::pair<std::string, std::string> Tag) noexcept {
 		Handle = Material[MaterialNumCheck(Script, Tag)];
 		DrawFunc(Handle);
+		return true;
 	}
 
 	//—§‚¿ŠGíœˆ—ŠÖ”
@@ -360,10 +361,8 @@ namespace ScriptTask {
 
 	//Šeí‘fŞ•`‰æ
 	bool DrawMaterial(Material<std::string>& Script, Material<int>& BackGround, Material<int>& Character, Material<int>& BackGroundMusic, Material<int>& SoundEffect, Material<std::string>& Movie, Material<int>& ImageEffect) {
-		if (ScriptTask::ScriptTagCheck(Script, Tag[0])) {	//”wŒi‰æ‘œ•`‰æ
-			ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, Tag[0]);
-			return true;
-		}
+		if (ScriptTask::ScriptTagCheck(Script, Tag[0]))		//”wŒi‰æ‘œ•`‰æ
+			return ScriptTask::DrawImages(Script, BackGround, [](int Handle) {DxLib::DrawGraph(0, 0, Handle, TRUE); }, BackGroundHandle, Tag[0]);
 
 		if (ScriptTask::ScriptTagCheck(Script, Tag[1])) {	//—§‚¿ŠG‰æ‘œ•`‰æ
 			ScriptTask::DrawCharacter(Script, Character);
@@ -385,10 +384,8 @@ namespace ScriptTask {
 			return true;
 		}
 
-		if (ScriptTask::ScriptTagCheck(Script, Tag[5])) {	//ƒCƒ[ƒWƒGƒtƒFƒNƒg•`‰æ
-			ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle, Tag[5]);
-			return true;
-		}
+		if (ScriptTask::ScriptTagCheck(Script, Tag[5])) 	//ƒCƒ[ƒWƒGƒtƒFƒNƒg•`‰æ
+			return ScriptTask::DrawImages(Script, ImageEffect, [](int Handle) { DxLib::DrawGraph(0, 0, Handle, TRUE); }, ImageEffectHandle, Tag[5]);
 
 		return false;
 	}
