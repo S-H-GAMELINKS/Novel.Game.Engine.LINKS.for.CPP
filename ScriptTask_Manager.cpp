@@ -324,6 +324,14 @@ namespace ScriptTask {
 		return true;
 	}
 
+	//エンディング動画の再生
+	bool DrawEndingMovie() {
+
+		DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
+
+		return true;
+	}
+
 	//タグチェック関数
 	bool ScriptTagCheck(const Script& Script, ScriptTag& Tag) {
 
@@ -427,10 +435,8 @@ namespace ScriptTask {
 		if (SystemTag(Script, Tag[10]))		//ゲームオーバー画面描画
 			return ScriptTask::GameOverScreenDraw();
 
-		if (SystemTag(Script, Tag[11])) {		//エンディング画面描画
-			DxLib::PlayMovie("DATA/MOVIE/ENDING.wmv", 1, DX_MOVIEPLAYTYPE_NORMAL);
-			return true;
-		}
+		if (SystemTag(Script, Tag[11]))		//エンディング画面描画
+			return ScriptTask::DrawEndingMovie();
 
 		if (SystemTag(Script, Tag[12])) {		//BGM停止
 			DxLib::StopSoundMem(BackGroundMusicHandle);
