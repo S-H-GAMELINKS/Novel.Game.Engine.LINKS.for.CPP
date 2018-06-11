@@ -33,8 +33,7 @@ extern ConfigData_t ConfigData;
 namespace {
 
 	//ˆ—’â~ŠÔŒvZŠÖ”
-	template <typename T>
-	decltype(auto) WaitTimeCalc(const T var) noexcept {
+	auto WaitTimeCalc(const int var) noexcept {
 		return var * var;
 	}
 
