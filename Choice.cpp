@@ -14,8 +14,7 @@
 extern int EndFlag;
 
 //Šeí‘fŞƒnƒ“ƒhƒ‹
-extern std::int32_t BackGroundHandle;
-extern std::int32_t CharacterHandle;
+extern std::int32_t BackGroundHandle, CharacterHandle;
 
 extern ConfigData_t ConfigData;
 
