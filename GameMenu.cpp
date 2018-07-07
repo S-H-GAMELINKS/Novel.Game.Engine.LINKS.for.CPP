@@ -76,14 +76,10 @@ namespace {
 	//ゲームメニュー項目選択処理
 	void GameMenuSelect(const std::int32_t& GameMenuCursorPosY) noexcept {
 
-		if (GameMenuCursorPosY == GameMenuBasePosY && MouseAndKey::CheckMouseAndKeyEnter())
-			SaveDataLoop(1);
-
-		if (GameMenuCursorPosY == GameMenuBasePosY * 2 && MouseAndKey::CheckMouseAndKeyEnter())
-			SaveDataLoop(2);
-
-		if (GameMenuCursorPosY == GameMenuBasePosY * 3 && MouseAndKey::CheckMouseAndKeyEnter())
-			SaveDataLoop(3);
+		for (std::int32_t i = 0; i < 3; i++) {
+			if (GameMenuCursorPosY == GameMenuBasePosY * (i + 1) && MouseAndKey::CheckMouseAndKeyEnter())
+				SaveDataLoop(i + 1);
+		}
 
 		if (GameMenuCursorPosY == GameMenuBasePosY * 4 && MouseAndKey::CheckMouseAndKeyEnter())
 			SkipAndAutoTask(3, EndFlagTemp);
