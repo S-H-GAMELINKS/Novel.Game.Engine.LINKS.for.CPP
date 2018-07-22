@@ -11,6 +11,7 @@
 #include <thread>
 #include <chrono>
 #include <array>
+#include <functional>
 
 //終了フラグ
 extern int EndFlag;
@@ -76,6 +77,8 @@ namespace {
 
 	constexpr std::array<int, 4> SkipAutoTaskFlag = { 3, 1, 2, 0 };
 
+	const std::array<std::function<void()>, 4> Funcs = { BackLogLoop, ConfigMenuLoop, GameMenuBackToTitle, GameMenuBackToGamePlay };
+
 	//ゲームメニュー項目選択処理
 	void GameMenuSelect(const std::int32_t& GameMenuCursorPosY) noexcept {
 
@@ -89,17 +92,10 @@ namespace {
 				SkipAndAutoTask(SkipAutoTaskFlag[i], EndFlagTemp);
 		}
 
-		if (GameMenuCursorPosY == GameMenuBasePosY * 8 && MouseAndKey::CheckMouseAndKeyEnter())
-			BackLogLoop();
-
-		if (GameMenuCursorPosY == GameMenuBasePosY * 9 && MouseAndKey::CheckMouseAndKeyEnter())
-			ConfigMenuLoop();
-
-		if (GameMenuCursorPosY == GameMenuBasePosY * 10 && MouseAndKey::CheckMouseAndKeyEnter())
-			GameMenuBackToTitle();
-
-		if (GameMenuCursorPosY == GameMenuBasePosY * 11 && MouseAndKey::CheckMouseAndKeyEnter())
-			GameMenuBackToGamePlay();
+		for (std::int32_t i = 0; i < 4; i++) {
+			if (GameMenuCursorPosY == GameMenuBasePosY * (i + 8) && MouseAndKey::CheckMouseAndKeyEnter())
+				Funcs[i]();
+		}
 
 		if (GameMenuCursorPosY == GameMenuBasePosY * 12 && MouseAndKey::CheckMouseAndKeyEnter()) {
 			if (IDYES == MessageBoxYesNo("ゲームを終了しますか？"))
