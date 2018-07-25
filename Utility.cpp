@@ -191,6 +191,8 @@ void ShortCutKey() noexcept {
 
 	constexpr std::array<int, 4> SkipAndAutoFlag = { 3, 1, 2, 0 };
 
+	const std::array<std::function<void()>, 5> Funcs = { BackLog, Config, BackToTitle, QuickSave, ScreenShot };
+
 	for (std::int32_t i = 0; i < 3; i++) {
 		if (DxLib::CheckHitKey(FuncKey[i]) == 1)
 			SaveData(i + 1);
@@ -201,20 +203,10 @@ void ShortCutKey() noexcept {
 			SkipAndAuto(SkipAndAutoFlag[i], EndFlag);
 	}
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
-		BackLog();
-
-	if (DxLib::CheckHitKey(KEY_INPUT_F9) == 1)
-		Config();
-
-	if (DxLib::CheckHitKey(KEY_INPUT_F10) == 1)
-		BackToTitle();
-
-	if (DxLib::CheckHitKey(KEY_INPUT_F11) == 1)
-		QuickSave();
-
-	if (DxLib::CheckHitKey(KEY_INPUT_F12) == 1)
-		ScreenShot();
+	for (std::int32_t i = 0; i < 5; i++) {
+		if (DxLib::CheckHitKey(FuncKey[i + 5]) == 1)
+			Funcs[i]();
+	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1 || (DxLib::GetMouseInput() == MOUSE_INPUT_RIGHT))
 		GameMenu();
