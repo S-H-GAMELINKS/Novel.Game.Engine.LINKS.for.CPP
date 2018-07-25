@@ -68,11 +68,10 @@ namespace {
 	//選択肢の選択されたかをチェック
 	void ChoiceSelectCheck(std::int32_t &ChoiceCursorPosY) noexcept {
 
-		if (ChoiceCursorPosY == ChoicePosY[0] && MouseAndKey::CheckMouseAndKeyEnter())
-			ChoiceSelect(EndFlag * 2);
-
-		if (ChoiceCursorPosY == ChoicePosY[1] && MouseAndKey::CheckMouseAndKeyEnter())
-			ChoiceSelect(EndFlag * 2 + 1);
+		for (std::int32_t i = 0; i < 2; i++) {
+			if (ChoiceCursorPosY == ChoicePosY[i] && MouseAndKey::CheckMouseAndKeyEnter())
+				ChoiceSelect(EndFlag * 2 + i);
+		}
 	}
 }
 
