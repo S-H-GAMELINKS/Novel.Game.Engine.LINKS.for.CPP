@@ -189,22 +189,17 @@ void ShortCutKey() noexcept {
 											KEY_INPUT_F5, KEY_INPUT_F6, KEY_INPUT_F7, KEY_INPUT_F8,
 											KEY_INPUT_F9, KEY_INPUT_F10, KEY_INPUT_F11, KEY_INPUT_F12 };
 
+	constexpr std::array<int, 4> SkipAndAutoFlag = { 3, 1, 2, 0 };
+
 	for (std::int32_t i = 0; i < 3; i++) {
 		if (DxLib::CheckHitKey(FuncKey[i]) == 1)
 			SaveData(i + 1);
 	}
 
-	if (DxLib::CheckHitKey(KEY_INPUT_F4) == 1)
-		SkipAndAuto(3, EndFlag);
-
-	if (DxLib::CheckHitKey(KEY_INPUT_F5) == 1)
-		SkipAndAuto(1, EndFlag);
-
-	if (DxLib::CheckHitKey(KEY_INPUT_F6) == 1) 
-		SkipAndAuto(2, EndFlag);
-
-	if (DxLib::CheckHitKey(KEY_INPUT_F7) == 1)
-		SkipAndAuto(0, EndFlag);
+	for (std::int32_t i = 0; i < 4; i++) {
+		if (DxLib::CheckHitKey(FuncKey[i + 3]) == 1)
+			SkipAndAuto(SkipAndAutoFlag[i], EndFlag);
+	}
 
 	if (DxLib::CheckHitKey(KEY_INPUT_F8) == 1)
 		BackLog();
