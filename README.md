@@ -18,6 +18,12 @@ URL:http://dixq.net/g/
 C言語何でも質問掲示板
 URL:http://dixq.net/forum/viewforum.php?f=3
 
+cpprefjp - C++日本語リファレンス
+URL:https://cpprefjp.github.io/
+
+Boostjp
+URL:https://boostjp.github.io/
+
 制作にあたっては上記の素晴らしいサイトにて
 公開されているソースコードを参考にさせていただきました。
 この場を借りて感謝いたします。
