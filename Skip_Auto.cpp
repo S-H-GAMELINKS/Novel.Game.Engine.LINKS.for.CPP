@@ -38,6 +38,20 @@ void SkipDataCheck(const std::int32_t& RouteNum) noexcept {
 		SkipAndAutoFlag = 0;
 }
 
+//既読スキップデータ読み込み＆書き込み
+template<typename T, std::size_t N>
+std::array<T, N> SkipDataGet(std::array<T, N> ReadData, std::array<T, N> WriteData) {
+
+	auto var = std::begin(WriteData);
+
+	for (auto it = std::begin(ReadData); it != std::end(ReadData); it++) {
+		*var = *it;
+		var++;
+	}
+
+	return WriteData;
+}
+
 //既読スキップデータの読込
 int SkipDataLoad() noexcept {
 	SkipData_t Data;
@@ -49,12 +63,7 @@ int SkipDataLoad() noexcept {
 	}
 	fread(&Data, sizeof(SkipData_t), 1, Fp);
 
-	std::int32_t i = 0;
-
-	for (auto&& d : Data.SkipFlag) {
-		SkipData[i] = d;
-		i++;
-	}
+	SkipData = SkipDataGet(Data.SkipFlag, SkipData);
 
 	fclose(Fp);
 	return 0;
@@ -65,12 +74,10 @@ int SkipDataSave() noexcept {
 
 	SkipData_t Data;
 
-	std::int32_t i = 0;
+	for (auto&& d : Data.SkipFlag)
+		d = 0;
 
-	for (auto&& d : Data.SkipFlag) {
-		d = SkipData[i];
-		i++;
-	}
+	Data.SkipFlag = SkipDataGet(SkipData, Data.SkipFlag);
 
 	FILE *Fp;
 	fopen_s(&Fp, "DATA/SAVE/SKIP_READ.bat", "wb");//バイナリファイルを開く
