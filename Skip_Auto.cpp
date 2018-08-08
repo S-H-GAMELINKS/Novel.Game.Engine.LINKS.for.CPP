@@ -92,25 +92,15 @@ int SkipDataSave() noexcept {
 // 既読スキップ/スキップ/オート切り替え関数
 void SkipAndAutoTask(const std::int32_t& Num, const int Flag) noexcept {
 
-	if (Num == 0) {
-		if (IDYES == MessageBoxYesNo("オート/スキップを停止しますか？")) {
-			SkipAndAutoFlag = 0;
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-	}
+	std::array<std::string, 3> Message = { "オート/スキップを停止しますか？" , "スキップを実行しますか？" , "オートを実行しますか？" };
 
-	if (Num == 1) {
-		if (IDYES == MessageBoxYesNo("スキップを実行しますか？")) {
-			SkipAndAutoFlag = 1;
+	for (std::int32_t i = 0; i < 3; i++) {
+		if (Num == i) {
+			if (IDYES == MessageBoxYesNo(Message[i].c_str())) {
+				SkipAndAutoFlag = i;
+			}
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-	}
-
-	if (Num == 2) {
-		if (IDYES == MessageBoxYesNo("オートを実行しますか？")) {
-			SkipAndAutoFlag = 2;
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 	}
 
 	if (Num == 3) {
