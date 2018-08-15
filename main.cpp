@@ -119,6 +119,7 @@ void GamePlayLoop(const int RouteNumber) noexcept {
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	std::array<std::string, 2> RemoveFile = { "DATA/SAVE/SAVESNSAPTEMP.png", "DATA/BACKLOG/BACKLOG1.png" };
 
 	//初期化前処理
 	DxLibInitPreProccessing();
@@ -153,8 +154,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ConfigSave();	// 設定データの保存
 	SkipDataSave(); // 既読スキップデータの保存
 
-	std::remove("DATA/SAVE/SAVESNSAPTEMP.png");
-	std::remove("DATA/BACKLOG/BACKLOG1.png");
+	for(auto&& file : RemoveFile)
+		std::remove(file.c_str());
 
 	DxLib_End();				// ＤＸライブラリ使用の終了処理
 
