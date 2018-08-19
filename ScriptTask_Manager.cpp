@@ -478,9 +478,6 @@ void ScriptTagTaskManager(Material<std::string>& Script, Material<int>& BackGrou
 		break;
 
 	case '#':	//キャラクター名描画
-		Cp++;
-		break;
-
 	case ' ':
 		Cp++;
 		break;
