@@ -18,6 +18,8 @@ extern ConfigData_t ConfigData;
 
 namespace {
 
+	using namespace MouseAndKey;
+
 	//タイトルメニューの描画関数
 	void GameTitleMenuDraw(std::int32_t CursorPosY) noexcept {
 
@@ -36,22 +38,22 @@ namespace {
 	//タイトルメニューの項目選択関数
 	void GameTitleMenuChoice(const std::int32_t& CursorPosY) noexcept {
 
-		if (CursorPosY == TitleMenuPosY && MouseAndKey::CheckMouseAndKeyEnter())
+		if (CursorPosY == TitleMenuPosY && CheckMouseAndKeyEnter())
 			EndFlag = 1;
 
-		if (CursorPosY == TitleMenuLoadPosY && MouseAndKey::CheckMouseAndKeyEnter())
+		if (CursorPosY == TitleMenuLoadPosY && CheckMouseAndKeyEnter())
 			SaveDataLoop(2);
 
-		if (CursorPosY == TitleMenuConfigPosY && MouseAndKey::CheckMouseAndKeyEnter())
+		if (CursorPosY == TitleMenuConfigPosY && CheckMouseAndKeyEnter())
 			ConfigMenuLoop();
 
-		if (CursorPosY == TitleMenuQuickLoadPosY && MouseAndKey::CheckMouseAndKeyEnter())
+		if (CursorPosY == TitleMenuQuickLoadPosY && CheckMouseAndKeyEnter())
 			QuickSaveDataLoad();
 
-		if (CursorPosY == TitleMenuContinuePosY && MouseAndKey::CheckMouseAndKeyEnter())
+		if (CursorPosY == TitleMenuContinuePosY && CheckMouseAndKeyEnter())
 			ContinueSaveDataLoad();
 
-		if (CursorPosY == TitleMenuExitPosY && MouseAndKey::CheckMouseAndKeyEnter())
+		if (CursorPosY == TitleMenuExitPosY && CheckMouseAndKeyEnter())
 			GameEndMessageBox();
 	}
 }
