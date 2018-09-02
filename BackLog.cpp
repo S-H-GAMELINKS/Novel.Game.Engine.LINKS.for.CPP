@@ -24,14 +24,13 @@ namespace BackLog {
 		if (Num < BackLogCount) {
 			DxLib::DrawGraph(0, 0, BackLog[BackLogCount - Num - 1], TRUE);
 			BackLogNumberDraw(Num);
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
 		else {
 			MessageBoxOk("これ以上バッグログはありません");
 			Num--;
+			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
 		}
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
-
 		return Num;
 	}
 
