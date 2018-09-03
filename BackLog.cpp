@@ -11,7 +11,7 @@
 namespace BackLog {
 	std::int32_t BackLogCount = 0;
 	std::vector<std::int32_t> BackLog;
-	std::string Name = "バックログ";
+	const std::string Name = "バックログ";
 
 	//判定用ラムダ式
 	auto MouseCheck = [](const int& Args) {return (DxLib::CheckHitKey(Args) == 1); };
