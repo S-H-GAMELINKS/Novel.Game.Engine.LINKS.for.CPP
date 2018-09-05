@@ -13,9 +13,10 @@ namespace BackLog {
 	std::vector<std::int32_t> BackLog;
 	const std::string Name = "バックログ";
 
-	//判定用ラムダ式
-	auto MouseCheck = [](const int& Args) {return (DxLib::CheckHitKey(Args) == 1); };
-	auto KeyCheck = [](const int& Args) {return (DxLib::GetMouseInput() == Args); };
+	//キー判定ラムダ式
+	auto Check = [](const int& key, const int& mouse) {
+		return (DxLib::CheckHitKey(key) == 1 || DxLib::GetMouseInput() == mouse);
+	};
 
 	//バックログのナンバー表示
 	void BackLogNumberDraw(const std::int32_t& Num) noexcept {
@@ -41,10 +42,10 @@ namespace BackLog {
 	//バックログ時のキー操作
 	bool BackLogKeyMove(std::int32_t& Num, bool BackLogFlag) noexcept {
 
-		if (MouseCheck(KEY_INPUT_UP) || KeyCheck(MOUSE_INPUT_RIGHT))
+		if (Check(KEY_INPUT_UP, MOUSE_INPUT_RIGHT))
 			Num = (Num < BackLogCount) ? Num + 1 : Num;
 
-		if (MouseCheck(KEY_INPUT_DOWN) || KeyCheck(MOUSE_INPUT_LEFT))
+		if (Check(KEY_INPUT_DOWN, MOUSE_INPUT_LEFT))
 			Num = (Num > 0) ? Num - 1 : 0;
 
 		if (DxLib::CheckHitKey(KEY_INPUT_BACK) == 1) {
