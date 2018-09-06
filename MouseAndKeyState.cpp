@@ -49,8 +49,8 @@ namespace MouseState {
 namespace MouseAndKey {
 
 	//”»’è—pƒ‰ƒ€ƒ_Ž®
-	auto MouseCheck = [](const int& Flag, const int& Args) {return (Flag == 0 && DxLib::CheckHitKey(Args) == 1); };
-	auto KeyCheck = [](const int& Flag, const int& Args) {return (Flag == 1 && DxLib::GetMouseInput() == Args); };
+    auto MouseCheck = [](const int& Flag, const int& Args) constexpr {return (Flag == 0 && DxLib::CheckHitKey(Args) == 1); };
+	auto KeyCheck = [](const int& Flag, const int& Args) constexpr {return (Flag == 1 && DxLib::GetMouseInput() == Args); };
 
 	const int Flag = ConfigData.MouseAndKeyFlag;
 
