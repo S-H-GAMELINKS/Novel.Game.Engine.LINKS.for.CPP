@@ -2,7 +2,7 @@
 #define UTILITY_H_
 
 //メッセージボックス(Yes or No)
-int MessageBoxYesNo(LPCTSTR lpText) noexcept;
+int MessageBoxYesNo(const LPCTSTR lpText) noexcept;
 
 //メッセージボックス(OK)
 int MessageBoxOk(LPCTSTR lpText) noexcept;

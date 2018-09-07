@@ -52,7 +52,7 @@ namespace {
 }
 
 //メッセージボックス(Yes or No)
-int MessageBoxYesNo(LPCTSTR lpText) noexcept
+int MessageBoxYesNo(const LPCTSTR lpText) noexcept
 {
 	return MessageBox(
 		DxLib::GetMainWindowHandle(),
