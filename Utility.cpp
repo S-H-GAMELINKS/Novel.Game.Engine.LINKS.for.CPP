@@ -35,7 +35,7 @@ extern ConfigData_t ConfigData;
 namespace {
 
 	//ˆ—’â~ŠÔŒvZŠÖ”
-	auto WaitTimeCalc(const int var) noexcept {
+	constexpr int WaitTimeCalc(const int& var) noexcept {
 		return var * var;
 	}
 
