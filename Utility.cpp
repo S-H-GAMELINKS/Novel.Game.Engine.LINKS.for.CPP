@@ -63,7 +63,7 @@ int MessageBoxYesNo(const LPCTSTR lpText) noexcept
 }
 
 //メッセージボックス(OK)
-int MessageBoxOk(LPCTSTR lpText) noexcept
+int MessageBoxOk(const LPCTSTR lpText) noexcept
 {
 	return MessageBox(
 		DxLib::GetMainWindowHandle(),

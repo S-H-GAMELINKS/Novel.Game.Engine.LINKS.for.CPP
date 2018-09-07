@@ -5,9 +5,9 @@
 int MessageBoxYesNo(const LPCTSTR lpText) noexcept;
 
 //メッセージボックス(OK)
-int MessageBoxOk(LPCTSTR lpText) noexcept;
+int MessageBoxOk(const LPCTSTR lpText) noexcept;
 
-//画面クリア処理関数
+//画面クリア処理関数c
 void ScreenClear() noexcept;
 
 //ゲーム終了確認ウインドウ
