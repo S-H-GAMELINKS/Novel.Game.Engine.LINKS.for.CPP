@@ -221,3 +221,8 @@ void TitleMoviePlay() noexcept {
 	PlayMovie("DATA/MOVIE/OP.wmv", 1, DX_MOVIEPLAYTYPE_BCANCEL);
 	ScreenClear();
 }
+
+//ウェイト処理
+void WaitTime() noexcept {
+	std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+}

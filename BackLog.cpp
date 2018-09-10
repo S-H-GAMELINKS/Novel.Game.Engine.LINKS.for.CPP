@@ -29,12 +29,12 @@ namespace BackLog {
 		if (Num < BackLogCount) {
 			DxLib::DrawGraph(0, 0, BackLog[BackLogCount - Num - 1], TRUE);
 			BackLogNumberDraw(Num);
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			WaitTime();
 		}
 		else {
 			MessageBoxOk("これ以上バッグログはありません");
 			Num--;
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			WaitTime();
 		}
 		return Num;
 	}
@@ -83,5 +83,5 @@ void BackLogLoop() noexcept {
 		else
 			MessageBoxOk("バックログがありません");
 	}
-	std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+	WaitTime();
 }

@@ -25,4 +25,7 @@ void MenuBarDraw();
 //メニューバー選択処理
 void MenuBarSelect();
 
+//ウェイト処理
+void WaitTime() noexcept;
+
 #endif // !UTILITY_H_
