@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "ConstantExpressionVariable.hpp"
 #include "ConfigMenu.hpp"
+#include "Utility.hpp"
 #include <cstdint>
 #include <thread>
 #include <chrono>
@@ -19,7 +20,7 @@ namespace KeyState {
 			if (DxLib::CheckHitKey(KEY_INPUT_UP) == 1)
 				CursorPosY = (TopPosY == CursorPosY) ? ButtomPosY : CursorPosY - Move;
 
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			WaitTime();
 		}
 
 		return CursorPosY;
