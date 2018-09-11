@@ -62,7 +62,7 @@ namespace {
 			EndFlag = Num;
 		}
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		WaitTime();
 	}
 
 	//選択肢の選択されたかをチェック
