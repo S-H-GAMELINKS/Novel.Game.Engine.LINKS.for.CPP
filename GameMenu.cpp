@@ -72,7 +72,7 @@ namespace {
 			BackGroundMusicHandle = 0;
 			SoundEffectHandle = 0;
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+		WaitTime();
 	}
 
 	constexpr std::array<int, 4> SkipAutoTaskFlag = { 3, 1, 2, 0 };
