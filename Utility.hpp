@@ -19,12 +19,6 @@ void ShortCutKey() noexcept;
 //タイトルムービー処理
 void TitleMoviePlay() noexcept;
 
-//メニューバー
-void MenuBarDraw();
-
-//メニューバー選択処理
-void MenuBarSelect();
-
 //ウェイト処理
 void WaitTime() noexcept;
 
