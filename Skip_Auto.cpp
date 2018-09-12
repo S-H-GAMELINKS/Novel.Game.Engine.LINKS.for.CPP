@@ -3,6 +3,7 @@
 #include "DxLib.h"
 #include "Utility.hpp"
 #include "ConstantExpressionVariable.hpp"
+#include "Utility.hpp"
 #include <array>
 #include <thread>
 #include <chrono>
@@ -100,12 +101,12 @@ void SkipAndAutoTask(const std::int32_t& Num, const int Flag) noexcept {
 			if (IDYES == MessageBoxYesNo(Message[i].c_str())) {
 				SkipDataCheck(Flag);
 			}
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			WaitTime();
 		} else if (Num == i) {
 			if (IDYES == MessageBoxYesNo(Message[i].c_str())) {
 				SkipAndAutoFlag = i;
 			}
-			std::this_thread::sleep_for(std::chrono::milliseconds(WaitKeyTaskTime));
+			WaitTime();
 		}
 	}
 
