@@ -231,12 +231,15 @@ void SaveDataLoop(const int& Num) noexcept {
 		//カーソルの初期位置
 		std::int32_t SaveDataMenuPosY = SaveDataBasePosY;
 
+		using namespace KeyState;
+		using namespace MouseState;
+
 		//セーブデータループ
 		while (SaveFlag == 1) {
 			ScreenClear();
 			SaveDataMenuDraw(SaveDataMenuPosY);
-			SaveDataMenuPosY = KeyState::KeyMoveTemplate(SaveDataMenuPosY, SaveDataBasePosY, SaveDataPosButtom, SaveDataCursorMove, ConfigData.MouseAndKeyFlag);
-			SaveDataMenuPosY = MouseState::MouseMoveTemplate(SaveDataMenuPosY, SaveDataBasePosY, SaveDataBasePosY, 4, ConfigData.MouseAndKeyFlag);
+			SaveDataMenuPosY = KeyMoveTemplate(SaveDataMenuPosY, SaveDataBasePosY, SaveDataPosButtom, SaveDataCursorMove, ConfigData.MouseAndKeyFlag);
+			SaveDataMenuPosY = MouseMoveTemplate(SaveDataMenuPosY, SaveDataBasePosY, SaveDataBasePosY, 4, ConfigData.MouseAndKeyFlag);
 			SaveDataMenuSelect(SaveDataMenuPosY, Num, SaveFlag);
 		}
 	}
