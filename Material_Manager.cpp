@@ -6,7 +6,7 @@
 #include <fstream>
 
 //スクリプト読込関数
-std::vector<std::string> ScriptRead(unsigned int EndFlag) noexcept {
+const std::vector<std::string> ScriptRead(unsigned int EndFlag) noexcept {
 
 	std::vector<std::string> Script;
 
