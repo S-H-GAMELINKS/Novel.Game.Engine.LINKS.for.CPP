@@ -33,7 +33,7 @@ namespace {
 
 //各種素材読込テンプレート関数
 template <typename T, typename Func>
-std::vector<T> MaterialLoad(std::vector<T> Material, const std::string& Path, Func&& Loader) noexcept {
+constexpr std::vector<T> MaterialLoad(std::vector<T> Material, const std::string& Path, Func&& Loader) noexcept {
 
 	//サウンドデータの読み込み形式
 	DxLib::SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMPRESS);
