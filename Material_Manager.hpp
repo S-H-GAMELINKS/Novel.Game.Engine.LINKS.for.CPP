@@ -16,7 +16,7 @@ namespace fs = boost::filesystem;
 namespace {
 
 	//各素材ファイルパス取得
-	std::vector<std::string> AllFilePath(const std::string& Path) {
+	const std::vector<std::string> AllFilePath(const std::string& Path) {
 
 		std::vector<std::string> Container;
 
