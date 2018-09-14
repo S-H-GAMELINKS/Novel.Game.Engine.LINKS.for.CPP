@@ -32,7 +32,7 @@ void SkipDataWrite(const std::int32_t& RouteNum) noexcept {
 }
 
 //Šù“Ç”»’è
-void SkipDataCheck(const std::int32_t& RouteNum) noexcept {
+constexpr void SkipDataCheck(const std::int32_t& RouteNum) noexcept {
 	if (SkipData[RouteNum - 1] == 1)
 		SkipAndAutoFlag = 1;
 	else
