@@ -41,7 +41,7 @@ void SkipDataCheck(const std::int32_t& RouteNum) noexcept {
 
 //既読スキップデータ読み込み＆書き込み
 template<typename T, std::size_t N>
-std::array<T, N> SkipDataGet(std::array<T, N> ReadData, std::array<T, N> WriteData) {
+constexpr std::array<T, N> SkipDataGet(std::array<T, N> ReadData, std::array<T, N> WriteData) {
 
 	auto var = std::begin(WriteData);
 
