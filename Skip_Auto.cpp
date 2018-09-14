@@ -27,7 +27,7 @@ struct alignas(4) SkipData_t {
 };
 
 //既読スキップデータ書き込み
-void SkipDataWrite(const std::int32_t& RouteNum) noexcept {
+constexpr void SkipDataWrite(const std::int32_t& RouteNum) noexcept {
 	SkipData[RouteNum - 1] = 1;
 }
 
