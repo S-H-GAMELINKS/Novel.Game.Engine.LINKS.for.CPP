@@ -47,6 +47,6 @@ constexpr std::vector<T> MaterialLoad(std::vector<T> Material, const std::string
 }
 
 //スクリプト読込関数
-const std::vector<std::string> ScriptRead(unsigned int EndFlag) noexcept;
+std::vector<std::string> ScriptRead(unsigned int EndFlag) noexcept;
 
 #endif // MATERIAL_MANAGER_CPP_
