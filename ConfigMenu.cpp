@@ -77,7 +77,7 @@ namespace {
 	}
 
 	//コンフィグ画面選択処理
-	bool ConfigMenuSelect(std::int32_t& ConfigCursorPosY, bool ConfigFlag) noexcept {
+	constexpr bool ConfigMenuSelect(std::int32_t& ConfigCursorPosY, bool ConfigFlag) noexcept {
 
 		if (GameMenuBasePosY == ConfigCursorPosY)
 			VolChangeTemplate(ConfigData.BackGroundMusicVolumeCount, ConfigData.BackGroundMusicVolume);
