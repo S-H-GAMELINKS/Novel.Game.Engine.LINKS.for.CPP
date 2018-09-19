@@ -6,12 +6,6 @@
 //コンフィグ画面ループ
 void ConfigMenuLoop() noexcept;
 
-//コンフィグ読込関数
-int ConfigLoad() noexcept;
-
-//コンフィグ保存関数
-int ConfigSave() noexcept;
-
 //設定データ
 struct alignas(4) ConfigData_t {
 	std::int32_t BackGroundMusicVolume;				//BGM音量情報
@@ -26,5 +20,20 @@ struct alignas(4) ConfigData_t {
 	std::int32_t ScriptDrawSpeedVolumeCount;		//文字列描画速度メーター情報
 	std::int32_t MouseAndKeyFlag;			//マウス操作とキー操作の情報 true/false
 };
+
+template <typename F, typename C>
+bool ConfigDataTemplate(F&& func, C& Config, const char* ReadWrite) {
+
+	FILE *Fp;
+
+	fopen_s(&Fp, "DATA/SAVE/Config.dat", ReadWrite);
+	if (nullptr == Fp) {
+		return false;
+	}
+
+	func(&Config, sizeof(ConfigData_t), 1, Fp);
+	fclose(Fp);
+	return true;
+}
 
 #endif // CONFIG_MENU_H_

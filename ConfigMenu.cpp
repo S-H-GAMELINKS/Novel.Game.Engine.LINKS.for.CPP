@@ -108,37 +108,6 @@ namespace {
 	}
 }
 
-//コンフィグ読込関数
-int ConfigLoad() noexcept {
-
-	FILE *Fp;
-
-	fopen_s(&Fp, "DATA/SAVE/Config.dat", "rb");
-	if (nullptr == Fp) {
-		return 0;
-	}
-
-	fread(&ConfigData, sizeof(ConfigData_t), 1, Fp);
-	fclose(Fp);
-	return 0;
-}
-
-//コンフィグ保存関数
-int ConfigSave() noexcept {
-	FILE* Fp;
-
-	fopen_s(&Fp, "DATA/SAVE/Config.dat", "wb");//バイナリファイルを開く
-
-	if (nullptr == Fp) {//エラーが起きたらnullptrを返す
-		return 0;
-	}
-
-	fwrite(&ConfigData, sizeof(ConfigData_t), 1, Fp); // ConfigData_t構造体の中身を出力
-	fclose(Fp);
-
-	return 0;
-}
-
 //コンフィグ画面ループ
 void ConfigMenuLoop() noexcept {
 
