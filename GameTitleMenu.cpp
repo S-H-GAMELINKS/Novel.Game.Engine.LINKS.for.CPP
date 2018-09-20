@@ -36,7 +36,7 @@ namespace {
 	}
 
 	//タイトルメニューの項目選択関数
-	void GameTitleMenuChoice(const std::int32_t& CursorPosY) noexcept {
+	constexpr void GameTitleMenuChoice(const std::int32_t& CursorPosY) noexcept {
 
 		if (CursorPosY == TitleMenuPosY && CheckMouseAndKeyEnter())
 			EndFlag = 1;
