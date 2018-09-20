@@ -80,7 +80,7 @@ namespace {
 	const std::array<std::function<void()>, 4> Funcs = { BackLogLoop, ConfigMenuLoop, GameMenuBackToTitle, GameMenuBackToGamePlay };
 
 	//ゲームメニュー項目選択処理
-	void GameMenuSelect(const std::int32_t& GameMenuCursorPosY) noexcept {
+	constexpr void GameMenuSelect(const std::int32_t& GameMenuCursorPosY) noexcept {
 
 		for (std::int32_t i = 0; i < 3; i++) {
 			if (GameMenuCursorPosY == GameMenuBasePosY * (i + 1) && MouseAndKey::CheckMouseAndKeyEnter())
