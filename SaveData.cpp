@@ -193,7 +193,7 @@ namespace {
 	}
 
 	//セーブデータ メニュー選択処理
-	void SaveDataMenuSelect(std::int32_t& SaveDataMenuPosY, const int& Num, std::int32_t& SaveFlag) noexcept {
+	constexpr void SaveDataMenuSelect(std::int32_t& SaveDataMenuPosY, const int& Num, std::int32_t& SaveFlag) noexcept {
 
 		for (std::int32_t i = 0; i < 3; i++) {
 			if (SaveDataMenuPosY == SaveDataBasePosY * (i + 1) && MouseAndKey::CheckMouseAndKeyEnter()) {
