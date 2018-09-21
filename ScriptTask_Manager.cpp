@@ -297,7 +297,7 @@ namespace ScriptTask {
 	}
 
 	//ƒNƒŠƒbƒN‘Ò‚¿ˆ—ŠÖ”
-	bool ClickWait() noexcept {
+	constexpr bool ClickWait() noexcept {
 		if (SkipAndAutoFlag == 0) {
 			DxLib::WaitKey();
 			if (MouseAndKey::CheckMouseAndKeyEnter())
