@@ -132,7 +132,7 @@ namespace ScriptTask {
 	}
 
 	//•¶Žš—ñ•`‰æ‘¬“x
-	void DrawScriptSpeed() noexcept {
+	constexpr void DrawScriptSpeed() noexcept {
 		switch (SkipAndAutoFlag) {
 		case 0:
 			DrawSpeed(StringSpeedAuto, ConfigData.ScriptDrawSpeedVolume);
