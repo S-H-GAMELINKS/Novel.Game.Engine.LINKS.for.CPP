@@ -136,15 +136,9 @@ namespace {
 	void BackToTitle() {
 		if (IDYES == MessageBoxYesNo("タイトル画面に戻りますか？")) {
 			DxLib::ClearDrawScreen();
-			EndFlag = 0;
-			Sp = 0;
-			Cp = 0;
-			DrawPointX = 0;
-			DrawPointY = 0;
-			BackGroundHandle = 0;
-			CharacterHandle = 0;
-			BackGroundMusicHandle = 0;
-			SoundEffectHandle = 0;
+			EndFlag = Sp = Cp = 0;
+			DrawPointX = DrawPointY = 0;
+			BackGroundHandle = CharacterHandle = BackGroundMusicHandle = SoundEffectHandle = 0;
 		}
 		else
 			DrawGameScreenAgain();
@@ -160,9 +154,7 @@ namespace {
 	//スクリーンショット関連
 	void ScreenShot() {
 		ScreenShotGet();
-		Cp = 0;
-		DrawPointX = 0;
-		DrawPointY = 0;
+		Cp = DrawPointX = DrawPointY = 0;
 		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
