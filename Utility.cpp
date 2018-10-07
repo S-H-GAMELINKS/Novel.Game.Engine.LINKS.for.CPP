@@ -94,9 +94,7 @@ void GameEndMessageBox() noexcept {
 void ScreenShotGet() noexcept {
 	if (IDYES == MessageBoxYesNo("スクリーンショットを取得しますか？")) {
 		static std::int32_t ScreenShotCount;
-		std::string FileName = "DATA/SCREENSHOT/SCREENSHOT";
-		FileName += std::to_string(ScreenShotCount + 1);
-		FileName += ".png";
+		std::string FileName = "DATA/SCREENSHOT/SCREENSHOT" + std::to_string(ScreenShotCount + 1) + ".png";
 
 		DxLib::SaveDrawScreenToPNG(0, 0, 640, 480, FileName.c_str());
 		ScreenShotCount++;
