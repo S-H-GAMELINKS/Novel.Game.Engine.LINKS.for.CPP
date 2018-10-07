@@ -42,9 +42,7 @@ namespace {
 	//ƒQ[ƒ€‰æ–ÊÄ•`‰æˆ—
 	void DrawGameScreenAgain() noexcept {
 		Sp = SpTemp;
-		Cp = 0;
-		DrawPointX = 0;
-		DrawPointY = 0;
+		Cp = DrawPointX = DrawPointY = 0;
 		DxLib::PlaySoundMem(BackGroundMusicHandle, DX_PLAYTYPE_LOOP);
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
