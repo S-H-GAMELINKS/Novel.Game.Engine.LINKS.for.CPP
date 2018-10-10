@@ -137,13 +137,6 @@ namespace {
 			DrawGameScreenAgain();
 	}
 
-	//クイックセーブ関係
-	void QuickSave() {
-		SpTemp = Sp;
-		QuickSaveDataSave();
-		DrawGameScreenAgain();
-	}
-
 	//スクリーンショット関連
 	void ScreenShot() {
 		ScreenShotGet();
