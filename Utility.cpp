@@ -102,6 +102,14 @@ void ScreenShotGet() noexcept {
 }
 
 namespace {
+
+	template<typename F>
+	void ShortCutTemp(F&& func) {
+		SpTemp = Sp;
+		func();
+		DrawGameScreenAgain();
+	}
+
 	//セーブデータ関連
 	void SaveData(const int Num) {
 		SpTemp = Sp;
@@ -192,7 +200,7 @@ void ShortCutKey() noexcept {
 	}
 
 	for (std::int32_t i = 0; i < 5; i++) {
-		if (DxLib::CheckHitKey(FuncKey[i + 5]) == 1)
+		if (DxLib::CheckHitKey(FuncKey[i + 7]) == 1)
 			Funcs[i]();
 	}
 
