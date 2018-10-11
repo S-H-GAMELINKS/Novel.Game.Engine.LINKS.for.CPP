@@ -111,6 +111,20 @@ namespace {
 		DrawGameScreenAgain();
 	}
 
+	template <typename F, typename T>
+	void ShortcutKeyTemplate(F&& func, const T& Num) {
+		SpTemp = Sp;
+		func(Num);
+		DrawGameScreenAgain();
+	}
+
+	template <typename F, typename T>
+	void ShortcutKeyTemplate(F&& func, const T& Num, const T& EndFlag) {
+		SpTemp = Sp;
+		func(Num, EndFlag);
+		DrawGameScreenAgain();
+	}
+
 	//セーブデータ関連
 	void SaveData(const int Num) {
 		SpTemp = Sp;
@@ -169,19 +183,15 @@ void ShortCutKey() noexcept {
 
 	const std::array<std::function<void()>, 4> Funcs = { BackLogLoop, ConfigMenuLoop, BackToTitle, QuickSaveDataSave };
 
-	for (std::int32_t i = 0; i < 3; i++) {
-		if (DxLib::CheckHitKey(FuncKey[i]) == 1)
-			SaveData(i + 1);
-	}
+	for (std::int32_t i = 0; i < 11; i++) {
+		if (DxLib::CheckHitKey(FuncKey[i]) == 1 && (0 <= i && i < 3))
+			ShortcutKeyTemplate(SaveDataLoop, i + 1);
 
-	for (std::int32_t i = 0; i < 4; i++) {
-		if (DxLib::CheckHitKey(FuncKey[i + 3]) == 1)
-			SkipAndAuto(SkipAndAutoFlag[i], EndFlag);
-	}
+		if (DxLib::CheckHitKey(FuncKey[i]) == 1 && (2 < i && i < 7))
+			ShortcutKeyTemplate(SkipAndAutoTask, SkipAndAutoFlag[i - 3], EndFlag);
 
-	for (std::int32_t i = 0; i < 4; i++) {
-		if (DxLib::CheckHitKey(FuncKey[i + 7]) == 1)
-			ShortcutKeyTemplate(Funcs[i]);
+		if (DxLib::CheckHitKey(FuncKey[i]) == 1 && (6 < i && i < 11))
+			ShortcutKeyTemplate(Funcs[i - 7]);
 	}
 
 	if (DxLib::CheckHitKey(FuncKey[11] == 1))
