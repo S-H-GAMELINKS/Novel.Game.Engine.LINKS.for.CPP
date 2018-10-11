@@ -181,7 +181,7 @@ void ShortCutKey() noexcept {
 
 	for (std::int32_t i = 0; i < 4; i++) {
 		if (DxLib::CheckHitKey(FuncKey[i + 7]) == 1)
-			Funcs[i]();
+			ShortcutKeyTemplate(Funcs[i]);
 	}
 
 	if (DxLib::CheckHitKey(FuncKey[11] == 1))
