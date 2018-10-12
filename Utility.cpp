@@ -125,20 +125,6 @@ namespace {
 		DrawGameScreenAgain();
 	}
 
-	//セーブデータ関連
-	void SaveData(const int Num) {
-		SpTemp = Sp;
-		SaveDataLoop(Num);
-		DrawGameScreenAgain();
-	}
-
-	//スキップ・オート関係
-	void SkipAndAuto(const int Num, const int EndFlag) {
-		SpTemp = Sp;
-		SkipAndAutoTask(Num, EndFlag);
-		DrawGameScreenAgain();
-	}
-
 	//タイトルへ戻る
 	void BackToTitle() {
 		if (IDYES == MessageBoxYesNo("タイトル画面に戻りますか？")) {
