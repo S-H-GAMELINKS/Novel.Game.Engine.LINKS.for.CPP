@@ -120,7 +120,7 @@ void GamePlayLoop(const int RouteNumber) noexcept {
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	std::array<std::string, 2> RemoveFile = { "DATA/SAVE/SAVESNSAPTEMP.png", "DATA/BACKLOG/BACKLOG1.png" };
+	std::array<std::string, 2> RemoveFile = { "DATA/SAVE/SAVESNSAPTEMP.png", "DATA/BACKLOG/BACKLOG.png" };
 
 	//初期化前処理
 	DxLibInitPreProccessing();
