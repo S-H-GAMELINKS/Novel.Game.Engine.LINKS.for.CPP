@@ -66,7 +66,7 @@ namespace {
 	}
 
 	//選択肢の選択されたかをチェック
-	constexpr void ChoiceSelectCheck(std::int32_t &ChoiceCursorPosY) noexcept {
+	constexpr void ChoiceSelectCheck(const std::int32_t &ChoiceCursorPosY) noexcept {
 
 		for (std::int32_t i = 0; i < 2; i++) {
 			if (ChoiceCursorPosY == ChoicePosY[i] && MouseAndKey::CheckMouseAndKeyEnter())
