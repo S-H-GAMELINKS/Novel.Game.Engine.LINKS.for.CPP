@@ -33,7 +33,7 @@ const char* ChoiceScript[][2] = {
 namespace {
 
 	//‘I‘ğˆ•`‰æŠÖ”
-	void DrawChoice(std::int32_t& ChoiceCursorPosY) noexcept {
+	void DrawChoice(const std::int32_t& ChoiceCursorPosY) noexcept {
 
 		DxLib::DrawGraph(0, 0, BackGroundHandle, TRUE);
 		DxLib::DrawGraph(150, 130, CharacterHandle, TRUE);
